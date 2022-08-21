@@ -3,7 +3,6 @@
     "name": "index",
     "path": "/",
     "component": "/Users/wenpin/Desktop/work/bookingRooms/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_5204aa00"
+    "chunkName": "pages/index"
   }
 ]
