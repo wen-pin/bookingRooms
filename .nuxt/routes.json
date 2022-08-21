@@ -1,8 +1,9 @@
 [
   {
-    "name": "",
-    "path": "",
-    "component": "/Users/wenpin/Desktop/work/bookingRooms/node_modules/@nuxt/vue-app/template/pages/index.vue",
-    "_name": "_9082929e"
+    "name": "index",
+    "path": "/",
+    "component": "/Users/wenpin/Desktop/work/bookingRooms/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_5204aa00"
   }
 ]
