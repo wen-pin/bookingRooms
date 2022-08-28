@@ -2,7 +2,8 @@
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/wenpin/Desktop/work/bookingRooms/pages/index.vue",
-    "chunkName": "pages/index"
+    "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_0711133c"
   }
 ]
