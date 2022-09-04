@@ -1,5 +1,7 @@
 <template>
-  <h1>Hello world!</h1>
+  <v-container class="text-yellow-400">
+    <h1>Hello world!</h1>
+  </v-container>
 </template>
 
 <script>
