@@ -9,4 +9,9 @@ export default {
     'virtual:windi-components.css',
     'virtual:windi-utilities.css',
   ],
+  components: true,
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+  auth: {
+    // Options
+  },
 }
