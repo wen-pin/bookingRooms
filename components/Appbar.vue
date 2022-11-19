@@ -2,6 +2,10 @@
   <v-app-bar app flat>
     <v-spacer></v-spacer>
 
+    <!-- <div v-if="$auth.loggedIn">
+      {{ $auth.user.name }}
+    </div> -->
+
     <v-menu offset-y nudge-bottom="10" nudge-width="100">
       <template #activator="{ attrs, on }">
         <v-btn rounded outlined v-bind="attrs" v-on="on">
@@ -13,28 +17,73 @@
 
       <v-list>
         <v-list-item-group>
-          <v-list-item>
+          <v-list-item @click.stop="registerDialog = true">
             <v-list-item-title>註冊</v-list-item-title>
+
+            <v-dialog v-model="registerDialog" max-width="400">
+              <v-card class="pa-10">
+                <v-card-title class="justify-center">註冊</v-card-title>
+                <v-form ref="form">
+                  <v-text-field
+                    v-model="registerInfo.data.username"
+                    autofocus
+                    clearable
+                    prepend-icon="mdi-account-circle"
+                    label="帳號"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="registerInfo.data.password"
+                    clearable
+                    prepend-icon="mdi-lock"
+                    label="密碼"
+                  ></v-text-field>
+
+                  <v-btn dark block @click="registerUser()"> 註冊 </v-btn>
+
+                  <v-btn text> 登入 </v-btn>
+                </v-form>
+              </v-card>
+            </v-dialog>
           </v-list-item>
-          <v-list-item @click.stop="dialogLogin = true">
+
+          <v-list-item @click.stop="loginDialog = true">
             <v-list-item-title> 登入 </v-list-item-title>
 
-            <v-dialog v-model="dialogLogin" max-width="400">
+            <v-dialog v-model="loginDialog" max-width="400">
               <v-card class="pa-10">
                 <v-card-title class="justify-center">登入</v-card-title>
                 <v-form ref="form">
-                  <v-text-field label="帳號"></v-text-field>
-                  <v-text-field label="密碼"></v-text-field>
+                  <v-text-field
+                    v-model="loginInfo.data.username"
+                    autofocus
+                    clearable
+                    prepend-icon="mdi-account-circle"
+                    label="帳號"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="loginInfo.data.password"
+                    clearable
+                    prepend-icon="mdi-lock"
+                    label="密碼"
+                  ></v-text-field>
 
-                  <v-btn dark block @click="onSumit()"> 登入 </v-btn>
+                  <v-btn dark block @click="loginUser()"> 登入 </v-btn>
 
-                  <v-btn text nuxt to="/register"> 註冊 </v-btn>
+                  <v-btn text> 註冊 </v-btn>
                 </v-form>
               </v-card>
             </v-dialog>
           </v-list-item>
         </v-list-item-group>
       </v-list>
+
+      <!-- <v-list>
+        <v-list-item-group>
+          <v-list-item>
+            <v-list-item-title>登出</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list> -->
     </v-menu>
   </v-app-bar>
 </template>
@@ -43,16 +92,44 @@
 export default {
   data() {
     return {
-      dialogLogin: false,
+      loginDialog: false,
+      registerDialog: false,
 
-      form: {
-        name: '',
-        password: '',
+      loginInfo: {
+        data: {
+          username: '',
+          password: '',
+        },
+      },
+
+      registerInfo: {
+        data: {
+          username: '',
+          password: '',
+        },
       },
     }
   },
   methods: {
-    onSumit() {},
+    loginUser() {
+      let payload = this.loginInfo.data
+      this.$auth.loginWith('local', {
+        data: payload,
+      })
+    },
+    async registerUser() {
+      try {
+        await this.$axios.$post('/api/users', this.registerInfo.data)
+
+        this.$auth.loginWith('local', {
+          data: this.registerInfo.data,
+        })
+      } catch (err) {
+        console.err(err)
+      } finally {
+        this.registerDialog = false
+      }
+    },
   },
 }
 </script>

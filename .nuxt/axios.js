@@ -67,9 +67,21 @@ const createAxiosInstance = axiosOptions => {
 
   // Setup interceptors
 
+  setupCredentialsInterceptor(axios)
   setupProgress(axios)
 
   return axios
+}
+
+const setupCredentialsInterceptor = axios => {
+  // Send credentials only to relative and API Backend requests
+  axios.onRequest(config => {
+    if (config.withCredentials === undefined) {
+      if (!/^https?:\/\//i.test(config.url) || config.url.indexOf(config.baseURL) === 0) {
+        config.withCredentials = true
+      }
+    }
+  })
 }
 
 const setupProgress = (axios) => {
@@ -148,7 +160,7 @@ export default (ctx, inject) => {
   const runtimeConfig = ctx.$config && ctx.$config.axios || {}
   // baseURL
   const baseURL = process.browser
-    ? (runtimeConfig.browserBaseURL || runtimeConfig.browserBaseUrl || runtimeConfig.baseURL || runtimeConfig.baseUrl || 'http://localhost:3000/')
+    ? (runtimeConfig.browserBaseURL || runtimeConfig.browserBaseUrl || runtimeConfig.baseURL || runtimeConfig.baseUrl || '/')
       : (runtimeConfig.baseURL || runtimeConfig.baseUrl || process.env._AXIOS_BASE_URL_ || 'http://localhost:3000/')
 
   // Create fresh objects for all default header scopes
