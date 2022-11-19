@@ -2,6 +2,10 @@
   <v-app-bar app flat>
     <v-spacer></v-spacer>
 
+    <!-- <div v-if="$auth.loggedIn">
+      {{ $auth.user.name }}
+    </div> -->
+
     <v-menu offset-y nudge-bottom="10" nudge-width="100">
       <template #activator="{ attrs, on }">
         <v-btn rounded outlined v-bind="attrs" v-on="on">
