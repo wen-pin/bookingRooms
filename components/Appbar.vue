@@ -2,6 +2,10 @@
   <v-app-bar app flat>
     <v-spacer></v-spacer>
 
+    <!-- <div v-if="$auth.loggedIn">
+      {{ $auth.user.name }}
+    </div> -->
+
     <v-menu offset-y nudge-bottom="10" nudge-width="100">
       <template #activator="{ attrs, on }">
         <v-btn rounded outlined v-bind="attrs" v-on="on">
@@ -14,7 +18,7 @@
       <v-list>
         <v-list-item-group>
           <v-list-item @click.stop="registerDialog = true">
-            <v-list-item-title>註冊test</v-list-item-title>
+            <v-list-item-title>註冊</v-list-item-title>
 
             <v-dialog v-model="registerDialog" max-width="400">
               <v-card class="pa-10">
