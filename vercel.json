@@ -1,14 +1,9 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "./pages/index.vue",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/pages/(.*)", 
-      "dest": "/pages/index.vue"
+      "src": "nuxt.config.js",
+      "use": "@nuxtjs/vercel-builder"
     }
   ]
 }
