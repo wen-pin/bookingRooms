@@ -18,7 +18,7 @@
       <v-list>
         <v-list-item-group>
           <v-list-item @click.stop="registerDialog = true">
-            <v-list-item-title>註冊</v-list-item-title>
+            <v-list-item-title>註冊test</v-list-item-title>
 
             <v-dialog v-model="registerDialog" max-width="400">
               <v-card class="pa-10">
