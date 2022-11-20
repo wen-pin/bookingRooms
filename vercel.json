@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "./server.js",
+      "src": "./pages/index.vue",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)", 
-      "dest": "/server.js"
+      "src": "/pages/(.*)", 
+      "dest": "/pages/index.vue"
     }
   ]
 }
