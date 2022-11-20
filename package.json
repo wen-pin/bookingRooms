@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "devDependencies": {
     "@mdi/font": "^7.0.96",
