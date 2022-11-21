@@ -40,7 +40,7 @@ export default {
 
   publicRuntimeConfig: {
     axios: {
-      browserBaseURL: process.env.BROWSER_BASE_URL || https://booking-rooms-server.vercel.app
+      browserBaseURL: process.env.BROWSER_BASE_URL || 'https://booking-rooms-server.vercel.app',
     }
   },
 
