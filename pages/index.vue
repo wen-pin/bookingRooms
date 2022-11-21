@@ -33,6 +33,7 @@
         </v-card>
       </v-col>
     </v-row>
+    {{ users }}
   </v-container>
 </template>
 
@@ -72,7 +73,13 @@ export default {
           price: '1000',
         },
       ],
+      users: [],
     }
+  },
+  async fetch() {
+    const res = await this.$axios.get('/api/users')
+    this.users = res.data
+    console.log(res.data)
   },
 }
 </script>

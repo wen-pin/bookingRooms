@@ -39,9 +39,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    axios: {
-      browserBaseURL: process.env.BROWSER_BASE_URL || 'https://booking-rooms-server.vercel.app',
-    }
+    API_URL,
   },
 
   /**
@@ -51,7 +49,7 @@ export default {
    */
   proxy: {
     // api url當中path的部分，例如：http://localhost:3000/api/
-    '/api': 'https://booking-rooms-server.vercel.app',
+    '/api': API_URL,
   },
 
   /**
