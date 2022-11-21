@@ -1,5 +1,3 @@
-export let API_URL =
-  process.env.API_URL || 'https://booking-rooms-server.vercel.app'
 export default {
   target: 'server',
 
@@ -38,9 +36,9 @@ export default {
     credentials: true,
   },
 
-  publicRuntimeConfig: {
-    API_URL,
-  },
+  // publicRuntimeConfig: {
+  //   API_URL,
+  // },
 
   /**
    * Proxy模組
@@ -49,7 +47,7 @@ export default {
    */
   proxy: {
     // api url當中path的部分，例如：http://localhost:3000/api/
-    '/api': API_URL,
+    '/api': 'https://booking-rooms-server.vercel.app',
   },
 
   /**
