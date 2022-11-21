@@ -51,7 +51,7 @@ export default {
    */
   proxy: {
     // api url當中path的部分，例如：http://localhost:3000/api/
-    '/api': API_URL,
+    '/api': 'https://booking-rooms-server.vercel.app',
   },
 
   /**
