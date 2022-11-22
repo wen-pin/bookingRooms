@@ -24,12 +24,7 @@ export default function (ctx, inject) {
   "vuex": {
     "namespace": "auth"
   },
-  "cookie": {
-    "prefix": "auth.",
-    "options": {
-      "path": "/"
-    }
-  },
+  "cookie": false,
   "localStorage": {
     "prefix": "auth."
   },
@@ -43,7 +38,7 @@ export default function (ctx, inject) {
   // local
   $auth.registerStrategy('local', new LocalScheme($auth, {
   "token": {
-    "property": true,
+    "property": "accessToken",
     "required": true,
     "type": "Bearer",
     "maxAge": 0

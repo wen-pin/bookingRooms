@@ -1,5 +1,21 @@
 export default {
+  server: {
+    host: process.env.HOST || '0.0.0.0',
+    port: process.env.PORT || 3000,
+  },
+  ssr: true,
   target: 'server',
+
+  head: {
+    titleTemplate: 'BookingRooms',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+
+      // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+      { hid: 'description', name: 'description', content: 'Meta description' },
+    ],
+  },
 
   // 為了解決defu__WEBPACK_IMPORTED_MODULE_3__ is not a function
   build: {
@@ -25,7 +41,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next', '@nuxtjs/proxy'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
   /**
    * Axios module configurtion
@@ -55,10 +71,12 @@ export default {
    * @see https://auth.nuxtjs.org
    */
   auth: {
+    cookie: false,
     strategies: {
       local: {
         token: {
-          property: true,
+          // 登入時response的token名稱
+          property: 'accessToken',
           required: true,
           type: 'Bearer',
           maxAge: 0,
@@ -70,10 +88,7 @@ export default {
         endpoints: {
           login: { url: '/api/users/login', method: 'post' },
           logout: { url: '/api/auth/logout', method: 'post' },
-          user: {
-            url: '/api/users',
-            method: 'get',
-          },
+          user: { url: '/api/users', method: 'get' },
         },
       },
     },
