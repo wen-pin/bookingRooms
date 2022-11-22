@@ -33,6 +33,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <div>
+      {{ users }}
+    </div>
   </v-container>
 </template>
 
@@ -75,10 +78,12 @@ export default {
       users: [],
     }
   },
-  // async fetch() {
-  //   const res = await this.$axios.get('/api/users')
-  //   this.users = res.data
-  //   // console.log(res.data)
-  // },
+  async fetch() {
+    const res = await this.$axios.get(
+      'https://booking-rooms-server.vercel.app/api/users',
+    )
+    this.users = res.data
+    // console.log(res.data)
+  },
 }
 </script>
