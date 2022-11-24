@@ -56,11 +56,11 @@ export default {
     credentials: true,
   },
 
-  publicRuntimeConfig: {
-    axios: {
-      browserBaseURL: process.env.API_URL,
-    },
-  },
+  // publicRuntimeConfig: {
+  //   axios: {
+  //     browserBaseURL: process.env.API_URL,
+  //   },
+  // },
 
   /**
    * Proxy模組
