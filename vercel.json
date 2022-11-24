@@ -6,9 +6,4 @@
       "use": "@nuxtjs/vercel-builder"
     }
   ],
-  "env": {
-    "API_URL": true,
-    "PORT": true,
-    "HOST": true
-  }
 }
