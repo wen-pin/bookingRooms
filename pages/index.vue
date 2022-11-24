@@ -36,6 +36,9 @@
     <div>
       {{ users }}
     </div>
+    <div>
+      {{ users }}
+    </div>
   </v-container>
 </template>
 
