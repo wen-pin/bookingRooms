@@ -36,6 +36,7 @@
     <div>
       {{ users }}
     </div>
+    <p>Our Url is: {{ $config.API_URL }}</p>
   </v-container>
 </template>
 
@@ -79,7 +80,7 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$axios.get('/api/users')
+    const res = await this.$axios.get(`${this.$config.API_URL}/api/users`)
     this.users = res.data
     // console.log(res.data)
   },

@@ -56,15 +56,13 @@ export default {
     credentials: true,
   },
 
-  // publicRuntimeConfig: {
-  //   axios: {
-  //     browserBaseURL: process.env.API_URL,
-  //   },
-  // },
-
-  privateRuntimeConfig: {
-    API_URL: process.env.API_URL,
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL || 'https://booking-rooms-server.vercel.app',
   },
+
+  // privateRuntimeConfig: {
+  //   API_URL: process.env.API_URL,
+  // },
 
   /**
    * Proxy模組
