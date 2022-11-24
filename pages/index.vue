@@ -81,7 +81,7 @@ export default {
   async fetch() {
     const res = await this.$axios.get('/api/users')
     this.users = res.data
-    console.log(res.data)
+    // console.log(res.data)
   },
 }
 </script>

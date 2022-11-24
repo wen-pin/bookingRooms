@@ -62,6 +62,10 @@ export default {
   //   },
   // },
 
+  privateRuntimeConfig: {
+    API_URL: process.env.API_URL,
+  },
+
   /**
    * Proxy模組
    * @see https://github.com/nuxt-community/proxy-module
