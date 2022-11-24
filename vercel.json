@@ -10,12 +10,5 @@
     "API_URL": true,
     "PORT": true,
     "HOST": true
-  },
-  "build": {
-    "env": {
-      "API_URL": true,
-      "PORT": true,
-      "HOST": true
-    }
   }
 }
