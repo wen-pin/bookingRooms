@@ -79,9 +79,7 @@ export default {
     }
   },
   async fetch() {
-    const res = await this.$axios.get(
-      'https://booking-rooms-server.vercel.app/api/users',
-    )
+    const res = await this.$axios.get('/api/users')
     this.users = res.data
     console.log(res.data)
   },
