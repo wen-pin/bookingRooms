@@ -4,5 +4,6 @@ export default function ({ $axios, redirect }) {
     if (error.response.status === 500) {
       redirect('/sorry')
     }
+    return Promise.resolve(false)
   })
 }
