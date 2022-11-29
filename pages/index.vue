@@ -37,6 +37,7 @@
       {{ users }}
     </div>
     <p>Our Url is: {{ $config.API_URL }}</p>
+    <p>Our Url is: {{ $config.API_URL }}</p>
   </v-container>
 </template>
 
