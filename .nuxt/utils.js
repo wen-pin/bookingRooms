@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"baseUrl":"https://booking-rooms-server.vercel.app"}
+      env: {"API_URL":"https://booking-rooms-server.vercel.app"}
     }
     // Only set once
 

@@ -44,7 +44,7 @@ export default {
   modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
   env: {
-    baseUrl: process.env.API_URL || 'http://localhost:3000',
+    API_URL: process.env.API_URL || 'http://localhost:3000',
   },
 
   /**
