@@ -24,11 +24,20 @@ export default function (ctx, inject) {
   "vuex": {
     "namespace": "auth"
   },
-  "cookie": false,
+  "cookie": {
+    "prefix": "auth.",
+    "options": {
+      "path": "/"
+    }
+  },
   "localStorage": {
     "prefix": "auth."
   },
-  "defaultStrategy": "local"
+  "defaultStrategy": "local",
+  "cookies": {
+    "prefix": "auth.",
+    "options": {}
+  }
 }
 
   // Create a new Auth instance
@@ -41,7 +50,7 @@ export default function (ctx, inject) {
     "property": "accessToken",
     "required": true,
     "type": "Bearer",
-    "maxAge": 0
+    "maxAge": 86400
   },
   "user": {
     "property": false,
@@ -49,7 +58,7 @@ export default function (ctx, inject) {
   },
   "endpoints": {
     "login": {
-      "url": "/api/users/login",
+      "url": "/api/auth/login",
       "method": "post"
     },
     "logout": {
@@ -57,7 +66,7 @@ export default function (ctx, inject) {
       "method": "post"
     },
     "user": {
-      "url": "/api/users",
+      "url": "/api/rooms",
       "method": "get"
     }
   },

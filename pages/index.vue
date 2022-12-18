@@ -34,15 +34,19 @@
       </v-col>
     </v-row>
     <div>
+      {{ apirooms }}
+    </div>
+    <div>
       {{ users }}
     </div>
-    <p>Our Url is: {{ $config.API_URL }}</p>
     <p>Our Url is: {{ $config.API_URL }}</p>
   </v-container>
 </template>
 
 <script>
 export default {
+  auth: false,
+
   data() {
     return {
       rooms: [
@@ -77,13 +81,21 @@ export default {
           price: '1000',
         },
       ],
+      apirooms: [],
       users: [],
     }
   },
   async fetch() {
-    const res = await this.$axios.get('/api/users')
-    this.users = res.data
-    console.log(res.data)
+    // const { data } = await $axios.get(`/articles/index?pageIndex=1\`)
+    // const  data  = await $axios.$get(`/articles/index?pageIndex=1\`)
+    // const  data  = await $axios.get(`/articles/index?pageIndex=1\`).data
+
+    // const res = await this.$axios.get('/api/rooms')
+    // this.apirooms = res.data
+    // console.log(res.data)
+    const resUsers = await this.$axios.get('/api/users')
+    this.users = resUsers.data
+    console.log(resUsers.data)
   },
 }
 </script>

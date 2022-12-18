@@ -43,6 +43,7 @@ export default {
    */
   modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
+  //定義客戶端環境變量，並可使用服務端的環境變量
   env: {
     API_URL: process.env.API_URL || 'http://localhost:3000',
   },
@@ -79,7 +80,6 @@ export default {
    * @see https://auth.nuxtjs.org
    */
   auth: {
-    cookie: false,
     strategies: {
       local: {
         token: {
@@ -87,18 +87,22 @@ export default {
           property: 'accessToken',
           required: true,
           type: 'Bearer',
-          maxAge: 0,
+          maxAge: 60 * 60 * 24,
         },
         user: {
           property: false,
           autoFetch: true,
         },
         endpoints: {
-          login: { url: '/api/users/login', method: 'post' },
+          login: { url: '/api/auth/login', method: 'post' },
           logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/users', method: 'get' },
+          user: { url: '/api/rooms', method: 'get' },
         },
       },
+    },
+    cookies: {
+      prefix: 'auth.',
+      options: {},
     },
   },
 }

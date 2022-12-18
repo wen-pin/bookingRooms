@@ -3,4 +3,5 @@
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "windicss.enableHoverPreview": true,
 }

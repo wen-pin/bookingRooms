@@ -2,10 +2,6 @@
   <v-app-bar app flat>
     <v-spacer></v-spacer>
 
-    <!-- <div v-if="$auth.loggedIn">
-      {{ $auth.user.name }}
-    </div> -->
-
     <v-menu offset-y nudge-bottom="10" nudge-width="100">
       <template #activator="{ attrs, on }">
         <v-btn rounded outlined v-bind="attrs" v-on="on">
@@ -17,7 +13,10 @@
 
       <v-list>
         <v-list-item-group>
-          <v-list-item @click.stop="registerDialog = true">
+          <v-list-item
+            v-if="!$auth.loggedIn"
+            @click.stop="registerDialog = true"
+          >
             <v-list-item-title>註冊</v-list-item-title>
 
             <v-dialog v-model="registerDialog" max-width="400">
@@ -39,14 +38,12 @@
                   ></v-text-field>
 
                   <v-btn dark block @click="registerUser()"> 註冊 </v-btn>
-
-                  <v-btn text> 登入 </v-btn>
                 </v-form>
               </v-card>
             </v-dialog>
           </v-list-item>
 
-          <v-list-item @click.stop="loginDialog = true">
+          <v-list-item v-if="!$auth.loggedIn" @click.stop="loginDialog = true">
             <v-list-item-title> 登入 </v-list-item-title>
 
             <v-dialog v-model="loginDialog" max-width="400">
@@ -69,21 +66,17 @@
 
                   <v-btn dark block @click="loginUser()"> 登入 </v-btn>
 
-                  <v-btn text> 註冊 </v-btn>
+                  <v-btn text @click="openRegisterDialog()"> 註冊 </v-btn>
                 </v-form>
               </v-card>
             </v-dialog>
           </v-list-item>
-        </v-list-item-group>
-      </v-list>
 
-      <!-- <v-list>
-        <v-list-item-group>
-          <v-list-item>
+          <v-list-item v-if="$auth.loggedIn" @click="$auth.logout()">
             <v-list-item-title>登出</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
-      </v-list> -->
+      </v-list>
     </v-menu>
   </v-app-bar>
 </template>
@@ -116,6 +109,8 @@ export default {
       this.$auth.loginWith('local', {
         data: payload,
       })
+
+      this.loginDialog = false
     },
     async registerUser() {
       try {
@@ -129,6 +124,10 @@ export default {
       } finally {
         this.registerDialog = false
       }
+    },
+    openRegisterDialog() {
+      this.loginDialog = false
+      this.registerDialog = true
     },
   },
 }
