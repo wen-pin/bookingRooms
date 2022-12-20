@@ -2,12 +2,15 @@
   <v-app-bar app flat>
     <v-spacer></v-spacer>
 
+    <div v-if="$auth.loggedIn" class="mr-2">{{ $auth.user.username }}</div>
+
     <v-menu offset-y nudge-bottom="10" nudge-width="100">
       <template #activator="{ attrs, on }">
         <v-btn rounded outlined v-bind="attrs" v-on="on">
           <v-icon>mdi-menu</v-icon>
 
-          <v-icon>mdi-account-circle</v-icon>
+          <v-icon v-if="$auth.loggedIn">mdi-account-circle</v-icon>
+          <v-icon v-else>mdi-account-circle-outline</v-icon>
         </v-btn>
       </template>
 

@@ -2,20 +2,21 @@
   <v-container>
     <v-row>
       <v-col v-for="room in rooms" :key="room.id" cols="3">
-        <v-card nuxt :to="`/rooms/${room.id}`">
+        <v-card elevation="0" nuxt :to="`/rooms/${room.id}`">
           <v-img
             height="250"
             src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+            class="rounded-lg"
           ></v-img>
 
-          <v-card-title>
-            <v-row>
-              {{ room.name }}
+          <v-card-text class="px-0">
+            <div class="flex font-bold">
+              {{ room.title }}
 
               <v-spacer></v-spacer>
 
               <v-rating
-                :value="4.5"
+                :value="room.rating"
                 color="amber"
                 dense
                 half-increments
@@ -23,23 +24,16 @@
                 size="14"
               ></v-rating>
 
-              <div class="grey--text ms-4">4.5 (413)</div>
-            </v-row>
-          </v-card-title>
+              <div class="grey--text ms-4">{{ room.rating }}</div>
+            </div>
 
-          <v-card-text>
-            <span>{{ room.price }}</span>
+            <div>房東: {{ room.landlord }}</div>
+            <div>1月9日至14日</div>
+            <div class="font-bold">${{ room.weekday_price }} TWD 晚 起</div>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <div>
-      {{ apirooms }}
-    </div>
-    <div>
-      {{ users }}
-    </div>
-    <p>Our Url is: {{ $config.API_URL }}</p>
   </v-container>
 </template>
 
@@ -52,33 +46,93 @@ export default {
       rooms: [
         {
           id: 1,
-          url: 'asdasd',
-          name: '彰化',
-          price: '1000',
+          landlord: 'John',
+          title: 'sadas',
+          address: '彰化',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
         },
         {
           id: 2,
-          url: 'asdasd',
-          name: '台中',
-          price: '1000',
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
         },
         {
           id: 3,
-          url: 'asdasd',
-          name: '南投',
-          price: '1000',
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
         },
         {
           id: 4,
-          url: 'asdasd',
-          name: '雲林',
-          price: '1000',
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
         },
         {
           id: 5,
-          url: 'asdasd',
-          name: '桃園',
-          price: '1000',
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
+        },
+        {
+          id: 6,
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
+        },
+        {
+          id: 6,
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
+        },
+        {
+          id: 6,
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
+        },
+        {
+          id: 6,
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
+        },
+        {
+          id: 6,
+          landlord: 'John',
+          title: '彰化',
+          address: '',
+          weekday_price: 1000,
+          holiday_price: 2000,
+          rating: 2.5,
         },
       ],
       apirooms: [],
@@ -95,7 +149,7 @@ export default {
     // console.log(res.data)
     const resUsers = await this.$axios.get('/api/users')
     this.users = resUsers.data
-    console.log(resUsers.data)
+    // console.log(resUsers.data)
   },
 }
 </script>

@@ -66,7 +66,7 @@ export default function (ctx, inject) {
       "method": "post"
     },
     "user": {
-      "url": "/api/rooms",
+      "url": "/api/auth/user",
       "method": "get"
     }
   },

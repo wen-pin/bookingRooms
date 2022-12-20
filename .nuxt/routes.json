@@ -7,6 +7,20 @@
     "_name": "_5e8e935a"
   },
   {
+    "name": "rooms",
+    "path": "/rooms",
+    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/index.vue",
+    "chunkName": "pages/rooms/index",
+    "_name": "_34769136"
+  },
+  {
+    "name": "rooms-room",
+    "path": "/rooms/:room",
+    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_room/index.vue",
+    "chunkName": "pages/rooms/_room/index",
+    "_name": "_35646d10"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",
