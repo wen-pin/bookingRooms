@@ -41,7 +41,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next', '@nuxtjs/i18n'],
 
   //定義客戶端環境變量，並可使用服務端的環境變量
   env: {
@@ -103,6 +103,39 @@ export default {
     cookies: {
       prefix: 'auth.',
       options: {},
+    },
+  },
+
+  /**
+   * 國際化 (i18n)
+   * @see https://i18n.nuxtjs.org/
+   */
+  i18n: {
+    strategy: 'no_prefix',
+    defaultLocale: 'zh-tw',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+    },
+    lazy: true,
+    langDir: './locales/',
+    locales: [
+      { code: 'en-us', iso: 'en-US', file: 'en.js', dir: 'ltr' },
+      { code: 'zh-tw', iso: 'zh-TW', file: 'tw.js', dir: 'ltr' },
+    ],
+    vueI18n: {
+      fallbackLocale: 'tw',
+      messages: {
+        en: {
+          welcome: 'Welcome',
+        },
+        fr: {
+          welcome: 'Bienvenue',
+        },
+        es: {
+          welcome: 'Bienvenido',
+        },
+      },
     },
   },
 }
