@@ -27,7 +27,7 @@
               <div class="grey--text ms-4">{{ room.rating }}</div>
             </div>
 
-            <div>房東: {{ room.landlord }}</div>
+            <div>{{ $t('房東') }}: {{ room.landlord }}</div>
             <div>1月9日至14日</div>
             <div class="font-bold">${{ room.weekday_price }} TWD 晚 起</div>
           </v-card-text>

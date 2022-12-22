@@ -118,22 +118,29 @@ export default {
       cookieKey: 'i18n_redirected',
     },
     lazy: true,
-    langDir: './locales/',
+    langDir: './locales',
     locales: [
       { code: 'en-us', iso: 'en-US', file: 'en.js', dir: 'ltr' },
       { code: 'zh-tw', iso: 'zh-TW', file: 'tw.js', dir: 'ltr' },
     ],
     vueI18n: {
-      fallbackLocale: 'tw',
-      messages: {
-        en: {
-          welcome: 'Welcome',
+      fallbackLocale: 'en-us',
+      locale: 'zh-tw',
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+      numberFormats: {
+        'en-us': {
+          currency: {
+            style: 'currency',
+            currency: 'USD',
+          },
         },
-        fr: {
-          welcome: 'Bienvenue',
-        },
-        es: {
-          welcome: 'Bienvenido',
+        'zh-tw': {
+          currency: {
+            style: 'currency',
+            currency: 'TWD', // NTD
+            currencyDisplay: 'code',
+            minimumFractionDigits: 0,
+          },
         },
       },
     },
