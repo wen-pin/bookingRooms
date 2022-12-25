@@ -24,12 +24,14 @@
                 size="14"
               ></v-rating>
 
-              <div class="grey--text ms-4">{{ room.rating }}</div>
+              <div>{{ room.rating }}</div>
             </div>
 
             <div>{{ $t('房東') }}: {{ room.landlord }}</div>
             <div>1月9日至14日</div>
-            <div class="font-bold">${{ room.weekday_price }} TWD 晚 起</div>
+            <div class="font-bold">
+              {{ $n(room.weekday_price, 'currency', 'zh-tw') }} 晚 起
+            </div>
           </v-card-text>
         </v-card>
       </v-col>

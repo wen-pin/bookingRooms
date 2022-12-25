@@ -124,6 +124,7 @@ export default {
       { code: 'zh-tw', iso: 'zh-TW', file: 'tw.js', dir: 'ltr' },
     ],
     vueI18n: {
+      silentTranslationWarn: true, // 關閉缺少翻譯的警告
       fallbackLocale: 'en-us',
       locale: 'zh-tw',
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
@@ -144,5 +145,14 @@ export default {
         },
       },
     },
+  },
+
+  /**
+   * UI框架 (Vuetify)
+   * @see https://github.com/nuxt-community/vuetify-module
+   */
+  vuetify: {
+    treeShake: false,
+    // defaultAssets: false,
   },
 }

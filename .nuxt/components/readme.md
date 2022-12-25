@@ -7,3 +7,7 @@ You can directly use them in pages and other components without the need to impo
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
 - `<Appbar>` | `<appbar>` (components/Appbar.vue)
+- `<CardDialog>` | `<card-dialog>` (components/CardDialog.vue)
+- `<DivideBlock>` | `<divide-block>` (components/DivideBlock.vue)
+- `<TextBtnDialog>` | `<text-btn-dialog>` (components/TextBtnDialog.vue)
+- `<TextRate>` | `<text-rate>` (components/TextRate.vue)

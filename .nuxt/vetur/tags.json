@@ -1,5 +1,17 @@
 {
   "Appbar": {
     "description": "Auto imported from components/Appbar.vue"
+  },
+  "CardDialog": {
+    "description": "Auto imported from components/CardDialog.vue"
+  },
+  "DivideBlock": {
+    "description": "Auto imported from components/DivideBlock.vue"
+  },
+  "TextBtnDialog": {
+    "description": "Auto imported from components/TextBtnDialog.vue"
+  },
+  "TextRate": {
+    "description": "Auto imported from components/TextRate.vue"
   }
 }

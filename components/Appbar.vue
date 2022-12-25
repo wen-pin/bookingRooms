@@ -1,5 +1,7 @@
 <template>
   <v-app-bar app flat>
+    <div class="text-lg">The rooms</div>
+
     <v-spacer></v-spacer>
 
     <div v-if="$auth.loggedIn" class="mr-2">{{ $auth.user.username }}</div>
