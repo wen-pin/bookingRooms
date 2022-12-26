@@ -1,6 +1,7 @@
 export { default as Appbar } from '../../components/Appbar.vue'
 export { default as CardDialog } from '../../components/CardDialog.vue'
 export { default as DivideBlock } from '../../components/DivideBlock.vue'
+export { default as SvgIcon } from '../../components/SvgIcon.vue'
 export { default as TextBtnDialog } from '../../components/TextBtnDialog.vue'
 export { default as TextRate } from '../../components/TextRate.vue'
 export { default as MessageBlock } from '../../components/messageBlock.vue'

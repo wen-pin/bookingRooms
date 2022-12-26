@@ -8,6 +8,9 @@
   "DivideBlock": {
     "description": "Auto imported from components/DivideBlock.vue"
   },
+  "SvgIcon": {
+    "description": "Auto imported from components/SvgIcon.vue"
+  },
   "TextBtnDialog": {
     "description": "Auto imported from components/TextBtnDialog.vue"
   },

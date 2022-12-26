@@ -1,3 +1,5 @@
+const path = require('path')
+
 export default {
   server: {
     host: process.env.HOST || '0.0.0.0',
@@ -20,6 +22,19 @@ export default {
   // 為了解決defu__WEBPACK_IMPORTED_MODULE_3__ is not a function
   build: {
     transpile: ['defu'],
+    extend(config, ctx) {
+      const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
+      svgRule.exclude = [path.resolve(__dirname, 'assets/svg')]
+      // Includes /icons/svg for svg-sprite-loader
+      config.module.rules.push({
+        test: /\.svg$/,
+        include: [path.resolve(__dirname, 'assets/svg')],
+        loader: 'svg-sprite-loader',
+        options: {
+          symbolId: 'icon-[name]',
+        },
+      })
+    },
   },
 
   buildModules: [
@@ -34,7 +49,7 @@ export default {
     'virtual:windi-utilities.css',
   ],
 
-  plugins: ['~/plugins/axios'],
+  plugins: ['~/plugins/axios', { src: '@/plugins/icons', ssr: true }],
 
   components: true,
 

@@ -291,6 +291,14 @@
             </div>
 
             <v-card width="200px" height="150px" class="p-5 mt-5">
+              <div>
+                <SvgIcon
+                  v-for="i in 4"
+                  :key="i"
+                  :iconClass="'doubleBed'"
+                  class="mr-1"
+                />
+              </div>
               <div>{{ $t('臥室') }}</div>
               <div>4 張 1.4 米寬雙人床</div>
             </v-card>
@@ -323,7 +331,9 @@
 </template>
 
 <script>
+import SvgIcon from '../../../components/SvgIcon.vue'
 export default {
+  components: { SvgIcon },
   data() {
     return {
       detailDialog: false,
