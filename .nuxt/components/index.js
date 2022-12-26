@@ -3,6 +3,7 @@ export { default as CardDialog } from '../../components/CardDialog.vue'
 export { default as DivideBlock } from '../../components/DivideBlock.vue'
 export { default as TextBtnDialog } from '../../components/TextBtnDialog.vue'
 export { default as TextRate } from '../../components/TextRate.vue'
+export { default as MessageBlock } from '../../components/messageBlock.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

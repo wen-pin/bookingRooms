@@ -13,5 +13,8 @@
   },
   "TextRate": {
     "description": "Auto imported from components/TextRate.vue"
+  },
+  "MessageBlock": {
+    "description": "Auto imported from components/messageBlock.vue"
   }
 }

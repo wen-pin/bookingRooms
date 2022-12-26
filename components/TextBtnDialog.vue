@@ -1,12 +1,12 @@
 <template>
-  <span
-    class="font-medium"
+  <div
+    class="font-medium my-auto"
     :class="
       isUnderlineCursorPointer ? 'underline cursor-pointer' : 'no-underline'
     "
   >
     {{ $t(this.title) }}
-  </span>
+  </div>
 </template>
 
 <script>

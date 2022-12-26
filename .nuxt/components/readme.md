@@ -11,3 +11,4 @@ You can directly use them in pages and other components without the need to impo
 - `<DivideBlock>` | `<divide-block>` (components/DivideBlock.vue)
 - `<TextBtnDialog>` | `<text-btn-dialog>` (components/TextBtnDialog.vue)
 - `<TextRate>` | `<text-rate>` (components/TextRate.vue)
+- `<MessageBlock>` | `<message-block>` (components/messageBlock.vue)

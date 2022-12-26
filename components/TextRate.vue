@@ -1,15 +1,16 @@
 <template>
-  <div class="flex !max-w-[150px]">
+  <div class="flex" :class="maxWidth">
     <v-rating
       :value="value"
-      color="amber"
+      :size="size"
+      color="black"
+      length="1"
       dense
       half-increments
       readonly
-      size="14"
-    ></v-rating>
+    />
 
-    <div class="mr-4">{{ value }}</div>
+    <div class="mr-4" :class="marginTop">{{ value }}</div>
   </div>
 </template>
 
@@ -19,6 +20,17 @@ export default {
     value: {
       type: Number,
       required: true,
+    },
+    size: {
+      type: Number,
+      default: 14,
+    },
+    maxWidth: {
+      type: String,
+      default: '!max-w-[150px]',
+    },
+    marginTop: {
+      type: String,
     },
   },
 }

@@ -1,5 +1,10 @@
 <template>
-  <v-dialog v-model="detailDialog" width="600">
+  <v-dialog
+    v-model="detailDialog"
+    :width="width"
+    :fullscreen="fullscreen"
+    :hide-overlay="hideOverlay"
+  >
     <v-card class="rounded-lg p-5">
       <v-btn icon @click="detailDialog = false">
         <v-icon>mdi-window-close</v-icon>
@@ -14,6 +19,18 @@
 export default {
   props: {
     dialog: {
+      type: Boolean,
+      default: false,
+    },
+    width: {
+      type: Number,
+      default: 600,
+    },
+    fullscreen: {
+      type: Boolean,
+      default: false,
+    },
+    hideOverlay: {
       type: Boolean,
       default: false,
     },
