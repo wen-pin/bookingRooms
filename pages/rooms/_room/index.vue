@@ -304,6 +304,52 @@
             </v-card>
           </div>
         </DivideBlock>
+
+        <DivideBlock>
+          <div class="my-10">
+            <div class="text-2xl font-bold">
+              {{ $t('有提供的設備與服務') }}
+            </div>
+
+            <v-row class="w-[80%] mt-2">
+              <v-col
+                v-for="item in fetchEquipmentAndServices(
+                  room.equipmentAndServices,
+                )"
+                :key="item.id"
+                cols="6"
+                class="flex pb-0"
+              >
+                <SvgIcon :iconClass="item.svgTitle" class="mr-2" />
+                <div>
+                  {{ item.title }}
+                </div>
+              </v-col>
+            </v-row>
+
+            <v-btn outlined class="mt-10" @click="eqptAndservDialog = true">
+              顯示全部{{ room.equipmentAndServices.length }}項設備與服務
+            </v-btn>
+
+            <v-dialog v-model="eqptAndservDialog">
+              <v-card class="rounded-lg p-5">
+                <v-btn icon @click="eqptAndservDialog = false">
+                  <v-icon>mdi-window-close</v-icon>
+                </v-btn>
+
+                <v-card-text class="!p-0 my-10">
+                  <div class="text-2xl font-bold">有提供的設備與服務</div>
+
+                  <CardEqptAndServ
+                    :title="'衛浴'"
+                    :subtitle="'浴缸'"
+                    :svgTitle="'doubleBed'"
+                  />
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+          </div>
+        </DivideBlock>
       </div>
 
       <div class="w-[40%] flex justify-center">
@@ -331,15 +377,17 @@
 </template>
 
 <script>
+import CardEqptAndServ from '../../../components/CardEqptAndServ.vue'
 import SvgIcon from '../../../components/SvgIcon.vue'
 export default {
-  components: { SvgIcon },
+  components: { SvgIcon, CardEqptAndServ },
   data() {
     return {
       detailDialog: false,
       detailDialog2: false,
       EvaluationDialog: false,
       fullscreenDialog: false,
+      eqptAndservDialog: false,
 
       room: {
         // 房東
@@ -416,6 +464,20 @@ export default {
             },
           ],
         },
+        equipmentAndServices: [
+          { id: 1, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 2, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 3, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 4, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 5, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 6, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 7, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 8, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 9, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 10, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 11, title: '廚房', svgTitle: 'doubleBed' },
+          { id: 12, title: '廚房', svgTitle: 'doubleBed' },
+        ],
       },
 
       // 房間留言
@@ -466,6 +528,9 @@ export default {
     },
     convertPercentage(value) {
       return (value / 5) * 100
+    },
+    fetchEquipmentAndServices(equipmentAndServices) {
+      return equipmentAndServices.slice(0, 10)
     },
   },
 }

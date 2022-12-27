@@ -5,6 +5,9 @@
   "CardDialog": {
     "description": "Auto imported from components/CardDialog.vue"
   },
+  "CardEqptAndServ": {
+    "description": "Auto imported from components/CardEqptAndServ.vue"
+  },
   "DivideBlock": {
     "description": "Auto imported from components/DivideBlock.vue"
   },

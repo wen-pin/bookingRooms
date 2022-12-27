@@ -8,6 +8,7 @@ You can directly use them in pages and other components without the need to impo
 
 - `<Appbar>` | `<appbar>` (components/Appbar.vue)
 - `<CardDialog>` | `<card-dialog>` (components/CardDialog.vue)
+- `<CardEqptAndServ>` | `<card-eqpt-and-serv>` (components/CardEqptAndServ.vue)
 - `<DivideBlock>` | `<divide-block>` (components/DivideBlock.vue)
 - `<SvgIcon>` | `<svg-icon>` (components/SvgIcon.vue)
 - `<TextBtnDialog>` | `<text-btn-dialog>` (components/TextBtnDialog.vue)
