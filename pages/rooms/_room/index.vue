@@ -214,9 +214,9 @@
               針對房東取消預訂、房源描述不實和入住困難等其他問題，我們會為每筆預訂提供免費保障。
             </div>
 
-            <span @click="detailDialog = true">
+            <div class="!max-w-[70px]" @click="detailDialog = true">
               <TextBtnDialog :title="'了解詳情'" />
-            </span>
+            </div>
 
             <CardDialog :dialog="detailDialog" @update="updateDetailDialog">
               <DivideBlock class="mx-5">
@@ -290,7 +290,7 @@
               {{ $t('住宿地點') }}
             </div>
 
-            <v-card width="200px" height="120px" class="p-5 mt-5">
+            <v-card outlined width="200px" height="120px" class="p-5 mt-5">
               <div>
                 <SvgIcon
                   v-for="i in 4"
@@ -313,8 +313,8 @@
 
             <v-row class="w-[80%] mt-2">
               <v-col
-                v-for="item in fetchEquipmentAndServices(
-                  room.equipmentAndServices,
+                v-for="item in fetchEqptAndServices(
+                  room.alleqptAndServices[0].eqptAndServices,
                 )"
                 :key="item.id"
                 cols="6"
@@ -328,23 +328,37 @@
             </v-row>
 
             <v-btn outlined class="mt-10" @click="eqptAndservDialog = true">
-              顯示全部{{ room.equipmentAndServices.length }}項設備與服務
+              顯示全部{{
+                room.alleqptAndServices[0].eqptAndServices.length
+              }}項設備與服務
             </v-btn>
 
-            <v-dialog v-model="eqptAndservDialog">
+            <v-dialog v-model="eqptAndservDialog" scrollable width="700">
               <v-card class="rounded-lg p-5">
                 <v-btn icon @click="eqptAndservDialog = false">
                   <v-icon>mdi-window-close</v-icon>
                 </v-btn>
 
-                <v-card-text class="!p-0 my-10">
+                <v-card-text class="!p-0 my-10 black--text">
                   <div class="text-2xl font-bold">有提供的設備與服務</div>
 
-                  <CardEqptAndServ
-                    :title="'衛浴'"
-                    :subtitle="'浴缸'"
-                    :svgTitle="'doubleBed'"
-                  />
+                  <div
+                    v-for="items in this.room.alleqptAndServices"
+                    :key="items.id"
+                  >
+                    <div class="text-xl font-bold my-8">
+                      {{ items.category }}
+                    </div>
+
+                    <CardEqptAndServ
+                      v-for="item in items.eqptAndServices"
+                      :key="item.id"
+                      :title="item.title"
+                      :subtitle="item.subtitle"
+                      :svgTitle="item.svgTitle"
+                      :isSupply="item.isSupply"
+                    />
+                  </div>
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -464,19 +478,162 @@ export default {
             },
           ],
         },
-        equipmentAndServices: [
-          { id: 1, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 2, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 3, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 4, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 5, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 6, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 7, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 8, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 9, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 10, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 11, title: '廚房', svgTitle: 'doubleBed' },
-          { id: 12, title: '廚房', svgTitle: 'doubleBed' },
+        alleqptAndServices: [
+          {
+            id: 1,
+            category: '衛浴',
+            eqptAndServices: [
+              { id: 1, title: '浴缸', svgTitle: 'tub' },
+              { id: 2, title: '吹風機', svgTitle: 'hairDryer' },
+              { id: 3, title: '洗髮露', svgTitle: 'shampoo' },
+              { id: 4, title: '沐浴乳', svgTitle: 'bodyWash' },
+              { id: 5, title: '熱水', svgTitle: 'hotWater' },
+            ],
+          },
+          {
+            id: 2,
+            category: '臥室和洗衣',
+            eqptAndServices: [
+              {
+                id: 1,
+                title: '生活必需品',
+                subtitle: '毛巾、床單、香皂和衛生紙',
+                svgTitle: 'toothbrush',
+              },
+              { id: 2, title: '衣架', svgTitle: 'coatHanger' },
+              { id: 3, title: '窗簾', svgTitle: 'curtain' },
+            ],
+          },
+          {
+            id: 3,
+            category: '娛樂',
+            eqptAndServices: [{ id: 1, title: '電視', svgTitle: 'television' }],
+          },
+          {
+            id: 4,
+            category: '親子',
+            eqptAndServices: [
+              { id: 1, title: '嬰兒床', svgTitle: 'crib' },
+              { id: 2, title: '嬰兒浴盆', svgTitle: 'babyTub' },
+            ],
+          },
+          {
+            id: 5,
+            category: '暖氣和冷氣',
+            eqptAndServices: [
+              { id: 1, title: '空調設備', svgTitle: 'airConditioner' },
+              { id: 2, title: '移動式電扇', svgTitle: 'fan' },
+              { id: 3, title: '暖氣', svgTitle: 'heat' },
+            ],
+          },
+          {
+            id: 6,
+            category: '網路和辦公',
+            eqptAndServices: [{ id: 1, title: 'wifi', svgTitle: 'wifi' }],
+          },
+          {
+            id: 7,
+            category: '廚房和餐飲',
+            eqptAndServices: [
+              {
+                id: 1,
+                title: '廚房',
+                subtitle: '房客可自行烹飪三餐的空間',
+                svgTitle: 'kitchen',
+              },
+              { id: 2, title: '冰箱', svgTitle: 'refrigerator' },
+              { id: 3, title: '微波爐', svgTitle: 'oven' },
+              {
+                id: 4,
+                title: '盤子和餐具',
+                subtitle: '碗、筷、盤、杯等',
+                svgTitle: 'tableware',
+              },
+              { id: 5, title: '熱水壺', svgTitle: 'kettle' },
+              { id: 6, title: '酒杯', svgTitle: 'wineGlass' },
+            ],
+          },
+          {
+            id: 8,
+            category: '位置特色',
+            eqptAndServices: [
+              {
+                id: 1,
+                title: '獨立入口',
+                subtitle: '獨立的街道或大樓入口',
+                svgTitle: 'entrance',
+              },
+            ],
+          },
+          {
+            id: 9,
+            category: '戶外',
+            eqptAndServices: [
+              { id: 1, title: '庭院或陽台', svgTitle: 'balcony' },
+              {
+                id: 2,
+                title: '後院',
+                subtitle: '房源中有綠地覆蓋的開放空間',
+                svgTitle: 'patio',
+              },
+            ],
+          },
+          {
+            id: 10,
+            category: '停車位和設施',
+            eqptAndServices: [
+              { id: 1, title: '建築物內免費停車', svgTitle: 'car' },
+              { id: 2, title: '游泳池', svgTitle: 'swimmingPool' },
+              { id: 3, title: '獨立房屋', svgTitle: 'house' },
+            ],
+          },
+          {
+            id: 10,
+            category: '服務',
+            eqptAndServices: [
+              {
+                id: 1,
+                title: '可長期住宿',
+                subtitle: '可住宿28晚以上',
+                svgTitle: 'calendar',
+              },
+              { id: 2, title: '房東將會迎接您', svgTitle: 'key' },
+            ],
+          },
+          {
+            id: 11,
+            category: '不提供',
+            eqptAndServices: [
+              {
+                id: 1,
+                title: '房源內的監視錄影器',
+                svgTitle: 'video',
+                isSupply: false,
+              },
+              {
+                id: 2,
+                title: '洗衣機',
+                svgTitle: 'washingMachine',
+                isSupply: false,
+              },
+              {
+                id: 3,
+                title: '煙霧警報器',
+                subtitle:
+                  '此房源可能沒有安裝煙霧偵測器。如有任何問題，請聯絡房東。',
+                svgTitle: 'siren',
+                isSupply: false,
+              },
+              {
+                id: 4,
+                title: '一氧化碳警報器',
+                subtitle:
+                  '此房源可能沒有安裝一氧化碳偵測器。如有任何問題，請聯絡房東。',
+                svgTitle: 'alarmSiren',
+                isSupply: false,
+              },
+            ],
+          },
         ],
       },
 
@@ -529,8 +686,8 @@ export default {
     convertPercentage(value) {
       return (value / 5) * 100
     },
-    fetchEquipmentAndServices(equipmentAndServices) {
-      return equipmentAndServices.slice(0, 10)
+    fetchEqptAndServices(eqptAndServices) {
+      return eqptAndServices.slice(0, 10)
     },
   },
 }

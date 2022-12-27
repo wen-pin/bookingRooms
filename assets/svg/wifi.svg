@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Tools -->
+<svg width="800px" height="800px" viewBox="0 -6.5 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>Wifi</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Wifi" sketch:type="MSLayerGroup" transform="translate(1.000000, 1.000000)" stroke="#6B6C6E" stroke-width="2">
+            <circle id="Oval" sketch:type="MSShapeGroup" cx="31" cy="43" r="6"></circle>
+            <path d="M13.9,33.9 C17.1,27.5 23.5,23.1 30.9,23.1 C38.3,23.1 44.6,27.5 47.9,33.9" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M6.9,25 C12.2,17.2 21,12.1 30.9,12.1 C40.8,12.1 49.6,17.2 54.9,25" id="Shape" sketch:type="MSShapeGroup"></path>
+            <path d="M0,15 C7.4,5.8 18.5,0 31,0 C43.4,0 54.6,5.8 62,15" id="Shape" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
