@@ -101,7 +101,7 @@ export default {
           rating: 2.5,
         },
         {
-          id: 6,
+          id: 7,
           landlord: 'John',
           title: '彰化',
           address: '',
@@ -110,7 +110,7 @@ export default {
           rating: 2.5,
         },
         {
-          id: 6,
+          id: 8,
           landlord: 'John',
           title: '彰化',
           address: '',
@@ -119,7 +119,7 @@ export default {
           rating: 2.5,
         },
         {
-          id: 6,
+          id: 9,
           landlord: 'John',
           title: '彰化',
           address: '',
@@ -128,7 +128,7 @@ export default {
           rating: 2.5,
         },
         {
-          id: 6,
+          id: 10,
           landlord: 'John',
           title: '彰化',
           address: '',

@@ -290,13 +290,13 @@
               {{ $t('住宿地點') }}
             </div>
 
-            <v-card width="200px" height="150px" class="p-5 mt-5">
+            <v-card width="200px" height="120px" class="p-5 mt-5">
               <div>
                 <SvgIcon
                   v-for="i in 4"
                   :key="i"
                   :iconClass="'doubleBed'"
-                  class="mr-1"
+                  class="mr-2"
                 />
               </div>
               <div>{{ $t('臥室') }}</div>
