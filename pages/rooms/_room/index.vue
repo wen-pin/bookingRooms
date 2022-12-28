@@ -373,15 +373,15 @@
 
         <div class="my-10">
           <div class="text-2xl font-bold">
-            {{ $t('在') }}{{ room.address }}住1晚 {{ now }}
-            {{ $dayjs().format('YYYY-MM-DD') }}
+            {{ $t('在') }}{{ room.address }}住1晚
           </div>
 
           <v-row class="mt-10">
             <v-date-picker
-              v-model="picker"
+              v-model="dates"
               range
-              min=""
+              scrollable
+              :min="$dayjs().format('YYYY-MM-DD')"
               year-icon="mdi-calendar-blank"
             ></v-date-picker>
           </v-row>
@@ -411,6 +411,48 @@
               />
             </span>
           </v-card-title>
+
+          <v-row class="justify-center">
+            <v-col cols="11">
+              <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                offset-y
+                max-width="290px"
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="dateRangeText"
+                    label="Picker in menu"
+                    prepend-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+
+                <v-date-picker
+                  v-model="dates"
+                  range
+                  :min="$dayjs().format('YYYY-MM-DD')"
+                  no-title
+                  scrollable
+                >
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menu = false"
+                    >Cancel</v-btn
+                  >
+                  <v-btn text color="primary" @click="$refs.menu.save(date)"
+                    >OK</v-btn
+                  >
+                </v-date-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
         </v-card>
       </div>
     </div>
@@ -489,17 +531,7 @@
 </template>
 
 <script>
-import CardEqptAndServ from '../../../components/CardEqptAndServ.vue'
-import SvgIcon from '../../../components/SvgIcon.vue'
 export default {
-  components: { SvgIcon, CardEqptAndServ },
-
-  asyncData({ $dayjs }) {
-    return {
-      now: $dayjs().format('YYYY/MM/DD'),
-    }
-  },
-
   data() {
     return {
       detailDialog: false,
@@ -507,11 +539,9 @@ export default {
       EvaluationDialog: false,
       fullscreenDialog: false,
       eqptAndservDialog: false,
-      date: '',
+      menu: false,
 
-      picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      dates: [],
 
       room: {
         // 房東
@@ -785,6 +815,11 @@ export default {
         ],
       },
     }
+  },
+  computed: {
+    dateRangeText() {
+      return this.dates.join(' ~ ')
+    },
   },
   methods: {
     updateDetailDialog(val) {
