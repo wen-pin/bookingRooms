@@ -8,7 +8,7 @@
         </span>
 
         <span class="mr-4 my-auto" @click="EvaluationDialog = true">
-          <TextBtnDialog :title="`${room.evaluations}則評價`" />
+          <TextBtnDialog :title="`${room.allMessages.length}則評價`" />
         </span>
 
         <CardDialog
@@ -21,7 +21,7 @@
               <div class="flex">
                 <span>
                   <TextRate
-                    :value="4.5"
+                    :value="room.averageRating"
                     :size="30"
                     :max-width="''"
                     :margin-top="'mt-[2px]'"
@@ -30,7 +30,7 @@
                 </span>
 
                 <TextBtnDialog
-                  :title="`${room.evaluations}則評價`"
+                  :title="`${room.allMessages.length}則評價`"
                   :isUnderlineCursorPointer="false"
                   class="text-3xl mt-[2px]"
                 />
@@ -66,7 +66,11 @@
                 prepend-inner-icon="mdi-magnify"
               />
 
-              <div v-for="item in allMessages" :key="item.id" class="mb-10">
+              <div
+                v-for="item in room.allMessages"
+                :key="item.id"
+                class="mb-10"
+              >
                 <messageBlock
                   :imgSrc="item.imgSrc"
                   :commenter="item.commenter"
@@ -78,7 +82,7 @@
           </v-row>
         </CardDialog>
 
-        <TextBtnDialog :title="room.address" />
+        <TextBtnDialog :title="room.address" :subTitle="room.country" />
 
         <v-spacer />
 
@@ -186,7 +190,9 @@
       </div>
     </div>
 
-    <div class="flex">
+    <div
+      class="flex border-solid border-t-0 border-r-0 border-b-1 border-l-0 border-slate-200"
+    >
       <div class="w-[60%]">
         <DivideBlock>
           <div class="my-5 flex justify-between">
@@ -364,10 +370,31 @@
             </v-dialog>
           </div>
         </DivideBlock>
+
+        <div class="my-10">
+          <div class="text-2xl font-bold">
+            {{ $t('在') }}{{ room.address }}住1晚 {{ now }}
+            {{ $dayjs().format('YYYY-MM-DD') }}
+          </div>
+
+          <v-row class="mt-10">
+            <v-date-picker
+              v-model="picker"
+              range
+              min=""
+              year-icon="mdi-calendar-blank"
+            ></v-date-picker>
+          </v-row>
+        </div>
       </div>
 
-      <div class="w-[40%] flex justify-center">
-        <v-card width="80%" height="300px" elevation="3" class="rounded-lg">
+      <div class="w-[40%] flex justify-center relative">
+        <v-card
+          width="80%"
+          height="300px"
+          elevation="3"
+          class="rounded-lg !sticky top-[80px]"
+        >
           <v-card-title class="justify-between">
             {{ $n(room.price.weekday, 'currency') }} 晚
 
@@ -379,7 +406,7 @@
 
             <span @click="EvaluationDialog = true">
               <TextBtnDialog
-                :title="`${room.evaluations}則評價`"
+                :title="`${room.allMessages.length}則評價`"
                 class="text-sm"
               />
             </span>
@@ -387,6 +414,77 @@
         </v-card>
       </div>
     </div>
+
+    <DivideBlock>
+      <div class="my-10">
+        <div class="flex">
+          <span>
+            <TextRate
+              :value="room.averageRating"
+              :size="25"
+              :max-width="''"
+              :margin-top="'mt-[2px]'"
+              class="text-2xl"
+            />
+          </span>
+
+          <TextBtnDialog
+            :title="`${room.allMessages.length}則評價`"
+            :isUnderlineCursorPointer="false"
+            class="text-2xl mt-[2px]"
+          />
+        </div>
+
+        <v-row class="mt-5">
+          <v-col
+            v-for="item in this.room.evaluationStandards"
+            :key="item.title"
+            cols="6"
+          >
+            <v-row>
+              <v-col cols="4" class="w-[50px]">{{ $t(item.title) }}</v-col>
+
+              <v-col cols="5" class="flex items-center">
+                <v-progress-linear
+                  :value="convertPercentage(item.value)"
+                  class="max-w-[200px]"
+                />
+              </v-col>
+
+              <v-col cols="3">{{ item.value }}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+
+        <v-row class="mt-5">
+          <v-col
+            v-for="item in room.allMessages"
+            :key="item.id"
+            cols="6"
+            class="mb-10"
+          >
+            <messageBlock
+              :imgSrc="item.imgSrc"
+              :commenter="item.commenter"
+              :messageTime="item.messageTime"
+              :message="item.message"
+            />
+          </v-col>
+        </v-row>
+
+        <v-btn outlined @click="EvaluationDialog = true">
+          顯示全部{{ room.allMessages.length }}則評價
+        </v-btn>
+      </div>
+    </DivideBlock>
+
+    <DivideBlock>
+      <div class="my-10">
+        <div class="text-2xl font-bold">
+          {{ $t('住宿地點') }}
+        </div>
+      </div>
+    </DivideBlock>
   </v-container>
 </template>
 
@@ -395,6 +493,13 @@ import CardEqptAndServ from '../../../components/CardEqptAndServ.vue'
 import SvgIcon from '../../../components/SvgIcon.vue'
 export default {
   components: { SvgIcon, CardEqptAndServ },
+
+  asyncData({ $dayjs }) {
+    return {
+      now: $dayjs().format('YYYY/MM/DD'),
+    }
+  },
+
   data() {
     return {
       detailDialog: false,
@@ -402,6 +507,11 @@ export default {
       EvaluationDialog: false,
       fullscreenDialog: false,
       eqptAndservDialog: false,
+      date: '',
+
+      picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
 
       room: {
         // 房東
@@ -409,8 +519,10 @@ export default {
         // 房間標題
         title:
           '(4-8人房)台灣最南端甜點店B&B「墾，點心背包客棧」 近墾丁最美沙灘砂島',
+        // 國家
+        country: '臺灣',
         // 地址
-        address: '恆春鎮、臺灣',
+        address: '恆春鎮',
         // 房間價錢
         price: {
           weekday: 2000,
@@ -420,8 +532,6 @@ export default {
         simpleInformation: '3位1間臥室1 張床1 間獨立浴室',
         // 平均評價
         averageRating: 4.6,
-        // 評價數量
-        evaluations: 5,
         // 評價標準
         evaluationStandards: [
           { title: '乾淨度', value: 5.0, percentage: null },
@@ -430,6 +540,44 @@ export default {
           { title: '位置', value: 2.5, percentage: null },
           { title: '入住', value: 4.9, percentage: null },
           { title: '性價比', value: 4.5, percentage: null },
+        ],
+        // 房間留言
+        allMessages: [
+          {
+            id: 1,
+            imgSrc:
+              'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            commenter: 'Yuan-Ping',
+            messageTime: '2022年7月',
+            message: '很棒的住宿體驗，尤其是從落地窗看出去的景緻。',
+          },
+          {
+            id: 2,
+            imgSrc:
+              'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            commenter: 'Chihchia',
+            messageTime: '2022年7月',
+            message:
+              '員工老闆也很親切，公共空間及房間整體非常有歷史感及設計感，保有老宅該有的風味，但位於馬路要道邊，加上窗戶非氣密式，整晚都有嘟嘟車呼嘯而過，早晨卡車卸貨等噪音，房間冷氣也很擾人安靜，有被影響到睡眠，房內有附耳塞，有稍稍緩解噪音感，若對於睡眠品質敏感的人可能要多考慮。',
+          },
+          {
+            id: 3,
+            imgSrc:
+              'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            commenter: 'Elsa',
+            messageTime: '2022年7月',
+            message:
+              '房間太美了！二樓的公共空間非常舒適，中國城逛累了窩在二樓沙發上發懶聽音樂，覺得很像在自己家裡那樣自在。所有的空間都好拍到不行，隨便拍隨便美，很喜歡獨特的設計和顏色。（也是因為非常挑高，所以樓梯很高很陡要小心走就是了～）主人很親切，也貼心提供推薦店家的名單～很棒的入住體驗^^',
+          },
+          {
+            id: 4,
+            imgSrc:
+              'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+            commenter: 'Po Nan',
+            messageTime: '2022年7月',
+            message:
+              '地理位置佳,房間風格獨特，超好拍照打卡！房東很nice! 因我搭隔天凌晨班機，還特別幫我預訂計程車，讓我可以從容的去機場。可於前晚選擇好明早的早餐類型和用餐時間，2樓的咖啡飲料和小餅乾都可免費自取，不怕半夜嘴饞～1樓的酒吧非常酷，店員態度熱情，推薦我喝的2款調酒都很棒！優點多到說不完，實在太喜歡，本來只住一晚，後來直接取消別的旅店，再多住八號一晚，哈哈！',
+          },
         ],
         img: {
           avaterSrc:
@@ -636,41 +784,6 @@ export default {
           },
         ],
       },
-
-      // 房間留言
-      allMessages: [
-        {
-          id: 1,
-          imgSrc: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          commenter: 'Yuan-Ping',
-          messageTime: '2022年7月',
-          message: '很棒的住宿體驗，尤其是從落地窗看出去的景緻。',
-        },
-        {
-          id: 2,
-          imgSrc: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          commenter: 'Chihchia',
-          messageTime: '2022年7月',
-          message:
-            '員工老闆也很親切，公共空間及房間整體非常有歷史感及設計感，保有老宅該有的風味，但位於馬路要道邊，加上窗戶非氣密式，整晚都有嘟嘟車呼嘯而過，早晨卡車卸貨等噪音，房間冷氣也很擾人安靜，有被影響到睡眠，房內有附耳塞，有稍稍緩解噪音感，若對於睡眠品質敏感的人可能要多考慮。',
-        },
-        {
-          id: 3,
-          imgSrc: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          commenter: 'Elsa',
-          messageTime: '2022年7月',
-          message:
-            '房間太美了！二樓的公共空間非常舒適，中國城逛累了窩在二樓沙發上發懶聽音樂，覺得很像在自己家裡那樣自在。所有的空間都好拍到不行，隨便拍隨便美，很喜歡獨特的設計和顏色。（也是因為非常挑高，所以樓梯很高很陡要小心走就是了～）主人很親切，也貼心提供推薦店家的名單～很棒的入住體驗^^',
-        },
-        {
-          id: 4,
-          imgSrc: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          commenter: 'Po Nan',
-          messageTime: '2022年7月',
-          message:
-            '地理位置佳,房間風格獨特，超好拍照打卡！房東很nice! 因我搭隔天凌晨班機，還特別幫我預訂計程車，讓我可以從容的去機場。可於前晚選擇好明早的早餐類型和用餐時間，2樓的咖啡飲料和小餅乾都可免費自取，不怕半夜嘴饞～1樓的酒吧非常酷，店員態度熱情，推薦我喝的2款調酒都很棒！優點多到說不完，實在太喜歡，本來只住一晚，後來直接取消別的旅店，再多住八號一晚，哈哈！',
-        },
-      ],
     }
   },
   methods: {

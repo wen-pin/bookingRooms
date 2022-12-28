@@ -56,7 +56,12 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next', '@nuxtjs/i18n'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/i18n',
+    '@nuxtjs/dayjs',
+  ],
 
   //定義客戶端環境變量，並可使用服務端的環境變量
   env: {
@@ -160,6 +165,21 @@ export default {
         },
       },
     },
+  },
+
+  /**
+   * 時間處理模組
+   * @see https://github.com/nuxt-community/dayjs-module
+   * @see https://day.js.org/docs/en/installation/node-js
+   */
+  dayjs: {
+    locales: ['en', 'zh-tw'],
+    defaultLocale: 'zh-tw',
+    plugins: [
+      'utc', // import 'dayjs/plugin/utc'
+      'timezone',
+      'relativeTime',
+    ],
   },
 
   /**
