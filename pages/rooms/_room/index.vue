@@ -394,7 +394,8 @@
         </div>
       </div>
 
-      <div class="w-[40%] flex justify-center relative">
+      <!-- 要在這邊加上z-10，這樣打開的卡片才能覆蓋底層 -->
+      <div class="w-[40%] flex justify-center relative z-10">
         <v-card
           width="80%"
           height="300px"
@@ -458,14 +459,12 @@
                 </v-date-picker>
               </v-menu>
 
-              <v-menu
-                bottom
+              <!-- <v-menu
                 ref="menu2"
                 v-model="menu2"
-                internal-activator
+                bottom
                 offset-y
                 :close-on-content-click="false"
-                class="relative"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
@@ -480,7 +479,7 @@
                   ></v-text-field>
                 </template>
 
-                <v-card class="py-5 !sticky top-0">
+                <v-card class="py-5">
                   <div
                     v-for="tenant in tenants"
                     :key="tenant.ageGroup"
@@ -523,7 +522,76 @@
                     />
                   </div>
                 </v-card>
-              </v-menu>
+              </v-menu> -->
+
+              <div class="relative">
+                <div
+                  class="flex justify-between border-solid border-[1px] border-gray-300 rounded-lg mt-5 px-3 cursor-pointer"
+                  @click="isVisible = !isVisible"
+                >
+                  <div class="my-2">
+                    <div>房客</div>
+                    <div>{{ allTenants }}</div>
+                  </div>
+
+                  <v-icon v-if="isVisible">mdi-chevron-up</v-icon>
+                  <v-icon v-else>mdi-chevron-down</v-icon>
+                </div>
+
+                <v-card v-if="isVisible" class="absolute top-0 left-0 py-5">
+                  <div
+                    v-for="tenant in tenants"
+                    :key="tenant.ageGroup"
+                    class="flex mx-5 mb-5"
+                  >
+                    <div>
+                      <div class="font-semibold">{{ tenant.ageGroup }}</div>
+                      <TextBtnDialog
+                        v-if="tenant.ageGroup == '寵物'"
+                        :title="tenant.ageRange"
+                        class="text-sm"
+                      />
+
+                      <div v-else class="text-sm">{{ tenant.ageRange }}</div>
+                    </div>
+
+                    <v-card-actions class="flex justify-end">
+                      <v-btn
+                        icon
+                        small
+                        outlined
+                        @click="reduceTenant(tenant.quantity)"
+                      >
+                        <v-icon>mdi-minus</v-icon>
+                      </v-btn>
+
+                      <div class="mx-4">
+                        {{ tenant.quantity }}
+                      </div>
+
+                      <v-btn
+                        icon
+                        small
+                        outlined
+                        @click="addTenant(tenant.quantity)"
+                      >
+                        <v-icon>mdi-plus</v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </div>
+
+                  <div class="mx-5 mb-8 text-xs">
+                    此房源最多可供 4 人入住（不包括嬰幼兒）。不接受寵物入住。
+                  </div>
+
+                  <div @click="isVisible = false">
+                    <TextBtnDialog
+                      :title="'關閉'"
+                      class="mx-5 flex justify-end"
+                    />
+                  </div>
+                </v-card>
+              </div>
             </v-col>
           </v-row>
         </v-card>
@@ -614,6 +682,7 @@ export default {
       eqptAndservDialog: false,
       menu: false,
       menu2: false,
+      isVisible: true,
 
       dates: [],
 
@@ -936,6 +1005,12 @@ export default {
     },
     fetchEqptAndServices(eqptAndServices) {
       return eqptAndServices.slice(0, 10)
+    },
+    addTenant(quantity) {
+      return quantity + 1
+    },
+    reduceTenant() {
+      return quantity - 1
     },
   },
 }
