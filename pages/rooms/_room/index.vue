@@ -418,7 +418,7 @@
                 ref="menu"
                 v-model="menu"
                 :close-on-content-click="false"
-                :return-value.sync="date"
+                :return-value.sync="dates"
                 transition="scale-transition"
                 offset-y
                 max-width="290px"
