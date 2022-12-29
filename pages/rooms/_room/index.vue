@@ -375,6 +375,12 @@
           <div class="text-2xl font-bold">
             {{ $t('在') }}{{ room.address }}住1晚
           </div>
+          <div class="text-sm text-neutral-500">
+            <div v-if="dates.length < 2">新增旅行日期，查看確切價格</div>
+            <div v-else>
+              {{ dateRangeText }}
+            </div>
+          </div>
 
           <v-row class="mt-10">
             <v-date-picker
@@ -427,7 +433,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="dateRangeText"
-                    label="Picker in menu"
+                    label="選擇入住退房日期"
                     prepend-icon="mdi-calendar"
                     readonly
                     v-bind="attrs"
@@ -446,10 +452,77 @@
                   <v-btn text color="primary" @click="menu = false"
                     >Cancel</v-btn
                   >
-                  <v-btn text color="primary" @click="$refs.menu.save(date)"
+                  <v-btn text color="primary" @click="$refs.menu.save(dates)"
                     >OK</v-btn
                   >
                 </v-date-picker>
+              </v-menu>
+
+              <v-menu
+                bottom
+                ref="menu2"
+                v-model="menu2"
+                internal-activator
+                offset-y
+                :close-on-content-click="false"
+                class="relative"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="allTenants"
+                    outlined
+                    :append-icon="menu2 ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+                    label="房客"
+                    hide-details
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+
+                <v-card class="py-5 !sticky top-0">
+                  <div
+                    v-for="tenant in tenants"
+                    :key="tenant.ageGroup"
+                    class="flex mx-5 mb-5"
+                  >
+                    <div>
+                      <div class="font-semibold">{{ tenant.ageGroup }}</div>
+                      <TextBtnDialog
+                        v-if="tenant.ageGroup == '寵物'"
+                        :title="tenant.ageRange"
+                        class="text-sm"
+                      />
+
+                      <div v-else class="text-sm">{{ tenant.ageRange }}</div>
+                    </div>
+
+                    <v-card-actions class="flex justify-end">
+                      <v-btn icon small outlined>
+                        <v-icon>mdi-minus</v-icon>
+                      </v-btn>
+
+                      <div class="mx-4">
+                        {{ tenant.quantity }}
+                      </div>
+
+                      <v-btn icon small outlined>
+                        <v-icon>mdi-plus</v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </div>
+
+                  <div class="mx-5 mb-8 text-xs">
+                    此房源最多可供 4 人入住（不包括嬰幼兒）。不接受寵物入住。
+                  </div>
+
+                  <div @click="menu2 = false">
+                    <TextBtnDialog
+                      :title="'關閉'"
+                      class="mx-5 flex justify-end"
+                    />
+                  </div>
+                </v-card>
               </v-menu>
             </v-col>
           </v-row>
@@ -540,8 +613,32 @@ export default {
       fullscreenDialog: false,
       eqptAndservDialog: false,
       menu: false,
+      menu2: false,
 
       dates: [],
+
+      tenants: [
+        {
+          ageGroup: '大人',
+          ageRange: '13 歲以上',
+          quantity: 1,
+        },
+        {
+          ageGroup: '兒童',
+          ageRange: '2 - 12歲',
+          quantity: 0,
+        },
+        {
+          ageGroup: '嬰幼兒',
+          ageRange: '2 歲以下',
+          quantity: 0,
+        },
+        {
+          ageGroup: '寵物',
+          ageRange: '會攜帶服務性動物嗎？',
+          quantity: 0,
+        },
+      ],
 
       room: {
         // 房東
@@ -819,6 +916,9 @@ export default {
   computed: {
     dateRangeText() {
       return this.dates.join(' ~ ')
+    },
+    allTenants() {
+      return this.tenants[0].quantity + '位'
     },
   },
   methods: {
