@@ -524,14 +524,36 @@
                 </v-card>
               </v-menu> -->
 
+              <div
+                class="flex justify-between border-gray-300 !border-l !border-t !border-r !border-b-0 border-solid rounded-tl-lg rounded-tr-lg mt-5 cursor-pointer"
+              >
+                <div class="w-[50%]">
+                  <div>入住</div>
+                  <div>2022/12/12</div>
+                </div>
+                <div class="w-[50%]">
+                  <div>退房</div>
+                  <div>2022/12/13</div>
+                </div>
+              </div>
               <div class="relative">
                 <div
-                  class="flex justify-between border-solid border-[1px] border-gray-300 rounded-lg mt-5 px-3 cursor-pointer"
+                  class="flex justify-between border-solid rounded-bl-lg rounded-br-lg px-3 cursor-pointer"
+                  :class="
+                    isVisible
+                      ? 'border-black border-[2px]'
+                      : 'border-gray-300 border-[1px]'
+                  "
                   @click="isVisible = !isVisible"
                 >
                   <div class="my-2">
                     <div>房客</div>
-                    <div>{{ allTenants }}</div>
+                    <div class="flex">
+                      <div>{{ allTenants }}</div>
+                      <div v-if="babyQuantity > 0">
+                        ,{{ babyQuantity }}名嬰幼兒
+                      </div>
+                    </div>
                   </div>
 
                   <v-icon v-if="isVisible">mdi-chevron-up</v-icon>
@@ -540,8 +562,8 @@
 
                 <v-card v-if="isVisible" class="absolute top-0 left-0 py-5">
                   <div
-                    v-for="tenant in tenants"
-                    :key="tenant.ageGroup"
+                    v-for="(tenant, idx) in tenants"
+                    :key="tenant.id"
                     class="flex mx-5 mb-5"
                   >
                     <div>
@@ -557,10 +579,11 @@
 
                     <v-card-actions class="flex justify-end">
                       <v-btn
+                        :disabled="isDisable(idx)"
                         icon
                         small
                         outlined
-                        @click="reduceTenant(tenant.quantity)"
+                        @click="reduceTenant(idx)"
                       >
                         <v-icon>mdi-minus</v-icon>
                       </v-btn>
@@ -569,12 +592,7 @@
                         {{ tenant.quantity }}
                       </div>
 
-                      <v-btn
-                        icon
-                        small
-                        outlined
-                        @click="addTenant(tenant.quantity)"
-                      >
+                      <v-btn icon small outlined @click="addTenant(idx)">
                         <v-icon>mdi-plus</v-icon>
                       </v-btn>
                     </v-card-actions>
@@ -681,28 +699,32 @@ export default {
       fullscreenDialog: false,
       eqptAndservDialog: false,
       menu: false,
-      menu2: false,
-      isVisible: true,
+      // menu2: false,
+      isVisible: false,
 
       dates: [],
 
       tenants: [
         {
+          id: 1,
           ageGroup: '大人',
           ageRange: '13 歲以上',
           quantity: 1,
         },
         {
+          id: 2,
           ageGroup: '兒童',
           ageRange: '2 - 12歲',
           quantity: 0,
         },
         {
+          id: 3,
           ageGroup: '嬰幼兒',
           ageRange: '2 歲以下',
           quantity: 0,
         },
         {
+          id: 4,
           ageGroup: '寵物',
           ageRange: '會攜帶服務性動物嗎？',
           quantity: 0,
@@ -986,8 +1008,20 @@ export default {
     dateRangeText() {
       return this.dates.join(' ~ ')
     },
-    allTenants() {
-      return this.tenants[0].quantity + '位'
+    allTenants: {
+      get() {
+        let total = this.tenants[0].quantity + this.tenants[1].quantity
+
+        return total + '位'
+      },
+      set(total) {
+        console.log(total)
+      },
+    },
+    babyQuantity: {
+      get() {
+        return this.tenants[2].quantity
+      },
     },
   },
   methods: {
@@ -1006,11 +1040,18 @@ export default {
     fetchEqptAndServices(eqptAndServices) {
       return eqptAndServices.slice(0, 10)
     },
-    addTenant(quantity) {
-      return quantity + 1
+    addTenant(idx) {
+      return this.tenants[idx].quantity++
     },
-    reduceTenant() {
-      return quantity - 1
+    reduceTenant(idx) {
+      return this.tenants[idx].quantity--
+    },
+    isDisable(idx) {
+      if (idx == 0) {
+        if (this.tenants[idx].quantity < 2) return true
+      } else if (idx != 0) {
+        if (this.tenants[idx].quantity < 1) return true
+      }
     },
   },
 }
