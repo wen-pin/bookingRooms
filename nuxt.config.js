@@ -161,6 +161,7 @@ export default {
             currency: 'TWD', // NTD
             currencyDisplay: 'code',
             minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
           },
         },
       },

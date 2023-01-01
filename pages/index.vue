@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  name: 'home',
   auth: false,
 
   data() {

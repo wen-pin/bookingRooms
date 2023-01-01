@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <div class="text-3xl mt-5">{{ room.title }}</div>
+
     <div class="my-2 flex">
       <div class="flex">
         <span class="my-auto">
@@ -373,10 +374,15 @@
 
         <div class="my-10">
           <div class="text-2xl font-bold">
-            {{ $t('在') }}{{ room.address }}住1晚
+            <div v-if="datesQueue.length == 0">選擇入住日期</div>
+            <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
+            <div v-else>
+              {{ $t('在') }}{{ room.address }}住{{ calculateDays }}晚
+            </div>
           </div>
+
           <div class="text-sm text-neutral-500">
-            <div v-if="dates.length < 2">新增旅行日期，查看確切價格</div>
+            <div v-if="datesQueue.length < 2">新增旅行日期，查看確切價格</div>
             <div v-else>
               {{ dateRangeText }}
             </div>
@@ -386,11 +392,16 @@
             <v-date-picker
               v-model="dates"
               range
-              scrollable
+              no-title
+              full-width
               :min="$dayjs().format('YYYY-MM-DD')"
               year-icon="mdi-calendar-blank"
             ></v-date-picker>
           </v-row>
+
+          <div class="mt-5 flex justify-end" @click="dates = []">
+            <TextBtnDialog :title="'清除日期'" />
+          </div>
         </div>
       </div>
 
@@ -398,12 +409,21 @@
       <div class="w-[40%] flex justify-center relative z-10">
         <v-card
           width="80%"
-          height="300px"
-          elevation="3"
-          class="rounded-lg !sticky top-[80px]"
+          :height="datesQueue.length === 2 ? '460px' : '285px'"
+          elevation="7"
+          class="rounded-lg !sticky top-[80px] mt-5 !mb-[90px]"
         >
           <v-card-title class="justify-between">
-            {{ $n(room.price.weekday, 'currency') }} 晚
+            <div>
+              <div v-if="datesQueue.length === 2" class="flex items-center">
+                {{ $n(this.averageRentalCost, 'currency') }}
+                <div class="font-normal text-base ml-1">晚</div>
+              </div>
+              <div v-else class="flex items-center">
+                {{ $n(0, 'currency') }}
+                <div class="font-normal text-base ml-1">晚</div>
+              </div>
+            </div>
 
             <v-spacer />
 
@@ -421,146 +441,135 @@
 
           <v-row class="justify-center">
             <v-col cols="11">
-              <v-menu
-                ref="menu"
-                v-model="menu"
-                :close-on-content-click="false"
-                :return-value.sync="dates"
-                transition="scale-transition"
-                offset-y
-                max-width="290px"
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="dateRangeText"
-                    label="選擇入住退房日期"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-
-                <v-date-picker
-                  v-model="dates"
-                  range
-                  :min="$dayjs().format('YYYY-MM-DD')"
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="menu = false"
-                    >Cancel</v-btn
-                  >
-                  <v-btn text color="primary" @click="$refs.menu.save(dates)"
-                    >OK</v-btn
-                  >
-                </v-date-picker>
-              </v-menu>
-
-              <!-- <v-menu
-                ref="menu2"
-                v-model="menu2"
-                bottom
-                offset-y
-                :close-on-content-click="false"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="allTenants"
-                    outlined
-                    :append-icon="menu2 ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                    label="房客"
-                    hide-details
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-
-                <v-card class="py-5">
-                  <div
-                    v-for="tenant in tenants"
-                    :key="tenant.ageGroup"
-                    class="flex mx-5 mb-5"
-                  >
-                    <div>
-                      <div class="font-semibold">{{ tenant.ageGroup }}</div>
-                      <TextBtnDialog
-                        v-if="tenant.ageGroup == '寵物'"
-                        :title="tenant.ageRange"
-                        class="text-sm"
-                      />
-
-                      <div v-else class="text-sm">{{ tenant.ageRange }}</div>
-                    </div>
-
-                    <v-card-actions class="flex justify-end">
-                      <v-btn icon small outlined>
-                        <v-icon>mdi-minus</v-icon>
-                      </v-btn>
-
-                      <div class="mx-4">
-                        {{ tenant.quantity }}
-                      </div>
-
-                      <v-btn icon small outlined>
-                        <v-icon>mdi-plus</v-icon>
-                      </v-btn>
-                    </v-card-actions>
-                  </div>
-
-                  <div class="mx-5 mb-8 text-xs">
-                    此房源最多可供 4 人入住（不包括嬰幼兒）。不接受寵物入住。
-                  </div>
-
-                  <div @click="menu2 = false">
-                    <TextBtnDialog
-                      :title="'關閉'"
-                      class="mx-5 flex justify-end"
-                    />
-                  </div>
-                </v-card>
-              </v-menu> -->
-
               <div
-                class="flex justify-between border-gray-300 !border-l !border-t !border-r !border-b-0 border-solid rounded-tl-lg rounded-tr-lg mt-5 cursor-pointer"
+                class="px-3 flex justify-between border-gray-300 border-l border-t border-r border-b-0 border-solid rounded-tl-lg rounded-tr-lg cursor-pointer"
+                @click="openDateCard()"
               >
-                <div class="w-[50%]">
-                  <div>入住</div>
-                  <div>2022/12/12</div>
+                <div class="w-[50%] my-2">
+                  <div class="font-semibold text-sm">入住</div>
+                  <div v-if="datesQueue[0] != null">{{ datesQueue[0] }}</div>
+                  <div v-else class="text-neutral-500">選取日期</div>
                 </div>
-                <div class="w-[50%]">
-                  <div>退房</div>
-                  <div>2022/12/13</div>
+
+                <v-divider vertical />
+
+                <div class="w-[50%] my-2 pl-3">
+                  <div class="font-semibold text-sm">退房</div>
+                  <div v-if="datesQueue[1] != null">{{ datesQueue[1] }}</div>
+                  <div v-else class="text-neutral-500">選取日期</div>
                 </div>
               </div>
+
+              <v-card
+                v-if="isVisible"
+                max-width="200%"
+                width="1000px"
+                class="!absolute top-[65px] left-[-355px] z-10 rounded-lg"
+              >
+                <div class="my-5">
+                  <div class="flex justify-between mx-8">
+                    <div class="flex flex-col justify-center">
+                      <div class="text-2xl font-bold">
+                        <div v-if="datesQueue.length == 0">選擇入住日期</div>
+                        <div v-else-if="datesQueue.length == 1">
+                          選擇退房日期
+                        </div>
+                        <div v-else>
+                          {{ $t('在') }}{{ room.address }}住{{
+                            calculateDays
+                          }}晚
+                        </div>
+                      </div>
+
+                      <div class="text-sm text-neutral-500">
+                        <div v-if="datesQueue.length < 2">
+                          新增旅行日期，查看確切價格
+                        </div>
+                        <div v-else>
+                          {{ dateRangeText }}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="!max-w-[320px] flex justify-between border-gray-300 border border-solid rounded-lg cursor-pointer"
+                    >
+                      <div
+                        :class="
+                          datesQueue[0] == null
+                            ? 'w-[50%] px-3 py-2 border-2 border-solid border-black rounded-lg '
+                            : 'w-[50%] px-3 py-2'
+                        "
+                      >
+                        <div class="font-semibold text-sm">入住</div>
+                        <div v-if="datesQueue[0] != null">
+                          {{ datesQueue[0] }}
+                        </div>
+                        <div v-else class="text-neutral-500">選取日期</div>
+                      </div>
+
+                      <v-divider vertical />
+
+                      <div
+                        :class="
+                          datesQueue[0] != null
+                            ? 'w-[50%] py-2 pl-3 border-2 border-solid border-black rounded-lg'
+                            : 'w-[50%] py-2 pl-3'
+                        "
+                      >
+                        <div class="font-semibold text-sm">退房</div>
+                        <div v-if="datesQueue[1] != null">
+                          {{ datesQueue[1] }}
+                        </div>
+                        <div v-else class="text-neutral-500">選取日期</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <v-date-picker
+                    v-model="dates"
+                    no-title
+                    range
+                    full-width
+                    :min="$dayjs().format('YYYY-MM-DD')"
+                    year-icon="mdi-calendar-blank"
+                    class="mt-5"
+                  />
+
+                  <div class="flex justify-end mx-8" @click="dates = []">
+                    <TextBtnDialog :title="'清除日期'" class="mr-5" />
+
+                    <v-btn dark color="black" @click="isVisible = false"
+                      >關閉</v-btn
+                    >
+                  </div>
+                </div>
+              </v-card>
+
               <div class="relative">
                 <div
-                  class="flex justify-between border-solid rounded-bl-lg rounded-br-lg px-3 cursor-pointer"
-                  :class="
-                    isVisible
-                      ? 'border-black border-[2px]'
-                      : 'border-gray-300 border-[1px]'
-                  "
-                  @click="isVisible = !isVisible"
+                  class="h-[65px] flex justify-between border-gray-300 border-[1px] border-solid rounded-bl-lg rounded-br-lg px-3 cursor-pointer"
+                  :class="isVisible2 ? 'border-black border-[2px]' : ''"
+                  @click="isVisible2 = !isVisible2"
                 >
                   <div class="my-2">
-                    <div>房客</div>
+                    <div class="font-semibold">房客</div>
                     <div class="flex">
                       <div>{{ allTenants }}</div>
                       <div v-if="babyQuantity > 0">
-                        ,{{ babyQuantity }}名嬰幼兒
+                        , {{ babyQuantity }}名嬰幼兒
                       </div>
                     </div>
                   </div>
 
-                  <v-icon v-if="isVisible">mdi-chevron-up</v-icon>
+                  <v-icon v-if="isVisible2">mdi-chevron-up</v-icon>
                   <v-icon v-else>mdi-chevron-down</v-icon>
                 </div>
 
-                <v-card v-if="isVisible" class="absolute top-0 left-0 py-5">
+                <v-card
+                  v-if="isVisible2"
+                  class="!absolute top-[65px] left-0 py-5 z-10 rounded-lg"
+                >
                   <div
                     v-for="(tenant, idx) in tenants"
                     :key="tenant.id"
@@ -602,7 +611,7 @@
                     此房源最多可供 4 人入住（不包括嬰幼兒）。不接受寵物入住。
                   </div>
 
-                  <div @click="isVisible = false">
+                  <div @click="isVisible2 = false">
                     <TextBtnDialog
                       :title="'關閉'"
                       class="mx-5 flex justify-end"
@@ -612,6 +621,54 @@
               </div>
             </v-col>
           </v-row>
+
+          <div class="mt-4 px-4">
+            <div v-if="datesQueue.length === 2">
+              <v-btn height="50px" dark block color="#EC407A">
+                <span class="text-base font-semibold"> 預定 </span>
+              </v-btn>
+
+              <div class="flex justify-center mt-4">你暫時不會被收費</div>
+
+              <DivideBlock>
+                <div class="mb-5">
+                  <div class="flex justify-between mt-5">
+                    <TextBtnDialog
+                      :title="`${$n(
+                        this.averageRentalCost,
+                        'currency',
+                      )}x${calculateDays} 晚`"
+                    />
+                    {{ $n(this.calculateRentalCost, 'currency') }}
+                  </div>
+
+                  <div class="flex justify-between mt-2">
+                    <TextBtnDialog :title="'服務費'" />
+                    {{ $n(this.calculateServiceCharge, 'currency') }}
+                  </div>
+                </div>
+              </DivideBlock>
+
+              <div class="flex justify-between mt-5 font-semibold">
+                <span>稅前總價</span>
+
+                {{ $n(this.allRentalCost, 'currency') }}
+              </div>
+            </div>
+
+            <v-btn v-else height="50px" dark block color="#EC407A">
+              <span class="text-base font-semibold"> 查看可訂日期 </span>
+            </v-btn>
+          </div>
+
+          <div
+            class="flex absolute left-[50%]"
+            :class="datesQueue.length === 2 ? 'top-[500px]' : 'top-[325px]'"
+            style="transform: translate(-50%, -50%)"
+          >
+            <v-icon class="mr-3">mdi-flag</v-icon>
+            <TextBtnDialog :title="'檢舉此房源'" class="text-gray-600" />
+          </div>
         </v-card>
       </div>
     </div>
@@ -684,6 +741,8 @@
         <div class="text-2xl font-bold">
           {{ $t('住宿地點') }}
         </div>
+
+        <div></div>
       </div>
     </DivideBlock>
   </v-container>
@@ -691,6 +750,7 @@
 
 <script>
 export default {
+  name: 'singleRoom',
   data() {
     return {
       detailDialog: false,
@@ -698,9 +758,9 @@ export default {
       EvaluationDialog: false,
       fullscreenDialog: false,
       eqptAndservDialog: false,
-      menu: false,
-      // menu2: false,
+
       isVisible: false,
+      isVisible2: false,
 
       dates: [],
 
@@ -743,8 +803,9 @@ export default {
         address: '恆春鎮',
         // 房間價錢
         price: {
-          weekday: 2000,
-          holiday: 2500,
+          weekday: 2800,
+          holiday: 3200,
+          serviceCharge: 415,
         },
         // 房間簡易資訊
         simpleInformation: '3位1間臥室1 張床1 間獨立浴室',
@@ -954,7 +1015,7 @@ export default {
             ],
           },
           {
-            id: 10,
+            id: 11,
             category: '服務',
             eqptAndServices: [
               {
@@ -967,7 +1028,7 @@ export default {
             ],
           },
           {
-            id: 11,
+            id: 12,
             category: '不提供',
             eqptAndServices: [
               {
@@ -1006,7 +1067,7 @@ export default {
   },
   computed: {
     dateRangeText() {
-      return this.dates.join(' ~ ')
+      return this.datesQueue.join(' ~ ')
     },
     allTenants: {
       get() {
@@ -1022,6 +1083,52 @@ export default {
       get() {
         return this.tenants[2].quantity
       },
+    },
+    calculateDays() {
+      return this.$dayjs(this.datesQueue[1]).diff(this.datesQueue[0], 'day')
+    },
+    calculateRentalCost() {
+      let holidayOfDays = 0
+      let weekdayOfDays = 0
+      let firstDay = this.datesQueue[0]
+
+      for (let i = 0; i < this.calculateDays; i++) {
+        let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
+        if (week === 6) {
+          holidayOfDays++
+        } else {
+          weekdayOfDays++
+        }
+      }
+
+      return (
+        holidayOfDays * this.room.price.holiday +
+        weekdayOfDays * this.room.price.weekday
+      )
+    },
+    averageRentalCost() {
+      return this.calculateRentalCost / this.calculateDays
+    },
+    calculateServiceCharge() {
+      return this.calculateDays * this.room.price.serviceCharge
+    },
+    allRentalCost() {
+      return this.calculateRentalCost + this.calculateServiceCharge
+    },
+    datesQueue() {
+      if (this.dates.length === 2) {
+        if (this.$dayjs(this.dates[0]).isAfter(this.$dayjs(this.dates[1]))) {
+          let temp = this.dates[0]
+          let newDates = []
+          newDates[0] = this.dates[1]
+          newDates[1] = temp
+          return newDates
+        } else {
+          return this.dates
+        }
+      } else {
+        return this.dates
+      }
     },
   },
   methods: {
@@ -1052,6 +1159,10 @@ export default {
       } else if (idx != 0) {
         if (this.tenants[idx].quantity < 1) return true
       }
+    },
+    openDateCard() {
+      this.isVisible2 = false
+      this.isVisible = true
     },
   },
 }
