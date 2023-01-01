@@ -742,7 +742,37 @@
           {{ $t('住宿地點') }}
         </div>
 
-        <div></div>
+        <div class="my-5">
+          <TextBtnDialog
+            :title="room.address"
+            :subTitle="room.country"
+            :isUnderlineCursorPointer="false"
+          />
+        </div>
+
+        <GmapMap
+          :center="{ lat: 10, lng: 10 }"
+          :zoom="7"
+          map-type-id="terrain"
+          style="width: 500px; height: 300px"
+        >
+          <GmapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="center = m.position"
+          />
+        </GmapMap>
+
+        <div class="!max-w-[115px] flex">
+          <TextBtnDialog :title="'顯示更多內容'" />
+
+          <v-icon class="cursor-pointer" small color="black">
+            mdi-greater-than
+          </v-icon>
+        </div>
       </div>
     </DivideBlock>
   </v-container>
@@ -763,6 +793,11 @@ export default {
       isVisible2: false,
 
       dates: [],
+
+      markers: [
+        { position: { lat: 10.0, lng: 10.0 } },
+        { position: { lat: 10.0, lng: 10.0 } },
+      ],
 
       tenants: [
         {

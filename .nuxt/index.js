@@ -22,6 +22,7 @@ import nuxt_plugin_pluginmain_77994d4b from 'nuxt_plugin_pluginmain_77994d4b' //
 import nuxt_plugin_axios_51bece3c from 'nuxt_plugin_axios_51bece3c' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ../plugins/axios (mode: 'all')
 import nuxt_plugin_icons_229035a6 from 'nuxt_plugin_icons_229035a6' // Source: ../plugins/icons (mode: 'all')
+import nuxt_plugin_googlemaps_ab35f716 from 'nuxt_plugin_googlemaps_ab35f716' // Source: ../plugins/google-maps (mode: 'all')
 import nuxt_plugin_auth_4cbb6c0e from 'nuxt_plugin_auth_4cbb6c0e' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -253,6 +254,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_icons_229035a6 === 'function') {
     await nuxt_plugin_icons_229035a6(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_googlemaps_ab35f716 === 'function') {
+    await nuxt_plugin_googlemaps_ab35f716(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_4cbb6c0e === 'function') {

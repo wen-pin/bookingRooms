@@ -21,7 +21,7 @@ export default {
 
   // 為了解決defu__WEBPACK_IMPORTED_MODULE_3__ is not a function
   build: {
-    transpile: ['defu'],
+    transpile: ['defu', /^vue2-google-maps($|\/)/],
     extend(config, ctx) {
       const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
       svgRule.exclude = [path.resolve(__dirname, 'assets/svg')]
@@ -49,7 +49,11 @@ export default {
     'virtual:windi-utilities.css',
   ],
 
-  plugins: ['~/plugins/axios', { src: '@/plugins/icons', ssr: true }],
+  plugins: [
+    '~/plugins/axios',
+    { src: '@/plugins/icons', ssr: true },
+    { src: '~/plugins/google-maps', ssr: true },
+  ],
 
   components: true,
 
