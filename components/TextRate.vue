@@ -1,5 +1,5 @@
 <template>
-  <div class="flex" :class="maxWidth">
+  <div class="flex items-center" :class="maxWidth">
     <v-rating
       :value="value"
       :size="size"

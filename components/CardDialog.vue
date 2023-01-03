@@ -4,10 +4,11 @@
     :width="width"
     :fullscreen="fullscreen"
     :hide-overlay="hideOverlay"
+    transition="dialog-bottom-transition"
   >
-    <v-card class="rounded-lg p-5">
+    <v-card class="rounded-lg p-5" height="100%">
       <v-btn icon @click="detailDialog = false">
-        <v-icon>mdi-window-close</v-icon>
+        <v-icon>{{ icon }}</v-icon>
       </v-btn>
 
       <slot />
@@ -33,6 +34,10 @@ export default {
     hideOverlay: {
       type: Boolean,
       default: false,
+    },
+    icon: {
+      type: String,
+      default: 'mdi-window-close',
     },
   },
   data() {

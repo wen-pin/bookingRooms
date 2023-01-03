@@ -8,7 +8,10 @@
           <TextRate :value="room.averageRating" />
         </span>
 
-        <span class="mr-4 my-auto" @click="EvaluationDialog = true">
+        <span
+          class="mr-4 my-auto"
+          @click="EvaluationDialog = !EvaluationDialog"
+        >
           <TextBtnDialog :title="`${room.allMessages.length}則評價`" />
         </span>
 
@@ -83,7 +86,15 @@
           </v-row>
         </CardDialog>
 
-        <TextBtnDialog :title="room.address" :subTitle="room.country" />
+        <span
+          class="flex items-center"
+          @click="googleMapsDialog = !googleMapsDialog"
+        >
+          <TextBtnDialog
+            :title="room.location.address"
+            :subTitle="room.country"
+          />
+        </span>
 
         <v-spacer />
 
@@ -334,10 +345,17 @@
               </v-col>
             </v-row>
 
-            <v-btn outlined class="mt-10" @click="eqptAndservDialog = true">
-              顯示全部{{
-                room.alleqptAndServices[0].eqptAndServices.length
-              }}項設備與服務
+            <v-btn
+              outlined
+              class="mt-10"
+              height="55px"
+              @click="eqptAndservDialog = true"
+            >
+              <span class="text-lg">
+                顯示全部{{
+                  room.alleqptAndServices[0].eqptAndServices.length
+                }}項設備與服務
+              </span>
             </v-btn>
 
             <v-dialog v-model="eqptAndservDialog" scrollable width="700">
@@ -377,7 +395,7 @@
             <div v-if="datesQueue.length == 0">選擇入住日期</div>
             <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
             <div v-else>
-              {{ $t('在') }}{{ room.address }}住{{ calculateDays }}晚
+              {{ $t('在') }}{{ room.location.address }}住{{ calculateDays }}晚
             </div>
           </div>
 
@@ -475,7 +493,7 @@
                           選擇退房日期
                         </div>
                         <div v-else>
-                          {{ $t('在') }}{{ room.address }}住{{
+                          {{ $t('在') }}{{ room.location.address }}住{{
                             calculateDays
                           }}晚
                         </div>
@@ -730,8 +748,10 @@
           </v-col>
         </v-row>
 
-        <v-btn outlined @click="EvaluationDialog = true">
-          顯示全部{{ room.allMessages.length }}則評價
+        <v-btn outlined height="55px" @click="EvaluationDialog = true">
+          <span span class="text-lg">
+            顯示全部{{ room.allMessages.length }}則評價
+          </span>
         </v-btn>
       </div>
     </DivideBlock>
@@ -744,37 +764,239 @@
 
         <div class="my-5">
           <TextBtnDialog
-            :title="room.address"
+            :title="room.location.address"
             :subTitle="room.country"
             :isUnderlineCursorPointer="false"
           />
         </div>
 
         <GmapMap
-          :center="{ lat: 10, lng: 10 }"
-          :zoom="7"
+          :center="{ lat: room.location.lat, lng: room.location.lng }"
+          :zoom="15"
           map-type-id="terrain"
-          style="width: 500px; height: 300px"
+          class="w-full h-[400px]"
         >
           <GmapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            :clickable="true"
-            :draggable="true"
-            @click="center = m.position"
+            :position="{ lat: room.location.lat, lng: room.location.lng }"
           />
         </GmapMap>
 
-        <div class="!max-w-[115px] flex">
+        <div
+          class="!max-w-[115px] flex mt-7"
+          @click="googleMapsDialog = !googleMapsDialog"
+        >
           <TextBtnDialog :title="'顯示更多內容'" />
 
           <v-icon class="cursor-pointer" small color="black">
             mdi-greater-than
           </v-icon>
         </div>
+
+        <v-dialog
+          v-model="googleMapsDialog"
+          fullscreen
+          hide-overlay
+          transition="dialog-bottom-transition"
+        >
+          <v-card class="h-full relative">
+            <v-btn
+              icon
+              class="!absolute top-4 left-4"
+              @click="googleMapsDialog = !googleMapsDialog"
+            >
+              <v-icon> mdi-less-than </v-icon>
+            </v-btn>
+
+            <div class="flex w-full h-full pt-[60px] px-8 pb-8">
+              <div class="w-[30%] pr-10">
+                <div class="text-3xl font-bold mt-3 mb-6">住宿地點</div>
+
+                <div class="font-medium mb-3">周邊交通</div>
+
+                <div>
+                  離最美沙灘砂島保護區約1分鐘車程
+                  離台灣最南端鵝鑾鼻燈塔約1分鐘車程
+                  離日出與觀星景點龍磐公園約5分鐘車程
+                </div>
+
+                <div class="!max-w-[80px] flex">
+                  <TextBtnDialog :title="'閱讀詳情'" />
+
+                  <v-icon class="cursor-pointer" small color="black">
+                    mdi-greater-than
+                  </v-icon>
+                </div>
+              </div>
+
+              <GmapMap
+                :center="{ lat: room.location.lat, lng: room.location.lng }"
+                :zoom="15"
+                map-type-id="terrain"
+                class="w-full h-full"
+              >
+                <GmapMarker
+                  :position="{ lat: room.location.lat, lng: room.location.lng }"
+                />
+              </GmapMap>
+            </div>
+          </v-card>
+        </v-dialog>
       </div>
     </DivideBlock>
+
+    <DivideBlock>
+      <div class="my-10">
+        <div class="flex items-center">
+          <v-avatar size="70px" class="mr-2">
+            <img
+              alt="Avatar"
+              src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+              class="cursor-pointer"
+            />
+          </v-avatar>
+
+          <div>
+            <span class="text-2xl font-medium">房東:Chiang</span>
+            <div class="text-zinc-400">加入時間:2017年5月</div>
+          </div>
+        </div>
+
+        <div class="flex my-5 w-full">
+          <div class="w-[50%]">
+            <div class="flex">
+              <span>
+                <TextRate
+                  :value="room.averageRating"
+                  :size="25"
+                  :max-width="''"
+                  class="text-lg"
+                />
+              </span>
+
+              <TextBtnDialog
+                :title="`${room.allMessages.length}則評價`"
+                :isUnderlineCursorPointer="false"
+                class="text-lg"
+              />
+
+              <v-icon color="black" class="ml-7 mr-3">mdi-shield-check</v-icon>
+
+              <div class="text-lg font-medium">身分已驗證</div>
+            </div>
+
+            <div class="text-lg pr-[100px] mt-5">
+              巨蟹女，所以愛家又溫暖～ 非常愛電影，來墾丁之前在電影公司工作。
+              現在搬來墾丁生活，經營甜點工作室，
+              喜歡出外郊遊，拍拍好看的照片，也玩底片機。
+            </div>
+          </div>
+
+          <div class="w-[50%] text-lg">
+            <div>語言: 中文 (简体)、English</div>
+            <div class="mt-3">回覆率: 100%</div>
+            <div class="mt-3">回覆時間: 1 小時內</div>
+
+            <v-btn large outlined class="rounded-lg mt-8" height="50px">
+              <sapn class="text-lg font-semibold">聯絡房東</sapn>
+            </v-btn>
+          </div>
+        </div>
+      </div>
+    </DivideBlock>
+
+    <div class="my-10">
+      <div class="text-2xl font-medium">注意事項</div>
+
+      <v-row class="mt-2">
+        <v-col cols="4">
+          <div class="font-medium">《房屋守則》</div>
+
+          <div class="h-[100px]">
+            <div class="my-2">入住時間：下午3:00</div>
+            <div class="my-2">退房時間：上午11:00</div>
+            <div class="my-2">最多 8 位房客</div>
+          </div>
+
+          <div
+            class="!max-w-[115px] flex mt-7"
+            @click="houseRulesDialog = !houseRulesDialog"
+          >
+            <TextBtnDialog :title="'顯示更多內容'" />
+
+            <v-icon class="cursor-pointer" small color="black">
+              mdi-greater-than
+            </v-icon>
+          </div>
+
+          <CardDialog
+            :dialog="houseRulesDialog"
+            :width="800"
+            @update="updateHouseRulesDialogDialog"
+          >
+            <div class="text-2xl font-semibold">《房屋守則》</div>
+          </CardDialog>
+        </v-col>
+
+        <v-col cols="4">
+          <div class="font-medium">安全與房源</div>
+
+          <div class="h-[100px]">
+            <div class="my-2">未安裝一氧化碳警報器</div>
+            <div class="my-2">無門鎖的泳池／按摩浴池</div>
+            <div class="my-2">附近的湖泊、河流、其他水域</div>
+          </div>
+
+          <div
+            class="!max-w-[115px] flex mt-7"
+            @click="securityDialog = !securityDialog"
+          >
+            <TextBtnDialog :title="'顯示更多內容'" />
+
+            <v-icon class="cursor-pointer" small color="black">
+              mdi-greater-than
+            </v-icon>
+          </div>
+
+          <CardDialog
+            :dialog="securityDialog"
+            :width="800"
+            @update="updateSecurityDialogDialog"
+          >
+            <div>安全與房源</div>
+          </CardDialog>
+        </v-col>
+
+        <v-col cols="4">
+          <div class="font-medium">《退訂政策》</div>
+
+          <div class="h-[100px]">
+            <div class="my-2">在 1月27日前可以免費取消。</div>
+            <div class="my-2">
+              請查看房東完整的《退訂政策》；即便是因為感染新冠肺炎而取消，或新冠疫情導致旅程中斷，這些政策依然適用。
+            </div>
+          </div>
+
+          <div
+            class="!max-w-[115px] flex mt-7"
+            @click="unsubscribePolicyDialog = !unsubscribePolicyDialog"
+          >
+            <TextBtnDialog :title="'顯示更多內容'" />
+
+            <v-icon class="cursor-pointer" small color="black">
+              mdi-greater-than
+            </v-icon>
+          </div>
+
+          <CardDialog
+            :dialog="unsubscribePolicyDialog"
+            :width="800"
+            @update="updateUnsubscribePolicyDialogDialog"
+          >
+            <div>《退訂政策》</div>
+          </CardDialog>
+        </v-col>
+      </v-row>
+    </div>
   </v-container>
 </template>
 
@@ -788,16 +1010,15 @@ export default {
       EvaluationDialog: false,
       fullscreenDialog: false,
       eqptAndservDialog: false,
+      googleMapsDialog: false,
+      houseRulesDialog: false,
+      securityDialog: false,
+      unsubscribePolicyDialog: false,
 
       isVisible: false,
       isVisible2: false,
 
       dates: [],
-
-      markers: [
-        { position: { lat: 10.0, lng: 10.0 } },
-        { position: { lat: 10.0, lng: 10.0 } },
-      ],
 
       tenants: [
         {
@@ -834,8 +1055,14 @@ export default {
           '(4-8人房)台灣最南端甜點店B&B「墾，點心背包客棧」 近墾丁最美沙灘砂島',
         // 國家
         country: '臺灣',
-        // 地址
-        address: '恆春鎮',
+        location: {
+          // 地址
+          address: '恆春鎮',
+          // 緯度
+          lat: 22.002449,
+          // 經度
+          lng: 120.737683,
+        },
         // 房間價錢
         price: {
           weekday: 2800,
@@ -1175,6 +1402,15 @@ export default {
     },
     updateEvaluationDialog(val) {
       this.EvaluationDialog = val
+    },
+    updateHouseRulesDialogDialog(val) {
+      this.houseRulesDialog = val
+    },
+    updateSecurityDialogDialog(val) {
+      this.securityDialog = val
+    },
+    updateUnsubscribePolicyDialog(val) {
+      this.unsubscribePolicyDialog = val
     },
     convertPercentage(value) {
       return (value / 5) * 100

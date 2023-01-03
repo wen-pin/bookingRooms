@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex">
+    <div class="flex items-center">
       <v-avatar size="56px" class="mr-2">
         <img alt="Avatar" :src="this.imgSrc" class="cursor-pointer" />
       </v-avatar>

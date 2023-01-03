@@ -5,7 +5,9 @@
       isUnderlineCursorPointer ? 'underline cursor-pointer' : 'no-underline'
     "
   >
-    {{ $t(this.title) }} {{ subTitle }}
+    {{ $t(this.title) }}
+    <span v-if="subTitle">、</span>
+    {{ subTitle }}
   </div>
 </template>
 
