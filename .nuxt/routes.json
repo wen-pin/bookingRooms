@@ -2,36 +2,29 @@
   {
     "name": "login",
     "path": "/login",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/login.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/login.vue",
     "chunkName": "pages/login",
-    "_name": "_5e8e935a"
+    "_name": "_4108970a"
   },
   {
     "name": "rooms",
     "path": "/rooms",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/index.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/index.vue",
     "chunkName": "pages/rooms/index",
-    "_name": "_34769136"
+    "_name": "_0dca778d"
   },
   {
     "name": "rooms-room",
     "path": "/rooms/:room",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_room/index.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/_room/index.vue",
     "chunkName": "pages/rooms/_room/index",
-    "_name": "_35646d10"
-  },
-  {
-    "name": "rooms-room-index2",
-    "path": "/rooms/:room/index2",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_room/index2.vue",
-    "chunkName": "pages/rooms/_room/index2",
-    "_name": "_7740de52"
+    "_name": "_76136f38"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_0711133c"
+    "_name": "_15d41164"
   }
 ]

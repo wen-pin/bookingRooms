@@ -18,7 +18,7 @@
         <CardDialog
           :dialog="EvaluationDialog"
           :width="1000"
-          @update="updateEvaluationDialog(val)"
+          @update="updateEvaluationDialog"
         >
           <v-row class="mt-10 px-3 relative">
             <v-col cols="5">
@@ -246,10 +246,7 @@
               <TextBtnDialog :title="'了解詳情'" />
             </div>
 
-            <CardDialog
-              :dialog="detailDialog"
-              @update="updateDetailDialog(val)"
-            >
+            <CardDialog :dialog="detailDialog" @update="updateDetailDialog">
               <DivideBlock class="mx-5">
                 <div class="my-5">
                   <div class="text-h5">Privacy Policy</div>
@@ -299,10 +296,7 @@
               </v-icon>
             </div>
 
-            <CardDialog
-              :dialog="detailDialog2"
-              @update="updateDetailDialog2(val)"
-            >
+            <CardDialog :dialog="detailDialog2" @update="updateDetailDialog2">
               <v-card-title class="text-2xl">空間介紹</v-card-title>
 
               <v-card-text>
@@ -926,7 +920,7 @@
             <div class="mt-3">回覆時間: 1 小時內</div>
 
             <v-btn large outlined class="rounded-lg mt-8" height="50px">
-              <sapn class="text-lg font-semibold">聯絡房東</sapn>
+              <span class="text-lg font-semibold">聯絡房東</span>
             </v-btn>
           </div>
         </div>
@@ -960,7 +954,7 @@
           <CardDialog
             :dialog="houseRulesDialog"
             :width="800"
-            @update="updateHouseRulesDialog(val)"
+            @update="updateHouseRulesDialog"
           >
             <div class="text-2xl font-semibold">《房屋守則》</div>
           </CardDialog>
@@ -989,7 +983,7 @@
           <CardDialog
             :dialog="securityDialog"
             :width="800"
-            @update="updateSecurityDialogDialog(val)"
+            @update="updateSecurityDialogDialog"
           >
             <div>安全與房源</div>
           </CardDialog>
@@ -1019,7 +1013,7 @@
           <CardDialog
             :dialog="unsubscribePolicyDialog"
             :width="800"
-            @update="updateUnsubscribePolicyDialog(val)"
+            @update="updateUnsubscribePolicyDialog"
           >
             <div>《退訂政策》</div>
           </CardDialog>
