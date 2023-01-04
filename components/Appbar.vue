@@ -1,6 +1,7 @@
 <template>
   <v-app-bar app flat>
     <div class="text-lg">The rooms</div>
+    {{ isVisible }}
 
     <v-spacer></v-spacer>
 
@@ -23,58 +24,10 @@
             @click.stop="registerDialog = true"
           >
             <v-list-item-title>註冊</v-list-item-title>
-
-            <v-dialog v-model="registerDialog" max-width="400">
-              <v-card class="pa-10">
-                <v-card-title class="justify-center">註冊</v-card-title>
-                <v-form ref="form">
-                  <v-text-field
-                    v-model="registerInfo.data.username"
-                    autofocus
-                    clearable
-                    prepend-icon="mdi-account-circle"
-                    label="帳號"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="registerInfo.data.password"
-                    clearable
-                    prepend-icon="mdi-lock"
-                    label="密碼"
-                  ></v-text-field>
-
-                  <v-btn dark block @click="registerUser()"> 註冊 </v-btn>
-                </v-form>
-              </v-card>
-            </v-dialog>
           </v-list-item>
 
           <v-list-item v-if="!$auth.loggedIn" @click.stop="toggleLoginDialog()">
             <v-list-item-title> 登入 </v-list-item-title>
-
-            <v-dialog v-model="isVisible" max-width="400">
-              <v-card class="pa-10">
-                <v-card-title class="justify-center">登入</v-card-title>
-                <v-form ref="form">
-                  <v-text-field
-                    v-model="loginInfo.data.username"
-                    autofocus
-                    clearable
-                    prepend-icon="mdi-account-circle"
-                    label="帳號"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="loginInfo.data.password"
-                    clearable
-                    prepend-icon="mdi-lock"
-                    label="密碼"
-                  ></v-text-field>
-
-                  <v-btn dark block @click="loginUser()"> 登入 </v-btn>
-
-                  <v-btn text @click="openRegisterDialog()"> 註冊 </v-btn>
-                </v-form>
-              </v-card>
-            </v-dialog>
           </v-list-item>
 
           <v-list-item v-if="$auth.loggedIn" @click="$auth.logout()">
@@ -83,6 +36,72 @@
         </v-list-item-group>
       </v-list>
     </v-menu>
+
+    <v-dialog v-model="isVisible" max-width="400">
+      <v-card class="pa-10">
+        <v-btn
+          icon
+          color="black"
+          class="!absolute top-[10px] left-[9px]"
+          @click.stop="toggleLoginDialog()"
+        >
+          <v-icon>mdi-window-close</v-icon>
+        </v-btn>
+
+        <v-card-title class="justify-center">登入</v-card-title>
+        <v-form ref="form">
+          <v-text-field
+            v-model="loginInfo.data.username"
+            autofocus
+            clearable
+            prepend-icon="mdi-account-circle"
+            label="帳號"
+          ></v-text-field>
+          <v-text-field
+            v-model="loginInfo.data.password"
+            clearable
+            prepend-icon="mdi-lock"
+            label="密碼"
+          ></v-text-field>
+
+          <v-btn dark block @click="loginUser()"> 登入 </v-btn>
+
+          <v-btn text @click="openRegisterDialog()"> 註冊 </v-btn>
+        </v-form>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="registerDialog" max-width="400">
+      <v-card class="pa-10">
+        <v-btn
+          icon
+          color="black"
+          class="!absolute top-[10px] left-[9px]"
+          @click.stop="registerDialog = false"
+        >
+          <v-icon>mdi-window-close</v-icon>
+        </v-btn>
+
+        <v-card-title class="justify-center">註冊</v-card-title>
+        <v-form ref="form">
+          <v-text-field
+            v-model="registerInfo.data.username"
+            autofocus
+            clearable
+            prepend-icon="mdi-account-circle"
+            label="帳號"
+          ></v-text-field>
+          <v-text-field
+            v-model="registerInfo.data.password"
+            clearable
+            prepend-icon="mdi-lock"
+            label="密碼"
+          ></v-text-field>
+
+          <v-btn dark block @click="registerUser()"> 註冊 </v-btn>
+        </v-form>
+      </v-card>
+    </v-dialog>
   </v-app-bar>
 </template>
 

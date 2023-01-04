@@ -7,18 +7,18 @@
     "_name": "_4108970a"
   },
   {
-    "name": "rooms",
-    "path": "/rooms",
-    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/index.vue",
-    "chunkName": "pages/rooms/index",
-    "_name": "_0dca778d"
+    "name": "book-stays-id",
+    "path": "/book/stays/:id?",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/book/stays/_id.vue",
+    "chunkName": "pages/book/stays/_id",
+    "_name": "_e066c5c6"
   },
   {
-    "name": "rooms-room",
-    "path": "/rooms/:room",
-    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/_room/index.vue",
-    "chunkName": "pages/rooms/_room/index",
-    "_name": "_76136f38"
+    "name": "rooms-id",
+    "path": "/rooms/:id?",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/_id.vue",
+    "chunkName": "pages/rooms/_id",
+    "_name": "_20baf935"
   },
   {
     "name": "index",

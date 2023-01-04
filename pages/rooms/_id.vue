@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <div class="text-3xl mt-5">{{ room.title }}</div>
+    {{ isVisible3 }}
 
     <div class="my-2 flex">
       <div class="flex">
@@ -124,93 +125,11 @@
       </div>
     </div>
 
-    <div class="flex pr-8 my-5">
-      <v-img
-        :lazy-src="room.img.lazySrc"
-        :src="room.img.roomSrc[0].img"
-        class="w-[50%] mr-2 rounded-l-lg"
-      ></v-img>
-
-      <div class="w-[25%] mx-2 flex flex-col">
-        <v-img
-          :lazy-src="room.img.lazySrc"
-          :src="room.img.roomSrc[1].img"
-          class="mb-2"
-        ></v-img>
-
-        <v-img
-          :lazy-src="room.img.lazySrc"
-          :src="room.img.roomSrc[2].img"
-          class="mt-2"
-        ></v-img>
-      </div>
-
-      <div class="w-[25%] ml-2 flex flex-col !relative">
-        <v-img
-          :lazy-src="room.img.lazySrc"
-          :src="room.img.roomSrc[3].img"
-          class="rounded-tr-lg mb-2"
-        ></v-img>
-
-        <v-img
-          :lazy-src="room.img.lazySrc"
-          :src="room.img.roomSrc[4].img"
-          class="rounded-br-lg mt-2"
-        ></v-img>
-
-        <v-btn
-          max-width="120px"
-          max-height="60px"
-          class="!absolute right-[20px] bottom-[20px] !text-xs"
-          @click="fullscreenDialog = true"
-        >
-          <v-icon>mdi-apps</v-icon>
-          {{ $t('顯示全部相片') }}
-        </v-btn>
-
-        <v-dialog
-          v-model="fullscreenDialog"
-          fullscreen
-          hide-overlay
-          scrollable
-          transition="dialog-bottom-transition"
-        >
-          <v-card>
-            <div class="flex pt-5 pl-2">
-              <v-btn icon @click="fullscreenDialog = false">
-                <v-icon class="cursor-pointer" color="black">
-                  mdi-less-than
-                </v-icon>
-              </v-btn>
-
-              <v-spacer />
-
-              <v-btn text>
-                <v-icon small class="cursor-pointer" color="black">
-                  mdi-export-variant
-                </v-icon>
-                <TextBtnDialog :title="'分享'" />
-              </v-btn>
-
-              <v-btn text @click="openStoreDialog()">
-                <v-icon small class="cursor-pointer" color="black">
-                  mdi-cards-heart-outline
-                </v-icon>
-                <TextBtnDialog :title="'儲存'" />
-              </v-btn>
-            </div>
-
-            <v-card-text class="flex justify-center">
-              <v-row class="max-w-[800px] mt-10">
-                <v-col v-for="item in room.img.roomSrc" :key="item.id" cols="6">
-                  <v-img :src="item.img" />
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-      </div>
-    </div>
+    <RoomsPhotos
+      :lazySrc="room.img.lazySrc"
+      :roomSrc="room.img.roomSrc"
+      class="my-5"
+    />
 
     <div
       class="flex border-solid border-t-0 border-r-0 border-b-1 border-l-0 border-slate-200"
@@ -675,7 +594,14 @@
 
           <div class="mt-4 px-4">
             <div v-if="datesQueue.length === 2">
-              <v-btn height="50px" dark block color="#EC407A">
+              <v-btn
+                height="50px"
+                dark
+                block
+                color="#EC407A"
+                nuxt
+                :to="`/book/stays/${this.$route.params.id}`"
+              >
                 <span class="text-base font-semibold"> 預定 </span>
               </v-btn>
 
@@ -707,7 +633,14 @@
               </div>
             </div>
 
-            <v-btn v-else height="50px" dark block color="#EC407A">
+            <v-btn
+              v-else
+              height="50px"
+              dark
+              block
+              color="#EC407A"
+              @click="openDateCard()"
+            >
               <span class="text-base font-semibold"> 查看可訂日期 </span>
             </v-btn>
           </div>
@@ -1041,7 +974,6 @@ export default {
       detailDialog: false,
       detailDialog2: false,
       EvaluationDialog: false,
-      fullscreenDialog: false,
       eqptAndservDialog: false,
       googleMapsDialog: false,
       houseRulesDialog: false,
@@ -1446,6 +1378,14 @@ export default {
         return this.dates
       }
     },
+    isVisible3: {
+      get() {
+        return this.$store.state.loginDialog_visible
+      },
+      set(val) {
+        this.$store.commit('toggleLoginDialog', val)
+      },
+    },
   },
   methods: {
     updateDetailDialog(val) {
@@ -1510,7 +1450,7 @@ export default {
       if (this.$auth.loggedIn) {
         this.storeDialog = true
       } else {
-        this.$store.commit('toggleLoginDialog', true)
+        this.$store.commit('toggleLoginDialog')
       }
     },
   },

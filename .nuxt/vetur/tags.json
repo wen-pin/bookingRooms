@@ -22,5 +22,8 @@
   },
   "MessageBlock": {
     "description": "Auto imported from components/messageBlock.vue"
+  },
+  "RoomsPhotos": {
+    "description": "Auto imported from components/rooms/Photos.vue"
   }
 }
