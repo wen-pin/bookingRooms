@@ -48,10 +48,10 @@
             </v-dialog>
           </v-list-item>
 
-          <v-list-item v-if="!$auth.loggedIn" @click.stop="loginDialog = true">
+          <v-list-item v-if="!$auth.loggedIn" @click.stop="toggleLoginDialog()">
             <v-list-item-title> 登入 </v-list-item-title>
 
-            <v-dialog v-model="loginDialog" max-width="400">
+            <v-dialog v-model="isVisible" max-width="400">
               <v-card class="pa-10">
                 <v-card-title class="justify-center">登入</v-card-title>
                 <v-form ref="form">
@@ -90,7 +90,6 @@
 export default {
   data() {
     return {
-      loginDialog: false,
       registerDialog: false,
 
       loginInfo: {
@@ -108,14 +107,27 @@ export default {
       },
     }
   },
+  computed: {
+    isVisible: {
+      get() {
+        return this.$store.state.loginDialog_visible
+      },
+      set(val) {
+        this.$store.commit('toggleLoginDialog', val)
+      },
+    },
+  },
   methods: {
+    toggleLoginDialog() {
+      return this.$store.commit('toggleLoginDialog')
+    },
     loginUser() {
       let payload = this.loginInfo.data
       this.$auth.loginWith('local', {
         data: payload,
       })
 
-      this.loginDialog = false
+      this.toggleLoginDialog()
     },
     async registerUser() {
       try {
@@ -131,7 +143,7 @@ export default {
       }
     },
     openRegisterDialog() {
-      this.loginDialog = false
+      this.toggleLoginDialog()
       this.registerDialog = true
     },
   },

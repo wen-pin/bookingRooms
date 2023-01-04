@@ -105,12 +105,22 @@
           <TextBtnDialog :title="'分享'" />
         </v-btn>
 
-        <v-btn text>
+        <v-btn text @click="openStoreDialog()">
           <v-icon small class="cursor-pointer" color="black">
             mdi-cards-heart-outline
           </v-icon>
           <TextBtnDialog :title="'儲存'" />
         </v-btn>
+
+        <v-dialog v-model="storeDialog">
+          <v-card class="rounded-lg p-5" height="100%">
+            <v-btn icon @click="storeDialog = false">
+              <v-icon>mdi-window-close</v-icon>
+            </v-btn>
+
+            <slot />
+          </v-card>
+        </v-dialog>
       </div>
     </div>
 
@@ -182,7 +192,7 @@
                 <TextBtnDialog :title="'分享'" />
               </v-btn>
 
-              <v-btn text>
+              <v-btn text @click="openStoreDialog()">
                 <v-icon small class="cursor-pointer" color="black">
                   mdi-cards-heart-outline
                 </v-icon>
@@ -1036,6 +1046,7 @@ export default {
       googleMapsDialog: false,
       houseRulesDialog: false,
       securityDialog: false,
+      storeDialog: false,
       unsubscribePolicyDialog: false,
 
       isVisible: false,
@@ -1380,9 +1391,6 @@ export default {
 
         return total + '位'
       },
-      set(total) {
-        console.log(total)
-      },
     },
     babyQuantity: {
       get() {
@@ -1486,11 +1494,24 @@ export default {
         } else {
           return true
         }
+      } else {
+        if (
+          this.tenants[0].quantity + this.tenants[1].quantity >
+          this.room.limitPeople - 1
+        )
+          return true
       }
     },
     openDateCard() {
       this.isVisible2 = false
       this.isVisible = true
+    },
+    openStoreDialog() {
+      if (this.$auth.loggedIn) {
+        this.storeDialog = true
+      } else {
+        this.$store.commit('toggleLoginDialog', true)
+      }
     },
   },
 }
