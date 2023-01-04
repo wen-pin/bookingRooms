@@ -6,6 +6,8 @@ export { default as SvgIcon } from '../../components/SvgIcon.vue'
 export { default as TextBtnDialog } from '../../components/TextBtnDialog.vue'
 export { default as TextRate } from '../../components/TextRate.vue'
 export { default as MessageBlock } from '../../components/messageBlock.vue'
+export { default as BtnShare } from '../../components/Btn/Share.vue'
+export { default as BtnFavorites } from '../../components/Btn/favorites.vue'
 export { default as RoomsPhotos } from '../../components/rooms/Photos.vue'
 
 // nuxt/nuxt.js#8607

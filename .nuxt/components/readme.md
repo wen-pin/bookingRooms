@@ -14,4 +14,6 @@ You can directly use them in pages and other components without the need to impo
 - `<TextBtnDialog>` | `<text-btn-dialog>` (components/TextBtnDialog.vue)
 - `<TextRate>` | `<text-rate>` (components/TextRate.vue)
 - `<MessageBlock>` | `<message-block>` (components/messageBlock.vue)
+- `<BtnShare>` | `<btn-share>` (components/Btn/Share.vue)
+- `<BtnFavorites>` | `<btn-favorites>` (components/Btn/favorites.vue)
 - `<RoomsPhotos>` | `<rooms-photos>` (components/rooms/Photos.vue)
