@@ -21,6 +21,13 @@
     "_name": "_35646d10"
   },
   {
+    "name": "rooms-room-index2",
+    "path": "/rooms/:room/index2",
+    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_room/index2.vue",
+    "chunkName": "pages/rooms/_room/index2",
+    "_name": "_7740de52"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",

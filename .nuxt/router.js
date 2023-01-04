@@ -7,6 +7,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _5e8e935a = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
 const _34769136 = () => interopDefault(import('../pages/rooms/index.vue' /* webpackChunkName: "pages/rooms/index" */))
 const _35646d10 = () => interopDefault(import('../pages/rooms/_room/index.vue' /* webpackChunkName: "pages/rooms/_room/index" */))
+const _7740de52 = () => interopDefault(import('../pages/rooms/_room/index2.vue' /* webpackChunkName: "pages/rooms/_room/index2" */))
 const _0711133c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -32,6 +33,10 @@ export const routerOptions = {
     path: "/rooms/:room",
     component: _35646d10,
     name: "rooms-room"
+  }, {
+    path: "/rooms/:room/index2",
+    component: _7740de52,
+    name: "rooms-room-index2"
   }, {
     path: "/",
     component: _0711133c,
