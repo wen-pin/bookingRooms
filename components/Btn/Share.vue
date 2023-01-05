@@ -6,3 +6,9 @@
     <TextBtnDialog :title="'分享'" />
   </v-btn>
 </template>
+
+<script>
+export default {
+  name: 'btnShare',
+}
+</script>

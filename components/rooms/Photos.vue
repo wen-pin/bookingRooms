@@ -52,19 +52,9 @@
 
             <v-spacer />
 
-            <v-btn text>
-              <v-icon small class="cursor-pointer" color="black">
-                mdi-export-variant
-              </v-icon>
-              <TextBtnDialog :title="'分享'" />
-            </v-btn>
+            <BtnShare />
 
-            <v-btn text @click="openStoreDialog()">
-              <v-icon small class="cursor-pointer" color="black">
-                mdi-cards-heart-outline
-              </v-icon>
-              <TextBtnDialog :title="'儲存'" />
-            </v-btn>
+            <BtnFavorites />
           </div>
 
           <v-card-text class="flex justify-center">

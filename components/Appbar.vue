@@ -26,7 +26,7 @@
             <v-list-item-title>註冊</v-list-item-title>
           </v-list-item>
 
-          <v-list-item v-if="!$auth.loggedIn" @click.stop="toggleLoginDialog()">
+          <v-list-item v-if="!$auth.loggedIn" @click.stop="toggleLoginBtn()">
             <v-list-item-title> 登入 </v-list-item-title>
           </v-list-item>
 
@@ -43,7 +43,7 @@
           icon
           color="black"
           class="!absolute top-[10px] left-[9px]"
-          @click.stop="toggleLoginDialog()"
+          @click.stop="toggleLoginBtn()"
         >
           <v-icon>mdi-window-close</v-icon>
         </v-btn>
@@ -132,13 +132,13 @@ export default {
         return this.$store.state.loginDialog_visible
       },
       set(val) {
-        this.$store.commit('toggleLoginDialog', val)
+        this.$store.commit('toggleLoginBtn', val)
       },
     },
   },
   methods: {
-    toggleLoginDialog() {
-      return this.$store.commit('toggleLoginDialog')
+    toggleLoginBtn() {
+      return this.$store.commit('toggleLoginBtn')
     },
     loginUser() {
       let payload = this.loginInfo.data
@@ -146,7 +146,7 @@ export default {
         data: payload,
       })
 
-      this.toggleLoginDialog()
+      this.toggleLoginBtn()
     },
     async registerUser() {
       try {
@@ -162,7 +162,7 @@ export default {
       }
     },
     openRegisterDialog() {
-      this.toggleLoginDialog()
+      this.toggleLoginBtn()
       this.registerDialog = true
     },
   },

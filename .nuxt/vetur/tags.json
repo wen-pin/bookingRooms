@@ -23,13 +23,16 @@
   "MessageBlock": {
     "description": "Auto imported from components/messageBlock.vue"
   },
-  "BtnShare": {
-    "description": "Auto imported from components/Btn/Share.vue"
-  },
-  "BtnFavorites": {
-    "description": "Auto imported from components/Btn/favorites.vue"
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
   },
   "RoomsPhotos": {
     "description": "Auto imported from components/rooms/Photos.vue"
+  },
+  "BtnFavorites": {
+    "description": "Auto imported from components/btn/Favorites.vue"
+  },
+  "BtnShare": {
+    "description": "Auto imported from components/btn/Share.vue"
   }
 }

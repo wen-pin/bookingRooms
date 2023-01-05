@@ -1,5 +1,5 @@
 <template>
-  <v-btn text @click="openStoreDialog()">
+  <v-btn text @click="openFavoritesDialog()">
     <v-icon small class="cursor-pointer" color="black">
       mdi-cards-heart-outline
     </v-icon>
@@ -9,15 +9,17 @@
 
 <script>
 export default {
+  name: 'btnFavorites',
+
   data() {
     return {}
   },
   methods: {
-    openStoreDialog() {
+    openFavoritesDialog() {
       if (this.$auth.loggedIn) {
-        this.storeDialog = true
+        this.$store.commit('toggleFavoritesBtn')
       } else {
-        this.$store.commit('toggleLoginDialog')
+        this.$store.commit('toggleLoginBtn')
       }
     },
   },
