@@ -52,9 +52,9 @@
 
             <v-spacer />
 
-            <BtnShare />
+            <DialogShare />
 
-            <BtnFavorites />
+            <DialogFavorites />
           </div>
 
           <v-card-text class="flex justify-center">
@@ -72,6 +72,8 @@
 
 <script>
 export default {
+  name: 'roomPhotos',
+
   props: {
     lazySrc: {
       types: String,

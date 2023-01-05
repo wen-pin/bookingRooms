@@ -9,83 +9,12 @@
           <TextRate :value="room.averageRating" />
         </span>
 
-        <span
+        <DialogEvaluation
+          :averageRating="room.averageRating"
+          :allMessages="room.allMessages"
+          :evaluationStandards="room.evaluationStandards"
           class="mr-4 my-auto"
-          @click="EvaluationDialog = !EvaluationDialog"
-        >
-          <TextBtnDialog :title="`${room.allMessages.length}則評價`" />
-        </span>
-
-        <CardDialog
-          :dialog="EvaluationDialog"
-          :width="1000"
-          @update="updateEvaluationDialog"
-        >
-          <v-row class="mt-10 px-3 relative">
-            <v-col cols="5">
-              <div class="flex">
-                <span>
-                  <TextRate
-                    :value="room.averageRating"
-                    :size="30"
-                    :max-width="''"
-                    :margin-top="'mt-[2px]'"
-                    class="text-3xl"
-                  />
-                </span>
-
-                <TextBtnDialog
-                  :title="`${room.allMessages.length}則評價`"
-                  :isUnderlineCursorPointer="false"
-                  class="text-3xl mt-[2px]"
-                />
-              </div>
-
-              <div class="mt-[50px]">
-                <v-row
-                  v-for="item in this.room.evaluationStandards"
-                  :key="item.title"
-                >
-                  <v-col cols="4" class="w-[50px]">{{ $t(item.title) }}</v-col>
-
-                  <v-col cols="5" class="flex items-center">
-                    <v-progress-linear
-                      :value="convertPercentage(item.value)"
-                      class="max-w-[200px]"
-                    />
-                  </v-col>
-
-                  <v-col cols="3">{{ item.value }}</v-col>
-                </v-row>
-              </div>
-            </v-col>
-
-            <v-col cols="7">
-              <v-text-field
-                :placeholder="$t('搜尋評價')"
-                filled
-                rounded
-                clearable
-                outlined
-                clear-icon="mdi-close-circle"
-                prepend-inner-icon="mdi-magnify"
-              />
-
-              <div
-                v-for="item in room.allMessages"
-                :key="item.id"
-                class="mb-10"
-              >
-                <messageBlock
-                  :imgSrc="item.imgSrc"
-                  :commenter="item.commenter"
-                  :messageTime="item.messageTime"
-                  :message="item.message"
-                />
-              </div>
-            </v-col>
-          </v-row>
-        </CardDialog>
+        />
 
         <span
           class="flex items-center"
@@ -99,15 +28,13 @@
 
         <v-spacer />
 
-        <BtnShare />
+        <DialogShare />
 
-        <BtnFavorites />
+        <DialogFavorites />
       </div>
     </div>
 
-    <DialogFavorites />
-
-    <RoomsPhotos
+    <RoomPhotos
       :lazySrc="room.img.lazySrc"
       :roomSrc="room.img.roomSrc"
       class="my-5"
@@ -117,202 +44,35 @@
       class="flex border-solid border-t-0 border-r-0 border-b-1 border-l-0 border-slate-200"
     >
       <div class="w-[60%]">
-        <DivideBlock>
-          <div class="my-5 flex justify-between">
-            <div>
-              <div class="text-2xl font-bold">
-                {{ room.landlord }} 出租的農場住宿
-              </div>
+        <RoomInfoTitle
+          :landlord="room.landlord"
+          :limitPeople="room.limitPeople"
+          :bedroom="room.pattern.bedroom"
+          :bed="room.pattern.bed"
+          :bathroom="room.pattern.bathroom"
+          :sharedBathroom="room.pattern.sharedBathroom"
+          :avaterSrc="room.img.avaterSrc"
+        />
 
-              <span v-if="room.limitPeople">{{ room.limitPeople }}位 </span>
-              <span v-if="room.pattern.bedroom"
-                >{{ room.pattern.bedroom }}間臥室
-              </span>
-              <span v-if="room.pattern.bed">{{ room.pattern.bed }}張床</span>
-              <span v-if="room.pattern.bathroom"
-                >{{ room.pattern.bathroom }}間衛浴
-              </span>
-              <span v-if="room.pattern.sharedBathroom"
-                >{{ room.pattern.sharedBathroom }}間共用衛浴
-              </span>
-            </div>
+        <RoomRights />
 
-            <v-avatar size="56px" @click="$vuetify.goTo(target, options)">
-              <img
-                alt="Avatar"
-                :src="room.img.avaterSrc"
-                class="cursor-pointer"
-              />
-            </v-avatar>
-          </div>
-        </DivideBlock>
+        <RoomIntroduce />
 
-        <DivideBlock>
-          <div class="my-5">
-            <div class="my-1">
-              針對房東取消預訂、房源描述不實和入住困難等其他問題，我們會為每筆預訂提供免費保障。
-            </div>
+        <RoomBeds :bedroom="room.pattern.bedroom" />
 
-            <div class="!max-w-[70px]" @click="detailDialog = true">
-              <TextBtnDialog :title="'了解詳情'" />
-            </div>
+        <RoomEquipment
+          :alleqptAndServices="room.alleqptAndServices"
+          :eqptAndServices="room.alleqptAndServices[0].eqptAndServices"
+        />
 
-            <CardDialog :dialog="detailDialog" @update="updateDetailDialog">
-              <DivideBlock class="mx-5">
-                <div class="my-5">
-                  <div class="text-h5">Privacy Policy</div>
-                  <div>AirCover 將為每筆預訂免費提供全面保障。</div>
-                </div>
-              </DivideBlock>
-
-              <v-card-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="detailDialog = false">
-                  I accept
-                </v-btn>
-              </v-card-actions>
-            </CardDialog>
-          </div>
-        </DivideBlock>
-
-        <DivideBlock>
-          <div class="my-5">
-            <div class="my-1">
-              在這間大自然包圍的浪漫房源中欣賞四周美景。 日出、日落、滿天星星
-              ##嚴禁訪客## 為提供來入住的房客，都能享有私人空間隱私
-              謝絕訪客，無法配合者，請勿下訂，謝謝 其他注意事項
-              #可提供幫忙準備烤肉爐+瓦斯：400元/次 #寵物需先徵詢房東同意
-              #包棟、寵物押金：3000元，再請貴賓入住當天另外準備，並於退房後無誤後退回
-              ##嚴禁訪客## 為提供來入住的房客，都能享有私人空間隱私
-              謝絕訪客，無法配合者，請勿下訂，謝謝
-            </div>
-
-            <div class="!max-w-[115px] flex" @click="detailDialog2 = true">
-              <TextBtnDialog :title="'顯示更多內容'" />
-
-              <v-icon class="cursor-pointer" small color="black">
-                mdi-greater-than
-              </v-icon>
-            </div>
-
-            <CardDialog :dialog="detailDialog2" @update="updateDetailDialog2">
-              <v-card-title class="text-2xl">空間介紹</v-card-title>
-
-              <v-card-text>
-                在這間大自然包圍的浪漫房源中欣賞四周美景。 日出、日落、滿天星星
-                ##嚴禁訪客## 為提供來入住的房客，都能享有私人空間隱私
-                謝絕訪客，無法配合者，請勿下訂，謝謝 其他注意事項
-                #可提供幫忙準備烤肉爐+瓦斯：400元/次 #寵物需先徵詢房東同意
-                #包棟、寵物押金：3000元，再請貴賓入住當天另外準備，並於退房後無誤後退回
-                ##嚴禁訪客## 為提供來入住的房客，都能享有私人空間隱私
-                謝絕訪客，無法配合者，請勿下訂，謝謝
-              </v-card-text>
-            </CardDialog>
-          </div>
-        </DivideBlock>
-
-        <DivideBlock>
-          <div class="my-10">
-            <div class="text-2xl font-bold">
-              {{ $t('住宿地點') }}
-            </div>
-
-            <v-card outlined width="200px" height="120px" class="p-5 mt-5">
-              <div>
-                <SvgIcon :iconClass="'doubleBed'" class="mr-2" />
-              </div>
-              <div>{{ $t('臥室') }}</div>
-              <div>{{ room.pattern.bedroom }}張 1.4 米寬雙人床</div>
-            </v-card>
-          </div>
-        </DivideBlock>
-
-        <DivideBlock>
-          <div class="my-10">
-            <div class="text-2xl font-bold">
-              {{ $t('有提供的設備與服務') }}
-            </div>
-
-            <v-row class="w-[80%] mt-2">
-              <v-col
-                v-for="item in fetchEqptAndServices(
-                  room.alleqptAndServices[0].eqptAndServices,
-                )"
-                :key="item.id"
-                cols="6"
-                class="flex pb-0"
-              >
-                <SvgIcon :iconClass="item.svgTitle" class="mr-2" />
-                <div>
-                  {{ item.title }}
-                </div>
-              </v-col>
-            </v-row>
-
-            <v-btn
-              outlined
-              class="mt-10"
-              height="55px"
-              @click="eqptAndservDialog = true"
-            >
-              <span class="text-lg">
-                顯示全部{{
-                  room.alleqptAndServices[0].eqptAndServices.length
-                }}項設備與服務
-              </span>
-            </v-btn>
-
-            <v-dialog v-model="eqptAndservDialog" scrollable width="700">
-              <v-card class="rounded-lg p-5">
-                <v-btn icon @click="eqptAndservDialog = false">
-                  <v-icon>mdi-window-close</v-icon>
-                </v-btn>
-
-                <v-card-text class="!p-0 my-10 black--text">
-                  <div class="text-2xl font-bold">有提供的設備與服務</div>
-
-                  <div
-                    v-for="items in this.room.alleqptAndServices"
-                    :key="items.id"
-                  >
-                    <div class="text-xl font-bold my-8">
-                      {{ items.category }}
-                    </div>
-
-                    <CardEqptAndServ
-                      v-for="item in items.eqptAndServices"
-                      :key="item.id"
-                      :title="item.title"
-                      :subtitle="item.subtitle"
-                      :svgTitle="item.svgTitle"
-                      :isSupply="item.isSupply"
-                    />
-                  </div>
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-          </div>
-        </DivideBlock>
+        <!-- 元件還沒完成 -->
+        <!-- <RoomDates :address="room.location.address" /> -->
 
         <div class="my-10">
           <div class="text-2xl font-bold">
             <div v-if="datesQueue.length == 0">選擇入住日期</div>
             <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
-            <div v-else>
-              {{ $t('在') }}{{ room.location.address }}住{{ calculateDays }}晚
-            </div>
+            <div v-else>{{ $t('在') }}{{ address }}住{{ calculateDays }}晚</div>
           </div>
 
           <div class="text-sm text-neutral-500">
@@ -955,7 +715,7 @@ export default {
     return {
       detailDialog: false,
       detailDialog2: false,
-      EvaluationDialog: false,
+
       eqptAndservDialog: false,
       googleMapsDialog: false,
       houseRulesDialog: false,
@@ -1390,9 +1150,7 @@ export default {
     convertPercentage(value) {
       return (value / 5) * 100
     },
-    fetchEqptAndServices(eqptAndServices) {
-      return eqptAndServices.slice(0, 10)
-    },
+
     addTenant(idx) {
       return this.tenants[idx].quantity++
     },

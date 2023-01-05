@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-btn text @click="authLogin()">
+    <v-btn text @click="isVisible = true">
       <v-icon small class="cursor-pointer" color="black">
-        mdi-cards-heart-outline
+        mdi-export-variant
       </v-icon>
-      <TextBtnDialog :title="'儲存'" />
+      <TextBtnDialog :title="'分享'" />
     </v-btn>
 
     <v-dialog v-model="isVisible">
@@ -19,21 +19,12 @@
 
 <script>
 export default {
-  name: 'dialogFavorites',
+  name: 'dialogShare',
 
   data() {
     return {
       isVisible: false,
     }
-  },
-  methods: {
-    authLogin() {
-      if (this.$auth.loggedIn) {
-        this.isVisible = true
-      } else {
-        this.$store.commit('toggleLoginBtn', true)
-      }
-    },
   },
 }
 </script>

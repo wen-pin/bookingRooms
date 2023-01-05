@@ -4,6 +4,7 @@
     :class="
       isUnderlineCursorPointer ? 'underline cursor-pointer' : 'no-underline'
     "
+    v-on="$listeners"
   >
     {{ $t(this.title) }}
     <span v-if="subTitle">、</span>

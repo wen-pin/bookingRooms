@@ -37,7 +37,7 @@
       </v-list>
     </v-menu>
 
-    <v-dialog v-model="isVisible" max-width="400">
+    <v-dialog v-model="isVisible" max-width="400" :retain-focus="false">
       <v-card class="pa-10">
         <v-btn
           icon

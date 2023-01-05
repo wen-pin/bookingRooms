@@ -23,16 +23,34 @@
   "MessageBlock": {
     "description": "Auto imported from components/messageBlock.vue"
   },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
   "DialogFavorites": {
     "description": "Auto imported from components/dialog/Favorites.vue"
   },
-  "RoomsPhotos": {
-    "description": "Auto imported from components/rooms/Photos.vue"
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
   },
-  "BtnFavorites": {
-    "description": "Auto imported from components/btn/Favorites.vue"
+  "RoomBeds": {
+    "description": "Auto imported from components/room/Beds.vue"
   },
-  "BtnShare": {
-    "description": "Auto imported from components/btn/Share.vue"
+  "RoomDates": {
+    "description": "Auto imported from components/room/Dates.vue"
+  },
+  "RoomEquipment": {
+    "description": "Auto imported from components/room/Equipment.vue"
+  },
+  "RoomInfoTitle": {
+    "description": "Auto imported from components/room/InfoTitle.vue"
+  },
+  "RoomIntroduce": {
+    "description": "Auto imported from components/room/Introduce.vue"
+  },
+  "RoomPhotos": {
+    "description": "Auto imported from components/room/Photos.vue"
+  },
+  "RoomRights": {
+    "description": "Auto imported from components/room/Rights.vue"
   }
 }
