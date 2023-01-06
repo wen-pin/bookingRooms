@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <div class="text-3xl mt-5">{{ room.title }}</div>
-    {{ isVisible3 }}
 
     <div class="my-2 flex">
       <div class="flex">
@@ -47,11 +46,9 @@
         <RoomInfoTitle
           :landlord="room.landlord"
           :limitPeople="room.limitPeople"
-          :bedroom="room.pattern.bedroom"
-          :bed="room.pattern.bed"
-          :bathroom="room.pattern.bathroom"
-          :sharedBathroom="room.pattern.sharedBathroom"
+          :pattern="room.pattern"
           :avaterSrc="room.img.avaterSrc"
+          target-element="#landlord"
         />
 
         <RoomRights />
@@ -72,7 +69,9 @@
           <div class="text-2xl font-bold">
             <div v-if="datesQueue.length == 0">選擇入住日期</div>
             <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
-            <div v-else>{{ $t('在') }}{{ address }}住{{ calculateDays }}晚</div>
+            <div v-else>
+              {{ $t('在') }}{{ room.location.address }}住{{ calculateDays }}晚
+            </div>
           </div>
 
           <div class="text-sm text-neutral-500">
@@ -399,312 +398,22 @@
       </div>
     </div>
 
-    <DivideBlock>
-      <div class="my-10">
-        <div class="flex">
-          <span>
-            <TextRate
-              :value="room.averageRating"
-              :size="25"
-              :max-width="''"
-              :margin-top="'mt-[2px]'"
-              class="text-2xl"
-            />
-          </span>
+    <RoomEvaluation
+      :averageRating="room.averageRating"
+      :allMessages="room.allMessages"
+      :evaluationStandards="room.evaluationStandards"
+    />
 
-          <TextBtnDialog
-            :title="`${room.allMessages.length}則評價`"
-            :isUnderlineCursorPointer="false"
-            class="text-2xl mt-[2px]"
-          />
-        </div>
+    <RoomLocation :location="room.location" :country="room.country" />
 
-        <v-row class="mt-5">
-          <v-col
-            v-for="item in this.room.evaluationStandards"
-            :key="item.title"
-            cols="6"
-          >
-            <v-row>
-              <v-col cols="4" class="w-[50px]">{{ $t(item.title) }}</v-col>
+    <RoomInfoLandlord
+      id="landlord"
+      :landlord="room.landlord"
+      :averageRating="room.averageRating"
+      :allMessages="room.allMessages"
+    />
 
-              <v-col cols="5" class="flex items-center">
-                <v-progress-linear
-                  :value="convertPercentage(item.value)"
-                  class="max-w-[200px]"
-                />
-              </v-col>
-
-              <v-col cols="3">{{ item.value }}</v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-
-        <v-row class="mt-5">
-          <v-col
-            v-for="item in room.allMessages"
-            :key="item.id"
-            cols="6"
-            class="mb-10"
-          >
-            <messageBlock
-              :imgSrc="item.imgSrc"
-              :commenter="item.commenter"
-              :messageTime="item.messageTime"
-              :message="item.message"
-            />
-          </v-col>
-        </v-row>
-
-        <v-btn outlined height="55px" @click="EvaluationDialog = true">
-          <span span class="text-lg">
-            顯示全部{{ room.allMessages.length }}則評價
-          </span>
-        </v-btn>
-      </div>
-    </DivideBlock>
-
-    <DivideBlock>
-      <div class="my-10">
-        <div class="text-2xl font-bold">
-          {{ $t('住宿地點') }}
-        </div>
-
-        <div class="my-5">
-          <TextBtnDialog
-            :title="room.location.address"
-            :subTitle="room.country"
-            :isUnderlineCursorPointer="false"
-          />
-        </div>
-
-        <GmapMap
-          :center="{ lat: room.location.lat, lng: room.location.lng }"
-          :zoom="15"
-          map-type-id="terrain"
-          class="w-full h-[400px]"
-        >
-          <GmapMarker
-            :position="{ lat: room.location.lat, lng: room.location.lng }"
-          />
-        </GmapMap>
-
-        <div
-          class="!max-w-[115px] flex mt-7"
-          @click="googleMapsDialog = !googleMapsDialog"
-        >
-          <TextBtnDialog :title="'顯示更多內容'" />
-
-          <v-icon class="cursor-pointer" small color="black">
-            mdi-greater-than
-          </v-icon>
-        </div>
-
-        <v-dialog
-          v-model="googleMapsDialog"
-          fullscreen
-          hide-overlay
-          transition="dialog-bottom-transition"
-        >
-          <v-card class="h-full relative">
-            <v-btn
-              icon
-              class="!absolute top-4 left-4"
-              @click="googleMapsDialog = !googleMapsDialog"
-            >
-              <v-icon> mdi-less-than </v-icon>
-            </v-btn>
-
-            <div class="flex w-full h-full pt-[60px] px-8 pb-8">
-              <div class="w-[30%] pr-10">
-                <div class="text-3xl font-bold mt-3 mb-6">住宿地點</div>
-
-                <div class="font-medium mb-3">周邊交通</div>
-
-                <div>
-                  離最美沙灘砂島保護區約1分鐘車程
-                  離台灣最南端鵝鑾鼻燈塔約1分鐘車程
-                  離日出與觀星景點龍磐公園約5分鐘車程
-                </div>
-
-                <div class="!max-w-[80px] flex">
-                  <TextBtnDialog :title="'閱讀詳情'" />
-
-                  <v-icon class="cursor-pointer" small color="black">
-                    mdi-greater-than
-                  </v-icon>
-                </div>
-              </div>
-
-              <GmapMap
-                :center="{ lat: room.location.lat, lng: room.location.lng }"
-                :zoom="15"
-                map-type-id="terrain"
-                class="w-full h-full"
-              >
-                <GmapMarker
-                  :position="{ lat: room.location.lat, lng: room.location.lng }"
-                />
-              </GmapMap>
-            </div>
-          </v-card>
-        </v-dialog>
-      </div>
-    </DivideBlock>
-
-    <DivideBlock ref="landlord">
-      <div class="my-10">
-        <div class="flex items-center">
-          <v-avatar size="70px" class="mr-2">
-            <img
-              alt="Avatar"
-              src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-              class="cursor-pointer"
-            />
-          </v-avatar>
-
-          <div>
-            <span class="text-2xl font-medium">房東:Chiang</span>
-            <div class="text-zinc-400">加入時間:2017年5月</div>
-          </div>
-        </div>
-
-        <div class="flex my-5 w-full">
-          <div class="w-[50%]">
-            <div class="flex">
-              <span>
-                <TextRate
-                  :value="room.averageRating"
-                  :size="25"
-                  :max-width="''"
-                  class="text-lg"
-                />
-              </span>
-
-              <TextBtnDialog
-                :title="`${room.allMessages.length}則評價`"
-                :isUnderlineCursorPointer="false"
-                class="text-lg"
-              />
-
-              <v-icon color="black" class="ml-7 mr-3">mdi-shield-check</v-icon>
-
-              <div class="text-lg font-medium">身分已驗證</div>
-            </div>
-
-            <div class="text-lg pr-[100px] mt-5">
-              巨蟹女，所以愛家又溫暖～ 非常愛電影，來墾丁之前在電影公司工作。
-              現在搬來墾丁生活，經營甜點工作室，
-              喜歡出外郊遊，拍拍好看的照片，也玩底片機。
-            </div>
-          </div>
-
-          <div class="w-[50%] text-lg">
-            <div>語言: 中文 (简体)、English</div>
-            <div class="mt-3">回覆率: 100%</div>
-            <div class="mt-3">回覆時間: 1 小時內</div>
-
-            <v-btn large outlined class="rounded-lg mt-8" height="50px">
-              <span class="text-lg font-semibold">聯絡房東</span>
-            </v-btn>
-          </div>
-        </div>
-      </div>
-    </DivideBlock>
-
-    <div class="my-10">
-      <div class="text-2xl font-medium">注意事項</div>
-
-      <v-row class="mt-2">
-        <v-col cols="4">
-          <div class="font-medium">《房屋守則》</div>
-
-          <div class="h-[100px]">
-            <div class="my-2">入住時間：下午3:00</div>
-            <div class="my-2">退房時間：上午11:00</div>
-            <div class="my-2">最多 8 位房客</div>
-          </div>
-
-          <div
-            class="!max-w-[115px] flex mt-7"
-            @click="houseRulesDialog = !houseRulesDialog"
-          >
-            <TextBtnDialog :title="'顯示更多內容'" />
-
-            <v-icon class="cursor-pointer" small color="black">
-              mdi-greater-than
-            </v-icon>
-          </div>
-
-          <CardDialog
-            :dialog="houseRulesDialog"
-            :width="800"
-            @update="updateHouseRulesDialog"
-          >
-            <div class="text-2xl font-semibold">《房屋守則》</div>
-          </CardDialog>
-        </v-col>
-
-        <v-col cols="4">
-          <div class="font-medium">安全與房源</div>
-
-          <div class="h-[100px]">
-            <div class="my-2">未安裝一氧化碳警報器</div>
-            <div class="my-2">無門鎖的泳池／按摩浴池</div>
-            <div class="my-2">附近的湖泊、河流、其他水域</div>
-          </div>
-
-          <div
-            class="!max-w-[115px] flex mt-7"
-            @click="securityDialog = !securityDialog"
-          >
-            <TextBtnDialog :title="'顯示更多內容'" />
-
-            <v-icon class="cursor-pointer" small color="black">
-              mdi-greater-than
-            </v-icon>
-          </div>
-
-          <CardDialog
-            :dialog="securityDialog"
-            :width="800"
-            @update="updateSecurityDialogDialog"
-          >
-            <div>安全與房源</div>
-          </CardDialog>
-        </v-col>
-
-        <v-col cols="4">
-          <div class="font-medium">《退訂政策》</div>
-
-          <div class="h-[100px]">
-            <div class="my-2">在 1月27日前可以免費取消。</div>
-            <div class="my-2">
-              請查看房東完整的《退訂政策》；即便是因為感染新冠肺炎而取消，或新冠疫情導致旅程中斷，這些政策依然適用。
-            </div>
-          </div>
-
-          <div
-            class="!max-w-[115px] flex mt-7"
-            @click="unsubscribePolicyDialog = !unsubscribePolicyDialog"
-          >
-            <TextBtnDialog :title="'顯示更多內容'" />
-
-            <v-icon class="cursor-pointer" small color="black">
-              mdi-greater-than
-            </v-icon>
-          </div>
-
-          <CardDialog
-            :dialog="unsubscribePolicyDialog"
-            :width="800"
-            @update="updateUnsubscribePolicyDialog"
-          >
-            <div>《退訂政策》</div>
-          </CardDialog>
-        </v-col>
-      </v-row>
-    </div>
+    <RoomNotes />
   </v-container>
 </template>
 
@@ -713,15 +422,6 @@ export default {
   name: 'singleRoom',
   data() {
     return {
-      detailDialog: false,
-      detailDialog2: false,
-
-      eqptAndservDialog: false,
-      googleMapsDialog: false,
-      houseRulesDialog: false,
-      securityDialog: false,
-      unsubscribePolicyDialog: false,
-
       isVisible: false,
       isVisible2: false,
 
@@ -1045,15 +745,23 @@ export default {
     }
   },
   computed: {
-    target() {
-      return this.$refs.landlord
-    },
-    options() {
-      return {
-        duration: 2000,
-        offset: 40,
-        easing: 'easeOutQuart',
-      }
+    // target() {
+    //   return this.$refs.landlord
+    // },
+    // options() {
+    //   return {
+    //     duration: 2000,
+    //     offset: 40,
+    //     easing: 'easeOutQuart',
+    //   }
+    // },
+    googleMapsDialog: {
+      get() {
+        return this.$store.state.googleMapsDialog_visible
+      },
+      set(v) {
+        this.$store.commit('toggleGoogleMapsBtn', v)
+      },
     },
     dateRangeText() {
       return this.datesQueue.join(' ~ ')
@@ -1119,38 +827,11 @@ export default {
         return this.dates
       }
     },
-    isVisible3: {
-      get() {
-        return this.$store.state.loginDialog_visible
-      },
-      set(val) {
-        this.$store.commit('toggleLoginBtn', val)
-      },
-    },
   },
   methods: {
-    updateDetailDialog(val) {
-      this.detailDialog = val
-    },
-    updateDetailDialog2(val) {
-      this.detailDialog2 = val
-    },
-    updateEvaluationDialog(val) {
-      this.EvaluationDialog = val
-    },
-    updateHouseRulesDialog(val) {
-      this.houseRulesDialog = val
-    },
-    updateSecurityDialogDialog(val) {
-      this.securityDialog = val
-    },
-    updateUnsubscribePolicyDialog(val) {
-      this.unsubscribePolicyDialog = val
-    },
     convertPercentage(value) {
       return (value / 5) * 100
     },
-
     addTenant(idx) {
       return this.tenants[idx].quantity++
     },

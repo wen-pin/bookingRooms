@@ -131,9 +131,6 @@ export default {
       get() {
         return this.$store.state.loginDialog_visible
       },
-      set(val) {
-        this.$store.commit('toggleLoginBtn', val)
-      },
     },
   },
   methods: {

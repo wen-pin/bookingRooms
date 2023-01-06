@@ -2,11 +2,11 @@
   <div>
     <TextBtnDialog
       :title="`${allMessages.length}則評價`"
-      @click="EvaluationDialog = !EvaluationDialog"
+      @click="isVisible = !isVisible"
     />
 
     <CardDialog
-      :dialog="EvaluationDialog"
+      :dialog="isVisible"
       :width="1000"
       @update="updateEvaluationDialog"
     >
@@ -93,9 +93,19 @@ export default {
       EvaluationDialog: false,
     }
   },
+  computed: {
+    isVisible: {
+      get() {
+        return this.$store.state.evaluationDialog_visible
+      },
+      set(v) {
+        this.$store.commit('toggleEvaluationBtn', v)
+      },
+    },
+  },
   methods: {
     updateEvaluationDialog(val) {
-      this.EvaluationDialog = val
+      this.isVisible = val
     },
     convertPercentage(value) {
       return (value / 5) * 100

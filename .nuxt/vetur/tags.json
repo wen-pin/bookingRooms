@@ -41,16 +41,28 @@
   "RoomEquipment": {
     "description": "Auto imported from components/room/Equipment.vue"
   },
+  "RoomEvaluation": {
+    "description": "Auto imported from components/room/Evaluation.vue"
+  },
+  "RoomInfoLandlord": {
+    "description": "Auto imported from components/room/InfoLandlord.vue"
+  },
   "RoomInfoTitle": {
     "description": "Auto imported from components/room/InfoTitle.vue"
   },
   "RoomIntroduce": {
     "description": "Auto imported from components/room/Introduce.vue"
   },
+  "RoomLocation": {
+    "description": "Auto imported from components/room/Location.vue"
+  },
   "RoomPhotos": {
     "description": "Auto imported from components/room/Photos.vue"
   },
   "RoomRights": {
     "description": "Auto imported from components/room/Rights.vue"
+  },
+  "RoomNotes": {
+    "description": "Auto imported from components/room/notes.vue"
   }
 }
