@@ -8,6 +8,9 @@
   "CardEqptAndServ": {
     "description": "Auto imported from components/CardEqptAndServ.vue"
   },
+  "DatePicker": {
+    "description": "Auto imported from components/DatePicker.vue"
+  },
   "DivideBlock": {
     "description": "Auto imported from components/DivideBlock.vue"
   },

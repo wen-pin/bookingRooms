@@ -111,7 +111,8 @@
               </div>
             </div>
 
-            <v-date-picker
+            <DatePicker />
+            <!-- <v-date-picker
               v-model="dates"
               no-title
               range
@@ -119,7 +120,7 @@
               :min="$dayjs().format('YYYY-MM-DD')"
               year-icon="mdi-calendar-blank"
               class="mt-5"
-            />
+            /> -->
 
             <div class="flex justify-end mx-8" @click="dates = []">
               <TextBtnDialog :title="'清除日期'" class="mr-5" />
@@ -316,8 +317,6 @@ export default {
       isVisible: false,
       isVisible2: false,
 
-      dates: [],
-
       tenants: [
         {
           id: 1,
@@ -347,6 +346,14 @@ export default {
     }
   },
   computed: {
+    dates: {
+      get() {
+        return this.$store.state.dates
+      },
+      set(v) {
+        this.$store.commit('fetchDates', v)
+      },
+    },
     EvaluationDialog: {
       get() {
         return this.$store.state.evaluationDialog_visible

@@ -66,7 +66,7 @@
         <!-- <RoomDates :address="room.location.address" /> -->
 
         <div class="my-10">
-          <div class="text-2xl font-bold">
+          <!-- <div class="text-2xl font-bold">
             <div v-if="datesQueue.length == 0">選擇入住日期</div>
             <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
             <div v-else>
@@ -79,17 +79,10 @@
             <div v-else>
               {{ dateRangeText }}
             </div>
-          </div>
+          </div> -->
 
           <v-row class="mt-10">
-            <v-date-picker
-              v-model="dates"
-              range
-              no-title
-              full-width
-              :min="$dayjs().format('YYYY-MM-DD')"
-              year-icon="mdi-calendar-blank"
-            ></v-date-picker>
+            <DatePicker />
           </v-row>
 
           <div class="mt-5 flex justify-end" @click="dates = []">
@@ -432,37 +425,35 @@ export default {
   name: 'singleRoom',
   data() {
     return {
-      isVisible: false,
-      isVisible2: false,
+      // isVisible: false,
+      // isVisible2: false,
 
-      dates: [],
-
-      tenants: [
-        {
-          id: 1,
-          ageGroup: '大人',
-          ageRange: '13 歲以上',
-          quantity: 1,
-        },
-        {
-          id: 2,
-          ageGroup: '兒童',
-          ageRange: '2 - 12歲',
-          quantity: 0,
-        },
-        {
-          id: 3,
-          ageGroup: '嬰幼兒',
-          ageRange: '2 歲以下',
-          quantity: 0,
-        },
-        {
-          id: 4,
-          ageGroup: '寵物',
-          ageRange: '會攜帶服務性動物嗎？',
-          quantity: 0,
-        },
-      ],
+      // tenants: [
+      //   {
+      //     id: 1,
+      //     ageGroup: '大人',
+      //     ageRange: '13 歲以上',
+      //     quantity: 1,
+      //   },
+      //   {
+      //     id: 2,
+      //     ageGroup: '兒童',
+      //     ageRange: '2 - 12歲',
+      //     quantity: 0,
+      //   },
+      //   {
+      //     id: 3,
+      //     ageGroup: '嬰幼兒',
+      //     ageRange: '2 歲以下',
+      //     quantity: 0,
+      //   },
+      //   {
+      //     id: 4,
+      //     ageGroup: '寵物',
+      //     ageRange: '會攜帶服務性動物嗎？',
+      //     quantity: 0,
+      //   },
+      // ],
 
       room: {
         // 房東
@@ -755,6 +746,14 @@ export default {
     }
   },
   computed: {
+    dates: {
+      get() {
+        return this.$store.state.dates
+      },
+      set(v) {
+        this.$store.commit('fetchDates', v)
+      },
+    },
     // target() {
     //   return this.$refs.landlord
     // },
@@ -773,106 +772,106 @@ export default {
         this.$store.commit('toggleGoogleMapsBtn', v)
       },
     },
-    dateRangeText() {
-      return this.datesQueue.join(' ~ ')
-    },
-    allTenants: {
-      get() {
-        let total = this.tenants[0].quantity + this.tenants[1].quantity
+    // dateRangeText() {
+    //   return this.datesQueue.join(' ~ ')
+    // },
+    // allTenants: {
+    //   get() {
+    //     let total = this.tenants[0].quantity + this.tenants[1].quantity
 
-        return total + '位'
-      },
-    },
-    babyQuantity: {
-      get() {
-        return this.tenants[2].quantity
-      },
-    },
-    petQuantity() {
-      return this.tenants[3].quantity
-    },
-    calculateDays() {
-      return this.$dayjs(this.datesQueue[1]).diff(this.datesQueue[0], 'day')
-    },
-    calculateRentalCost() {
-      let holidayOfDays = 0
-      let weekdayOfDays = 0
-      let firstDay = this.datesQueue[0]
+    //     return total + '位'
+    //   },
+    // },
+    // babyQuantity: {
+    //   get() {
+    //     return this.tenants[2].quantity
+    //   },
+    // },
+    // petQuantity() {
+    //   return this.tenants[3].quantity
+    // },
+    // calculateDays() {
+    //   return this.$dayjs(this.datesQueue[1]).diff(this.datesQueue[0], 'day')
+    // },
+    // calculateRentalCost() {
+    //   let holidayOfDays = 0
+    //   let weekdayOfDays = 0
+    //   let firstDay = this.datesQueue[0]
 
-      for (let i = 0; i < this.calculateDays; i++) {
-        let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
-        if (week === 6) {
-          holidayOfDays++
-        } else {
-          weekdayOfDays++
-        }
-      }
+    //   for (let i = 0; i < this.calculateDays; i++) {
+    //     let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
+    //     if (week === 6) {
+    //       holidayOfDays++
+    //     } else {
+    //       weekdayOfDays++
+    //     }
+    //   }
 
-      return (
-        holidayOfDays * this.room.price.holiday +
-        weekdayOfDays * this.room.price.weekday
-      )
-    },
-    averageRentalCost() {
-      return this.calculateRentalCost / this.calculateDays
-    },
-    calculateServiceCharge() {
-      return this.calculateDays * this.room.price.serviceCharge
-    },
-    allRentalCost() {
-      return this.calculateRentalCost + this.calculateServiceCharge
-    },
-    datesQueue() {
-      if (this.dates.length === 2) {
-        if (this.$dayjs(this.dates[0]).isAfter(this.$dayjs(this.dates[1]))) {
-          let temp = this.dates[0]
-          let newDates = []
-          newDates[0] = this.dates[1]
-          newDates[1] = temp
-          return newDates
-        } else {
-          return this.dates
-        }
-      } else {
-        return this.dates
-      }
-    },
+    //   return (
+    //     holidayOfDays * this.room.price.holiday +
+    //     weekdayOfDays * this.room.price.weekday
+    //   )
+    // },
+    // averageRentalCost() {
+    //   return this.calculateRentalCost / this.calculateDays
+    // },
+    // calculateServiceCharge() {
+    //   return this.calculateDays * this.room.price.serviceCharge
+    // },
+    // allRentalCost() {
+    //   return this.calculateRentalCost + this.calculateServiceCharge
+    // },
+    // datesQueue() {
+    //   if (this.dates.length === 2) {
+    //     if (this.$dayjs(this.dates[0]).isAfter(this.$dayjs(this.dates[1]))) {
+    //       let temp = this.dates[0]
+    //       let newDates = []
+    //       newDates[0] = this.dates[1]
+    //       newDates[1] = temp
+    //       return newDates
+    //     } else {
+    //       return this.dates
+    //     }
+    //   } else {
+    //     return this.dates
+    //   }
+    // },
   },
   methods: {
-    addTenant(idx) {
-      return this.tenants[idx].quantity++
-    },
-    reduceTenant(idx) {
-      return this.tenants[idx].quantity--
-    },
-    isReduceBtnDisable(idx) {
-      if (idx == 0) {
-        if (this.tenants[idx].quantity < 2) return true
-      } else if (idx != 0) {
-        if (this.tenants[idx].quantity < 1) return true
-      }
-    },
-    isAddBtnDisable(idx) {
-      if (idx === 2) {
-        if (this.tenants[idx].quantity > 4) return true
-      } else if (idx === 3) {
-        if (this.room.isAcceptPet) {
-          if (this.tenants[idx].quantity > 4) return true
-        } else {
-          return true
-        }
-      } else {
-        if (
-          this.tenants[0].quantity + this.tenants[1].quantity >
-          this.room.limitPeople - 1
-        )
-          return true
-      }
-    },
-    openDateCard() {
-      this.isVisible2 = false
-      this.isVisible = true
-    },
+    // addTenant(idx) {
+    //   return this.tenants[idx].quantity++
+    // },
+    // reduceTenant(idx) {
+    //   return this.tenants[idx].quantity--
+    // },
+    // isReduceBtnDisable(idx) {
+    //   if (idx == 0) {
+    //     if (this.tenants[idx].quantity < 2) return true
+    //   } else if (idx != 0) {
+    //     if (this.tenants[idx].quantity < 1) return true
+    //   }
+    // },
+    // isAddBtnDisable(idx) {
+    //   if (idx === 2) {
+    //     if (this.tenants[idx].quantity > 4) return true
+    //   } else if (idx === 3) {
+    //     if (this.room.isAcceptPet) {
+    //       if (this.tenants[idx].quantity > 4) return true
+    //     } else {
+    //       return true
+    //     }
+    //   } else {
+    //     if (
+    //       this.tenants[0].quantity + this.tenants[1].quantity >
+    //       this.room.limitPeople - 1
+    //     )
+    //       return true
+    //   }
+    // },
+    // openDateCard() {
+    //   this.isVisible2 = false
+    //   this.isVisible = true
+    // },
   },
 }
 </script>
