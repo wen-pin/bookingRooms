@@ -57,24 +57,10 @@
         >
           <div class="my-5">
             <div class="flex justify-between mx-8">
-              <div class="flex flex-col justify-center">
-                <div class="text-2xl font-bold">
-                  <div v-if="datesQueue.length == 0">選擇入住日期</div>
-                  <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
-                  <div v-else>
-                    {{ $t('在') }}{{ location.address }}住{{ calculateDays }}晚
-                  </div>
-                </div>
-
-                <div class="text-sm text-neutral-500">
-                  <div v-if="datesQueue.length < 2">
-                    新增旅行日期，查看確切價格
-                  </div>
-                  <div v-else>
-                    {{ dateRangeText }}
-                  </div>
-                </div>
-              </div>
+              <DateRange
+                :location="location"
+                class="flex flex-col justify-center"
+              />
 
               <div
                 class="!max-w-[320px] flex justify-between border-gray-300 border border-solid rounded-lg cursor-pointer"
@@ -112,15 +98,6 @@
             </div>
 
             <DatePicker />
-            <!-- <v-date-picker
-              v-model="dates"
-              no-title
-              range
-              full-width
-              :min="$dayjs().format('YYYY-MM-DD')"
-              year-icon="mdi-calendar-blank"
-              class="mt-5"
-            /> -->
 
             <div class="flex justify-end mx-8" @click="dates = []">
               <TextBtnDialog :title="'清除日期'" class="mr-5" />
@@ -133,8 +110,8 @@
         <div class="relative">
           <div
             class="h-[65px] flex justify-between border-gray-300 border-[1px] border-solid rounded-bl-lg rounded-br-lg px-3 cursor-pointer"
-            :class="isVisible2 ? 'border-black border-[2px]' : ''"
-            @click="isVisible2 = !isVisible2"
+            :class="isTenantsVisible ? 'border-black border-[2px]' : ''"
+            @click="isTenantsVisible = !isTenantsVisible"
           >
             <div class="my-2">
               <div class="font-semibold">房客</div>
@@ -145,12 +122,12 @@
               </div>
             </div>
 
-            <v-icon v-if="isVisible2">mdi-chevron-up</v-icon>
+            <v-icon v-if="isTenantsVisible">mdi-chevron-up</v-icon>
             <v-icon v-else>mdi-chevron-down</v-icon>
           </div>
 
           <v-card
-            v-if="isVisible2"
+            v-if="isTenantsVisible"
             class="!absolute top-[65px] left-0 py-5 z-10 rounded-lg"
           >
             <div
@@ -209,7 +186,7 @@
               <span v-else> 不接受寵物入住。 </span>
             </div>
 
-            <div @click="isVisible2 = false">
+            <div @click="isTenantsVisible = false">
               <TextBtnDialog :title="'關閉'" class="mx-5 flex justify-end" />
             </div>
           </v-card>
@@ -315,7 +292,7 @@ export default {
   data() {
     return {
       isVisible: false,
-      isVisible2: false,
+      isTenantsVisible: false,
 
       tenants: [
         {
@@ -362,9 +339,7 @@ export default {
         this.$store.commit('toggleEvaluationBtn', v)
       },
     },
-    dateRangeText() {
-      return this.datesQueue.join(' ~ ')
-    },
+
     allTenants: {
       get() {
         let total = this.tenants[0].quantity + this.tenants[1].quantity
@@ -458,7 +433,7 @@ export default {
       }
     },
     openDateCard() {
-      this.isVisible2 = false
+      this.isTenantsVisible = false
       this.isVisible = true
     },
   },

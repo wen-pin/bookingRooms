@@ -11,6 +11,9 @@
   "DatePicker": {
     "description": "Auto imported from components/DatePicker.vue"
   },
+  "DateRange": {
+    "description": "Auto imported from components/DateRange.vue"
+  },
   "DivideBlock": {
     "description": "Auto imported from components/DivideBlock.vue"
   },
@@ -40,9 +43,6 @@
   },
   "RoomCardBook": {
     "description": "Auto imported from components/room/CardBook.vue"
-  },
-  "RoomDates": {
-    "description": "Auto imported from components/room/Dates.vue"
   },
   "RoomEquipment": {
     "description": "Auto imported from components/room/Equipment.vue"

@@ -1,16 +1,21 @@
+import dayjs from 'dayjs'
+
 export const state = () => ({
   dates: [],
 
   // 登入對話框是否可見
   loginDialog_visible: false,
+  // 評價對話筐
   evaluationDialog_visible: false,
+  // 地圖對話筐
   googleMapsDialog_visible: false,
 })
 
 export const getters = {
+  // 排列較早日期在前
   datesQueue: (state) => {
     if (state.dates.length === 2) {
-      if (this.$dayjs(this.dates[0]).isAfter(this.$dayjs(state.dates[1]))) {
+      if (dayjs(state.dates[0]).isAfter(dayjs(state.dates[1]))) {
         let temp = state.dates[0]
         let newDates = []
         newDates[0] = state.dates[1]
@@ -26,6 +31,7 @@ export const getters = {
 }
 
 export const mutations = {
+  // 選擇日期
   fetchDates(state, v) {
     state.dates = v
   },
