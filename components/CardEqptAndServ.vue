@@ -22,6 +22,8 @@
 
 <script>
 export default {
+  name: 'cardEqptAndServ',
+
   props: {
     title: {
       type: String,

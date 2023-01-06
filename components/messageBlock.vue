@@ -17,6 +17,8 @@
 
 <script>
 export default {
+  name: 'messageBlock',
+
   props: {
     imgSrc: {
       type: String,

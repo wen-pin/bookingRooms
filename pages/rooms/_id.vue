@@ -44,6 +44,7 @@
     >
       <div class="w-[60%]">
         <RoomInfoTitle
+          id="scrollTargetId"
           :landlord="room.landlord"
           :limitPeople="room.limitPeople"
           :pattern="room.pattern"
@@ -97,7 +98,6 @@
     <RoomLocation :location="room.location" :country="room.country" />
 
     <RoomInfoLandlord
-      id="landlord"
       :landlord="room.landlord"
       :averageRating="room.averageRating"
       :allMessages="room.allMessages"
@@ -110,6 +110,8 @@
 <script>
 export default {
   name: 'singleRoom',
+  layout: 'singleRoom',
+
   data() {
     return {
       room: {
@@ -411,6 +413,7 @@ export default {
         this.$store.commit('fetchDates', v)
       },
     },
+
     // target() {
     //   return this.$refs.landlord
     // },

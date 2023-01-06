@@ -17,6 +17,12 @@
   "DivideBlock": {
     "description": "Auto imported from components/DivideBlock.vue"
   },
+  "MessageBlock": {
+    "description": "Auto imported from components/MessageBlock.vue"
+  },
+  "SubAppbar": {
+    "description": "Auto imported from components/SubAppbar.vue"
+  },
   "SvgIcon": {
     "description": "Auto imported from components/SvgIcon.vue"
   },
@@ -25,9 +31,6 @@
   },
   "TextRate": {
     "description": "Auto imported from components/TextRate.vue"
-  },
-  "MessageBlock": {
-    "description": "Auto imported from components/messageBlock.vue"
   },
   "DialogEvaluation": {
     "description": "Auto imported from components/dialog/Evaluation.vue"

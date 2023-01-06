@@ -16,6 +16,8 @@
 
 <script>
 export default {
+  name: 'textRate',
+
   props: {
     value: {
       type: Number,

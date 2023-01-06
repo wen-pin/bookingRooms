@@ -58,7 +58,7 @@
           />
 
           <div v-for="item in allMessages" :key="item.id" class="mb-10">
-            <messageBlock
+            <MessageBlock
               :imgSrc="item.imgSrc"
               :commenter="item.commenter"
               :messageTime="item.messageTime"

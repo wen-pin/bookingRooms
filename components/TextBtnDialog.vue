@@ -14,6 +14,8 @@
 
 <script>
 export default {
+  name: 'textBtnDialog',
+
   props: {
     title: {
       type: String,

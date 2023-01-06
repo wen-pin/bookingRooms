@@ -13,8 +13,9 @@ import 'virtual:windi-utilities.css'
 import '../node_modules/vuetify/dist/vuetify.css'
 
 import _6f6c098b from '../layouts/default.vue'
+import _5b6ca5b9 from '../layouts/singleRoom.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_singleRoom": sanitizeComponent(_5b6ca5b9) }
 
 export default {
   render (h, props) {

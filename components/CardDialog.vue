@@ -18,6 +18,8 @@
 
 <script>
 export default {
+  name: 'cardDialog',
+
   props: {
     dialog: {
       type: Boolean,
