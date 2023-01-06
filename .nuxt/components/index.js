@@ -10,6 +10,7 @@ export { default as DialogEvaluation } from '../../components/dialog/Evaluation.
 export { default as DialogFavorites } from '../../components/dialog/Favorites.vue'
 export { default as DialogShare } from '../../components/dialog/Share.vue'
 export { default as RoomBeds } from '../../components/room/Beds.vue'
+export { default as RoomCardBook } from '../../components/room/CardBook.vue'
 export { default as RoomDates } from '../../components/room/Dates.vue'
 export { default as RoomEquipment } from '../../components/room/Equipment.vue'
 export { default as RoomEvaluation } from '../../components/room/Evaluation.vue'

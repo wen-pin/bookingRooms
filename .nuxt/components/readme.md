@@ -18,6 +18,7 @@ You can directly use them in pages and other components without the need to impo
 - `<DialogFavorites>` | `<dialog-favorites>` (components/dialog/Favorites.vue)
 - `<DialogShare>` | `<dialog-share>` (components/dialog/Share.vue)
 - `<RoomBeds>` | `<room-beds>` (components/room/Beds.vue)
+- `<RoomCardBook>` | `<room-card-book>` (components/room/CardBook.vue)
 - `<RoomDates>` | `<room-dates>` (components/room/Dates.vue)
 - `<RoomEquipment>` | `<room-equipment>` (components/room/Equipment.vue)
 - `<RoomEvaluation>` | `<room-evaluation>` (components/room/Evaluation.vue)

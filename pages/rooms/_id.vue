@@ -100,7 +100,17 @@
 
       <!-- 要在這邊加上z-10，這樣打開的卡片才能覆蓋底層 -->
       <div class="w-[40%] flex justify-center relative z-10">
-        <v-card
+        <RoomCardBook
+          :averageRating="room.averageRating"
+          :allMessages="room.allMessages"
+          :location="room.location"
+          :price="room.price"
+          :limitPeople="room.limitPeople"
+          :isAcceptPet="room.isAcceptPet"
+          class="!sticky top-[80px] mt-5 !mb-[90px]"
+        />
+
+        <!-- <v-card
           width="80%"
           :height="datesQueue.length === 2 ? '460px' : '285px'"
           elevation="7"
@@ -394,7 +404,7 @@
             <v-icon class="mr-3">mdi-flag</v-icon>
             <TextBtnDialog :title="'檢舉此房源'" class="text-gray-600" />
           </div>
-        </v-card>
+        </v-card> -->
       </div>
     </div>
 
@@ -829,9 +839,6 @@ export default {
     },
   },
   methods: {
-    convertPercentage(value) {
-      return (value / 5) * 100
-    },
     addTenant(idx) {
       return this.tenants[idx].quantity++
     },

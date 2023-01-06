@@ -35,6 +35,9 @@
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"
   },
+  "RoomCardBook": {
+    "description": "Auto imported from components/room/CardBook.vue"
+  },
   "RoomDates": {
     "description": "Auto imported from components/room/Dates.vue"
   },
