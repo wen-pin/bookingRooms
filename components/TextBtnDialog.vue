@@ -1,6 +1,6 @@
 <template>
   <div
-    class="font-medium my-auto"
+    class="font-bold my-auto"
     :class="
       isUnderlineCursorPointer ? 'underline cursor-pointer' : 'no-underline'
     "

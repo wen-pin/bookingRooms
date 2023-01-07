@@ -98,6 +98,7 @@
     <RoomLocation :location="room.location" :country="room.country" />
 
     <RoomInfoLandlord
+      id="landlord"
       :landlord="room.landlord"
       :averageRating="room.averageRating"
       :allMessages="room.allMessages"

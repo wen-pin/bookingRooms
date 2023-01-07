@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 
 export const state = () => ({
   dates: [],
-  scrollTargetId: 'scrolling',
 
   // 登入對話框是否可見
   loginDialog_visible: false,

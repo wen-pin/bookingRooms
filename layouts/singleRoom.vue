@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <!-- <Appbar /> -->
+    <Appbar />
     <SubAppbar />
 
     <v-main>
