@@ -21,12 +21,15 @@
           <v-list-item-group>
             <v-list-item
               v-if="!$auth.loggedIn"
-              @click.stop="registerDialog = true"
+              @click.stop="registerDialog_visible = true"
             >
               <v-list-item-title>註冊</v-list-item-title>
             </v-list-item>
 
-            <v-list-item v-if="!$auth.loggedIn" @click.stop="toggleLoginBtn()">
+            <v-list-item
+              v-if="!$auth.loggedIn"
+              @click.stop="loginDialog_visible = !loginDialog_visible"
+            >
               <v-list-item-title> 登入 </v-list-item-title>
             </v-list-item>
 
@@ -37,113 +40,43 @@
         </v-list>
       </v-menu>
 
-      <v-dialog v-model="isVisible" max-width="400" :retain-focus="false">
+      <v-dialog
+        v-model="loginDialog_visible"
+        max-width="400"
+        :retain-focus="false"
+      >
         <v-card class="pa-10">
           <v-btn
             icon
             color="black"
             class="!absolute top-[10px] left-[9px]"
-            @click.stop="toggleLoginBtn()"
+            @click.stop="loginDialog_visible = !loginDialog_visible"
           >
             <v-icon>mdi-window-close</v-icon>
           </v-btn>
 
           <v-card-title class="justify-center">登入</v-card-title>
-          <v-form ref="form">
-            <v-text-field
-              v-model="loginInfo.data.username"
-              autofocus
-              clearable
-              flat
-              prepend-inner-icon="mdi-account-circle"
-              solo
-              outlined
-              label="帳號"
-              placeholder="帳號"
-              :rules="[(v) => !!v || $t(`不能為空`)]"
-            ></v-text-field>
-            <v-text-field
-              v-model="loginInfo.data.password"
-              :type="form_password_visible ? 'text' : 'password'"
-              clearable
-              flat
-              prepend-inner-icon="mdi-lock"
-              :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
-              solo
-              outlined
-              label="密碼"
-              placeholder="密碼"
-              :rules="[(v) => !!v || $t(`不能為空`)]"
-              @click:append="form_password_visible = !form_password_visible"
-            ></v-text-field>
 
-            <v-btn dark block @click="loginUser()"> 登入 </v-btn>
+          <FormLogin />
 
-            <v-btn text @click="openRegisterDialog()"> 註冊 </v-btn>
-          </v-form>
+          <v-btn text @click="openRegisterDialog()"> 註冊 </v-btn>
         </v-card>
       </v-dialog>
 
-      <v-dialog v-model="registerDialog" max-width="400">
+      <v-dialog v-model="registerDialog_visible" max-width="400">
         <v-card class="pa-10">
           <v-btn
             icon
             color="black"
             class="!absolute top-[10px] left-[9px]"
-            @click.stop="registerDialog = false"
+            @click.stop="registerDialog_visible = false"
           >
             <v-icon>mdi-window-close</v-icon>
           </v-btn>
 
           <v-card-title class="justify-center">註冊</v-card-title>
-          <v-form ref="form">
-            <v-text-field
-              v-model="registerInfo.data.username"
-              autofocus
-              clearable
-              flat
-              prepend-inner-icon="mdi-account-circle"
-              solo
-              outlined
-              label="帳號"
-              placeholder="帳號"
-              :rules="[(v) => !!v || $t(`不能為空`)]"
-            ></v-text-field>
 
-            <v-text-field
-              v-model="registerInfo.data.password"
-              clearable
-              solo
-              outlined
-              flat
-              label="密碼"
-              placeholder="密碼"
-              prepend-inner-icon="mdi-lock"
-              :type="form_password_visible ? 'text' : 'password'"
-              :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[(v) => !!v || $t(`不能為空`)]"
-              @click:append="form_password_visible = !form_password_visible"
-            ></v-text-field>
-
-            <v-text-field
-              v-model="password_confirm"
-              clearable
-              solo
-              outlined
-              prepend-inner-icon="mdi-lock"
-              :type="form_password_visible ? 'text' : 'password'"
-              :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
-              :label="$t('確認密碼')"
-              :error-messages="
-                password_confirm === registerInfo.data.password
-                  ? null
-                  : $t(`密碼不相同`)
-              "
-              @click:append="form_password_visible = !form_password_visible"
-            ></v-text-field>
-
-            <v-btn dark block @click="registerUser()"> 註冊 </v-btn>
-          </v-form>
+          <FormRegister />
         </v-card>
       </v-dialog>
     </v-container>
@@ -155,63 +88,30 @@ export default {
   name: 'appbar',
 
   data() {
-    return {
-      registerDialog: false,
-      /** 表單密碼可見 */
-      form_password_visible: false,
-      /** 表單密碼確認 */
-      password_confirm: '',
-
-      loginInfo: {
-        data: {
-          username: '',
-          password: '',
-        },
-      },
-
-      registerInfo: {
-        data: {
-          username: '',
-          password: '',
-        },
-      },
-    }
+    return {}
   },
   computed: {
-    isVisible: {
+    loginDialog_visible: {
       get() {
         return this.$store.state.loginDialog_visible
+      },
+      set(v) {
+        this.$store.commit('toggleLoginBtn', v)
+      },
+    },
+    registerDialog_visible: {
+      get() {
+        return this.$store.state.registerDialog_visible
+      },
+      set(v) {
+        this.$store.commit('toggleRegisterBtn', v)
       },
     },
   },
   methods: {
-    toggleLoginBtn() {
-      return this.$store.commit('toggleLoginBtn')
-    },
-    loginUser() {
-      let payload = this.loginInfo.data
-      this.$auth.loginWith('local', {
-        data: payload,
-      })
-
-      this.toggleLoginBtn()
-    },
-    async registerUser() {
-      try {
-        await this.$axios.$post('/api/users', this.registerInfo.data)
-
-        this.$auth.loginWith('local', {
-          data: this.registerInfo.data,
-        })
-      } catch (err) {
-        console.err(err)
-      } finally {
-        this.registerDialog = false
-      }
-    },
     openRegisterDialog() {
-      this.toggleLoginBtn()
-      this.registerDialog = true
+      this.loginDialog_visible = false
+      this.registerDialog_visible = true
     },
   },
 }

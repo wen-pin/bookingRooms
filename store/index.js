@@ -1,14 +1,46 @@
 import dayjs from 'dayjs'
 
 export const state = () => ({
+  // 日期
   dates: [],
+
+  // 房客
+  tenants: [
+    {
+      id: 1,
+      ageGroup: '大人',
+      ageRange: '13 歲以上',
+      quantity: 1,
+    },
+    {
+      id: 2,
+      ageGroup: '兒童',
+      ageRange: '2 - 12歲',
+      quantity: 0,
+    },
+    {
+      id: 3,
+      ageGroup: '嬰幼兒',
+      ageRange: '2 歲以下',
+      quantity: 0,
+    },
+    {
+      id: 4,
+      ageGroup: '寵物',
+      ageRange: '會攜帶服務性動物嗎？',
+      quantity: 0,
+    },
+  ],
 
   // 登入對話框是否可見
   loginDialog_visible: false,
+  // 註冊對話框是否可見
+  registerDialog_visible: false,
   // 評價對話筐
   evaluationDialog_visible: false,
   // 地圖對話筐
   googleMapsDialog_visible: false,
+  tenantCard_visible: false,
 })
 
 export const getters = {
@@ -28,6 +60,18 @@ export const getters = {
       return state.dates
     }
   },
+  // 住宿日期範圍
+  dateRangeText: (state, getters) => {
+    return getters.datesQueue.join(' ~ ')
+  },
+  // 住宿天數
+  calculateDays(state, getters) {
+    return dayjs(getters.datesQueue[1]).diff(getters.datesQueue[0], 'day')
+  },
+  // 大人人數
+  allTenants(state) {
+    return state.tenants[0].quantity + state.tenants[1].quantity
+  },
 }
 
 export const mutations = {
@@ -40,6 +84,10 @@ export const mutations = {
     state.loginDialog_visible =
       typeof toggle === 'boolean' ? toggle : !state.loginDialog_visible
   },
+  toggleRegisterBtn(state, toggle) {
+    state.registerDialog_visible =
+      typeof toggle === 'boolean' ? toggle : !state.registerDialog_visible
+  },
   toggleEvaluationBtn(state, toggle) {
     state.evaluationDialog_visible =
       typeof toggle === 'boolean' ? toggle : !state.evaluationDialog_visible
@@ -47,6 +95,18 @@ export const mutations = {
   toggleGoogleMapsBtn(state, toggle) {
     state.googleMapsDialog_visible =
       typeof toggle === 'boolean' ? toggle : !state.googleMapsDialog_visible
+  },
+  toggleTenantCardBtn(state, toggle) {
+    state.tenantCard_visible =
+      typeof toggle === 'boolean' ? toggle : !state.tenantCard_visible
+  },
+  // 房客+1
+  addTenant(state, idx) {
+    state.tenants[idx].quantity++
+  },
+  // 房客-1
+  reduceTenant(state, idx) {
+    state.tenants[idx].quantity--
   },
 }
 

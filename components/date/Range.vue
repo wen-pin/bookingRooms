@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-2xl font-bold">
+    <div v-if="location" class="text-2xl font-bold">
       <div v-if="datesQueue.length == 0">選擇入住日期</div>
       <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
       <div v-else>
@@ -24,7 +24,6 @@ export default {
   props: {
     location: {
       types: Object,
-      required: true,
     },
   },
 
@@ -36,10 +35,10 @@ export default {
       return this.$store.getters.datesQueue
     },
     calculateDays() {
-      return this.$dayjs(this.datesQueue[1]).diff(this.datesQueue[0], 'day')
+      return this.$store.getters.calculateDays
     },
     dateRangeText() {
-      return this.datesQueue.join(' ~ ')
+      return this.$store.getters.dateRangeText
     },
   },
 }

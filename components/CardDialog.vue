@@ -11,6 +11,12 @@
         <v-icon>{{ icon }}</v-icon>
       </v-btn>
 
+      <v-card-title v-if="title" class="px-5">
+        <span class="text-2xl font-semibold">
+          {{ title }}
+        </span>
+      </v-card-title>
+
       <slot />
     </v-card>
   </v-dialog>
@@ -21,6 +27,10 @@ export default {
   name: 'cardDialog',
 
   props: {
+    title: {
+      types: String,
+      default: '',
+    },
     dialog: {
       type: Boolean,
       default: false,

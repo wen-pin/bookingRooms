@@ -8,14 +8,14 @@
   "CardEqptAndServ": {
     "description": "Auto imported from components/CardEqptAndServ.vue"
   },
-  "DatePicker": {
-    "description": "Auto imported from components/DatePicker.vue"
-  },
-  "DateRange": {
-    "description": "Auto imported from components/DateRange.vue"
-  },
   "DivideBlock": {
     "description": "Auto imported from components/DivideBlock.vue"
+  },
+  "FormLogin": {
+    "description": "Auto imported from components/FormLogin.vue"
+  },
+  "FormRegister": {
+    "description": "Auto imported from components/FormRegister.vue"
   },
   "MessageBlock": {
     "description": "Auto imported from components/MessageBlock.vue"
@@ -41,11 +41,29 @@
   "DialogShare": {
     "description": "Auto imported from components/dialog/Share.vue"
   },
+  "DateClearBtn": {
+    "description": "Auto imported from components/date/ClearBtn.vue"
+  },
+  "DateCloseBtn": {
+    "description": "Auto imported from components/date/CloseBtn.vue"
+  },
+  "DatePicker": {
+    "description": "Auto imported from components/date/Picker.vue"
+  },
+  "DateRange": {
+    "description": "Auto imported from components/date/Range.vue"
+  },
+  "DateRangeStyle": {
+    "description": "Auto imported from components/date/RangeStyle.vue"
+  },
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"
   },
   "RoomCardBook": {
     "description": "Auto imported from components/room/CardBook.vue"
+  },
+  "RoomCardTenant": {
+    "description": "Auto imported from components/room/CardTenant.vue"
   },
   "RoomEquipment": {
     "description": "Auto imported from components/room/Equipment.vue"

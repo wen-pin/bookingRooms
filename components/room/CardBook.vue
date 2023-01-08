@@ -23,7 +23,7 @@
         <TextRate :value="averageRating" class="text-sm" />
       </span>
 
-      <span @click="EvaluationDialog = true">
+      <span @click="evaluationDialog = true">
         <TextBtnDialog :title="`${allMessages.length}則評價`" class="text-sm" />
       </span>
     </v-card-title>
@@ -62,47 +62,15 @@
                 class="flex flex-col justify-center"
               />
 
-              <div
-                class="!max-w-[320px] flex justify-between border-gray-300 border border-solid rounded-lg cursor-pointer"
-              >
-                <div
-                  :class="
-                    datesQueue[0] == null
-                      ? 'w-[50%] px-3 py-2 border-2 border-solid border-black rounded-lg '
-                      : 'w-[50%] px-3 py-2'
-                  "
-                >
-                  <div class="font-semibold text-sm">入住</div>
-                  <div v-if="datesQueue[0] != null">
-                    {{ datesQueue[0] }}
-                  </div>
-                  <div v-else class="text-neutral-500">選取日期</div>
-                </div>
-
-                <v-divider vertical />
-
-                <div
-                  :class="
-                    datesQueue[0] != null
-                      ? 'w-[50%] py-2 pl-3 border-2 border-solid border-black rounded-lg'
-                      : 'w-[50%] py-2 pl-3'
-                  "
-                >
-                  <div class="font-semibold text-sm">退房</div>
-                  <div v-if="datesQueue[1] != null">
-                    {{ datesQueue[1] }}
-                  </div>
-                  <div v-else class="text-neutral-500">選取日期</div>
-                </div>
-              </div>
+              <DateRangeStyle />
             </div>
 
             <DatePicker />
 
-            <div class="flex justify-end mx-8" @click="dates = []">
-              <TextBtnDialog :title="'清除日期'" class="mr-5" />
+            <div class="flex justify-end mx-8">
+              <DateClearBtn />
 
-              <v-btn dark color="black" @click="isVisible = false">關閉</v-btn>
+              <DateCloseBtn :text="'關閉'" @click="isVisible = false" />
             </div>
           </div>
         </v-card>
@@ -110,23 +78,29 @@
         <div class="relative">
           <div
             class="h-[65px] flex justify-between border-gray-300 border-[1px] border-solid rounded-bl-lg rounded-br-lg px-3 cursor-pointer"
-            :class="isTenantsVisible ? 'border-black border-[2px]' : ''"
-            @click="isTenantsVisible = !isTenantsVisible"
+            :class="tenantCard_visible ? 'border-black border-[2px]' : ''"
+            @click="tenantCard_visible = !tenantCard_visible"
           >
             <div class="my-2">
               <div class="font-semibold">房客</div>
               <div class="flex">
-                <div>{{ allTenants }}</div>
+                <div>{{ allTenants }}位</div>
                 <div v-if="babyQuantity > 0">, {{ babyQuantity }}名嬰幼兒</div>
                 <div v-if="petQuantity > 0">, {{ petQuantity }}隻寵物</div>
               </div>
             </div>
 
-            <v-icon v-if="isTenantsVisible">mdi-chevron-up</v-icon>
+            <v-icon v-if="tenantCard_visible">mdi-chevron-up</v-icon>
             <v-icon v-else>mdi-chevron-down</v-icon>
           </div>
 
-          <v-card
+          <roomCardTenant
+            v-if="tenantCard_visible"
+            :limitPeople="limitPeople"
+            :isAcceptPet="isAcceptPet"
+            class="!absolute top-[65px] left-0 z-10"
+          />
+          <!-- <v-card
             v-if="isTenantsVisible"
             class="!absolute top-[65px] left-0 py-5 z-10 rounded-lg"
           >
@@ -189,7 +163,7 @@
             <div @click="isTenantsVisible = false">
               <TextBtnDialog :title="'關閉'" class="mx-5 flex justify-end" />
             </div>
-          </v-card>
+          </v-card> -->
         </div>
       </v-col>
     </v-row>
@@ -292,46 +266,19 @@ export default {
   data() {
     return {
       isVisible: false,
-      isTenantsVisible: false,
-
-      tenants: [
-        {
-          id: 1,
-          ageGroup: '大人',
-          ageRange: '13 歲以上',
-          quantity: 1,
-        },
-        {
-          id: 2,
-          ageGroup: '兒童',
-          ageRange: '2 - 12歲',
-          quantity: 0,
-        },
-        {
-          id: 3,
-          ageGroup: '嬰幼兒',
-          ageRange: '2 歲以下',
-          quantity: 0,
-        },
-        {
-          id: 4,
-          ageGroup: '寵物',
-          ageRange: '會攜帶服務性動物嗎？',
-          quantity: 0,
-        },
-      ],
     }
   },
   computed: {
-    dates: {
-      get() {
-        return this.$store.state.dates
-      },
-      set(v) {
-        this.$store.commit('fetchDates', v)
-      },
+    // 房客
+    tenants() {
+      return this.$store.state.tenants
     },
-    EvaluationDialog: {
+    // 時間排列
+    datesQueue() {
+      return this.$store.getters.datesQueue
+    },
+    // 評價對話筐是否顯示
+    evaluationDialog: {
       get() {
         return this.$store.state.evaluationDialog_visible
       },
@@ -339,25 +286,20 @@ export default {
         this.$store.commit('toggleEvaluationBtn', v)
       },
     },
-
-    allTenants: {
+    // 房客選擇卡片
+    tenantCard_visible: {
       get() {
-        let total = this.tenants[0].quantity + this.tenants[1].quantity
-
-        return total + '位'
+        return this.$store.state.tenantCard_visible
+      },
+      set(v) {
+        this.$store.commit('toggleTenantCardBtn', v)
       },
     },
-    babyQuantity: {
-      get() {
-        return this.tenants[2].quantity
-      },
-    },
-    petQuantity() {
-      return this.tenants[3].quantity
-    },
+    // 計算天數
     calculateDays() {
       return this.$dayjs(this.datesQueue[1]).diff(this.datesQueue[0], 'day')
     },
+    // 計算全部每晚房價
     calculateRentalCost() {
       let holidayOfDays = 0
       let weekdayOfDays = 0
@@ -376,64 +318,34 @@ export default {
         holidayOfDays * this.price.holiday + weekdayOfDays * this.price.weekday
       )
     },
+    // 平均每晚房價(不包含服務費)
     averageRentalCost() {
       return this.calculateRentalCost / this.calculateDays
     },
+    // 計算全部服務費
     calculateServiceCharge() {
       return this.calculateDays * this.price.serviceCharge
     },
+    // 總價
     allRentalCost() {
       return this.calculateRentalCost + this.calculateServiceCharge
     },
-    datesQueue() {
-      if (this.dates.length === 2) {
-        if (this.$dayjs(this.dates[0]).isAfter(this.$dayjs(this.dates[1]))) {
-          let temp = this.dates[0]
-          let newDates = []
-          newDates[0] = this.dates[1]
-          newDates[1] = temp
-          return newDates
-        } else {
-          return this.dates
-        }
-      } else {
-        return this.dates
-      }
+    // 大人人數
+    allTenants() {
+      return this.$store.getters.allTenants
+    },
+    // 嬰幼兒人數
+    babyQuantity() {
+      return this.$store.state.tenants[2].quantity
+    },
+    // 寵物數量
+    petQuantity() {
+      return this.$store.state.tenants[3].quantity
     },
   },
   methods: {
-    addTenant(idx) {
-      return this.tenants[idx].quantity++
-    },
-    reduceTenant(idx) {
-      return this.tenants[idx].quantity--
-    },
-    isReduceBtnDisable(idx) {
-      if (idx == 0) {
-        if (this.tenants[idx].quantity < 2) return true
-      } else if (idx != 0) {
-        if (this.tenants[idx].quantity < 1) return true
-      }
-    },
-    isAddBtnDisable(idx) {
-      if (idx === 2) {
-        if (this.tenants[idx].quantity > 4) return true
-      } else if (idx === 3) {
-        if (this.isAcceptPet) {
-          if (this.tenants[idx].quantity > 4) return true
-        } else {
-          return true
-        }
-      } else {
-        if (
-          this.tenants[0].quantity + this.tenants[1].quantity >
-          this.limitPeople - 1
-        )
-          return true
-      }
-    },
     openDateCard() {
-      this.isTenantsVisible = false
+      this.tenantCard_visible = false
       this.isVisible = true
     },
   },
