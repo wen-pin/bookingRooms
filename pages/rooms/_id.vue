@@ -46,6 +46,7 @@
         <RoomInfoTitle
           id="scrollTargetId"
           :landlord="room.landlord"
+          :rentalType="room.rentalType"
           :limitPeople="room.limitPeople"
           :pattern="room.pattern"
           :avaterSrc="room.img.avaterSrc"
@@ -118,6 +119,8 @@ export default {
       room: {
         // 房東
         landlord: 'Chiang',
+        // 房間類型
+        rentalType: '農場住宿',
         // 房間標題
         title:
           '(4-8人房)台灣最南端甜點店B&B「墾，點心背包客棧」 近墾丁最美沙灘砂島',
@@ -139,7 +142,10 @@ export default {
         price: {
           weekday: 2800,
           holiday: 3200,
+          // 服務費
           serviceCharge: 415,
+          // 清潔費
+          cleaningFee: 100,
         },
         // 房間格局
         pattern: {

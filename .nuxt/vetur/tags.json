@@ -32,15 +32,6 @@
   "TextRate": {
     "description": "Auto imported from components/TextRate.vue"
   },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
-  },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
-  },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
-  },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"
   },
@@ -86,10 +77,22 @@
   "RoomPhotos": {
     "description": "Auto imported from components/room/Photos.vue"
   },
+  "RoomPriceUntaxed": {
+    "description": "Auto imported from components/room/PriceUntaxed.vue"
+  },
   "RoomRights": {
     "description": "Auto imported from components/room/Rights.vue"
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
+  },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
   }
 }

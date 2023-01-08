@@ -2,7 +2,9 @@
   <DivideBlock>
     <div class="my-5 flex justify-between">
       <div>
-        <div class="text-2xl font-bold">{{ landlord }} 出租的農場住宿</div>
+        <div class="text-2xl font-bold">
+          {{ landlord }}出租的{{ rentalType }}
+        </div>
 
         <span>{{ limitPeople }}位 </span>
         <span>{{ pattern.bedroom }}間臥室 </span>
@@ -26,6 +28,10 @@ export default {
 
   props: {
     landlord: {
+      types: String,
+      required: true,
+    },
+    rentalType: {
       types: String,
       required: true,
     },

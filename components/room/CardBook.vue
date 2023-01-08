@@ -1,7 +1,7 @@
 <template>
   <v-card
     width="80%"
-    :height="datesQueue.length === 2 ? '460px' : '285px'"
+    :height="datesQueue.length === 2 ? '490px' : '315px'"
     elevation="7"
     class="rounded-lg"
   >
@@ -183,6 +183,8 @@
 
         <div class="flex justify-center mt-4">你暫時不會被收費</div>
 
+        <!-- <RoomPriceUntaxed /> -->
+
         <DivideBlock>
           <div class="mb-5">
             <div class="flex justify-between mt-5">
@@ -198,6 +200,14 @@
             <div class="flex justify-between mt-2">
               <TextBtnDialog :title="'服務費'" />
               {{ $n(this.calculateServiceCharge, 'currency') }}
+            </div>
+
+            <div
+              v-if="calculateCleaningFee !== 0"
+              class="flex justify-between mt-2"
+            >
+              <TextBtnDialog :title="'清潔費'" />
+              {{ $n(this.calculateCleaningFee, 'currency') }}
             </div>
           </div>
         </DivideBlock>
@@ -223,7 +233,7 @@
 
     <div
       class="flex absolute left-[50%]"
-      :class="datesQueue.length === 2 ? 'top-[500px]' : 'top-[325px]'"
+      :class="datesQueue.length === 2 ? 'top-[530px]' : 'top-[355px]'"
       style="transform: translate(-50%, -50%)"
     >
       <v-icon class="mr-3">mdi-flag</v-icon>
@@ -326,9 +336,17 @@ export default {
     calculateServiceCharge() {
       return this.calculateDays * this.price.serviceCharge
     },
+    // 計算全部清潔費
+    calculateCleaningFee() {
+      return this.calculateDays * this.price.cleaningFee
+    },
     // 總價
     allRentalCost() {
-      return this.calculateRentalCost + this.calculateServiceCharge
+      return (
+        this.calculateRentalCost +
+        this.calculateServiceCharge +
+        this.calculateCleaningFee
+      )
     },
     // 大人人數
     allTenants() {

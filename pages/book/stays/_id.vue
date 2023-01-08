@@ -112,7 +112,48 @@
         </div>
       </v-col>
       <v-col cols="6">
-        <v-card> </v-card>
+        <v-card class="rounded-lg p-5" max-width="480px">
+          <DivideBlock>
+            <div class="flex w-full mb-7">
+              <v-img
+                :src="room.img.roomSrc[1].img"
+                max-width="100px"
+                class="rounded-lg w-[30%]"
+              ></v-img>
+
+              <div class="w-[70%] px-2">
+                <div class="text-sm font-extralight">{{ room.rentalType }}</div>
+
+                <div>{{ room.title }}</div>
+
+                <div class="flex mt-3">
+                  <span>
+                    <TextRate
+                      :value="room.averageRating"
+                      :size="15"
+                      :max-width="''"
+                      class="text-sm"
+                    />
+                  </span>
+
+                  <TextBtnDialog
+                    :title="`${room.allMessages.length}則評價`"
+                    :isUnderlineCursorPointer="false"
+                    class="text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+          </DivideBlock>
+
+          <DivideBlock>
+            <div class="my-5">
+              <div class="text-xl font-semibold">價格詳情</div>
+            </div>
+          </DivideBlock>
+
+          <div class="mt-5 font-medium">總價 (TWD)</div>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -132,6 +173,8 @@ export default {
       room: {
         // 房東
         landlord: 'Chiang',
+        // 房間類型
+        rentalType: '農場住宿',
         // 房間標題
         title:
           '(4-8人房)台灣最南端甜點店B&B「墾，點心背包客棧」 近墾丁最美沙灘砂島',
