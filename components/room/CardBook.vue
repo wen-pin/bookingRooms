@@ -100,70 +100,6 @@
             :isAcceptPet="isAcceptPet"
             class="!absolute top-[65px] left-0 z-10"
           />
-          <!-- <v-card
-            v-if="isTenantsVisible"
-            class="!absolute top-[65px] left-0 py-5 z-10 rounded-lg"
-          >
-            <div
-              v-for="(tenant, idx) in tenants"
-              :key="tenant.id"
-              class="flex mx-5 mb-5"
-            >
-              <div>
-                <div class="font-semibold">{{ tenant.ageGroup }}</div>
-                <TextBtnDialog
-                  v-if="tenant.ageGroup == '寵物'"
-                  :title="tenant.ageRange"
-                  class="text-sm"
-                />
-
-                <div v-else class="text-sm">{{ tenant.ageRange }}</div>
-              </div>
-
-              <v-card-actions class="flex justify-end">
-                <v-btn
-                  :disabled="isReduceBtnDisable(idx)"
-                  icon
-                  small
-                  outlined
-                  @click="reduceTenant(idx)"
-                >
-                  <v-icon>mdi-minus</v-icon>
-                </v-btn>
-
-                <div class="mx-4">
-                  {{ tenant.quantity }}
-                </div>
-
-                <v-btn
-                  :disabled="isAddBtnDisable(idx)"
-                  icon
-                  small
-                  outlined
-                  @click="addTenant(idx)"
-                >
-                  <v-icon>mdi-plus</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </div>
-
-            <div class="mx-5 mb-8 text-xs">
-              <span v-if="limitPeople">
-                此房源最多可供
-                {{ limitPeople }}
-                人入住（不包括嬰幼兒）。
-              </span>
-              <span v-if="isAcceptPet">
-                如果會攜帶超過 2 隻寵物，請事先通知房東。
-              </span>
-
-              <span v-else> 不接受寵物入住。 </span>
-            </div>
-
-            <div @click="isTenantsVisible = false">
-              <TextBtnDialog :title="'關閉'" class="mx-5 flex justify-end" />
-            </div>
-          </v-card> -->
         </div>
       </v-col>
     </v-row>
@@ -183,34 +119,7 @@
 
         <div class="flex justify-center mt-4">你暫時不會被收費</div>
 
-        <!-- <RoomPriceUntaxed /> -->
-
-        <DivideBlock>
-          <div class="mb-5">
-            <div class="flex justify-between mt-5">
-              <TextBtnDialog
-                :title="`${$n(
-                  this.averageRentalCost,
-                  'currency',
-                )}x${calculateDays} 晚`"
-              />
-              {{ $n(this.calculateRentalCost, 'currency') }}
-            </div>
-
-            <div class="flex justify-between mt-2">
-              <TextBtnDialog :title="'服務費'" />
-              {{ $n(this.calculateServiceCharge, 'currency') }}
-            </div>
-
-            <div
-              v-if="calculateCleaningFee !== 0"
-              class="flex justify-between mt-2"
-            >
-              <TextBtnDialog :title="'清潔費'" />
-              {{ $n(this.calculateCleaningFee, 'currency') }}
-            </div>
-          </div>
-        </DivideBlock>
+        <RoomPriceUntaxed :price="price" />
 
         <div class="flex justify-between mt-5 font-semibold">
           <span>稅前總價</span>
@@ -307,7 +216,7 @@ export default {
     },
     // 計算天數
     calculateDays() {
-      return this.$dayjs(this.datesQueue[1]).diff(this.datesQueue[0], 'day')
+      return this.$store.getters.calculateDays
     },
     // 計算全部每晚房價
     calculateRentalCost() {

@@ -17,9 +17,6 @@
   "FormRegister": {
     "description": "Auto imported from components/FormRegister.vue"
   },
-  "MessageBlock": {
-    "description": "Auto imported from components/MessageBlock.vue"
-  },
   "SubAppbar": {
     "description": "Auto imported from components/SubAppbar.vue"
   },
@@ -31,6 +28,9 @@
   },
   "TextRate": {
     "description": "Auto imported from components/TextRate.vue"
+  },
+  "MessageBlock": {
+    "description": "Auto imported from components/messageBlock.vue"
   },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"
@@ -46,6 +46,15 @@
   },
   "DateRangeStyle": {
     "description": "Auto imported from components/date/RangeStyle.vue"
+  },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
   },
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"
@@ -85,14 +94,5 @@
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
-  },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
-  },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
-  },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
   }
 }

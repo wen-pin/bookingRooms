@@ -112,7 +112,7 @@
         </div>
       </v-col>
       <v-col cols="6">
-        <v-card class="rounded-lg p-5" max-width="480px">
+        <v-card class="rounded-lg p-5 mx-auto" max-width="480px">
           <DivideBlock>
             <div class="flex w-full mb-7">
               <v-img
@@ -146,13 +146,15 @@
             </div>
           </DivideBlock>
 
-          <DivideBlock>
-            <div class="my-5">
-              <div class="text-xl font-semibold">價格詳情</div>
-            </div>
-          </DivideBlock>
+          <div class="text-xl font-semibold mt-5">價格詳情</div>
 
-          <div class="mt-5 font-medium">總價 (TWD)</div>
+          <RoomPriceUntaxed :price="room.price" :isVisible="true" />
+
+          <div class="flex justify-between mt-5">
+            <div class="font-medium">總價 (TWD)</div>
+
+            <div>{{ $n(this.allRentalCost, 'currency') }}</div>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -197,6 +199,8 @@ export default {
           weekday: 2800,
           holiday: 3200,
           serviceCharge: 415,
+          cleaningFee: 100,
+          taxCharges: 660,
         },
         // 房間格局
         pattern: {
@@ -472,8 +476,58 @@ export default {
         this.$store.commit('toggleTenantCardBtn', v)
       },
     },
+    // 時間排列
+    datesQueue() {
+      return this.$store.getters.datesQueue
+    },
+    // 計算天數
     calculateDays() {
       return this.$store.getters.calculateDays
+    },
+    // 計算全部每晚房價
+    calculateRentalCost() {
+      let holidayOfDays = 0
+      let weekdayOfDays = 0
+      let firstDay = this.datesQueue[0]
+
+      for (let i = 0; i < this.calculateDays; i++) {
+        let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
+        if (week === 6) {
+          holidayOfDays++
+        } else {
+          weekdayOfDays++
+        }
+      }
+
+      return (
+        holidayOfDays * this.room.price.holiday +
+        weekdayOfDays * this.room.price.weekday
+      )
+    },
+    // 平均每晚房價(不包含服務費)
+    averageRentalCost() {
+      return this.calculateRentalCost / this.calculateDays
+    },
+    // 計算全部服務費
+    calculateServiceCharge() {
+      return this.calculateDays * this.room.price.serviceCharge
+    },
+    // 計算全部清潔費
+    calculateCleaningFee() {
+      return this.calculateDays * this.room.price.cleaningFee
+    },
+    // 計算全部稅費
+    calculateTaxCharges() {
+      return this.room.price.taxCharges + (this.calculateDays - 1) * 200
+    },
+    // 稅後總價
+    allRentalCost() {
+      return (
+        this.calculateRentalCost +
+        this.calculateServiceCharge +
+        this.calculateCleaningFee +
+        this.calculateTaxCharges
+      )
     },
     allTenants() {
       return this.$store.getters.allTenants

@@ -146,6 +146,7 @@ export default {
           serviceCharge: 415,
           // 清潔費
           cleaningFee: 100,
+          taxCharges: 660,
         },
         // 房間格局
         pattern: {
