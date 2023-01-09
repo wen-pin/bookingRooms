@@ -39,4 +39,28 @@ export default {
   fill: currentColor;
   overflow: hidden;
 }
+.svg-iconvisa {
+  width: 2em;
+  height: 2em;
+  font-size: 1.2em;
+  vertical-align: -0.15em;
+  fill: #1a237e;
+  overflow: hidden;
+}
+.svg-iconsize {
+  width: 2em;
+  height: 2em;
+  font-size: 1.2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.svg-iconsize2 {
+  width: 3em;
+  height: 3em;
+  font-size: 1.2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>

@@ -98,6 +98,8 @@ export default {
         this.$auth.loginWith('local', {
           data: this.registerInfo.data,
         })
+
+        this.$router.push('/')
       } catch (err) {
         console.err(err)
       } finally {

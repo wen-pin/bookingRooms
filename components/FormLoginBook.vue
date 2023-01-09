@@ -80,7 +80,7 @@ export default {
           data: payload,
         })
 
-        this.$router.push('/')
+        this.$router.push(`/book/stays/${this.$route.params.id}`)
       } catch (err) {
         this.$error(err)
       } finally {

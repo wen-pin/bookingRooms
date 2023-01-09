@@ -2,7 +2,7 @@
   <div>
     <v-form ref="form">
       <v-text-field
-        v-model="loginInfo.data.username"
+        v-model="registerInfo.data.username"
         autofocus
         clearable
         flat
@@ -13,38 +13,58 @@
         placeholder="帳號"
         :rules="[(v) => !!v || $t(`不能為空`)]"
       ></v-text-field>
+
       <v-text-field
-        v-model="loginInfo.data.password"
-        :type="form_password_visible ? 'text' : 'password'"
+        v-model="registerInfo.data.password"
         clearable
-        flat
-        prepend-inner-icon="mdi-lock"
-        :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
         solo
         outlined
+        flat
         label="密碼"
         placeholder="密碼"
+        prepend-inner-icon="mdi-lock"
+        :type="form_password_visible ? 'text' : 'password'"
+        :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
         :rules="[(v) => !!v || $t(`不能為空`)]"
+        @click:append="form_password_visible = !form_password_visible"
+      ></v-text-field>
+
+      <v-text-field
+        v-model="password_confirm"
+        clearable
+        solo
+        outlined
+        flat
+        prepend-inner-icon="mdi-lock"
+        :type="form_password_visible ? 'text' : 'password'"
+        :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
+        :label="$t('確認密碼')"
+        :error-messages="
+          password_confirm === registerInfo.data.password
+            ? null
+            : $t(`密碼不相同`)
+        "
         @click:append="form_password_visible = !form_password_visible"
       ></v-text-field>
     </v-form>
 
-    <v-btn dark block @click="loginUser()"> 登入 </v-btn>
+    <v-btn dark block @click="registerUser()"> 註冊並登入 </v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'formLoginBook',
-
-  props: {},
+  name: 'formRegister',
 
   data() {
     return {
       /** 表單密碼可見 */
       form_password_visible: false,
 
-      loginInfo: {
+      /** 表單密碼確認 */
+      password_confirm: '',
+
+      registerInfo: {
         data: {
           username: '',
           password: '',
@@ -71,20 +91,22 @@ export default {
     },
   },
   methods: {
-    async loginUser() {
+    async registerUser() {
       try {
         this.$nuxt.$loading.start()
 
-        let payload = this.loginInfo.data
-        await this.$auth.loginWith('local', {
-          data: payload,
+        await this.$axios.$post('/api/users', this.registerInfo.data)
+
+        this.$auth.loginWith('local', {
+          data: this.registerInfo.data,
         })
 
-        this.$router.push('/')
+        this.$router.push(`/book/stays/${this.$route.params.id}`)
       } catch (err) {
-        this.$error(err)
+        console.err(err)
       } finally {
-        this.loginDialog_visible = false
+        this.registerDialog_visible = false
+
         this.$nuxt.$loading.start()
       }
     },

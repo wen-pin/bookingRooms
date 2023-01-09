@@ -113,6 +113,7 @@
           color="#EC407A"
           nuxt
           :to="`/book/stays/${this.$route.params.id}`"
+          class="rounded-lg"
         >
           <span class="text-base font-semibold"> 預定 </span>
         </v-btn>
@@ -134,6 +135,7 @@
         dark
         block
         color="#EC407A"
+        class="rounded-lg"
         @click="openDateCard()"
       >
         <span class="text-base font-semibold"> 查看可訂日期 </span>

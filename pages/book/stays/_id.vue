@@ -89,7 +89,82 @@
           </div>
         </DivideBlock>
 
-        <div class="mt-10">
+        <div v-if="!$auth.loggedIn" class="mt-8">
+          <DivideBlock>
+            <div class="mb-8">
+              <div class="flex">
+                <div class="text-2xl font-medium">付款方式：</div>
+                <div class="flex justify-end">
+                  <SvgIcon
+                    :iconClass="'visa'"
+                    :className="'visa'"
+                    class="mr-2"
+                  />
+                  <SvgIcon :iconClass="'mastercard'" class="mr-2 my-auto" />
+                  <SvgIcon
+                    :iconClass="'googlePay'"
+                    :className="'size'"
+                    class="mr-2"
+                  />
+                  <SvgIcon :iconClass="'applePay'" :className="'size'" />
+                </div>
+              </div>
+
+              <v-menu v-model="menu" offset-y>
+                <template #activator="{ on, attrs }">
+                  <v-btn
+                    height="70px"
+                    block
+                    outlined
+                    v-bind="attrs"
+                    v-on="on"
+                    class="rounded-lg mt-6"
+                  >
+                    <SvgIcon
+                      :iconClass="'visaOutlined'"
+                      :className="'size2'"
+                      class="mr-5"
+                    />
+                    <div>**** 4005</div>
+
+                    <v-spacer />
+                    <v-icon v-if="menu">mdi-chevron-up</v-icon>
+                    <v-icon v-else>mdi-chevron-down</v-icon>
+                  </v-btn>
+                </template>
+
+                <v-list>
+                  <v-list-item v-for="(item, index) in 3" :key="index">
+                    <v-list-item-title>{{ item }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+
+              <TextBtnDialog :title="'輸入優惠券代碼'" class="mt-5" />
+            </div>
+          </DivideBlock>
+
+          <DivideBlock>
+            <div class="my-8">
+              <div class="text-2xl font-medium">退訂政策</div>
+              <div class="flex mt-5">
+                <div>這筆預訂不可退款。</div>
+                <TextBtnDialog :title="'了解詳情'" />
+              </div>
+            </div>
+          </DivideBlock>
+
+          <div class="mt-8">
+            點選以下按鈕即表示本人同意房東的《房屋守則》、房客基本守則、《重新預訂和退款政策》，且允許
+            Airbnb 在我應負責賠償損壞時，可以向我的付款方式扣款。
+          </div>
+
+          <v-btn height="50px" dark color="#EC407A" class="rounded-lg">
+            確認並付款
+          </v-btn>
+        </div>
+
+        <div v-else class="mt-10">
           <div class="text-2xl font-medium">登入或註冊即可預訂</div>
 
           <v-tabs v-model="tab" fixed-tabs>
@@ -102,7 +177,7 @@
 
           <v-tabs-items v-model="tab" class="mt-5">
             <v-tab-item>
-              <FormLogin />
+              <FormLoginBook />
             </v-tab-item>
 
             <v-tab-item>
@@ -112,7 +187,7 @@
         </div>
       </v-col>
       <v-col cols="6">
-        <v-card class="rounded-lg p-5 mx-auto" max-width="480px">
+        <v-card outlined class="rounded-lg p-5 mx-auto" max-width="480px">
           <DivideBlock>
             <div class="flex w-full mb-7">
               <v-img
@@ -169,6 +244,7 @@ export default {
     return {
       editDialog: false,
       tab: null,
+      menu: false,
 
       items: ['登入', '註冊'],
 
