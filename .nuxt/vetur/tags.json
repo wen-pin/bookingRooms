@@ -23,9 +23,6 @@
   "FormRegisterBook": {
     "description": "Auto imported from components/FormRegisterBook.vue"
   },
-  "MessageBlock": {
-    "description": "Auto imported from components/MessageBlock.vue"
-  },
   "SubAppbar": {
     "description": "Auto imported from components/SubAppbar.vue"
   },
@@ -37,6 +34,9 @@
   },
   "TextRate": {
     "description": "Auto imported from components/TextRate.vue"
+  },
+  "MessageBlock": {
+    "description": "Auto imported from components/messageBlock.vue"
   },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"

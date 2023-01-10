@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="!max-w-[1280px]">
     <div class="flex my-10">
       <v-btn icon class="mr-6" @click="$router.go(-1)">
         <v-icon> mdi-less-than </v-icon>
@@ -7,7 +7,7 @@
       <div class="text-4xl font-semibold">申請預訂</div>
     </div>
 
-    <v-row>
+    <v-row class="px-[80px]">
       <v-col cols="6">
         <DivideBlock>
           <div class="mb-10">
@@ -110,37 +110,50 @@
                 </div>
               </div>
 
-              <v-menu v-model="menu" offset-y>
-                <template #activator="{ on, attrs }">
-                  <v-btn
-                    height="70px"
-                    block
-                    outlined
-                    v-bind="attrs"
-                    v-on="on"
-                    class="rounded-lg mt-6"
-                  >
-                    <SvgIcon
-                      :iconClass="'visaOutlined'"
-                      :className="'size2'"
-                      class="mr-5"
-                    />
-                    <div>**** 4005</div>
-
-                    <v-spacer />
-                    <v-icon v-if="menu">mdi-chevron-up</v-icon>
-                    <v-icon v-else>mdi-chevron-down</v-icon>
-                  </v-btn>
+              <v-select
+                v-model="select"
+                label="請選擇付款方式"
+                :items="payItems"
+                item-text="title"
+                item-value="iconClass"
+                return-object
+                :menu-props="{ bottom: true, offsetY: true }"
+                outlined
+                class="rounded-lg"
+              >
+                <template #selection="{ item }">
+                  <SvgIcon
+                    :iconClass="item.iconClass"
+                    :className="item.className"
+                    class="mr-5"
+                  />
+                  <div>{{ item.title }}</div>
                 </template>
+              </v-select>
 
-                <v-list>
-                  <v-list-item v-for="(item, index) in 3" :key="index">
-                    <v-list-item-title>{{ item }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
+              <TextBtnDialog
+                :title="'輸入優惠券代碼'"
+                class="mt-5"
+                @click="couponsDialog = !couponsDialog"
+              />
 
-              <TextBtnDialog :title="'輸入優惠券代碼'" class="mt-5" />
+              <CardDialog :dialog="couponsDialog" @update="updateCouponsDialog">
+                <div class="text-center text-xl font-medium">優惠券</div>
+
+                <div class="font-medium my-5">新增優惠券</div>
+
+                <v-text-field
+                  color="#000"
+                  outlined
+                  autofocus
+                  label="優惠券代碼"
+                  class="rounded-lg"
+                >
+                  <template #append>
+                    <TextBtnDialog :title="'新增'" />
+                  </template>
+                </v-text-field>
+              </CardDialog>
             </div>
           </DivideBlock>
 
@@ -154,13 +167,19 @@
             </div>
           </DivideBlock>
 
-          <div class="mt-8">
+          <div class="my-8 text-xs">
             點選以下按鈕即表示本人同意房東的《房屋守則》、房客基本守則、《重新預訂和退款政策》，且允許
             Airbnb 在我應負責賠償損壞時，可以向我的付款方式扣款。
           </div>
 
-          <v-btn height="50px" dark color="#EC407A" class="rounded-lg">
-            確認並付款
+          <v-btn
+            width="150px"
+            height="50px"
+            dark
+            color="#EC407A"
+            class="rounded-lg"
+          >
+            <span class="text-lg"> 確認並付款 </span>
           </v-btn>
         </div>
 
@@ -186,51 +205,56 @@
           </v-tabs-items>
         </div>
       </v-col>
+
       <v-col cols="6">
-        <v-card outlined class="rounded-lg p-5 mx-auto" max-width="480px">
-          <DivideBlock>
-            <div class="flex w-full mb-7">
-              <v-img
-                :src="room.img.roomSrc[1].img"
-                max-width="100px"
-                class="rounded-lg w-[30%]"
-              ></v-img>
+        <div class="flex justify-end">
+          <v-card outlined class="rounded-lg p-6" max-width="480px">
+            <DivideBlock>
+              <div class="flex w-full mb-7">
+                <v-img
+                  :src="room.img.roomSrc[1].img"
+                  max-width="100px"
+                  class="rounded-lg w-[30%]"
+                ></v-img>
 
-              <div class="w-[70%] px-2">
-                <div class="text-sm font-extralight">{{ room.rentalType }}</div>
+                <div class="w-[70%] px-2">
+                  <div class="text-sm font-extralight">
+                    {{ room.rentalType }}
+                  </div>
 
-                <div>{{ room.title }}</div>
+                  <div>{{ room.title }}</div>
 
-                <div class="flex mt-3">
-                  <span>
-                    <TextRate
-                      :value="room.averageRating"
-                      :size="15"
-                      :max-width="''"
+                  <div class="flex mt-3">
+                    <span>
+                      <TextRate
+                        :value="room.averageRating"
+                        :size="15"
+                        :max-width="''"
+                        class="text-sm"
+                      />
+                    </span>
+
+                    <TextBtnDialog
+                      :title="`${room.allMessages.length}則評價`"
+                      :isUnderlineCursorPointer="false"
                       class="text-sm"
                     />
-                  </span>
-
-                  <TextBtnDialog
-                    :title="`${room.allMessages.length}則評價`"
-                    :isUnderlineCursorPointer="false"
-                    class="text-sm"
-                  />
+                  </div>
                 </div>
               </div>
+            </DivideBlock>
+
+            <div class="text-xl font-semibold mt-5">價格詳情</div>
+
+            <RoomPriceUntaxed :price="room.price" :isVisible="true" />
+
+            <div class="flex justify-between mt-5">
+              <div class="font-medium">總價 (TWD)</div>
+
+              <div>{{ $n(this.allRentalCost, 'currency') }}</div>
             </div>
-          </DivideBlock>
-
-          <div class="text-xl font-semibold mt-5">價格詳情</div>
-
-          <RoomPriceUntaxed :price="room.price" :isVisible="true" />
-
-          <div class="flex justify-between mt-5">
-            <div class="font-medium">總價 (TWD)</div>
-
-            <div>{{ $n(this.allRentalCost, 'currency') }}</div>
-          </div>
-        </v-card>
+          </v-card>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -243,10 +267,30 @@ export default {
   data() {
     return {
       editDialog: false,
-      tab: null,
-      menu: false,
+      couponsDialog: false,
 
+      tab: null,
       items: ['登入', '註冊'],
+
+      select: [
+        {
+          iconClass: 'visaOutlined',
+          className: 'size',
+          title: '**** 4005',
+        },
+      ],
+      payItems: [
+        {
+          iconClass: 'visaOutlined',
+          className: 'size',
+          title: '**** 4005',
+        },
+        {
+          iconClass: 'googlePayOutlined',
+          className: 'size',
+          title: 'Google Pay',
+        },
+      ],
 
       room: {
         // 房東
@@ -618,6 +662,9 @@ export default {
   methods: {
     updateEditDialog() {
       this.editDialog = false
+    },
+    updateCouponsDialog(val) {
+      this.couponsDialog = val
     },
     updateTenantCard_visible() {
       this.tenantCard_visible = false
