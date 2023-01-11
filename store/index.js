@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 export const state = () => ({
   // 日期
   dates: [],
+  googleMaps_visible: false,
 
   // 房客
   tenants: [
