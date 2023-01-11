@@ -9,193 +9,15 @@
 
     <v-row class="px-[80px]">
       <v-col cols="6">
-        <DivideBlock>
-          <div class="mb-10">
-            <div class="text-2xl font-medium">你的旅程</div>
-
-            <div class="mt-5">
-              <div class="flex justify-between">
-                <div>
-                  <div class="text-xl font-medium">日期</div>
-                  <DateRange class="mt-2" />
-                </div>
-
-                <TextBtnDialog
-                  :title="'編輯'"
-                  class="text-xl"
-                  @click="editDialog = !editDialog"
-                />
-              </div>
-
-              <CardDialog :dialog="editDialog" @update="updateEditDialog()">
-                <div class="flex justify-between items-center px-7">
-                  <div class="flex flex-col justify-center text-2xl font-bold">
-                    {{ calculateDays }} 晚
-                    <DateRange />
-                  </div>
-
-                  <DateRangeStyle />
-                </div>
-
-                <DatePicker />
-
-                <div class="flex justify-end mx-8 mb-10">
-                  <DateClearBtn />
-
-                  <DateCloseBtn :text="'關閉'" @click="editDialog = false" />
-                </div>
-              </CardDialog>
-            </div>
-
-            <div class="mt-5">
-              <div class="flex justify-between">
-                <div>
-                  <div class="text-xl font-medium">房客人數</div>
-                  <div class="mt-2">
-                    <div class="font-semibold">房客</div>
-                    <div class="flex">
-                      <div>{{ allTenants }}位</div>
-                      <div v-if="babyQuantity > 0">
-                        , {{ babyQuantity }}名嬰幼兒
-                      </div>
-                      <div v-if="petQuantity > 0">
-                        , {{ petQuantity }}隻寵物
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <TextBtnDialog
-                  :title="'編輯'"
-                  class="text-xl"
-                  @click="tenantCard_visible = !tenantCard_visible"
-                />
-
-                <CardDialog
-                  :dialog="tenantCard_visible"
-                  :title="'房客人數'"
-                  @update="updateTenantCard_visible"
-                >
-                  <div>
-                    <RoomCardTenant
-                      :limitPeople="room.limitPeople"
-                      :isAcceptPet="room.isAcceptPet"
-                      :elevation="0"
-                    />
-                  </div>
-                </CardDialog>
-              </div>
-            </div>
-          </div>
-        </DivideBlock>
+        <BookTrip
+          :limitPeople="room.limitPeople"
+          :isAcceptPet="room.isAcceptPet"
+        />
 
         <div v-if="!$auth.loggedIn" class="mt-8">
-          <DivideBlock>
-            <div class="mb-8">
-              <div class="flex">
-                <div class="text-2xl font-medium">付款方式：</div>
-                <div class="flex justify-end">
-                  <SvgIcon
-                    :iconClass="'visa'"
-                    :className="'visa'"
-                    class="mr-2"
-                  />
-                  <SvgIcon :iconClass="'mastercard'" class="mr-2 my-auto" />
-                  <SvgIcon
-                    :iconClass="'googlePay'"
-                    :className="'size'"
-                    class="mr-2"
-                  />
-                  <SvgIcon :iconClass="'applePay'" :className="'size'" />
-                </div>
-              </div>
+          <BookPayment />
 
-              <v-select
-                v-model="select"
-                label="請選擇付款方式"
-                :items="payItems"
-                item-text="title"
-                item-value="iconClass"
-                return-object
-                :menu-props="{ bottom: true, offsetY: true }"
-                outlined
-                class="rounded-lg"
-              >
-                <template #selection="{ item }">
-                  <SvgIcon
-                    :iconClass="item.iconClass"
-                    :className="item.className"
-                    class="mr-5"
-                  />
-                  <div>{{ item.title }}</div>
-                </template>
-              </v-select>
-
-              <TextBtnDialog
-                :title="'輸入優惠券代碼'"
-                class="mt-5 w-[115px]"
-                @click="couponsDialog = !couponsDialog"
-              />
-
-              <CardDialog :dialog="couponsDialog" @update="updateCouponsDialog">
-                <div class="text-center text-xl font-medium">優惠券</div>
-
-                <div class="font-medium my-5">新增優惠券</div>
-
-                <v-text-field
-                  color="#000"
-                  outlined
-                  autofocus
-                  label="優惠券代碼"
-                  class="rounded-lg"
-                >
-                  <template #append>
-                    <TextBtnDialog :title="'新增'" />
-                  </template>
-                </v-text-field>
-              </CardDialog>
-            </div>
-          </DivideBlock>
-
-          <DivideBlock>
-            <div class="my-8">
-              <div class="text-2xl font-medium">退訂政策</div>
-              <div class="flex mt-5">
-                <div>這筆預訂不可退款。</div>
-                <TextBtnDialog
-                  :title="'了解詳情'"
-                  @click="unsubscribeDialog = !unsubscribeDialog"
-                />
-              </div>
-            </div>
-
-            <CardDialog
-              :dialog="unsubscribeDialog"
-              :title="'《退訂政策》'"
-              @update="updateUnsubscribeDialog"
-            >
-              <div class="px-5 mt-8 mb-[80px]">
-                <div class="text-xl font-medium">取消截止時間</div>
-
-                <DivideBlock>
-                  <div class="flex mt-8 mb-5">
-                    <div class="mr-[80px]">
-                      <div class="font-medium">{{ datesQueue[0] }}</div>
-                      <div class="text-sm">下午4:00</div>
-                      <div class="text-sm">（入住）</div>
-                    </div>
-                    <div>無法退款</div>
-                  </div>
-                </DivideBlock>
-
-                <TextBtnDialog
-                  :title="'了解更多有關《退訂政策》的事宜'"
-                  class="mt-5 mb-[30px]"
-                >
-                </TextBtnDialog>
-              </div>
-            </CardDialog>
-          </DivideBlock>
+          <BookUnsubscribe />
 
           <div class="my-8 text-xs">
             點選以下按鈕即表示本人同意房東的《房屋守則》、房客基本守則、《重新預訂和退款政策》，且允許
@@ -238,52 +60,14 @@
 
       <v-col cols="6">
         <div class="flex justify-end">
-          <v-card outlined class="rounded-lg p-6" max-width="480px">
-            <DivideBlock>
-              <div class="flex w-full mb-7">
-                <v-img
-                  :src="room.img.roomSrc[1].img"
-                  max-width="100px"
-                  class="rounded-lg w-[30%]"
-                ></v-img>
-
-                <div class="w-[70%] px-2">
-                  <div class="text-sm font-extralight">
-                    {{ room.rentalType }}
-                  </div>
-
-                  <div>{{ room.title }}</div>
-
-                  <div class="flex mt-3">
-                    <span>
-                      <TextRate
-                        :value="room.averageRating"
-                        :size="15"
-                        :max-width="''"
-                        class="text-sm"
-                      />
-                    </span>
-
-                    <TextBtnDialog
-                      :title="`${room.allMessages.length}則評價`"
-                      :isUnderlineCursorPointer="false"
-                      class="text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-            </DivideBlock>
-
-            <div class="text-xl font-semibold mt-5">價格詳情</div>
-
-            <RoomPriceUntaxed :price="room.price" :isVisible="true" />
-
-            <div class="flex justify-between mt-5">
-              <div class="font-medium">總價 (TWD)</div>
-
-              <div>{{ $n(this.allRentalCost, 'currency') }}</div>
-            </div>
-          </v-card>
+          <BookCardPrice
+            :roomSrc="room.img.roomSrc"
+            :rentalType="room.rentalType"
+            :title="room.title"
+            :averageRating="room.averageRating"
+            :allMessages="room.allMessages"
+            :price="room.price"
+          />
         </div>
       </v-col>
     </v-row>
@@ -296,32 +80,8 @@ export default {
 
   data() {
     return {
-      editDialog: false,
-      couponsDialog: false,
-      unsubscribeDialog: false,
-
       tab: null,
       items: ['登入', '註冊'],
-
-      select: [
-        {
-          iconClass: 'visaOutlined',
-          className: 'size',
-          title: '**** 4005',
-        },
-      ],
-      payItems: [
-        {
-          iconClass: 'visaOutlined',
-          className: 'size',
-          title: '**** 4005',
-        },
-        {
-          iconClass: 'googlePayOutlined',
-          className: 'size',
-          title: 'Google Pay',
-        },
-      ],
 
       room: {
         // 房東
@@ -616,93 +376,6 @@ export default {
         ],
       },
     }
-  },
-  computed: {
-    // 房客選擇卡片
-    tenantCard_visible: {
-      get() {
-        return this.$store.state.tenantCard_visible
-      },
-      set(v) {
-        this.$store.commit('toggleTenantCardBtn', v)
-      },
-    },
-    // 時間排列
-    datesQueue() {
-      return this.$store.getters.datesQueue
-    },
-    // 計算天數
-    calculateDays() {
-      return this.$store.getters.calculateDays
-    },
-    // 計算全部每晚房價
-    calculateRentalCost() {
-      let holidayOfDays = 0
-      let weekdayOfDays = 0
-      let firstDay = this.datesQueue[0]
-
-      for (let i = 0; i < this.calculateDays; i++) {
-        let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
-        if (week === 6) {
-          holidayOfDays++
-        } else {
-          weekdayOfDays++
-        }
-      }
-
-      return (
-        holidayOfDays * this.room.price.holiday +
-        weekdayOfDays * this.room.price.weekday
-      )
-    },
-    // 平均每晚房價(不包含服務費)
-    averageRentalCost() {
-      return this.calculateRentalCost / this.calculateDays
-    },
-    // 計算全部服務費
-    calculateServiceCharge() {
-      return this.calculateDays * this.room.price.serviceCharge
-    },
-    // 計算全部清潔費
-    calculateCleaningFee() {
-      return this.calculateDays * this.room.price.cleaningFee
-    },
-    // 計算全部稅費
-    calculateTaxCharges() {
-      return this.room.price.taxCharges + (this.calculateDays - 1) * 200
-    },
-    // 稅後總價
-    allRentalCost() {
-      return (
-        this.calculateRentalCost +
-        this.calculateServiceCharge +
-        this.calculateCleaningFee +
-        this.calculateTaxCharges
-      )
-    },
-    allTenants() {
-      return this.$store.getters.allTenants
-    },
-    babyQuantity() {
-      return this.$store.state.tenants[2].quantity
-    },
-    petQuantity() {
-      return this.$store.state.tenants[3].quantity
-    },
-  },
-  methods: {
-    updateEditDialog() {
-      this.editDialog = false
-    },
-    updateCouponsDialog(val) {
-      this.couponsDialog = val
-    },
-    updateUnsubscribeDialog(val) {
-      this.unsubscribeDialog = val
-    },
-    updateTenantCard_visible() {
-      this.tenantCard_visible = false
-    },
   },
 }
 </script>

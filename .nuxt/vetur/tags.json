@@ -23,9 +23,6 @@
   "FormRegisterBook": {
     "description": "Auto imported from components/FormRegisterBook.vue"
   },
-  "MessageBlock": {
-    "description": "Auto imported from components/MessageBlock.vue"
-  },
   "SubAppbar": {
     "description": "Auto imported from components/SubAppbar.vue"
   },
@@ -38,14 +35,20 @@
   "TextRate": {
     "description": "Auto imported from components/TextRate.vue"
   },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
+  "MessageBlock": {
+    "description": "Auto imported from components/messageBlock.vue"
   },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
+  "BookCardPrice": {
+    "description": "Auto imported from components/book/CardPrice.vue"
   },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
+  "BookPayment": {
+    "description": "Auto imported from components/book/Payment.vue"
+  },
+  "BookTrip": {
+    "description": "Auto imported from components/book/Trip.vue"
+  },
+  "BookUnsubscribe": {
+    "description": "Auto imported from components/book/Unsubscribe.vue"
   },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"
@@ -100,5 +103,14 @@
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
+  },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
   }
 }
