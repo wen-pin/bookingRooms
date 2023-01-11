@@ -31,7 +31,7 @@
             color="#EC407A"
             class="rounded-lg"
           >
-            <span class="text-lg"> 確認並付款 </span>
+            <span class="text-lg" @click="payment()"> 確認並付款 </span>
           </v-btn>
         </div>
 
@@ -376,6 +376,12 @@ export default {
         ],
       },
     }
+  },
+  methods: {
+    payment() {
+      // 撈api
+      this.$router.push('/book/sucess')
+    },
   },
 }
 </script>
