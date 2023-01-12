@@ -13,12 +13,15 @@
 
       <v-select
         v-model="select"
-        label="請選擇付款方式"
         :items="payItems"
+        :menu-props="{ bottom: true, offsetY: true }"
+        :rules="[(v) => !!v.title || $t(`不能為空`)]"
+        label="請選擇付款方式"
+        placeholder="請選擇付款方式"
+        autofocus
         item-text="title"
         item-value="iconClass"
         return-object
-        :menu-props="{ bottom: true, offsetY: true }"
         outlined
         class="rounded-lg"
       >
@@ -69,13 +72,6 @@ export default {
     return {
       couponsDialog: false,
 
-      select: [
-        {
-          iconClass: 'visaOutlined',
-          className: 'size',
-          title: '**** 4005',
-        },
-      ],
       payItems: [
         {
           iconClass: 'visaOutlined',
@@ -90,7 +86,16 @@ export default {
       ],
     }
   },
-  computed: {},
+  computed: {
+    select: {
+      get() {
+        return this.$store.state.select
+      },
+      set(v) {
+        return this.$store.commit('selectPayment', v)
+      },
+    },
+  },
   methods: {
     updateCouponsDialog(val) {
       this.couponsDialog = val

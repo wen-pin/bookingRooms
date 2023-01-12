@@ -7,13 +7,6 @@
     "_name": "_4108970a"
   },
   {
-    "name": "book-sucess",
-    "path": "/book/sucess",
-    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/book/sucess.vue",
-    "chunkName": "pages/book/sucess",
-    "_name": "_ff0202c8"
-  },
-  {
     "name": "book-stays-id",
     "path": "/book/stays/:id?",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/book/stays/_id.vue",

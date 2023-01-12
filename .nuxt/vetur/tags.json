@@ -65,6 +65,15 @@
   "DateRangeStyle": {
     "description": "Auto imported from components/date/RangeStyle.vue"
   },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
+  },
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"
   },
@@ -103,14 +112,5 @@
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
-  },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
-  },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
-  },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
   }
 }

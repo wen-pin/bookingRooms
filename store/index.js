@@ -3,7 +3,8 @@ import dayjs from 'dayjs'
 export const state = () => ({
   // 日期
   dates: [],
-  googleMaps_visible: false,
+  // 選擇的付款方式
+  select: {},
 
   // 房客
   tenants: [
@@ -41,7 +42,10 @@ export const state = () => ({
   evaluationDialog_visible: false,
   // 地圖對話筐
   googleMapsDialog_visible: false,
+  // 房客卡片是否可見
   tenantCard_visible: false,
+  // 是否啟用全站的google地圖
+  googleMaps_visible: false,
 })
 
 export const getters = {
@@ -108,6 +112,10 @@ export const mutations = {
   // 房客-1
   reduceTenant(state, idx) {
     state.tenants[idx].quantity--
+  },
+  // 選擇付款方式
+  selectPayment(state, v) {
+    state.select = v
   },
 }
 

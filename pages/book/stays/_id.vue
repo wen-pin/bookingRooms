@@ -14,7 +14,7 @@
           :isAcceptPet="room.isAcceptPet"
         />
 
-        <div v-if="!$auth.loggedIn" class="mt-8">
+        <div v-if="$auth.loggedIn" class="mt-8">
           <BookPayment />
 
           <BookUnsubscribe />
@@ -25,14 +25,53 @@
           </div>
 
           <v-btn
+            :disabled="this.select.title === undefined"
             width="150px"
             height="50px"
-            dark
             color="#EC407A"
             class="rounded-lg"
           >
-            <span class="text-lg" @click="payment()"> 確認並付款 </span>
+            <span class="text-lg text-white" @click="payment()">
+              {{ $t('確認並付款') }}
+            </span>
           </v-btn>
+
+          <v-dialog v-model="successDialog" width="450" persistent>
+            <v-card height="500px" class="p-5">
+              <div class="flex flex-col items-center">
+                <SvgIcon
+                  :iconClass="'success'"
+                  :className="'success'"
+                  class="my-10"
+                />
+
+                <div class="text-3xl">預訂完成</div>
+
+                <v-btn
+                  color="#0288D1"
+                  width="300px"
+                  height="50px"
+                  dark
+                  depressed
+                  class="mt-[100px]"
+                >
+                  查看訂單詳情
+                </v-btn>
+
+                <v-btn
+                  width="300px"
+                  height="50px"
+                  dark
+                  depressed
+                  nuxt
+                  to="/"
+                  class="mt-5"
+                >
+                  回首頁
+                </v-btn>
+              </div>
+            </v-card>
+          </v-dialog>
         </div>
 
         <div v-else class="mt-10">
@@ -52,7 +91,7 @@
             </v-tab-item>
 
             <v-tab-item>
-              <FormRegister />
+              <FormRegisterBook />
             </v-tab-item>
           </v-tabs-items>
         </div>
@@ -81,6 +120,7 @@ export default {
   data() {
     return {
       tab: null,
+      successDialog: false,
       items: ['登入', '註冊'],
 
       room: {
@@ -377,10 +417,30 @@ export default {
       },
     }
   },
+  computed: {
+    select: {
+      get() {
+        return this.$store.state.select
+      },
+      set(v) {
+        return this.$store.commit('selectPayment', v)
+      },
+    },
+    dates: {
+      get() {
+        return this.$store.state.dates
+      },
+      set(v) {
+        return this.$store.commit('fetchDates', v)
+      },
+    },
+  },
   methods: {
     payment() {
+      this.successDialog = true
       // 撈api
-      this.$router.push('/book/sucess')
+      this.select = {}
+      this.dates = []
     },
   },
 }
