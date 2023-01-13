@@ -1,7 +1,7 @@
 <template>
   <DivideBlock>
-    <div class="my-5">
-      <div class="my-1">
+    <div class="my-8">
+      <div class="mb-3">
         針對房東取消預訂、房源描述不實和入住困難等其他問題，我們會為每筆預訂提供免費保障。
       </div>
 

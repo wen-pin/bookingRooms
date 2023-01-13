@@ -1,6 +1,6 @@
 <template>
   <DivideBlock>
-    <div class="my-5 flex justify-between">
+    <div class="my-8 flex justify-between">
       <div>
         <div class="text-2xl font-bold">
           {{ landlord }}出租的{{ rentalType }}
