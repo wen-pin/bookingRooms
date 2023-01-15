@@ -10,7 +10,7 @@
       readonly
     />
 
-    <div class="mr-4" :class="marginTop">{{ value }}</div>
+    <div :class="margin">{{ value }}</div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
       type: String,
       default: '!max-w-[150px]',
     },
-    marginTop: {
+    margin: {
       type: String,
     },
   },

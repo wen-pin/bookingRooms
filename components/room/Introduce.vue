@@ -1,7 +1,7 @@
 <template>
   <DivideBlock>
     <div class="my-8">
-      <div class="mb-3 line-clamp-6" v-html="convertLineBreak"></div>
+      <div class="mb-3 line-clamp-6" v-html="useLineClamp"></div>
 
       <div class="!max-w-[115px] flex" @click="dialog = true">
         <TextBtnDialog :title="'顯示更多內容'" />
@@ -11,13 +11,8 @@
         </v-icon>
       </div>
 
-      {{ content }}
-
       <CardDialog :dialog="dialog" :title="'空間介紹'" @update="updateDialog">
-        <v-card-text
-          class="black--text !text-base mt-5"
-          v-html="convertLineBreak"
-        >
+        <v-card-text class="black--text !text-base mt-5" v-html="useLineClamp">
         </v-card-text>
       </CardDialog>
     </div>
@@ -39,7 +34,7 @@ export default {
     }
   },
   computed: {
-    convertLineBreak() {
+    useLineClamp() {
       let arr = this.content.split('')
       return arr
         .map((item) => {

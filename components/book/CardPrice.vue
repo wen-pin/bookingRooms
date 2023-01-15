@@ -3,7 +3,7 @@
     <DivideBlock>
       <div class="flex w-full mb-7">
         <v-img
-          :src="roomSrc[1].img"
+          :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
           max-width="100px"
           class="rounded-lg w-[30%]"
         ></v-img>
@@ -20,7 +20,7 @@
               <TextRate
                 :value="averageRating"
                 :size="15"
-                :max-width="''"
+                :margin="'mr-4'"
                 class="text-sm"
               />
             </span>
@@ -82,6 +82,9 @@ export default {
     return {}
   },
   computed: {
+    roomId() {
+      return this.$route.params.id
+    },
     // 時間排列
     datesQueue() {
       return this.$store.getters.datesQueue

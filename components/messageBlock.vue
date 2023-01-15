@@ -2,7 +2,13 @@
   <div>
     <div class="flex items-center">
       <v-avatar size="56px" class="mr-2">
-        <img alt="Avatar" :src="this.imgSrc" class="cursor-pointer" />
+        <img
+          alt="Avatar"
+          :src="
+            require(`~/assets/img/rooms/room1/commenters/${this.avaterTitle}`)
+          "
+          class="cursor-pointer"
+        />
       </v-avatar>
 
       <div>
@@ -11,7 +17,7 @@
       </div>
     </div>
 
-    <div class="mt-5">{{ message }}</div>
+    <div v-html="useLineClamp" class="mt-5"></div>
   </div>
 </template>
 
@@ -20,7 +26,7 @@ export default {
   name: 'messageBlock',
 
   props: {
-    imgSrc: {
+    avaterTitle: {
       type: String,
       required: true,
     },
@@ -36,6 +42,22 @@ export default {
     message: {
       type: String,
       required: true,
+    },
+  },
+  data() {
+    return {
+      width: '',
+      height: '',
+    }
+  },
+  computed: {
+    useLineClamp() {
+      let arr = this.message.split('')
+      return arr
+        .map((item) => {
+          return item === '\n' ? '<br />' : item
+        })
+        .join('')
     },
   },
 }

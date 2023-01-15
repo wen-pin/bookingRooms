@@ -7,7 +7,7 @@
             :value="averageRating"
             :size="25"
             :max-width="''"
-            :margin-top="'mt-[2px]'"
+            :margin="'mt-[2px] mr-4'"
             class="text-2xl"
           />
         </span>
@@ -44,11 +44,20 @@
           class="mb-10"
         >
           <messageBlock
-            :imgSrc="item.imgSrc"
+            :avaterTitle="item.avaterTitle"
             :commenter="item.commenter"
             :messageTime="item.messageTime"
             :message="item.message"
+            class="mr-[100px] line-clamp-3"
           />
+
+          <div class="!max-w-[115px] flex mt-2" @click="isVisible = true">
+            <TextBtnDialog :title="'顯示更多內容'" />
+
+            <v-icon class="cursor-pointer" small color="black">
+              mdi-greater-than
+            </v-icon>
+          </div>
         </v-col>
       </v-row>
 

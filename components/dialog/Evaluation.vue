@@ -18,7 +18,7 @@
                 :value="averageRating"
                 :size="30"
                 :max-width="''"
-                :margin-top="'mt-[2px]'"
+                :margin="'mt-[2px] mr-4'"
                 class="text-3xl"
               />
             </span>
@@ -59,7 +59,7 @@
 
           <div v-for="item in allMessages" :key="item.id" class="mb-10">
             <MessageBlock
-              :imgSrc="item.imgSrc"
+              :avaterTitle="item.avaterTitle"
               :commenter="item.commenter"
               :messageTime="item.messageTime"
               :message="item.message"

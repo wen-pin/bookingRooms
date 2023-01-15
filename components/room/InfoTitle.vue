@@ -16,7 +16,13 @@
       </div>
 
       <v-avatar size="56px" @click="goToTarget(targetElement)">
-        <img alt="Avatar" :src="avaterSrc" class="cursor-pointer" />
+        <img
+          alt="Avatar"
+          :src="
+            require(`~/assets/img/rooms/room${this.$route.params.id}/avater.jpeg`)
+          "
+          class="cursor-pointer"
+        />
       </v-avatar>
     </div>
   </DivideBlock>

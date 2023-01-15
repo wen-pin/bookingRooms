@@ -5,7 +5,9 @@
         <v-avatar size="70px" class="mr-2">
           <img
             alt="Avatar"
-            src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+            :src="
+              require(`~/assets/img/rooms/room${this.$route.params.id}/avater.jpeg`)
+            "
             class="cursor-pointer"
           />
         </v-avatar>
@@ -24,6 +26,7 @@
                 :value="averageRating"
                 :size="25"
                 :max-width="''"
+                :margin="'mr-4'"
                 class="text-lg"
               />
             </span>

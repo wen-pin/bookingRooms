@@ -1,29 +1,53 @@
 <template>
-  <div class="flex pr-8">
-    <v-img
-      :lazy-src="lazySrc"
-      :src="roomSrc[0].img"
-      class="w-[50%] mr-2 rounded-l-lg"
-    ></v-img>
-
-    <div class="w-[25%] mx-2 flex flex-col">
-      <v-img :lazy-src="lazySrc" :src="roomSrc[1].img" class="mb-2"></v-img>
-
-      <v-img :lazy-src="lazySrc" :src="roomSrc[2].img" class="mt-2"></v-img>
+  <div class="flex pr-8 h-[450px]">
+    <div class="w-[50%]">
+      <v-img
+        :lazy-src="lazySrc"
+        :src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
+        width="100%"
+        height="100%"
+        class="w-[50%] mr-2 rounded-l-lg"
+      ></v-img>
     </div>
 
-    <div class="w-[25%] ml-2 flex flex-col !relative">
-      <v-img
-        :lazy-src="lazySrc"
-        :src="roomSrc[3].img"
-        class="rounded-tr-lg mb-2"
-      ></v-img>
+    <div class="w-[25%] mx-2 pb-2 flex flex-col">
+      <div class="h-[50%]">
+        <v-img
+          :lazy-src="lazySrc"
+          :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
+          height="100%"
+          class="mb-2"
+        ></v-img>
+      </div>
 
-      <v-img
-        :lazy-src="lazySrc"
-        :src="roomSrc[4].img"
-        class="rounded-br-lg mt-2"
-      ></v-img>
+      <div class="h-[50%]">
+        <v-img
+          :lazy-src="lazySrc"
+          :src="require(`~/assets/img/rooms/room${roomId}/bg_3.jpg`)"
+          height="100%"
+          class="mt-2"
+        ></v-img>
+      </div>
+    </div>
+
+    <div class="w-[25%] ml-2 pb-2 flex flex-col !relative">
+      <div class="h-[50%]">
+        <v-img
+          :lazy-src="lazySrc"
+          :src="require(`~/assets/img/rooms/room${roomId}/bg_4.jpg`)"
+          height="100%"
+          class="rounded-tr-lg mb-2"
+        ></v-img>
+      </div>
+
+      <div class="h-[50%]">
+        <v-img
+          :lazy-src="lazySrc"
+          :src="require(`~/assets/img/rooms/room${roomId}/bg_5.jpg`)"
+          height="100%"
+          class="rounded-br-lg mt-2"
+        ></v-img>
+      </div>
 
       <v-btn
         max-width="120px"
@@ -59,8 +83,18 @@
 
           <v-card-text class="flex justify-center">
             <v-row class="max-w-[800px] mt-10">
-              <v-col v-for="item in roomSrc" :key="item.id" cols="6">
-                <v-img :src="item.img" />
+              <v-col
+                v-for="item in 13"
+                :key="item.id"
+                cols="12"
+                class="h-[450px]"
+              >
+                <v-img
+                  height="100%"
+                  :src="
+                    require(`~/assets/img/rooms/room${roomId}/bg_${item}.jpg`)
+                  "
+                />
               </v-col>
             </v-row>
           </v-card-text>
@@ -86,6 +120,11 @@ export default {
     return {
       fullscreenDialog: false,
     }
+  },
+  computed: {
+    roomId() {
+      return this.$route.params.id
+    },
   },
 }
 </script>
