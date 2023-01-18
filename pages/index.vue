@@ -646,10 +646,8 @@ export default {
     // const { data } = await $axios.get(`/articles/index?pageIndex=1\`)
     // const  data  = await $axios.$get(`/articles/index?pageIndex=1\`)
     // const  data  = await $axios.get(`/articles/index?pageIndex=1\`).data
-
     const res = await this.$axios.get('/api/rooms')
     this.rooms = res.data
-    console.log(res.data)
     // const resUsers = await this.$axios.get('/api/users')
     // this.users = resUsers.data
     // console.log(resUsers.data)

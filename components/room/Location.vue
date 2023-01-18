@@ -34,31 +34,32 @@
       <v-dialog
         v-model="isVisible"
         fullscreen
-        hide-overlay
         transition="dialog-bottom-transition"
       >
-        <v-card class="h-full relative">
-          <v-btn
-            icon
-            class="!absolute top-4 left-4"
-            @click="isVisible = !isVisible"
-          >
+        <v-card class="h-screen relative">
+          <v-btn icon class="!absolute top-4 left-4" @click="close()">
             <v-icon> mdi-less-than </v-icon>
           </v-btn>
 
           <div class="flex w-full h-full pt-[60px] px-8 pb-8">
-            <div class="w-[30%] pr-10">
+            <div class="w-[40%] pr-10">
               <div class="text-3xl font-bold mt-3 mb-6">住宿地點</div>
 
-              <div class="font-medium mb-3">周邊交通</div>
-
-              <div>
-                離最美沙灘砂島保護區約1分鐘車程
-                離台灣最南端鵝鑾鼻燈塔約1分鐘車程
-                離日出與觀星景點龍磐公園約5分鐘車程
+              <div v-if="location" class="font-medium mb-3">
+                {{ location.title }}
               </div>
 
-              <div class="!max-w-[80px] flex">
+              <div
+                v-if="location"
+                v-html="convertTobr"
+                :class="details_visible ? 'line-clamp-3' : ''"
+              ></div>
+
+              <div
+                v-if="details_visible"
+                class="!max-w-[80px] flex"
+                @click="details_visible = !details_visible"
+              >
                 <TextBtnDialog :title="'閱讀詳情'" />
 
                 <v-icon class="cursor-pointer" small color="black">
@@ -101,7 +102,9 @@ export default {
   },
 
   data() {
-    return {}
+    return {
+      details_visible: true,
+    }
   },
   computed: {
     isVisible: {
@@ -114,6 +117,20 @@ export default {
     },
     googleMaps_visible() {
       return this.$store.state.googleMaps_visible
+    },
+    convertTobr() {
+      let arr = this.location.content.split('')
+      return arr
+        .map((item) => {
+          return item === '\n' ? '<br />' : item
+        })
+        .join('')
+    },
+  },
+  methods: {
+    close() {
+      this.isVisible = !this.isVisible
+      this.details_visible = !this.details_visible
     },
   },
 }

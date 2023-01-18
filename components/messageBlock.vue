@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div v-html="useLineClamp" class="mt-5"></div>
+    <div v-html="convertTobr" class="mt-5"></div>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
     }
   },
   computed: {
-    useLineClamp() {
+    convertTobr() {
       let arr = this.message.split('')
       return arr
         .map((item) => {
