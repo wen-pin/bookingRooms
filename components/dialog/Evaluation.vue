@@ -59,9 +59,9 @@
 
           <div v-for="item in allMessages" :key="item.id" class="mb-10">
             <MessageBlock
-              :avaterTitle="item.avaterTitle"
-              :commenter="item.commenter"
-              :messageTime="item.messageTime"
+              :avaterImg="item.avaterImg"
+              :commenterName="item.commenterName"
+              :createdAt="item.createdAt"
               :message="item.message"
             />
           </div>

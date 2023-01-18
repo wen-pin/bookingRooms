@@ -11,7 +11,9 @@
 
           <v-card-text class="px-0 black--text">
             <div class="flex font-bold">
-              <div>位於{{ room.location.address }}的{{ room.rentalType }}</div>
+              <div v-if="room.location.address !== undefined">
+                位於{{ room.location.address }}的{{ room.rentalType }}
+              </div>
               <v-spacer></v-spacer>
 
               <span>

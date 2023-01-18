@@ -49,10 +49,6 @@ export default {
       types: Object,
       required: true,
     },
-    avaterSrc: {
-      types: String,
-      required: true,
-    },
     targetElement: {
       types: String,
     },
