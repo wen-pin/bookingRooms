@@ -44,9 +44,9 @@
           class="mb-10"
         >
           <messageBlock
-            :avaterTitle="item.avaterTitle"
-            :commenter="item.commenter"
-            :messageTime="item.messageTime"
+            :avaterImg="item.avaterImg"
+            :commenterName="item.commenterName"
+            :createdAt="item.createdAt"
             :message="item.message"
             class="mr-[100px] line-clamp-3"
           />

@@ -2,7 +2,7 @@
   <div class="flex pr-8 h-[450px]">
     <div class="w-[50%]">
       <v-img
-        :lazy-src="lazySrc"
+        :lazy-src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
         :src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
         width="100%"
         height="100%"
@@ -13,7 +13,7 @@
     <div class="w-[25%] mx-2 pb-2 flex flex-col">
       <div class="h-[50%]">
         <v-img
-          :lazy-src="lazySrc"
+          :lazy-src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
           :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
           height="100%"
           class="mb-2"
@@ -22,7 +22,7 @@
 
       <div class="h-[50%]">
         <v-img
-          :lazy-src="lazySrc"
+          :lazy-src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
           :src="require(`~/assets/img/rooms/room${roomId}/bg_3.jpg`)"
           height="100%"
           class="mt-2"
@@ -33,7 +33,7 @@
     <div class="w-[25%] ml-2 pb-2 flex flex-col !relative">
       <div class="h-[50%]">
         <v-img
-          :lazy-src="lazySrc"
+          :lazy-src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
           :src="require(`~/assets/img/rooms/room${roomId}/bg_4.jpg`)"
           height="100%"
           class="rounded-tr-lg mb-2"
@@ -42,7 +42,7 @@
 
       <div class="h-[50%]">
         <v-img
-          :lazy-src="lazySrc"
+          :lazy-src="require(`~/assets/img/rooms/room${roomId}/bg_1.jpg`)"
           :src="require(`~/assets/img/rooms/room${roomId}/bg_5.jpg`)"
           height="100%"
           class="rounded-br-lg mt-2"
@@ -108,14 +108,6 @@
 export default {
   name: 'roomPhotos',
 
-  props: {
-    lazySrc: {
-      types: String,
-    },
-    roomSrc: {
-      types: Array,
-    },
-  },
   data() {
     return {
       fullscreenDialog: false,

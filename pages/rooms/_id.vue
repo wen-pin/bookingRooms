@@ -1,18 +1,18 @@
 <template>
   <v-container>
-    <div class="text-3xl mt-5">{{ room.title }}</div>
-    {{ room1.location }}
+    <div class="text-3xl mt-5">{{ room1.title }}</div>
+    {{ room1.location.address }}
 
     <div class="my-2 flex">
       <div class="flex">
         <span class="my-auto">
-          <TextRate :value="room.averageRating" :margin="'mr-4'" />
+          <TextRate :value="room1.averageRating" :margin="'mr-4'" />
         </span>
 
         <DialogEvaluation
-          :averageRating="room.averageRating"
-          :allMessages="room.allMessages"
-          :evaluationStandards="room.evaluationStandards"
+          :averageRating="room1.averageRating"
+          :allMessages="room1.allMessages"
+          :evaluationStandards="room1.evaluationStandards"
           class="mr-4 my-auto"
         />
 
@@ -21,8 +21,8 @@
           @click="googleMapsDialog = !googleMapsDialog"
         >
           <TextBtnDialog
-            :title="room.location.address"
-            :subTitle="room.country"
+            :title="room1.location.address"
+            :subTitle="room1.country"
           />
         </span>
 
@@ -34,11 +34,7 @@
       </div>
     </div>
 
-    <RoomPhotos
-      :lazySrc="room.img.lazySrc"
-      :roomSrc="room.img.roomSrc"
-      class="my-5"
-    />
+    <RoomPhotos class="my-5" />
 
     <div
       class="flex border-solid border-t-0 border-r-0 border-b-1 border-l-0 border-slate-200"
@@ -46,11 +42,11 @@
       <div class="w-[60%]">
         <RoomInfoTitle
           id="scrollTargetId"
-          :landlord="room.landlord"
-          :rentalType="room.rentalType"
-          :limitPeople="room.limitPeople"
-          :pattern="room.pattern"
-          :avaterSrc="room.img.avaterSrc"
+          :landlord="room1.landlord"
+          :rentalType="room1.rentalType"
+          :limitPeople="room1.limitPeople"
+          :pattern="room1.pattern"
+          :avaterSrc="room1.img.avaterSrc"
           target-element="#landlord"
         />
 
@@ -58,14 +54,14 @@
 
         <RoomIntroduce />
 
-        <RoomBeds :bedroom="room.pattern.bedroom" />
+        <RoomBeds :bedroom="room1.pattern.bedroom" />
 
         <RoomEquipment
-          :alleqptAndServices="room.alleqptAndServices"
-          :eqptAndServices="room.alleqptAndServices[0].eqptAndServices"
+          :alleqptAndServices="room1.alleqptAndServices"
+          :eqptAndServices="room1.alleqptAndServices[0].eqptAndServices"
         />
         <div class="my-10">
-          <DateRange :location="room.location" />
+          <DateRange :location="room1.location" />
 
           <v-row class="mt-10">
             <DatePicker />
@@ -80,21 +76,21 @@
       <!-- 要在這邊加上z-10，這樣打開的卡片才能覆蓋底層 -->
       <div class="w-[40%] flex justify-center relative z-10">
         <RoomCardBook
-          :averageRating="room.averageRating"
-          :allMessages="room.allMessages"
-          :location="room.location"
-          :price="room.price"
-          :limitPeople="room.limitPeople"
-          :isAcceptPet="room.isAcceptPet"
+          :averageRating="room1.averageRating"
+          :allMessages="room1.allMessages"
+          :location="room1.location"
+          :price="room1.price"
+          :limitPeople="room1.limitPeople"
+          :isAcceptPet="room1.isAcceptPet"
           class="!sticky top-[80px] mt-5 !mb-[90px]"
         />
       </div>
     </div>
 
     <RoomEvaluation
-      :averageRating="room.averageRating"
-      :allMessages="room.allMessages"
-      :evaluationStandards="room.evaluationStandards"
+      :averageRating="room1.averageRating"
+      :allMessages="room1.allMessages"
+      :evaluationStandards="room1.evaluationStandards"
     />
 
     <RoomLocation :location="room.location" :country="room.country" />

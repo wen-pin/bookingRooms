@@ -5,15 +5,15 @@
         <img
           alt="Avatar"
           :src="
-            require(`~/assets/img/rooms/room1/commenters/${this.avaterTitle}`)
+            require(`~/assets/img/rooms/room1/commenters/${this.avaterImg}`)
           "
           class="cursor-pointer"
         />
       </v-avatar>
 
       <div>
-        <span>{{ commenter }}</span>
-        <div class="text-zinc-400">{{ messageTime }}</div>
+        <span>{{ commenterName }}</span>
+        <div class="text-zinc-400">{{ createdAt }}</div>
       </div>
     </div>
 
@@ -26,16 +26,16 @@ export default {
   name: 'messageBlock',
 
   props: {
-    avaterTitle: {
+    avaterImg: {
       type: String,
       required: true,
     },
-    commenter: {
+    commenterName: {
       type: String,
       required: true,
     },
     // 之後要改type: Date()
-    messageTime: {
+    createdAt: {
       type: String,
       required: true,
     },
