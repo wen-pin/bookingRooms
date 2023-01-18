@@ -62,7 +62,7 @@
       </v-row>
 
       <v-btn outlined height="55px" @click="isVisible = true">
-        <span span class="text-lg">
+        <span v-if="allMessages.length" span class="text-lg">
           顯示全部{{ allMessages.length }}則評價
         </span>
       </v-btn>

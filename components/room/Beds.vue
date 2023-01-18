@@ -10,7 +10,7 @@
           <SvgIcon :iconClass="'doubleBed'" class="mr-2" />
         </div>
         <div>{{ $t('臥室') }}</div>
-        <div>{{ bedroom }}張 1.4 米寬雙人床</div>
+        <div v-if="pattern">{{ pattern.bedroom }}張 1.4 米寬雙人床</div>
       </v-card>
     </div>
   </DivideBlock>
@@ -21,8 +21,8 @@ export default {
   name: 'roomBeds',
 
   props: {
-    bedroom: {
-      types: Number,
+    pattern: {
+      types: Object,
       required: true,
     },
   },

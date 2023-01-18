@@ -16,6 +16,7 @@
         />
 
         <span
+          v-if="room.location"
           class="flex items-center"
           @click="googleMapsDialog = !googleMapsDialog"
         >
@@ -52,12 +53,15 @@
 
         <RoomIntroduce />
 
-        <RoomBeds :bedroom="room1.pattern.bedroom" />
+        <RoomBeds :pattern="room.pattern" />
 
-        <RoomEquipment
-          :alleqptAndServices="room.alleqptAndServices"
-          :eqptAndServices="room.alleqptAndServices[0].eqptAndServices"
-        />
+        <div v-if="room.alleqptAndServices">
+          <RoomEquipment
+            :alleqptAndServices="room.alleqptAndServices"
+            :eqptAndServices="room.alleqptAndServices[0].eqptAndServices"
+          />
+        </div>
+
         <div class="my-10">
           <DateRange :location="room.location" />
 

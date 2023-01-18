@@ -20,7 +20,7 @@
       </v-row>
 
       <v-btn outlined class="mt-10" height="55px" @click="dialog = true">
-        <span class="text-lg">
+        <span v-if="eqptAndServices.length" class="text-lg">
           顯示全部{{ eqptAndServices.length }}項設備與服務
         </span>
       </v-btn>

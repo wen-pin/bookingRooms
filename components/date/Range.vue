@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="location.address !== undefined" class="text-2xl font-bold">
+    <div v-if="location && datesQueue" class="text-2xl font-bold">
       <div v-if="datesQueue.length == 0">選擇入住日期</div>
       <div v-else-if="datesQueue.length == 1">選擇退房日期</div>
       <div v-else>

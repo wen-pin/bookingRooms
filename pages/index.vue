@@ -11,7 +11,7 @@
 
           <v-card-text class="px-0 black--text">
             <div class="flex font-bold">
-              <div v-if="room.location.address !== undefined">
+              <div v-if="room.location">
                 位於{{ room.location.address }}的{{ room.rentalType }}
               </div>
               <v-spacer></v-spacer>
@@ -20,7 +20,9 @@
                 <TextRate :value="room.averageRating" :size="14" />
               </span>
 
-              <span>({{ room.allMessages.length }})</span>
+              <span v-if="room.allMessages">
+                ({{ room.allMessages.length }})
+              </span>
             </div>
 
             <span class="line-clamp-1 w-[215px]">

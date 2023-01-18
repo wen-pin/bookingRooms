@@ -21,7 +21,6 @@ export default {
   props: {
     value: {
       type: Number,
-      required: true,
     },
     size: {
       type: Number,
