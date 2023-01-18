@@ -71,9 +71,12 @@ export default {
         }
       }
 
-      return (
-        holidayOfDays * this.price.holiday + weekdayOfDays * this.price.weekday
-      )
+      if (this.price) {
+        return (
+          holidayOfDays * this.price.holiday +
+          weekdayOfDays * this.price.weekday
+        )
+      }
     },
     // 平均每晚房價(不包含服務費)
     averageRentalCost() {
@@ -81,15 +84,21 @@ export default {
     },
     // 計算全部服務費
     calculateServiceCharge() {
-      return this.calculateDays * this.price.serviceCharge
+      if (this.price) {
+        return this.calculateDays * this.price.serviceCharge
+      }
     },
     // 計算全部清潔費
     calculateCleaningFee() {
-      return this.calculateDays * this.price.cleaningFee
+      if (this.price) {
+        return this.calculateDays * this.price.cleaningFee
+      }
     },
     // 計算全部稅費
     calculateTaxCharges() {
-      return this.price.taxCharges + (this.calculateDays - 1) * 200
+      if (this.price) {
+        return this.price.taxCharges + (this.calculateDays - 1) * 200
+      }
     },
   },
   methods: {},
