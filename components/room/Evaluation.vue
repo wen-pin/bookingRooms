@@ -12,11 +12,13 @@
           />
         </span>
 
-        <TextBtnDialog
-          :title="`${allMessages.length}則評價`"
-          :isUnderlineCursorPointer="false"
-          class="text-2xl mt-[2px]"
-        />
+        <span v-if="allMessages">
+          <TextBtnDialog
+            :title="`${allMessages.length}則評價`"
+            :isUnderlineCursorPointer="false"
+            class="text-2xl mt-[2px]"
+          />
+        </span>
       </div>
 
       <v-row class="mt-5">
@@ -62,7 +64,7 @@
       </v-row>
 
       <v-btn outlined height="55px" @click="isVisible = true">
-        <span v-if="allMessages.length" span class="text-lg">
+        <span v-if="allMessages" span class="text-lg">
           顯示全部{{ allMessages.length }}則評價
         </span>
       </v-btn>
@@ -81,7 +83,6 @@ export default {
     },
     allMessages: {
       types: Array,
-      required: true,
     },
     evaluationStandards: {
       types: Array,

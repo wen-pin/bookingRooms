@@ -25,11 +25,13 @@
               />
             </span>
 
-            <TextBtnDialog
-              :title="`${allMessages.length}則評價`"
-              :isUnderlineCursorPointer="false"
-              class="text-sm"
-            />
+            <span v-if="allMessages">
+              <TextBtnDialog
+                :title="`${allMessages.length}則評價`"
+                :isUnderlineCursorPointer="false"
+                class="text-sm"
+              />
+            </span>
           </div>
         </div>
       </div>
@@ -70,7 +72,6 @@ export default {
     },
     allMessages: {
       types: Array,
-      required: true,
     },
     price: {
       types: Object,

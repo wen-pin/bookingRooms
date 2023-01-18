@@ -6,7 +6,7 @@
     class="rounded-lg"
   >
     <v-card-title class="justify-between">
-      <div>
+      <div v-if="datesQueue">
         <div v-if="datesQueue.length === 2" class="flex items-center">
           {{ $n(this.averageRentalCost, 'currency') }}
           <div class="font-normal text-base ml-1">晚</div>
@@ -23,7 +23,7 @@
         <TextRate :value="averageRating" :margin="'mr-4'" class="text-sm" />
       </span>
 
-      <span @click="evaluationDialog = true">
+      <span v-if="allMessages" @click="evaluationDialog = true">
         <TextBtnDialog :title="`${allMessages.length}則評價`" class="text-sm" />
       </span>
     </v-card-title>

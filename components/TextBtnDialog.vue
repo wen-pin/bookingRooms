@@ -7,7 +7,7 @@
     v-on="$listeners"
   >
     <span v-if="title">
-      {{ $t(title) }}
+      {{ title }}
     </span>
     <span v-if="subTitle">、</span>
     {{ subTitle }}

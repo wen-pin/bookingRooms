@@ -31,11 +31,13 @@
               />
             </span>
 
-            <TextBtnDialog
-              :title="`${allMessages.length}則評價`"
-              :isUnderlineCursorPointer="false"
-              class="text-lg"
-            />
+            <span v-if="allMessages">
+              <TextBtnDialog
+                :title="`${allMessages.length}則評價`"
+                :isUnderlineCursorPointer="false"
+                class="text-lg"
+              />
+            </span>
 
             <v-icon color="black" class="ml-7 mr-3">mdi-shield-check</v-icon>
 
@@ -78,7 +80,6 @@ export default {
     },
     allMessages: {
       types: Array,
-      required: true,
     },
   },
 

@@ -82,9 +82,9 @@
           </div>
 
           <v-card-text class="flex justify-center">
-            <v-row class="max-w-[800px] mt-10">
+            <v-row v-if="roomQuality" class="max-w-[800px] mt-10">
               <v-col
-                v-for="item in 13"
+                v-for="item in roomQuality"
                 :key="item.id"
                 cols="12"
                 class="h-[450px]"
@@ -107,6 +107,12 @@
 <script>
 export default {
   name: 'roomPhotos',
+
+  props: {
+    roomQuality: {
+      types: Number,
+    },
+  },
 
   data() {
     return {

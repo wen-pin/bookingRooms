@@ -34,7 +34,9 @@
       </div>
     </div>
 
-    <RoomPhotos class="my-5" />
+    <div v-if="room.img">
+      <RoomPhotos :roomQuality="room.img.roomQuality" class="my-5" />
+    </div>
 
     <div
       class="flex border-solid border-t-0 border-r-0 border-b-1 border-l-0 border-slate-200"

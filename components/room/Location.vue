@@ -5,7 +5,7 @@
         {{ $t('住宿地點') }}
       </div>
 
-      <div class="my-5">
+      <div v-if="location" class="my-5">
         <TextBtnDialog
           :title="location.address"
           :subTitle="country"

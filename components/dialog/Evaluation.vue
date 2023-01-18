@@ -1,9 +1,11 @@
 <template>
   <div>
-    <TextBtnDialog
-      :title="`${allMessages.length}則評價`"
-      @click="isVisible = !isVisible"
-    />
+    <span v-if="allMessages">
+      <TextBtnDialog
+        :title="`${allMessages.length}則評價`"
+        @click="isVisible = !isVisible"
+      />
+    </span>
 
     <CardDialog
       :dialog="isVisible"
@@ -23,11 +25,13 @@
               />
             </span>
 
-            <TextBtnDialog
-              :title="`${allMessages.length}則評價`"
-              :isUnderlineCursorPointer="false"
-              class="text-3xl mt-[2px]"
-            />
+            <span v-if="allMessages">
+              <TextBtnDialog
+                :title="`${allMessages.length}則評價`"
+                :isUnderlineCursorPointer="false"
+                class="text-3xl mt-[2px]"
+              />
+            </span>
           </div>
 
           <div class="mt-[50px]">
