@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="text-3xl mt-5">{{ room.title }}</div>
-    {{ roomapi }}
+    {{ room1.location }}
 
     <div class="my-2 flex">
       <div class="flex">
@@ -114,6 +114,7 @@
 export default {
   name: 'singleRoom',
   layout: 'singleRoom',
+  auth: false,
 
   data() {
     return {
@@ -408,16 +409,14 @@ export default {
           },
         ],
       },
-      roomapi: null,
+      room1: {},
     }
   },
   async fetch() {
-    const res = await this.$axios.get('/api/rooms/', {
-      params: { id: this.$route.params.id },
-    })
-    this.roomapi = res.data
+    const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
+    this.room1 = res.data
 
-    console.log(roomapi)
+    console.log(res.data)
   },
   computed: {
     dates: {
