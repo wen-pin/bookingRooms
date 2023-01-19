@@ -125,9 +125,6 @@ export default {
   //   const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
   //   this.room = res.data
   // },
-  async fetch() {
-    this.$store.dispatch('fetchRoom', { roomId: this.$route.params.id })
-  },
   computed: {
     dates: {
       get() {
