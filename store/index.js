@@ -6,6 +6,8 @@ export const state = () => ({
   // 選擇的付款方式
   select: {},
 
+  room: {},
+
   // 房客
   tenants: [
     {
@@ -80,6 +82,9 @@ export const getters = {
 }
 
 export const mutations = {
+  fetchRoom(state, v) {
+    state.room = v
+  },
   // 選擇日期
   fetchDates(state, v) {
     state.dates = v
@@ -119,4 +124,10 @@ export const mutations = {
   },
 }
 
-export const actions = {}
+export const actions = {
+  async fetchRoom({ commit }, { roomId }) {
+    const res = await this.$axios.get(`/api/rooms/${roomId}`)
+
+    commit('fetchRoom', res.data)
+  },
+}

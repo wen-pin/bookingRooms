@@ -85,7 +85,7 @@
             <v-row v-if="roomQuality" class="max-w-[800px] mt-10">
               <v-col
                 v-for="item in roomQuality"
-                :key="item.id"
+                :key="item"
                 cols="12"
                 class="h-[450px]"
               >

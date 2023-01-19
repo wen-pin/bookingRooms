@@ -52,12 +52,14 @@ export default {
   },
   computed: {
     convertTobr() {
-      let arr = this.message.split('')
-      return arr
-        .map((item) => {
-          return item === '\n' ? '<br />' : item
-        })
-        .join('')
+      if (this.message) {
+        let arr = this.message.split('')
+        return arr
+          .map((item) => {
+            return item === '\n' ? '<br />' : item
+          })
+          .join('')
+      }
     },
   },
 }

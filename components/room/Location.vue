@@ -119,12 +119,14 @@ export default {
       return this.$store.state.googleMaps_visible
     },
     convertTobr() {
-      let arr = this.location.content.split('')
-      return arr
-        .map((item) => {
-          return item === '\n' ? '<br />' : item
-        })
-        .join('')
+      if (this.location.content) {
+        let arr = this.location.content.split('')
+        return arr
+          .map((item) => {
+            return item === '\n' ? '<br />' : item
+          })
+          .join('')
+      }
     },
   },
   methods: {
