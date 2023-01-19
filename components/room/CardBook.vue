@@ -216,54 +216,16 @@ export default {
         this.$store.commit('toggleTenantCardBtn', v)
       },
     },
-    // 計算天數
-    calculateDays() {
-      return this.$store.getters.calculateDays
-    },
-    // 計算全部每晚房價
     calculateRentalCost() {
-      let holidayOfDays = 0
-      let weekdayOfDays = 0
-      let firstDay = this.datesQueue[0]
-
-      for (let i = 0; i < this.calculateDays; i++) {
-        let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
-        if (week === 6) {
-          holidayOfDays++
-        } else {
-          weekdayOfDays++
-        }
-      }
-      if (this.price) {
-        return (
-          holidayOfDays * this.price.holiday +
-          weekdayOfDays * this.price.weekday
-        )
-      }
+      return this.$store.getters.calculateRentalCost
     },
     // 平均每晚房價(不包含服務費)
     averageRentalCost() {
-      return this.calculateRentalCost / this.calculateDays
-    },
-    // 計算全部服務費
-    calculateServiceCharge() {
-      if (this.price) {
-        return this.calculateDays * this.price.serviceCharge
-      }
-    },
-    // 計算全部清潔費
-    calculateCleaningFee() {
-      if (this.price) {
-        return this.calculateDays * this.price.cleaningFee
-      }
+      return this.$store.getters.averageRentalCost
     },
     // 總價
     allRentalCost() {
-      return (
-        this.calculateRentalCost +
-        this.calculateServiceCharge +
-        this.calculateCleaningFee
-      )
+      return this.$store.getters.allRentalCost
     },
     // 大人人數
     allTenants() {

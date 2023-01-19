@@ -410,14 +410,19 @@ export default {
       //     },
       //   ],
       // },
-      room: {},
+      // room: {},
     }
   },
-  async fetch() {
-    const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
-    this.room = res.data
-  },
+  // async fetch() {
+  //   const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
+  //   this.room = res.data
+  // },
   computed: {
+    room: {
+      get() {
+        return this.$store.state.room
+      },
+    },
     select: {
       get() {
         return this.$store.state.select
