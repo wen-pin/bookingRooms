@@ -10,6 +10,8 @@ import 'virtual:windi-components.css'
 
 import 'virtual:windi-utilities.css'
 
+import '../node_modules/vue-toastification/dist/index.css'
+
 import '../node_modules/vuetify/dist/vuetify.css'
 
 import _6f6c098b from '../layouts/default.vue'

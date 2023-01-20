@@ -38,18 +38,6 @@
   "MessageBlock": {
     "description": "Auto imported from components/messageBlock.vue"
   },
-  "BookCardPrice": {
-    "description": "Auto imported from components/book/CardPrice.vue"
-  },
-  "BookPayment": {
-    "description": "Auto imported from components/book/Payment.vue"
-  },
-  "BookTrip": {
-    "description": "Auto imported from components/book/Trip.vue"
-  },
-  "BookUnsubscribe": {
-    "description": "Auto imported from components/book/Unsubscribe.vue"
-  },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"
   },
@@ -112,5 +100,17 @@
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
+  },
+  "BookCardPrice": {
+    "description": "Auto imported from components/book/CardPrice.vue"
+  },
+  "BookPayment": {
+    "description": "Auto imported from components/book/Payment.vue"
+  },
+  "BookTrip": {
+    "description": "Auto imported from components/book/Trip.vue"
+  },
+  "BookUnsubscribe": {
+    "description": "Auto imported from components/book/Unsubscribe.vue"
   }
 }

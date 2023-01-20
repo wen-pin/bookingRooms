@@ -15,6 +15,7 @@ import { createStore } from './store.js'
 
 import nuxt_plugin_plugin_252c1bcc from 'nuxt_plugin_plugin_252c1bcc' // Source: ./components/plugin.js (mode: 'all')
 import nuxt_plugin_plugin_33899ba2 from 'nuxt_plugin_plugin_33899ba2' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_toast_b95e34de from 'nuxt_plugin_toast_b95e34de' // Source: ./toast.js (mode: 'client')
 import nuxt_plugin_dayjsplugin_61caddbb from 'nuxt_plugin_dayjsplugin_61caddbb' // Source: ./dayjs-plugin.js (mode: 'all')
 import nuxt_plugin_pluginutils_b09b14ce from 'nuxt_plugin_pluginutils_b09b14ce' // Source: ./nuxt-i18n/plugin.utils.js (mode: 'all')
 import nuxt_plugin_pluginrouting_3aec00a4 from 'nuxt_plugin_pluginrouting_3aec00a4' // Source: ./nuxt-i18n/plugin.routing.js (mode: 'all')
@@ -226,6 +227,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_plugin_33899ba2 === 'function') {
     await nuxt_plugin_plugin_33899ba2(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_toast_b95e34de === 'function') {
+    await nuxt_plugin_toast_b95e34de(app.context, inject)
   }
 
   if (typeof nuxt_plugin_dayjsplugin_61caddbb === 'function') {

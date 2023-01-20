@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form ref="form">
+    <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="registerInfo.data.username"
         autofocus
@@ -11,7 +11,7 @@
         outlined
         label="帳號"
         placeholder="帳號"
-        :rules="[(v) => !!v || $t(`不能為空`)]"
+        :rules="[(v) => !!v || $t(`帳號為必填`)]"
       ></v-text-field>
 
       <v-text-field
@@ -25,7 +25,7 @@
         prepend-inner-icon="mdi-lock"
         :type="form_password_visible ? 'text' : 'password'"
         :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[(v) => !!v || $t(`不能為空`)]"
+        :rules="[(v) => !!v || $t(`密碼為必填`)]"
         @click:append="form_password_visible = !form_password_visible"
       ></v-text-field>
 
@@ -44,6 +44,7 @@
             ? null
             : $t(`密碼不相同`)
         "
+        :rules="[(v) => !!v || $t(`確認密碼為必填`)]"
         @click:append="form_password_visible = !form_password_visible"
       ></v-text-field>
     </v-form>
@@ -60,6 +61,8 @@ export default {
     return {
       /** 表單密碼可見 */
       form_password_visible: false,
+      // 表單是否有效驗證
+      valid: true,
 
       /** 表單密碼確認 */
       password_confirm: '',
@@ -92,23 +95,32 @@ export default {
   },
   methods: {
     async registerUser() {
-      try {
-        this.$nuxt.$loading.start()
+      if (!this.valid) {
+        this.validate()
+        this.$toast.warning('帳號或密碼未填寫')
+      } else {
+        try {
+          this.$nuxt.$loading.start()
 
-        await this.$axios.$post('/api/users', this.registerInfo.data)
+          await this.$axios.$post('/api/users', this.registerInfo.data)
 
-        this.$auth.loginWith('local', {
-          data: this.registerInfo.data,
-        })
+          this.$auth.loginWith('local', {
+            data: this.registerInfo.data,
+          })
 
-        this.$router.push(`/book/stays/${this.$route.params.id}`)
-      } catch (err) {
-        console.err(err)
-      } finally {
-        this.registerDialog_visible = false
+          this.$router.push(`/book/stays/${this.$route.params.id}`)
+        } catch (err) {
+          console.err(err)
+        } finally {
+          this.registerDialog_visible = false
 
-        this.$nuxt.$loading.start()
+          this.$nuxt.$loading.finish()
+        }
       }
+    },
+    // 驗證表單是否有效
+    validate() {
+      this.$refs.form.validate()
     },
   },
 }

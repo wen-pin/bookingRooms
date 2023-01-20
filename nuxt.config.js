@@ -1,4 +1,5 @@
 const path = require('path')
+import { POSITION } from 'vue-toastification'
 
 export default {
   server: {
@@ -67,6 +68,7 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/i18n',
     '@nuxtjs/dayjs',
+    'vue-toastification/nuxt',
   ],
 
   //定義客戶端環境變量，並可使用服務端的環境變量
@@ -196,5 +198,25 @@ export default {
   vuetify: {
     treeShake: false,
     // defaultAssets: false,
+  },
+
+  // 通知吐司 https://github.com/Maronato/vue-toastification
+  toast: {
+    transition: 'Vue-Toastification__bounce',
+    maxToasts: 5,
+    newestOnTop: true,
+
+    position: POSITION.TOP_RIGHT,
+    timeout: 3000,
+    closeOnClick: false,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: true,
+    closeButton: 'button',
+    icon: true,
+    rtl: false,
   },
 }

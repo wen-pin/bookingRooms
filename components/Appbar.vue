@@ -59,7 +59,9 @@
 
           <FormLogin />
 
-          <v-btn text @click="openRegisterDialog()"> 註冊 </v-btn>
+          <v-btn text class="px-0" @click="openRegisterDialog()">
+            註冊？
+          </v-btn>
         </v-card>
       </v-dialog>
 

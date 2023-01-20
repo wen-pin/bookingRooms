@@ -28,6 +28,7 @@
     "@nuxtjs/i18n": "^7.3.0",
     "@nuxtjs/proxy": "^2.1.0",
     "svg-sprite-loader": "^6.0.11",
+    "vue-toastification": "^1.7.14",
     "vue2-google-maps": "^0.10.7",
     "vuex-persistedstate": "^4.1.0"
   }
