@@ -114,17 +114,16 @@
 export default {
   name: 'singleRoom',
   layout: 'singleRoom',
-  auth: false,
 
   data() {
     return {
-      // room: {},
+      room: {},
     }
   },
-  // async fetch() {
-  //   const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
-  //   this.room = res.data
-  // },
+  async fetch() {
+    const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
+    this.room = res.data
+  },
   computed: {
     dates: {
       get() {
@@ -134,12 +133,6 @@ export default {
         this.$store.commit('fetchDates', v)
       },
     },
-    room: {
-      get() {
-        return this.$store.state.room
-      },
-    },
-
     // target() {
     //   return this.$refs.landlord
     // },

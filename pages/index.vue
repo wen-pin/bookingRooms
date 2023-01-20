@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col v-for="room in rooms" :key="room.id" cols="3">
-        <v-card elevation="0" @click="EnterRoom(room.id)">
+        <v-card elevation="0" nuxt :to="`/rooms/${room.id}`">
           <v-img
             height="250"
             :src="require(`~/assets/img/rooms/room${room.id}/bg_1.jpg`)"
@@ -63,12 +63,12 @@ export default {
     // console.log(resUsers.data)
   },
   methods: {
-    async EnterRoom(id) {
-      await this.$store.dispatch('fetchRoom', {
-        roomId: id,
-      })
-      this.$router.push(`/rooms/${id}`)
-    },
+    // async EnterRoom(id) {
+    //   await this.$store.dispatch('fetchRoom', {
+    //     roomId: id,
+    //   })
+    //   this.$router.push(`/rooms/${id}`)
+    // },
   },
 }
 </script>

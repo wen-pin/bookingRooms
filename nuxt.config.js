@@ -53,7 +53,8 @@ export default {
     '~/plugins/axios',
     { src: '@/plugins/icons', ssr: true },
     { src: '~/plugins/google-maps', ssr: true },
-    { src: '~/plugins/persistedState.client.js' },
+    // 有bug暫時不用
+    // { src: '~/plugins/persistedState.client.js' },
   ],
 
   components: true,

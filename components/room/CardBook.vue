@@ -194,10 +194,6 @@ export default {
     tenants() {
       return this.$store.state.tenants
     },
-    // 時間排列
-    datesQueue() {
-      return this.$store.getters.datesQueue
-    },
     // 評價對話筐是否顯示
     evaluationDialog: {
       get() {
@@ -216,16 +212,57 @@ export default {
         this.$store.commit('toggleTenantCardBtn', v)
       },
     },
+    // 時間排列
+    datesQueue() {
+      return this.$store.getters.datesQueue
+    },
+    // 計算天數
+    calculateDays() {
+      return this.$store.getters.calculateDays
+    },
+    // 計算全部每晚房價
     calculateRentalCost() {
-      return this.$store.getters.calculateRentalCost
+      let holidayOfDays = 0
+      let weekdayOfDays = 0
+      let firstDay = this.datesQueue[0]
+      for (let i = 0; i < this.calculateDays; i++) {
+        let week = parseInt(this.$dayjs(firstDay).add(i, 'day').day())
+        if (week === 6) {
+          holidayOfDays++
+        } else {
+          weekdayOfDays++
+        }
+      }
+      if (this.price) {
+        return (
+          holidayOfDays * this.price.holiday +
+          weekdayOfDays * this.price.weekday
+        )
+      }
     },
     // 平均每晚房價(不包含服務費)
     averageRentalCost() {
-      return this.$store.getters.averageRentalCost
+      return this.calculateRentalCost / this.calculateDays
+    },
+    // 計算全部服務費
+    calculateServiceCharge() {
+      if (this.price) {
+        return this.calculateDays * this.price.serviceCharge
+      }
+    },
+    // 計算全部清潔費
+    calculateCleaningFee() {
+      if (this.price) {
+        return this.calculateDays * this.price.cleaningFee
+      }
     },
     // 總價
     allRentalCost() {
-      return this.$store.getters.allRentalCost
+      return (
+        this.calculateRentalCost +
+        this.calculateServiceCharge +
+        this.calculateCleaningFee
+      )
     },
     // 大人人數
     allTenants() {

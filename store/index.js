@@ -6,7 +6,7 @@ export const state = () => ({
   // 選擇的付款方式
   select: {},
 
-  room: {},
+  // room: {},
 
   // 房客
   tenants: [
@@ -78,51 +78,6 @@ export const getters = {
   calculateDays(state, getters) {
     return dayjs(getters.datesQueue[1]).diff(getters.datesQueue[0], 'day')
   },
-  // 計算全部每晚房價
-  calculateRentalCost: (state, getters) => {
-    let holidayOfDays = 0
-    let weekdayOfDays = 0
-    let firstDay = getters.datesQueue[0]
-
-    for (let i = 0; i < getters.calculateDays; i++) {
-      let week = parseInt(dayjs(firstDay).add(i, 'day').day())
-      if (week === 6) {
-        holidayOfDays++
-      } else {
-        weekdayOfDays++
-      }
-    }
-    if (getters.room.price) {
-      return (
-        holidayOfDays * getters.room.price.holiday +
-        weekdayOfDays * getters.room.price.weekday
-      )
-    }
-  },
-  // 平均每晚房價(不包含服務費)
-  averageRentalCost: (state, getters) => {
-    return getters.calculateRentalCost / getters.calculateDays
-  },
-  // 計算全部服務費
-  calculateServiceCharge: (state, getters) => {
-    if (getters.room.price) {
-      return getters.calculateDays * getters.room.price.serviceCharge
-    }
-  },
-  // 計算全部清潔費
-  calculateCleaningFee: (state, getters) => {
-    if (getters.room.price) {
-      return getters.calculateDays * getters.room.price.cleaningFee
-    }
-  },
-  // 總價
-  allRentalCost: (state, getters) => {
-    return (
-      getters.calculateRentalCost +
-      getters.calculateServiceCharge +
-      getters.calculateCleaningFee
-    )
-  },
   // 大人人數
   allTenants(state) {
     return state.tenants[0].quantity + state.tenants[1].quantity
@@ -131,9 +86,9 @@ export const getters = {
 
 export const mutations = {
   // 取得房間資料
-  fetchRoom(state, v) {
-    state.room = v
-  },
+  // fetchRoom(state, v) {
+  //   state.room = v
+  // },
   // 選擇日期
   fetchDates(state, v) {
     state.dates = v
