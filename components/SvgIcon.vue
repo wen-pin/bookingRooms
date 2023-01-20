@@ -71,4 +71,12 @@ export default {
   fill: currentColor;
   overflow: hidden;
 }
+.svg-iconwarn {
+  width: 3em;
+  height: 3em;
+  font-size: 1.2em;
+  vertical-align: -0.15em;
+  fill: #dc0d0d;
+  overflow: hidden;
+}
 </style>
