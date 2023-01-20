@@ -3,24 +3,28 @@
     "name": "login",
     "path": "/login",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_5e8e935a"
   },
   {
     "name": "book-stays-id",
     "path": "/book/stays/:id?",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/book/stays/_id.vue",
-    "chunkName": "pages/book/stays/_id"
+    "chunkName": "pages/book/stays/_id",
+    "_name": "_1a982e45"
   },
   {
     "name": "rooms-id",
     "path": "/rooms/:id?",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_id.vue",
-    "chunkName": "pages/rooms/_id"
+    "chunkName": "pages/rooms/_id",
+    "_name": "_45734f0d"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_0711133c"
   }
 ]

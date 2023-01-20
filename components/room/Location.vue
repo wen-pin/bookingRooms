@@ -45,26 +45,29 @@
             <div class="w-[40%] pr-10">
               <div class="text-3xl font-bold mt-3 mb-6">住宿地點</div>
 
-              <div v-if="location" class="font-medium mb-3">
-                {{ location.title }}
-              </div>
+              <div v-if="location">
+                <div v-if="location.title" class="font-medium mb-3">
+                  {{ location.title }}
+                </div>
 
-              <div
-                v-if="location"
-                v-html="convertTobr"
-                :class="details_visible ? 'line-clamp-3' : ''"
-              ></div>
+                <div
+                  v-html="convertTobr"
+                  :class="details_visible ? 'line-clamp-3' : ''"
+                ></div>
 
-              <div
-                v-if="details_visible"
-                class="!max-w-[80px] flex"
-                @click="details_visible = !details_visible"
-              >
-                <TextBtnDialog :title="'閱讀詳情'" />
+                <div v-if="location.content">
+                  <div
+                    v-if="details_visible"
+                    class="!max-w-[80px] flex"
+                    @click="details_visible = !details_visible"
+                  >
+                    <TextBtnDialog :title="'閱讀詳情'" />
 
-                <v-icon class="cursor-pointer" small color="black">
-                  mdi-greater-than
-                </v-icon>
+                    <v-icon class="cursor-pointer" small color="black">
+                      mdi-greater-than
+                    </v-icon>
+                  </div>
+                </div>
               </div>
             </div>
 
