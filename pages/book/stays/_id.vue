@@ -54,6 +54,8 @@
                   dark
                   depressed
                   class="mt-[100px]"
+                  nuxt
+                  to="/trips"
                 >
                   查看訂單詳情
                 </v-btn>
@@ -125,9 +127,9 @@ export default {
       room: {},
     }
   },
-  async fetch() {
-    const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
-    this.room = res.data
+  async asyncData({ $axios, params }) {
+    const res = await $axios.get(`/api/rooms/${params.id}`)
+    return { room: res.data }
   },
   computed: {
     select: {
@@ -146,13 +148,25 @@ export default {
         return this.$store.commit('fetchDates', v)
       },
     },
+    dateRangeText() {
+      return this.$store.getters.dateRangeText
+    },
   },
   methods: {
-    payment() {
-      this.successDialog = true
-      // 撈api
-      this.select = {}
-      this.dates = []
+    async payment() {
+      try {
+        await this.$axios.$post('api/bookingRooms', {
+          bookerName: this.$auth.user.user.username,
+          bookingDate: this.dateRangeText,
+          roomId: this.$route.params.id,
+        })
+      } catch (err) {
+        console.log(err)
+      } finally {
+        this.successDialog = true
+        this.select = {}
+        this.dates = []
+      }
     },
   },
 }
