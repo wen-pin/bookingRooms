@@ -7,7 +7,7 @@
 
       <div v-if="$auth.loggedIn" class="mr-2">{{ $auth.user.username }}</div>
 
-      <v-menu offset-y nudge-bottom="10" nudge-width="100">
+      <v-menu offset-y nudge-bottom="10" nudge-left="100" nudge-width="100">
         <template #activator="{ attrs, on }">
           <v-btn rounded outlined v-bind="attrs" v-on="on">
             <v-icon>mdi-menu</v-icon>
@@ -17,23 +17,31 @@
           </v-btn>
         </template>
 
-        <v-list>
+        <v-list v-if="!$auth.loggedIn">
           <v-list-item-group>
             <v-list-item
-              v-if="!$auth.loggedIn"
-              @click.stop="registerDialog_visible = true"
-            >
-              <v-list-item-title>註冊</v-list-item-title>
-            </v-list-item>
-
-            <v-list-item
-              v-if="!$auth.loggedIn"
               @click.stop="loginDialog_visible = !loginDialog_visible"
             >
               <v-list-item-title> 登入 </v-list-item-title>
             </v-list-item>
 
-            <v-list-item v-if="$auth.loggedIn" @click="$auth.logout()">
+            <v-list-item @click.stop="registerDialog_visible = true">
+              <v-list-item-title>註冊</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+
+        <v-list v-else>
+          <v-list-item-group>
+            <v-list-item @click="goToTrips()">
+              <v-list-item-title>
+                <span class="font-semibold">旅程</span>
+              </v-list-item-title>
+            </v-list-item>
+
+            <v-divider></v-divider>
+
+            <v-list-item @click="$auth.logout()">
               <v-list-item-title>登出</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
@@ -114,6 +122,9 @@ export default {
     openRegisterDialog() {
       this.loginDialog_visible = false
       this.registerDialog_visible = true
+    },
+    goToTrips() {
+      this.$router.push('/trips')
     },
   },
 }
