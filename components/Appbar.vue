@@ -5,7 +5,9 @@
 
       <v-spacer></v-spacer>
 
-      <div v-if="$auth.loggedIn" class="mr-2">{{ $auth.user.username }}</div>
+      <div v-if="$auth.loggedIn" class="mr-2">
+        {{ $auth.user.user.username }}
+      </div>
 
       <v-menu offset-y nudge-bottom="10" nudge-left="100" nudge-width="100">
         <template #activator="{ attrs, on }">

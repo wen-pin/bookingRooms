@@ -7,6 +7,13 @@
     "_name": "_5e8e935a"
   },
   {
+    "name": "trips",
+    "path": "/trips",
+    "component": "/Users/wenpin/Desktop/bookingRooms/pages/trips/index.vue",
+    "chunkName": "pages/trips/index",
+    "_name": "_81d09c4a"
+  },
+  {
     "name": "book-stays-id",
     "path": "/book/stays/:id?",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/book/stays/_id.vue",
