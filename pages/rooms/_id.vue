@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <!-- 要在這邊加上z-10，這樣打開的卡片才能覆蓋底層 -->
+      <!-- 要在這邊加上z-10，打開的卡片才能覆蓋底層 -->
       <div class="w-[40%] flex justify-center relative z-10">
         <RoomCardBook
           :averageRating="room.averageRating"
@@ -120,9 +120,9 @@ export default {
       room: {},
     }
   },
-  async fetch() {
-    const res = await this.$axios.get(`/api/rooms/${this.$route.params.id}`)
-    this.room = res.data
+  async asyncData({ $axios, params }) {
+    const res = await $axios.get(`/api/rooms/${params.id}`)
+    return { room: res.data }
   },
   computed: {
     dates: {
