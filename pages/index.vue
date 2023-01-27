@@ -4,16 +4,18 @@
       <v-col v-for="room in rooms" :key="room.id" cols="3">
         <v-card elevation="0" nuxt :to="`/rooms/${room.id}`">
           <v-img
-            height="250"
             :src="require(`~/assets/img/rooms/room${room.id}/bg_1.jpg`)"
+            :aspect-ratio="27 / 25"
+            width="100%"
             class="rounded-lg"
           ></v-img>
 
           <v-card-text class="px-0 black--text">
             <div class="flex font-bold">
-              <div v-if="room.location">
+              <div v-if="room.location" class="line-clamp-1 w-[215px]">
                 位於{{ room.location.address }}的{{ room.rentalType }}
               </div>
+
               <v-spacer></v-spacer>
 
               <span>
@@ -49,26 +51,11 @@ export default {
   data() {
     return {
       rooms: [],
-      users: [],
     }
   },
-  async fetch() {
-    // const { data } = await $axios.get(`/articles/index?pageIndex=1\`)
-    // const  data  = await $axios.$get(`/articles/index?pageIndex=1\`)
-    // const  data  = await $axios.get(`/articles/index?pageIndex=1\`).data
-    const res = await this.$axios.get('/api/rooms')
-    this.rooms = res.data
-    // const resUsers = await this.$axios.get('/api/users')
-    // this.users = resUsers.data
-    // console.log(resUsers.data)
-  },
-  methods: {
-    // async EnterRoom(id) {
-    //   await this.$store.dispatch('fetchRoom', {
-    //     roomId: id,
-    //   })
-    //   this.$router.push(`/rooms/${id}`)
-    // },
+  async asyncData({ $axios }) {
+    const data = await $axios.$get('/api/rooms')
+    return { rooms: data }
   },
 }
 </script>

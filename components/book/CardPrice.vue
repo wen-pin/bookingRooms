@@ -4,6 +4,7 @@
       <div class="flex w-full mb-7">
         <v-img
           :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
+          :aspect-ratio="1"
           max-width="100px"
           class="rounded-lg w-[30%]"
         ></v-img>
