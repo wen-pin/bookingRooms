@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app absolute flat>
     <v-container flex>
-      <div class="text-lg flex items-center">The rooms</div>
+      <div class="text-lg flex items-center" @click="goHome()">The rooms</div>
 
       <v-spacer></v-spacer>
 
@@ -127,6 +127,9 @@ export default {
     },
     goToTrips() {
       this.$router.push('/trips')
+    },
+    goHome() {
+      this.$router.push('/')
     },
   },
 }
