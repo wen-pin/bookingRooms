@@ -8,7 +8,7 @@
       <v-row class="my-5">
         <v-col
           v-for="bookingRoom in bookingRooms"
-          :key="bookingRoom.room.id"
+          :key="bookingRoom.id"
           cols="4"
         >
           <div class="flex items-center">
