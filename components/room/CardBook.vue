@@ -36,7 +36,9 @@
         >
           <div class="w-[50%] my-2">
             <div class="font-semibold text-sm">入住</div>
-            <div v-if="datesQueue[0] != null">{{ datesQueue[0] }}</div>
+            <div v-if="datesQueue[0] != null">
+              {{ this.$dayjs(datesQueue[0]).format('YYYY/M/DD') }}
+            </div>
             <div v-else class="text-neutral-500">選取日期</div>
           </div>
 
@@ -44,7 +46,9 @@
 
           <div class="w-[50%] my-2 pl-3">
             <div class="font-semibold text-sm">退房</div>
-            <div v-if="datesQueue[1] != null">{{ datesQueue[1] }}</div>
+            <div v-if="datesQueue[1] != null">
+              {{ this.$dayjs(datesQueue[1]).format('YYYY/M/DD') }}
+            </div>
             <div v-else class="text-neutral-500">選取日期</div>
           </div>
         </div>

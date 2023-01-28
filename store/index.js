@@ -70,7 +70,10 @@ export const getters = {
   },
   // 住宿日期範圍
   dateRangeText: (state, getters) => {
-    return getters.datesQueue.join(' ~ ')
+    let newDatesQueue = getters.datesQueue.map((date) =>
+      dayjs(date).format('YYYY[年]M[月]DD[日]'),
+    )
+    return newDatesQueue.join(' ~ ')
   },
   // 住宿天數
   calculateDays(state, getters) {

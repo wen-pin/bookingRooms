@@ -13,7 +13,9 @@
 
       <div>
         <span>{{ commenterName }}</span>
-        <div class="text-zinc-400">{{ createdAt }}</div>
+        <div class="text-zinc-400">
+          {{ this.$dayjs(createdAt).format('YYYY[年]M[月]') }}
+        </div>
       </div>
     </div>
 
