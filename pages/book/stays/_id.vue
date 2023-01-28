@@ -159,13 +159,16 @@ export default {
           bookerName: this.$auth.user.user.username,
           bookingDate: this.dateRangeText,
           roomId: this.$route.params.id,
+          payment: this.select.title,
         })
-      } catch (err) {
-        console.log(err)
-      } finally {
+
         this.successDialog = true
         this.select = {}
         this.dates = []
+      } catch (err) {
+        console.log(err)
+        this.$toast.warning('訂房日期未填寫')
+      } finally {
       }
     },
   },
