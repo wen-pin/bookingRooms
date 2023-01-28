@@ -5,7 +5,6 @@
         <v-img
           :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
           :aspect-ratio="1"
-          max-width="100px"
           class="rounded-lg w-[30%]"
         ></v-img>
 
@@ -14,7 +13,7 @@
             {{ rentalType }}
           </div>
 
-          <div>{{ title }}</div>
+          <div class="line-clamp-3">{{ title }}</div>
 
           <div class="flex mt-3">
             <span>
