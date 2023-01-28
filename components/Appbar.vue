@@ -1,7 +1,15 @@
 <template>
   <v-app-bar app absolute flat>
     <v-container flex>
-      <div class="text-lg flex items-center" @click="goHome()">The rooms</div>
+      <div>
+        <div
+          class="w-[170px] flex items-center cursor-pointer"
+          @click="goHome()"
+        >
+          <SvgIcon :iconClass="'logo'" :className="'size'" class="mr-1" />
+          <span class="text-2xl font-black"> The Rooms </span>
+        </div>
+      </div>
 
       <v-spacer></v-spacer>
 
