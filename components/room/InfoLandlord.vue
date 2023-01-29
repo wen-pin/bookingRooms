@@ -13,8 +13,12 @@
         </v-avatar>
 
         <div>
-          <span class="text-2xl font-medium">房東:{{ landlord }}</span>
-          <div class="text-zinc-400">加入時間:2017年5月</div>
+          <span class="text-2xl font-medium">房東:{{ landlordInfo.name }}</span>
+          <div class="text-zinc-400">
+            加入時間:{{
+              this.$dayjs(landlordInfo.createdAt).format('YYYY[年]M[月]')
+            }}
+          </div>
         </div>
       </div>
 
@@ -39,26 +43,57 @@
               />
             </span>
 
-            <v-icon color="black" class="ml-7 mr-3">mdi-shield-check</v-icon>
+            <div v-if="landlordInfo.isAuth" class="ml-5">
+              <div class="flex">
+                <v-icon color="black" class="mr-3">mdi-shield-check</v-icon>
 
-            <div class="text-lg font-medium">身分已驗證</div>
+                <div class="text-lg font-medium">身分已驗證</div>
+              </div>
+            </div>
+
+            <div v-if="landlordInfo.isNice" class="ml-5">
+              <div class="flex">
+                <v-icon color="black" class="mr-3">mdi-medal-outline</v-icon>
+
+                <div class="text-lg font-medium">超讚房東</div>
+              </div>
+            </div>
           </div>
 
-          <div class="text-lg pr-[100px] mt-5">
-            巨蟹女，所以愛家又溫暖～ 非常愛電影，來墾丁之前在電影公司工作。
-            現在搬來墾丁生活，經營甜點工作室，
-            喜歡出外郊遊，拍拍好看的照片，也玩底片機。
+          <div class="text-lg pr-[100px] mt-5" v-html="convertTobr"></div>
+
+          <div v-if="landlordInfo.isNice">
+            <div class="font-semibold mt-5 mb-1">
+              {{ landlordInfo.name }} 是超讚房東
+            </div>
+
+            <div>
+              超讚房東是一批經驗豐富、深獲房客好評的房東，全心為房客提供超棒的入住體驗。
+            </div>
           </div>
         </div>
 
         <div class="w-[50%] text-lg">
-          <div>語言: 中文 (简体)、English</div>
-          <div class="mt-3">回覆率: 100%</div>
-          <div class="mt-3">回覆時間: 1 小時內</div>
+          <div class="pl-[80px]">
+            <div v-if="landlordInfo.language">
+              語言: {{ landlordInfo.language }}
+            </div>
+            <div class="mt-3">回覆率: {{ landlordInfo.responseRate }}</div>
+            <div class="mt-3">回覆時間: {{ landlordInfo.responseTime }}</div>
 
-          <v-btn large outlined class="rounded-lg mt-8" height="50px">
-            <span class="text-lg font-semibold">聯絡房東</span>
-          </v-btn>
+            <v-btn large outlined class="rounded-lg mt-8" height="50px">
+              <span class="text-lg font-semibold">聯絡房東</span>
+            </v-btn>
+
+            <div class="flex items-center mt-6">
+              <SvgIcon :iconClass="'shield'" class="mr-2" />
+
+              <div class="w-[70%] text-xs font-normal">
+                為了確保你的付款安全，請勿透過 Airbnb
+                網站或應用程式以外的方式來匯款或聯絡。
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -70,9 +105,8 @@ export default {
   name: 'roomInfoLandlord',
 
   props: {
-    landlord: {
-      types: String,
-      required: true,
+    landlordInfo: {
+      types: Object,
     },
     averageRating: {
       types: Number,
@@ -87,6 +121,16 @@ export default {
     return {
       googleMapsDialog: false,
     }
+  },
+  computed: {
+    convertTobr() {
+      let arr = this.landlordInfo.selfIntroduction.split('')
+      return arr
+        .map((item) => {
+          return item === '\n' ? '<br />' : item
+        })
+        .join('')
+    },
   },
 }
 </script>
