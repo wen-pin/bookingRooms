@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="text-3xl mt-5">{{ room.title }}</div>
+    <div class="text-2xl font-bold mt-5">{{ room.title }}</div>
 
     <div class="my-2 flex">
       <div class="flex">
@@ -15,16 +15,13 @@
           class="mr-4 my-auto"
         />
 
-        <span
-          v-if="room.location"
-          class="flex items-center"
-          @click="googleMapsDialog = !googleMapsDialog"
-        >
+        <div v-if="room.location" class="flex items-center">
           <TextBtnDialog
             :title="room.location.address"
             :subTitle="room.country"
+            @click="googleMapsDialog = !googleMapsDialog"
           />
-        </span>
+        </div>
 
         <v-spacer />
 
@@ -101,7 +98,7 @@
 
     <RoomInfoLandlord
       id="landlord"
-      :landlord="room.landlord"
+      :landlordInfo="room.landlordInfo"
       :averageRating="room.averageRating"
       :allMessages="room.allMessages"
     />
