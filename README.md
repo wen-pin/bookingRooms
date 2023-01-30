@@ -35,7 +35,8 @@ $ yarn install
 
 ##### Vercel Deployment
 
-```vercel.json
+```
+// vercel.json
 {
   "version": 2,
   "builds": [
