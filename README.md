@@ -10,7 +10,7 @@ This is a booking website that references Airbnb's UI/UX. You can choose the roo
 
 - [Background](#background)
 - [Demo](#Demo)
-- [Install](#install)
+- [Installation](#Installation)
 - [API](#api)
 
 ## Background
@@ -21,7 +21,7 @@ Airbnb is a website for renting accommodation and homestays. It provides short-t
 
 Check out the [demo](https://booking-rooms.vercel.app/)
 
-## Install
+## Installation
 
 This project uses [yarn](https://yarnpkg.com/). Go check them out if you don't have them locally installed.
 
