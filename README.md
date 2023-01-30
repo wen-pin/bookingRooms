@@ -33,18 +33,11 @@ $ yarn install
 
 ## Usage
 
-![alt text](/assets/img/bg_1.jpeg =100x100)
-
 <img src=/assets/img/bg_1.jpeg width=60% />
-
-<img src=https://img-blog.csdnimg.cn/20200822014538211.png width=60% />
 
 ## API
 
-| Syntax      | Description | Description |
-| ----------- | ----------- | ----------- |
-| Header      | Title       | Title       |
-| Paragraph   | Text        | Text        |
+Check out the [server side]([https://booking-rooms.vercel.app/](https://github.com/wen-pin/bookingRooms-server/tree/master))
 
 ## License
 
