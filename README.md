@@ -1,4 +1,5 @@
 <img src=/assets/img/readme_bg.png />
+[![banner img](/assets/img/readme_bg.png)](https://therooms.vercel.app/)
 
 # bookingRooms
 
@@ -23,7 +24,7 @@ Airbnb is a website for renting accommodation and homestays. It provides short-t
 
 ## Demo
 
-Check out the [demo](https://booking-rooms.vercel.app/)
+Check out the [demo](https://therooms.vercel.app/)
 
 ## Installation
 
