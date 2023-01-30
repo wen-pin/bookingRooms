@@ -16,7 +16,7 @@ This is a booking website that references Airbnb's UI/UX. You can choose the roo
 
 ## Install
 
-This project uses yarn. Go check them out if you don't have them locally installed.
+This project uses [yarn](https://yarnpkg.com/). Go check them out if you don't have them locally installed.
 
     yarn install
 
