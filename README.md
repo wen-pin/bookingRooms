@@ -9,12 +9,17 @@ This is a booking website that references Airbnb's UI/UX. You can choose the roo
 ## Table of Contents
 
 - [Background](#background)
+- [Demo](#Demo)
 - [Install](#install)
 - [API](#api)
 
 ## Background
 
 Airbnb is a website for renting accommodation and homestays. It provides short-term rental houses or rooms, allowing travelers to discover and book unique listings around the world through websites or mobile phones. It is one of the representatives of the sharing economy in recent years. I have booked a room on Airbnb before, and I can find a room with a high cp value. The room information is very complete, and the operation of booking a room on Airbnb is also very simple. I also like their UI very much, there are many small ideas.
+
+## Demo
+
+Check out the [demo](https://booking-rooms.vercel.app/)
 
 ## Install
 
