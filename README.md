@@ -1,4 +1,4 @@
-<img src=/assets/img/bg_1.jpeg />
+<img src=/assets/img/readme.png />
 
 # bookingRooms
 
