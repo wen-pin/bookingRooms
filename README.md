@@ -37,7 +37,7 @@ $ yarn install
 
 ## API
 
-Check out the [server side]([https://booking-rooms.vercel.app/](https://github.com/wen-pin/bookingRooms-server/tree/master))
+Check out the [server side](https://github.com/wen-pin/bookingRooms-server/tree/master)
 
 ## License
 
