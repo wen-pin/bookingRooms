@@ -35,7 +35,7 @@ $ yarn install
 
 ![alt text](/assets/img/bg_1.jpeg =100x100)
 
-<img src=('/assets/img/bg_1.jpeg') width=60% />
+<img src=/assets/img/bg_1.jpeg width=60% />
 
 <img src=https://img-blog.csdnimg.cn/20200822014538211.png width=60% />
 
