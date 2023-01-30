@@ -19,7 +19,7 @@ This is a booking website that references Airbnb's UI/UX. You can choose the roo
 
 ## Background
 
-Airbnb is a website for renting accommodation and homestays. It provides short-term rental houses or rooms, allowing travelers to discover and book unique listings around the world through websites or mobile phones. It is one of the representatives of the sharing economy in recent years. I have booked a room on Airbnb before, and I can find a room with a high cp value. The room information is very complete, and the operation of booking a room on Airbnb is also very simple. Also, their UI/UX design is very good, so I want to use this as an exercise to make my own reservation website.
+Airbnb is a website for renting accommodation and homestays. It provides short-term rental houses or rooms, allowing travelers to discover and book unique listings around the world through websites or mobile phones. It is one of the representatives of the sharing economy in recent years. I have booked a room on Airbnb before, and I can find a room with a high cp value. The room information is very complete, and the operation of booking a room on Airbnb is also very simple. Also, their UI/UX design is very good, so I want to use this as an exercise to make my own booking website.
 
 ## Demo
 
