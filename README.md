@@ -9,10 +9,11 @@ This is a booking website that references Airbnb's UI/UX. You can choose the roo
 ## Table of Contents
 
 - [Background](#background)
-- [Demo](#Demo)
-- [Installation](#Installation)
-- [API](#api)
-- [License](#License)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#aPI)
+- [License](#license)
 
 ## Background
 
@@ -28,6 +29,12 @@ This project uses [yarn](https://yarnpkg.com/). Go check them out if you don't h
 
 ```
 $ yarn install
+```
+
+## Usage
+
+```md
+![alt text](assets/img/rooms/bg_1.jpeg)
 ```
 
 ## API
