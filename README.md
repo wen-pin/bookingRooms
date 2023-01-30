@@ -32,6 +32,11 @@ $ yarn install
 
 ## API
 
+| Syntax      | Description | Description |
+| ----------- | ----------- | ----------- |
+| Header      | Title       | Title       |
+| Paragraph   | Text        | Text        |
+
 ## License
 
 `UNLICENSED`
