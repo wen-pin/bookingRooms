@@ -33,6 +33,20 @@ $ yarn install
 
 ## Usage
 
+##### Vercel Deployment
+
+```vercel.json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "nuxt.config.js",
+      "use": "@nuxtjs/vercel-builder"
+    }
+  ]
+}
+```
+
 <img src=/assets/img/bg_1.jpeg width=60% />
 
 ## API
