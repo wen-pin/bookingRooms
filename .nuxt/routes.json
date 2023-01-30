@@ -7,6 +7,13 @@
     "_name": "_5e8e935a"
   },
   {
+    "name": "logo",
+    "path": "/logo",
+    "component": "/Users/wenpin/Desktop/bookingRooms/pages/logo.vue",
+    "chunkName": "pages/logo",
+    "_name": "_1fba57b1"
+  },
+  {
     "name": "trips",
     "path": "/trips",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/trips/index.vue",
