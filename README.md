@@ -33,7 +33,7 @@ $ yarn install
 
 ## Usage
 
-![alt text](/assets/img/bg_1.jpeg)
+![alt text](/assets/img/bg_1.jpeg =100x100)
 
 ## API
 
