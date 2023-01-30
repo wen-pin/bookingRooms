@@ -33,9 +33,7 @@ $ yarn install
 
 ## Usage
 
-```md
 ![alt text](/assets/img/bg_1.jpeg)
-```
 
 ## API
 
