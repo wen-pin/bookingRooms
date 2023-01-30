@@ -1,4 +1,4 @@
-<img src=/assets/img/bg_1.jpeg width="60%" div align=right />
+<img src=/assets/img/bg_1.jpeg />
 
 # bookingRooms
 
