@@ -34,7 +34,7 @@ $ yarn install
 ## Usage
 
 ```md
-![alt text](assets/img/rooms/bg_1.jpeg)
+![alt text](/assets/img/bg_1.jpeg)
 ```
 
 ## API
