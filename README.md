@@ -1,6 +1,5 @@
 # bookingRooms
 
-[![bookingRooms](https://img.shields.io/badge/bookingRooms-The%20Rooms-green)](https://github.com/wen-pin/bookingRooms)
 [![nuxt](https://img.shields.io/badge/nuxt-v2.15.8-blue)](https://nuxtjs.org/docs/get-started/installation)
 
 This is a booking website.
