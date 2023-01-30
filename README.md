@@ -2,11 +2,11 @@
 
 # bookingRooms
 
-[![nuxt](https://img.shields.io/badge/nuxt-v2.15.8-blue)](https://nuxtjs.org/docs/get-started/installation)
-
 This is a booking website.
 
 This is a booking website that references Airbnb's UI/UX. You can choose the room, check-in and check-out dates, and the number of occupants. If you want to book a room, you need to log in to your account. If you don’t have one, you can register. After logging in, you can see the journey option in the menu on the top bar, click to enter see your reserved room.
+
+[![nuxt](https://img.shields.io/badge/nuxt-v2.15.8-blue)](https://nuxtjs.org/docs/get-started/installation)
 
 ## Table of Contents
 
