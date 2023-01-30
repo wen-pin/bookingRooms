@@ -1,3 +1,5 @@
+<img src=/assets/img/bg_1.jpeg width=60% div align=center/>
+
 # bookingRooms
 
 [![nuxt](https://img.shields.io/badge/nuxt-v2.15.8-blue)](https://nuxtjs.org/docs/get-started/installation)
@@ -47,8 +49,6 @@ vercel.json
   ]
 }
 ```
-
-<img src=/assets/img/bg_1.jpeg width=60% />
 
 ## API
 
