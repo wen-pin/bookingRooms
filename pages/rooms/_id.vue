@@ -40,7 +40,6 @@
     >
       <div class="w-[60%]">
         <RoomInfoTitle
-          id="scrollTargetId"
           :landlord="room.landlord"
           :rentalType="room.rentalType"
           :limitPeople="room.limitPeople"
@@ -61,7 +60,7 @@
           />
         </div>
 
-        <div class="my-10">
+        <div class="my-10" id="date">
           <DateRange :location="room.location" />
 
           <v-row class="mt-10">
@@ -103,7 +102,11 @@
       :allMessages="room.allMessages"
     />
 
-    <RoomNotes />
+    <RoomNotes
+      :notes="room.notes"
+      :limitPeople="room.limitPeople"
+      target-element="#date"
+    />
   </v-container>
 </template>
 
