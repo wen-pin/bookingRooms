@@ -32,7 +32,11 @@
     </div>
 
     <div v-if="room.img">
-      <RoomPhotos :roomQuality="room.img.roomQuality" class="my-5" />
+      <RoomPhotos
+        id="photos"
+        :roomQuality="room.img.roomQuality"
+        class="my-5"
+      />
     </div>
 
     <div
@@ -55,6 +59,7 @@
 
         <div v-if="room.alleqptAndServices">
           <RoomEquipment
+            id="equipment"
             :alleqptAndServices="room.alleqptAndServices"
             :eqptAndServices="room.alleqptAndServices[0].eqptAndServices"
           />
@@ -88,12 +93,17 @@
     </div>
 
     <RoomEvaluation
+      id="evaluation"
       :averageRating="room.averageRating"
       :allMessages="room.allMessages"
       :evaluationStandards="room.evaluationStandards"
     />
 
-    <RoomLocation :location="room.location" :country="room.country" />
+    <RoomLocation
+      id="location"
+      :location="room.location"
+      :country="room.country"
+    />
 
     <RoomInfoLandlord
       id="landlord"
