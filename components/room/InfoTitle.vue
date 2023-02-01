@@ -7,10 +7,12 @@
         </div>
 
         <span>{{ limitPeople }}位 </span>
-        <span v-if="pattern">{{ pattern.bedroom }}間臥室 </span>
-        <span v-if="pattern">{{ pattern.bed }}張床</span>
-        <span v-if="pattern">{{ pattern.bathroom }}間衛浴 </span>
-        <span v-if="pattern"> {{ pattern.sharedBathroom }}間共用衛浴 </span>
+        <span v-if="pattern.bedroom > 0">{{ pattern.bedroom }}間臥室 </span>
+        <span v-if="pattern.bed > 0">{{ pattern.bed }}張床</span>
+        <span v-if="pattern.bathroom > 0">{{ pattern.bathroom }}間衛浴 </span>
+        <span v-if="pattern.sharedBathroom > 0">
+          {{ pattern.sharedBathroom }}間共用衛浴
+        </span>
       </div>
 
       <v-avatar size="56px" @click="goToTarget(targetElement)">
