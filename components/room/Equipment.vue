@@ -7,12 +7,12 @@
 
       <v-row class="w-[80%] mt-2">
         <v-col
-          v-for="item in fetchEqptAndServices(eqptAndServices)"
+          v-for="item in sliceAlleqptAndServices(fetchAlleqptAndServices)"
           :key="item.id"
           cols="6"
           class="flex pb-0"
         >
-          <SvgIcon :iconClass="item.svgTitle" class="mr-2" />
+          <SvgIcon :iconClass="item.svgTitle" class="mr-3" />
           <div>
             {{ item.title }}
           </div>
@@ -20,8 +20,8 @@
       </v-row>
 
       <v-btn outlined class="mt-10" height="55px" @click="dialog = true">
-        <span v-if="eqptAndServices" class="text-lg">
-          顯示全部{{ eqptAndServices.length }}項設備與服務
+        <span v-if="fetchAlleqptAndServices" class="text-lg">
+          顯示全部{{ fetchAlleqptAndServices.length }}項設備與服務
         </span>
       </v-btn>
 
@@ -73,9 +73,20 @@ export default {
       dialog: false,
     }
   },
+  computed: {
+    // 不分類別的所有設備及服務
+    fetchAlleqptAndServices() {
+      const array = []
+      this.alleqptAndServices.map((x) =>
+        x.eqptAndServices.forEach((element) => array.push(element)),
+      )
+
+      return array
+    },
+  },
   methods: {
-    fetchEqptAndServices(eqptAndServices) {
-      return eqptAndServices.slice(0, 10)
+    sliceAlleqptAndServices(array) {
+      return array.slice(0, 10)
     },
   },
 }
