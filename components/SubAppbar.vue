@@ -11,7 +11,7 @@
 
       <v-tab
         v-for="item in items"
-        :key="item"
+        :key="item.title"
         @click="goToTarget(item.targetElement)"
       >
         {{ item.title }}
