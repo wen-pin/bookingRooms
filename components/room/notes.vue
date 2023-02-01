@@ -37,26 +37,60 @@
 
             <div class="my-10 font-medium text-xl">入住條件</div>
 
-            <div class="flex items-center">
+            <div v-if="!isAcceptPet" class="flex items-center">
               <v-icon large class="mr-2">mdi-account-group-outline</v-icon>
 
               <div class="text-lg">最多{{ limitPeople }}位房客</div>
+            </div>
+
+            <div v-else>
+              <DivideBlock>
+                <div class="flex items-center mb-5">
+                  <v-icon large class="mr-2">mdi-account-group-outline</v-icon>
+
+                  <div class="text-lg">最多{{ limitPeople }}位房客</div>
+                </div>
+              </DivideBlock>
+
+              <div class="flex items-center mt-5">
+                <v-icon large class="mr-3">mdi-paw</v-icon>
+
+                <div class="text-lg">可攜帶寵物</div>
+              </div>
             </div>
 
             <div class="my-10 font-medium text-xl">允許的事項</div>
 
             <DivideBlock>
               <div class="flex items-center mb-5">
-                <v-icon large class="mr-2">mdi-clock-time-four-outline</v-icon>
+                <v-icon large class="mr-3">mdi-clock-time-four-outline</v-icon>
 
                 <div class="text-lg">入住時間：{{ notes.checkIn }}</div>
               </div>
             </DivideBlock>
 
-            <div class="flex items-center mt-5">
-              <v-icon large class="mr-2">mdi-clock-time-four-outline</v-icon>
+            <div v-if="!notes.isSmoking" class="flex items-center mt-5">
+              <v-icon large class="mr-3">mdi-clock-time-four-outline</v-icon>
 
               <div class="text-lg">退房時間：{{ notes.checkOut }}</div>
+            </div>
+
+            <div v-else>
+              <DivideBlock>
+                <div class="flex items-center mt-5 mb-5">
+                  <v-icon large class="mr-3"
+                    >mdi-clock-time-four-outline</v-icon
+                  >
+
+                  <div class="text-lg">退房時間：{{ notes.checkOut }}</div>
+                </div>
+              </DivideBlock>
+
+              <div class="flex items-center mt-5">
+                <v-icon large class="mr-3">mdi-smoking</v-icon>
+
+                <div class="text-lg">允許抽煙</div>
+              </div>
             </div>
           </div>
 
@@ -215,6 +249,9 @@ export default {
   props: {
     notes: {
       types: Object,
+    },
+    isAcceptPet: {
+      types: Boolean,
     },
     limitPeople: {
       types: Number,
