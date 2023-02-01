@@ -49,7 +49,7 @@
 
         <RoomRights />
 
-        <RoomIntroduce />
+        <RoomIntroduce :spaceInfo="room.spaceInfo" />
 
         <RoomBeds :pattern="room.pattern" />
 
@@ -105,6 +105,7 @@
     <RoomNotes
       :notes="room.notes"
       :limitPeople="room.limitPeople"
+      :isAcceptPet="room.isAcceptPet"
       target-element="#date"
     />
   </v-container>
