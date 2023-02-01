@@ -40,7 +40,7 @@
 
       <v-row class="mt-5">
         <v-col
-          v-for="item in allMessages"
+          v-for="item in limitAllMessages"
           :key="item.id"
           cols="6"
           class="mb-10"
@@ -101,6 +101,11 @@ export default {
       set(v) {
         this.$store.commit('toggleEvaluationBtn', v)
       },
+    },
+    limitAllMessages() {
+      if (this.allMessages) {
+        return this.allMessages.slice(0, 6)
+      }
     },
   },
   methods: {
