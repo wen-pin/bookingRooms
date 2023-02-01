@@ -1,11 +1,25 @@
 <template>
   <div>
-    <v-btn text @click="isVisible = true">
+    <!-- 尚未完成開發 -->
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn text v-bind="attrs" v-on="on">
+          <v-icon small class="cursor-pointer" color="black">
+            mdi-export-variant
+          </v-icon>
+          <TextBtnDialog :title="'分享'" />
+        </v-btn>
+      </template>
+
+      <span>此功能開發中</span>
+    </v-tooltip>
+
+    <!-- <v-btn text @click="isVisible = true">
       <v-icon small class="cursor-pointer" color="black">
         mdi-export-variant
       </v-icon>
       <TextBtnDialog :title="'分享'" />
-    </v-btn>
+    </v-btn> -->
 
     <v-dialog v-model="isVisible">
       <v-card class="rounded-lg p-5" height="100%">

@@ -2,43 +2,43 @@
   {
     "name": "login",
     "path": "/login",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/login.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/login.vue",
     "chunkName": "pages/login",
-    "_name": "_5e8e935a"
+    "_name": "_4108970a"
   },
   {
     "name": "logo",
     "path": "/logo",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/logo.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/logo.vue",
     "chunkName": "pages/logo",
-    "_name": "_1fba57b1"
+    "_name": "_7b0af489"
   },
   {
     "name": "trips",
     "path": "/trips",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/trips/index.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/trips/index.vue",
     "chunkName": "pages/trips/index",
-    "_name": "_81d09c4a"
+    "_name": "_31c51bfa"
   },
   {
     "name": "book-stays-id",
     "path": "/book/stays/:id?",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/book/stays/_id.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/book/stays/_id.vue",
     "chunkName": "pages/book/stays/_id",
-    "_name": "_1a982e45"
+    "_name": "_e066c5c6"
   },
   {
     "name": "rooms-id",
     "path": "/rooms/:id?",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_id.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/_id.vue",
     "chunkName": "pages/rooms/_id",
-    "_name": "_45734f0d"
+    "_name": "_20baf935"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",
+    "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_0711133c"
+    "_name": "_15d41164"
   }
 ]

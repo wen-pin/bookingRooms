@@ -81,9 +81,27 @@
             <div class="mt-3">回覆率: {{ landlordInfo.responseRate }}</div>
             <div class="mt-3">回覆時間: {{ landlordInfo.responseTime }}</div>
 
-            <v-btn large outlined class="rounded-lg mt-8" height="50px">
+            <!-- <v-btn large outlined class="rounded-lg mt-8" height="50px">
               <span class="text-lg font-semibold">聯絡房東</span>
-            </v-btn>
+            </v-btn> -->
+
+            <!-- 尚未完成開發 -->
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  large
+                  outlined
+                  class="rounded-lg mt-8"
+                  height="50px"
+                >
+                  <span class="text-lg font-semibold">聯絡房東</span>
+                </v-btn>
+              </template>
+
+              <span>此功能開發中</span>
+            </v-tooltip>
 
             <div class="flex items-center mt-6">
               <SvgIcon :iconClass="'shield'" class="mr-2" />

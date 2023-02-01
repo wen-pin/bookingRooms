@@ -152,7 +152,19 @@
       style="transform: translate(-50%, -50%)"
     >
       <v-icon class="mr-3">mdi-flag</v-icon>
-      <TextBtnDialog :title="'檢舉此房源'" class="text-gray-600" />
+
+      <!-- <TextBtnDialog :title="'檢舉此房源'" class="text-gray-600" /> -->
+
+      <!-- 尚未完成開發 -->
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <div v-bind="attrs" v-on="on" class="cursor-pointer">
+            <TextBtnDialog :title="'檢舉此房源'" class="text-gray-600" />
+          </div>
+        </template>
+
+        <span>此功能開發中</span>
+      </v-tooltip>
     </div>
   </v-card>
 </template>
