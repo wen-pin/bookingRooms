@@ -2,6 +2,9 @@
   "Appbar": {
     "description": "Auto imported from components/Appbar.vue"
   },
+  "Appbar2": {
+    "description": "Auto imported from components/Appbar2.vue"
+  },
   "CardDialog": {
     "description": "Auto imported from components/CardDialog.vue"
   },
@@ -22,9 +25,6 @@
   },
   "FormRegisterBook": {
     "description": "Auto imported from components/FormRegisterBook.vue"
-  },
-  "SubAppbar": {
-    "description": "Auto imported from components/SubAppbar.vue"
   },
   "SvgIcon": {
     "description": "Auto imported from components/SvgIcon.vue"

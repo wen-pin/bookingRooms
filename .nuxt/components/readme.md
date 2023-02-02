@@ -7,6 +7,7 @@ You can directly use them in pages and other components without the need to impo
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
 - `<Appbar>` | `<appbar>` (components/Appbar.vue)
+- `<Appbar2>` | `<appbar2>` (components/Appbar2.vue)
 - `<CardDialog>` | `<card-dialog>` (components/CardDialog.vue)
 - `<CardEqptAndServ>` | `<card-eqpt-and-serv>` (components/CardEqptAndServ.vue)
 - `<DivideBlock>` | `<divide-block>` (components/DivideBlock.vue)
@@ -14,7 +15,6 @@ You can directly use them in pages and other components without the need to impo
 - `<FormLoginBook>` | `<form-login-book>` (components/FormLoginBook.vue)
 - `<FormRegister>` | `<form-register>` (components/FormRegister.vue)
 - `<FormRegisterBook>` | `<form-register-book>` (components/FormRegisterBook.vue)
-- `<SubAppbar>` | `<sub-appbar>` (components/SubAppbar.vue)
 - `<SvgIcon>` | `<svg-icon>` (components/SvgIcon.vue)
 - `<TextBtnDialog>` | `<text-btn-dialog>` (components/TextBtnDialog.vue)
 - `<TextRate>` | `<text-rate>` (components/TextRate.vue)
