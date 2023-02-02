@@ -1,10 +1,12 @@
 <template>
   <v-app>
-    <Appbar />
+    <UiAppbar />
 
     <v-main>
       <Nuxt />
     </v-main>
+
+    <UiBottomNavi v-if="$vuetify.breakpoint.xs" />
   </v-app>
 </template>
 
