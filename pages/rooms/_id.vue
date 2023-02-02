@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <Appbar2
+    <UiAppbar2
       :averageRating="room.averageRating"
       :allMessages="room.allMessages"
       :price="room.price"
