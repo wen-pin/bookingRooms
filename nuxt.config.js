@@ -198,6 +198,10 @@ export default {
   vuetify: {
     treeShake: false,
     // defaultAssets: false,
+    breakpoint: {
+      mobileBreakpoint: 'xs', // 这个值等于600
+      thresholds: {},
+    },
   },
 
   // 通知吐司 https://github.com/Maronato/vue-toastification

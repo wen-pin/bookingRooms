@@ -1,10 +1,4 @@
 {
-  "Appbar": {
-    "description": "Auto imported from components/Appbar.vue"
-  },
-  "Appbar2": {
-    "description": "Auto imported from components/Appbar2.vue"
-  },
   "CardDialog": {
     "description": "Auto imported from components/CardDialog.vue"
   },
@@ -50,6 +44,15 @@
   "BookUnsubscribe": {
     "description": "Auto imported from components/book/Unsubscribe.vue"
   },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
+  },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"
   },
@@ -64,15 +67,6 @@
   },
   "DateRangeStyle": {
     "description": "Auto imported from components/date/RangeStyle.vue"
-  },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
-  },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
-  },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
   },
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"
@@ -112,5 +106,14 @@
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
+  },
+  "UiAppbar": {
+    "description": "Auto imported from components/ui/Appbar.vue"
+  },
+  "UiAppbar2": {
+    "description": "Auto imported from components/ui/Appbar2.vue"
+  },
+  "UiBottomNavi ": {
+    "description": "Auto imported from components/ui/BottomNavi .vue"
   }
 }

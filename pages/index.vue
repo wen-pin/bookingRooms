@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-for="room in rooms" :key="room.id" cols="3">
+      <v-col v-for="room in rooms" :key="room.id" lg="3" xs="12">
         <v-card elevation="0" nuxt :to="`/rooms/${room.id}`">
           <v-img
             :src="require(`~/assets/img/rooms/room${room.id}/bg_1.jpg`)"
@@ -20,10 +20,6 @@
 
               <span>
                 <TextRate :value="room.averageRating" :size="14" />
-              </span>
-
-              <span v-if="room.allMessages">
-                ({{ room.allMessages.length }})
               </span>
             </div>
 

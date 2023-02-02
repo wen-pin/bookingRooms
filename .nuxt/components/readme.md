@@ -6,8 +6,6 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
-- `<Appbar>` | `<appbar>` (components/Appbar.vue)
-- `<Appbar2>` | `<appbar2>` (components/Appbar2.vue)
 - `<CardDialog>` | `<card-dialog>` (components/CardDialog.vue)
 - `<CardEqptAndServ>` | `<card-eqpt-and-serv>` (components/CardEqptAndServ.vue)
 - `<DivideBlock>` | `<divide-block>` (components/DivideBlock.vue)
@@ -23,14 +21,14 @@ You can directly use them in pages and other components without the need to impo
 - `<BookPayment>` | `<book-payment>` (components/book/Payment.vue)
 - `<BookTrip>` | `<book-trip>` (components/book/Trip.vue)
 - `<BookUnsubscribe>` | `<book-unsubscribe>` (components/book/Unsubscribe.vue)
+- `<DialogEvaluation>` | `<dialog-evaluation>` (components/dialog/Evaluation.vue)
+- `<DialogFavorites>` | `<dialog-favorites>` (components/dialog/Favorites.vue)
+- `<DialogShare>` | `<dialog-share>` (components/dialog/Share.vue)
 - `<DateClearBtn>` | `<date-clear-btn>` (components/date/ClearBtn.vue)
 - `<DateCloseBtn>` | `<date-close-btn>` (components/date/CloseBtn.vue)
 - `<DatePicker>` | `<date-picker>` (components/date/Picker.vue)
 - `<DateRange>` | `<date-range>` (components/date/Range.vue)
 - `<DateRangeStyle>` | `<date-range-style>` (components/date/RangeStyle.vue)
-- `<DialogEvaluation>` | `<dialog-evaluation>` (components/dialog/Evaluation.vue)
-- `<DialogFavorites>` | `<dialog-favorites>` (components/dialog/Favorites.vue)
-- `<DialogShare>` | `<dialog-share>` (components/dialog/Share.vue)
 - `<RoomBeds>` | `<room-beds>` (components/room/Beds.vue)
 - `<RoomCardBook>` | `<room-card-book>` (components/room/CardBook.vue)
 - `<RoomCardTenant>` | `<room-card-tenant>` (components/room/CardTenant.vue)
@@ -44,3 +42,6 @@ You can directly use them in pages and other components without the need to impo
 - `<RoomPriceUntaxed>` | `<room-price-untaxed>` (components/room/PriceUntaxed.vue)
 - `<RoomRights>` | `<room-rights>` (components/room/Rights.vue)
 - `<RoomNotes>` | `<room-notes>` (components/room/notes.vue)
+- `<UiAppbar>` | `<ui-appbar>` (components/ui/Appbar.vue)
+- `<UiAppbar2>` | `<ui-appbar2>` (components/ui/Appbar2.vue)
+- `<UiBottomNavi >` | `<ui-bottom-navi >` (components/ui/BottomNavi .vue)
