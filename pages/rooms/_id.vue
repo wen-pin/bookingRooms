@@ -95,7 +95,7 @@
           :price="room.price"
           :limitPeople="room.limitPeople"
           :isAcceptPet="room.isAcceptPet"
-          class="!sticky top-[80px] mt-5 !mb-[90px]"
+          class="!sticky top-[120px] mt-5 !mb-[90px]"
         />
       </div>
     </div>
