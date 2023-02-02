@@ -1,5 +1,12 @@
 <template>
   <v-container>
+    <Appbar2
+      :averageRating="room.averageRating"
+      :allMessages="room.allMessages"
+      :price="room.price"
+      target-element="#date"
+    />
+
     <div class="text-2xl font-bold mt-5">{{ room.title }}</div>
 
     <div class="my-2 flex">
@@ -44,6 +51,7 @@
     >
       <div class="w-[60%]">
         <RoomInfoTitle
+          id="infoTitle"
           :landlord="room.landlord"
           :rentalType="room.rentalType"
           :limitPeople="room.limitPeople"
@@ -79,7 +87,7 @@
       </div>
 
       <!-- 要在這邊加上z-10，打開的卡片才能覆蓋底層 -->
-      <div class="w-[40%] flex justify-center relative z-10">
+      <div class="w-[40%] flex justify-end relative z-10">
         <RoomCardBook
           :averageRating="room.averageRating"
           :allMessages="room.allMessages"
@@ -124,7 +132,6 @@
 <script>
 export default {
   name: 'singleRoom',
-  layout: 'singleRoom',
 
   data() {
     return {
