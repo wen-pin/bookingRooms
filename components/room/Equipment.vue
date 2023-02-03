@@ -5,16 +5,22 @@
         {{ $t('有提供的設備與服務') }}
       </div>
 
-      <v-row class="w-[80%] mt-2">
+      <v-row class="mt-2">
         <v-col
           v-for="item in sliceAlleqptAndServices(fetchAlleqptAndServices)"
           :key="item.id"
-          cols="6"
-          class="flex pb-0"
+          :cols="$vuetify.breakpoint.xs ? 12 : 6"
+          class="pb-0"
         >
-          <SvgIcon :iconClass="item.svgTitle" class="mr-3" />
-          <div>
-            {{ item.title }}
+          <div class="flex">
+            <SvgIcon
+              :iconClass="item.svgTitle"
+              :className="'size3'"
+              class="mr-3"
+            />
+            <div>
+              {{ item.title }}
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -25,13 +31,23 @@
         </span>
       </v-btn>
 
-      <v-dialog v-model="dialog" scrollable width="700">
-        <v-card class="rounded-lg p-5">
-          <v-btn icon @click="dialog = false">
-            <v-icon>mdi-window-close</v-icon>
+      <v-dialog
+        v-model="dialog"
+        :fullscreen="$vuetify.breakpoint.xs"
+        transition="dialog-bottom-transition"
+        scrollable
+        width="700"
+      >
+        <v-card class="rounded-lg">
+          <v-btn icon @click="dialog = false" class="ml-3 mt-2">
+            <v-icon v-if="$vuetify.breakpoint.xs" color="black">
+              mdi-less-than
+            </v-icon>
+
+            <v-icon v-else color="black">mdi-window-close</v-icon>
           </v-btn>
 
-          <v-card-text class="!p-0 my-10 black--text">
+          <v-card-text class="!p-5 mb-10 black--text">
             <div class="text-2xl font-bold">有提供的設備與服務</div>
 
             <div v-for="items in alleqptAndServices" :key="items.id">
@@ -86,7 +102,11 @@ export default {
   },
   methods: {
     sliceAlleqptAndServices(array) {
-      return array.slice(0, 10)
+      if (this.$vuetify.breakpoint.xs) {
+        return array.slice(0, 6)
+      } else {
+        return array.slice(0, 10)
+      }
     },
   },
 }

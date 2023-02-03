@@ -1,26 +1,46 @@
 <template>
-  <div class="my-10">
-    <div class="text-2xl font-medium">注意事項</div>
+  <div :class="$vuetify.breakpoint.xs ? 'my-2' : 'my-10'">
+    <div v-if="!$vuetify.breakpoint.xs" class="text-2xl font-medium">
+      注意事項
+    </div>
 
     <v-row class="mt-2">
-      <v-col cols="4">
-        <div class="font-medium">《房屋守則》</div>
-
-        <div class="h-[100px]">
-          <div class="my-2">入住時間：{{ notes.checkIn }}</div>
-          <div class="my-2">退房時間：{{ notes.checkOut }}</div>
-          <div class="my-2">最多 {{ limitPeople }} 位房客</div>
-        </div>
-
+      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
         <div
-          class="!max-w-[115px] flex mt-7"
-          @click="houseRulesDialog = !houseRulesDialog"
+          :class="
+            $vuetify.breakpoint.xs
+              ? 'divide-solid divide-y divide-slate-200'
+              : ''
+          "
         >
-          <TextBtnDialog :title="'顯示更多內容'" />
+          <div :class="$vuetify.breakpoint.xs ? 'mb-5' : ''">
+            <div
+              :class="$vuetify.breakpoint.xs ? 'text-2xl' : ''"
+              class="font-medium"
+            >
+              《房屋守則》
+            </div>
 
-          <v-icon class="cursor-pointer" small color="black">
-            mdi-greater-than
-          </v-icon>
+            <div class="h-[100px]">
+              <div class="my-2">入住時間：{{ notes.checkIn }}</div>
+              <div class="my-2">退房時間：{{ notes.checkOut }}</div>
+              <div class="my-2">最多 {{ limitPeople }} 位房客</div>
+            </div>
+
+            <div
+              :class="$vuetify.breakpoint.xs ? '' : 'mt-7'"
+              class="!max-w-[115px] flex"
+              @click="houseRulesDialog = !houseRulesDialog"
+            >
+              <TextBtnDialog :title="'顯示更多內容'" />
+
+              <v-icon class="cursor-pointer" small color="black">
+                mdi-greater-than
+              </v-icon>
+            </div>
+          </div>
+
+          <div></div>
         </div>
 
         <CardDialog
@@ -100,28 +120,46 @@
         </CardDialog>
       </v-col>
 
-      <v-col cols="4">
-        <div class="font-medium">安全與房源</div>
-
-        <div class="h-[100px]">
-          <div
-            v-for="item in notes.safeInfo[0].eqptAndServices.slice(0, 3)"
-            :key="item.title"
-            class="my-2"
-          >
-            {{ item.title }}
-          </div>
-        </div>
-
+      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
         <div
-          class="!max-w-[115px] flex mt-7"
-          @click="securityDialog = !securityDialog"
+          :class="
+            $vuetify.breakpoint.xs
+              ? 'divide-solid divide-y divide-slate-200'
+              : ''
+          "
         >
-          <TextBtnDialog :title="'顯示更多內容'" />
+          <div class="mb-5">
+            <div
+              :class="$vuetify.breakpoint.xs ? 'text-2xl' : ''"
+              class="font-medium"
+            >
+              安全與房源
+            </div>
 
-          <v-icon class="cursor-pointer" small color="black">
-            mdi-greater-than
-          </v-icon>
+            <div class="h-[100px]">
+              <div
+                v-for="item in notes.safeInfo[0].eqptAndServices.slice(0, 3)"
+                :key="item.title"
+                class="my-2"
+              >
+                {{ item.title }}
+              </div>
+            </div>
+
+            <div
+              :class="$vuetify.breakpoint.xs ? '' : 'mt-7'"
+              class="!max-w-[115px] flex"
+              @click="securityDialog = !securityDialog"
+            >
+              <TextBtnDialog :title="'顯示更多內容'" />
+
+              <v-icon class="cursor-pointer" small color="black">
+                mdi-greater-than
+              </v-icon>
+            </div>
+          </div>
+
+          <div></div>
         </div>
 
         <CardDialog
@@ -152,43 +190,58 @@
         </CardDialog>
       </v-col>
 
-      <v-col cols="4">
-        <div class="font-medium">《退訂政策》</div>
+      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
+        <div :class="$vuetify.breakpoint.xs ? 'flex justify-between' : ''">
+          <div>
+            <div
+              :class="$vuetify.breakpoint.xs ? 'text-2xl' : ''"
+              class="font-medium"
+            >
+              《退訂政策》
+            </div>
 
-        <div class="h-[100px]">
-          <div v-if="datesQueue.length === 0" class="my-2">
-            新增旅程日期，即可查看此住宿的退訂詳情。
-          </div>
-          <div v-else>
-            <div class="my-2">這筆預訂不可退款。</div>
-            <div class="my-2">
-              請查看房東完整的《退訂政策》；即便是因為感染新冠肺炎而取消，或新冠疫情導致旅程中斷，這些政策依然適用。
+            <div :class="$vuetify.breakpoint.xs ? '' : 'h-[100px]'">
+              <div v-if="datesQueue.length === 0" class="my-2">
+                新增旅程日期，即可查看此住宿的退訂詳情。
+              </div>
+              <div v-else>
+                <div class="my-2">這筆預訂不可退款。</div>
+                <div class="my-2">
+                  請查看房東完整的《退訂政策》；即便是因為感染新冠肺炎而取消，或新冠疫情導致旅程中斷，這些政策依然適用。
+                </div>
+              </div>
             </div>
           </div>
+
+          <v-icon v-if="$vuetify.breakpoint.xs" color="black"
+            >mdi-greater-than</v-icon
+          >
         </div>
 
-        <div
-          v-if="datesQueue.length !== 0"
-          class="!max-w-[115px] flex mt-7"
-          @click="unsubscribePolicyDialog = !unsubscribePolicyDialog"
-        >
-          <TextBtnDialog :title="'顯示更多內容'" />
+        <div v-if="!$vuetify.breakpoint.xs">
+          <div
+            v-if="datesQueue.length !== 0"
+            class="!max-w-[115px] flex mt-7"
+            @click="unsubscribePolicyDialog = !unsubscribePolicyDialog"
+          >
+            <TextBtnDialog :title="'顯示更多內容'" />
 
-          <v-icon class="cursor-pointer" small color="black">
-            mdi-greater-than
-          </v-icon>
-        </div>
+            <v-icon class="cursor-pointer" small color="black">
+              mdi-greater-than
+            </v-icon>
+          </div>
 
-        <div
-          v-else
-          class="!max-w-[115px] flex mt-7"
-          @click="goToTarget(targetElement)"
-        >
-          <div class="font-bold underline cursor-pointer">新增日期</div>
+          <div
+            v-else
+            class="!max-w-[115px] flex mt-7"
+            @click="goToTarget(targetElement)"
+          >
+            <div class="font-bold underline cursor-pointer">新增日期</div>
 
-          <v-icon class="cursor-pointer" small color="black">
-            mdi-greater-than
-          </v-icon>
+            <v-icon class="cursor-pointer" small color="black">
+              mdi-greater-than
+            </v-icon>
+          </div>
         </div>
 
         <CardDialog

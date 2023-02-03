@@ -21,7 +21,7 @@
         </span>
       </div>
 
-      <v-row class="mt-5">
+      <v-row v-if="!$vuetify.breakpoint.xs" class="mt-5">
         <v-col v-for="item in evaluationStandards" :key="item.title" cols="6">
           <v-row>
             <v-col cols="4" class="w-[50px]">{{ $t(item.title) }}</v-col>
@@ -63,7 +63,12 @@
         </v-col>
       </v-row>
 
-      <v-btn outlined height="55px" @click="isVisible = true">
+      <v-btn
+        :block="$vuetify.breakpoint.xs"
+        outlined
+        height="55px"
+        @click="isVisible = true"
+      >
         <span v-if="allMessages" span class="text-lg">
           顯示全部{{ allMessages.length }}則評價
         </span>

@@ -18,12 +18,17 @@
         :center="{ lat: location.lat, lng: location.lng }"
         :zoom="15"
         map-type-id="terrain"
-        class="w-full h-[400px]"
+        :class="$vuetify.breakpoint.xs ? 'h-[220px]' : 'h-[400px]'"
+        class="w-full"
       >
         <GmapMarker :position="{ lat: location.lat, lng: location.lng }" />
       </GmapMap>
 
-      <div class="!max-w-[115px] flex mt-7" @click="isVisible = !isVisible">
+      <div
+        v-if="location.content"
+        class="!max-w-[115px] flex mt-7"
+        @click="isVisible = !isVisible"
+      >
         <TextBtnDialog :title="'顯示更多內容'" />
 
         <v-icon class="cursor-pointer" small color="black">
@@ -33,32 +38,37 @@
 
       <v-dialog
         v-model="isVisible"
-        fullscreen
         transition="dialog-bottom-transition"
+        scrollable
+        fullscreen
       >
-        <v-card class="h-screen relative">
-          <v-btn icon class="!absolute top-4 left-4" @click="close()">
-            <v-icon> mdi-less-than </v-icon>
+        <v-card class="h-screen relative bg-white">
+          <v-btn icon class="ml-3 mt-2" @click="close()">
+            <v-icon color="black"> mdi-less-than </v-icon>
           </v-btn>
 
-          <div class="flex w-full h-full pt-[60px] px-8 pb-8">
-            <div class="w-[40%] pr-10">
+          <v-card-text class="black--text flex mb-8">
+            <div
+              class="pr-10"
+              :class="$vuetify.breakpoint.xs ? 'w-full' : 'w-[40%]'"
+            >
               <div class="text-3xl font-bold mt-3 mb-6">住宿地點</div>
 
               <div v-if="location">
-                <div v-if="location.title" class="font-medium mb-3">
+                <div v-if="location.title" class="text-xl font-medium mb-3">
                   {{ location.title }}
                 </div>
 
                 <div
                   v-html="convertTobr"
                   :class="details_visible ? 'line-clamp-3' : ''"
+                  class="text-base"
                 ></div>
 
-                <div v-if="location.content">
+                <div v-if="location.content" class="text-base">
                   <div
                     v-if="details_visible"
-                    class="!max-w-[80px] flex"
+                    class="!max-w-[85px] flex"
                     @click="details_visible = !details_visible"
                   >
                     <TextBtnDialog :title="'閱讀詳情'" />
@@ -72,7 +82,7 @@
             </div>
 
             <GmapMap
-              v-if="googleMaps_visible"
+              v-if="!$vuetify.breakpoint.xs"
               :center="{ lat: location.lat, lng: location.lng }"
               :zoom="15"
               map-type-id="terrain"
@@ -82,7 +92,7 @@
                 :position="{ lat: location.lat, lng: location.lng }"
               />
             </GmapMap>
-          </div>
+          </v-card-text>
         </v-card>
       </v-dialog>
     </div>

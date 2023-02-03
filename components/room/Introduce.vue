@@ -15,10 +15,12 @@
         :width="800"
         :dialog="dialog"
         :title="'空間介紹'"
+        :fullscreen="$vuetify.breakpoint.xs"
+        :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
+        scrollable
         @update="updateDialog"
       >
-        <v-card-text class="black--text !text-base mt-5" v-html="convertTobr">
-        </v-card-text>
+        <div class="!text-base mt-5" v-html="convertTobr"></div>
       </CardDialog>
     </div>
   </DivideBlock>
