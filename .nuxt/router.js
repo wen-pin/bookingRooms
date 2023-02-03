@@ -4,12 +4,16 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5e8e935a = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
-const _1fba57b1 = () => interopDefault(import('../pages/logo.vue' /* webpackChunkName: "pages/logo" */))
-const _81d09c4a = () => interopDefault(import('../pages/trips/index.vue' /* webpackChunkName: "pages/trips/index" */))
-const _1a982e45 = () => interopDefault(import('../pages/book/stays/_id.vue' /* webpackChunkName: "pages/book/stays/_id" */))
-const _45734f0d = () => interopDefault(import('../pages/rooms/_id.vue' /* webpackChunkName: "pages/rooms/_id" */))
-const _0711133c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _139676bf = () => interopDefault(import('../pages/account.vue' /* webpackChunkName: "pages/account" */))
+const _4108970a = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _7b0af489 = () => interopDefault(import('../pages/logo.vue' /* webpackChunkName: "pages/logo" */))
+const _a82920ce = () => interopDefault(import('../pages/message.vue' /* webpackChunkName: "pages/message" */))
+const _89fe62fe = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _31c51bfa = () => interopDefault(import('../pages/trips/index.vue' /* webpackChunkName: "pages/trips/index" */))
+const _4c037e40 = () => interopDefault(import('../pages/wishlists.vue' /* webpackChunkName: "pages/wishlists" */))
+const _e066c5c6 = () => interopDefault(import('../pages/book/stays/_id.vue' /* webpackChunkName: "pages/book/stays/_id" */))
+const _20baf935 = () => interopDefault(import('../pages/rooms/_id.vue' /* webpackChunkName: "pages/rooms/_id" */))
+const _15d41164 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -23,28 +27,44 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/account",
+    component: _139676bf,
+    name: "account"
+  }, {
     path: "/login",
-    component: _5e8e935a,
+    component: _4108970a,
     name: "login"
   }, {
     path: "/logo",
-    component: _1fba57b1,
+    component: _7b0af489,
     name: "logo"
   }, {
+    path: "/message",
+    component: _a82920ce,
+    name: "message"
+  }, {
+    path: "/register",
+    component: _89fe62fe,
+    name: "register"
+  }, {
     path: "/trips",
-    component: _81d09c4a,
+    component: _31c51bfa,
     name: "trips"
   }, {
+    path: "/wishlists",
+    component: _4c037e40,
+    name: "wishlists"
+  }, {
     path: "/book/stays/:id?",
-    component: _1a982e45,
+    component: _e066c5c6,
     name: "book-stays-id"
   }, {
     path: "/rooms/:id?",
-    component: _45734f0d,
+    component: _20baf935,
     name: "rooms-id"
   }, {
     path: "/",
-    component: _0711133c,
+    component: _15d41164,
     name: "index"
   }],
 
