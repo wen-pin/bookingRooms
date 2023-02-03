@@ -4,20 +4,21 @@
     :width="width"
     :fullscreen="fullscreen"
     :hide-overlay="hideOverlay"
+    scrollable
     transition="dialog-bottom-transition"
   >
-    <v-card class="rounded-lg p-5" height="100%">
-      <v-btn icon @click="detailDialog = false">
-        <v-icon>{{ icon }}</v-icon>
+    <v-card class="rounded-lg">
+      <v-btn icon @click="detailDialog = false" class="ml-3 mt-2">
+        <v-icon color="black">{{ icon }}</v-icon>
       </v-btn>
 
-      <v-card-title v-if="title">
-        <span class="text-2xl font-semibold">
+      <v-card-text class="p-5 mb-10 black--text">
+        <div v-if="title" class="text-2xl font-semibold mt-5">
           {{ title }}
-        </span>
-      </v-card-title>
+        </div>
 
-      <slot />
+        <slot />
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
