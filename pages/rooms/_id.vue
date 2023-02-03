@@ -93,6 +93,13 @@
           />
         </div>
 
+        <!-- 使用斷點會報錯 -->
+        <!-- <RoomLocation
+          v-if="$vuetify.breakpoint.xs"
+          :location="room.location"
+          :country="room.country"
+        /> -->
+
         <div class="my-10" id="date">
           <DateRange :location="room.location" />
 
@@ -155,6 +162,7 @@
 <script>
 export default {
   name: 'singleRoom',
+  layout: 'singleRoom',
 
   data() {
     return {
