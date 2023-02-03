@@ -63,6 +63,14 @@ export default {
   fill: currentColor;
   overflow: hidden;
 }
+.svg-iconsize3 {
+  width: 1.5em;
+  height: 1.5em;
+  font-size: 1.2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 .svg-iconsuccess {
   width: 5em;
   height: 5em;
