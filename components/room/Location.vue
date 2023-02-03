@@ -1,6 +1,6 @@
 <template>
   <DivideBlock>
-    <div class="my-10">
+    <div class="my-8">
       <div class="text-2xl font-bold">
         {{ $t('住宿地點') }}
       </div>

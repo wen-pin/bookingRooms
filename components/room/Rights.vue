@@ -1,6 +1,6 @@
 <template>
   <DivideBlock>
-    <div class="my-8">
+    <div class="my-6">
       <div class="text-3xl font-extrabold">theroomscover</div>
 
       <div class="mt-2 mb-3">
