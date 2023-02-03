@@ -1,55 +1,75 @@
 <template>
   <v-container>
     <UiAppbar2
+      v-if="!$vuetify.breakpoint.xs"
       :averageRating="room.averageRating"
       :allMessages="room.allMessages"
       :price="room.price"
       target-element="#date"
     />
 
-    <div class="text-2xl font-bold mt-5">{{ room.title }}</div>
+    <div
+      :class="
+        $vuetify.breakpoint.xs ? 'divide-solid divide-y divide-slate-200' : ''
+      "
+    >
+      <div :class="$vuetify.breakpoint.xs ? 'mb-6' : ''">
+        <div class="text-2xl font-bold mt-5">{{ room.title }}</div>
 
-    <div class="my-2 flex">
-      <div class="flex">
-        <span class="my-auto">
-          <TextRate :value="room.averageRating" :margin="'mr-4'" />
-        </span>
+        <div class="my-2 flex">
+          <div class="flex" :class="$vuetify.breakpoint.xs ? 'flex-col' : ''">
+            <div class="my-auto">
+              <div class="flex items-center">
+                <TextRate
+                  :value="room.averageRating"
+                  :maxWidth="'!max-w-[50px]'"
+                  :class="!$vuetify.breakpoint.xs ? 'mr-4' : ''"
+                />
 
-        <DialogEvaluation
-          :averageRating="room.averageRating"
-          :allMessages="room.allMessages"
-          :evaluationStandards="room.evaluationStandards"
-          class="mr-4 my-auto"
-        />
+                <DialogEvaluation
+                  :averageRating="room.averageRating"
+                  :allMessages="room.allMessages"
+                  :evaluationStandards="room.evaluationStandards"
+                  class="mr-4 my-auto"
+                />
+              </div>
+            </div>
 
-        <div v-if="room.location" class="flex items-center">
-          <TextBtnDialog
-            :title="room.location.address"
-            :subTitle="room.country"
-            @click="googleMapsDialog = !googleMapsDialog"
-          />
+            <div v-if="room.location" class="flex items-center">
+              <TextBtnDialog
+                :title="room.location.address"
+                :subTitle="room.country"
+                @click="googleMapsDialog = !googleMapsDialog"
+              />
+            </div>
+
+            <v-spacer />
+
+            <DialogShare v-if="!$vuetify.breakpoint.xs" />
+
+            <DialogFavorites v-if="!$vuetify.breakpoint.xs" />
+          </div>
         </div>
-
-        <v-spacer />
-
-        <DialogShare />
-
-        <DialogFavorites />
       </div>
+
+      <!-- 底線 -->
+      <div></div>
     </div>
 
-    <div v-if="room.img">
-      <RoomPhotos
-        id="photos"
-        :roomQuality="room.img.roomQuality"
-        class="my-5"
-      />
+    <div v-if="!$vuetify.breakpoint.xs">
+      <div v-if="room.img">
+        <RoomPhotos
+          id="photos"
+          :roomQuality="room.img.roomQuality"
+          class="my-5"
+        />
+      </div>
     </div>
 
     <div
       class="flex border-solid border-t-0 border-r-0 border-b-1 border-l-0 border-slate-200"
     >
-      <div class="w-[60%]">
+      <div :class="$vuetify.breakpoint.xs ? 'w-full' : 'w-[60%]'">
         <RoomInfoTitle
           id="infoTitle"
           :landlord="room.landlord"
@@ -87,7 +107,10 @@
       </div>
 
       <!-- 要在這邊加上z-10，打開的卡片才能覆蓋底層 -->
-      <div class="w-[40%] flex justify-end relative z-10">
+      <div
+        v-if="!$vuetify.breakpoint.xs"
+        class="w-[40%] flex justify-end relative z-10"
+      >
         <RoomCardBook
           :averageRating="room.averageRating"
           :allMessages="room.allMessages"

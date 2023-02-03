@@ -1,9 +1,19 @@
 <template>
   <DivideBlock>
-    <div class="my-8 flex justify-between">
+    <div
+      class="flex justify-between"
+      :class="$vuetify.breakpoint.xs ? 'my-6' : 'my-8'"
+    >
       <div>
         <div class="text-2xl font-bold">
-          {{ landlord }}出租的{{ rentalType }}
+          <div v-if="$vuetify.breakpoint.xs">
+            <div>
+              {{ rentalType }}
+            </div>
+            <div>房東：{{ landlord }}</div>
+          </div>
+
+          <div v-else>{{ landlord }}出租的{{ rentalType }}</div>
         </div>
 
         <span>{{ limitPeople }}位 </span>

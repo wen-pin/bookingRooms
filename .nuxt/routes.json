@@ -3,70 +3,60 @@
     "name": "account",
     "path": "/account",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/account.vue",
-    "chunkName": "pages/account",
-    "_name": "_139676bf"
+    "chunkName": "pages/account"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_4108970a"
+    "chunkName": "pages/login"
   },
   {
     "name": "logo",
     "path": "/logo",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/logo.vue",
-    "chunkName": "pages/logo",
-    "_name": "_7b0af489"
+    "chunkName": "pages/logo"
   },
   {
     "name": "message",
     "path": "/message",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/message.vue",
-    "chunkName": "pages/message",
-    "_name": "_a82920ce"
+    "chunkName": "pages/message"
   },
   {
     "name": "register",
     "path": "/register",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/register.vue",
-    "chunkName": "pages/register",
-    "_name": "_89fe62fe"
+    "chunkName": "pages/register"
   },
   {
     "name": "trips",
     "path": "/trips",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/trips/index.vue",
-    "chunkName": "pages/trips/index",
-    "_name": "_31c51bfa"
+    "chunkName": "pages/trips/index"
   },
   {
     "name": "wishlists",
     "path": "/wishlists",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/wishlists.vue",
-    "chunkName": "pages/wishlists",
-    "_name": "_4c037e40"
+    "chunkName": "pages/wishlists"
   },
   {
     "name": "book-stays-id",
     "path": "/book/stays/:id?",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/book/stays/_id.vue",
-    "chunkName": "pages/book/stays/_id",
-    "_name": "_e066c5c6"
+    "chunkName": "pages/book/stays/_id"
   },
   {
     "name": "rooms-id",
     "path": "/rooms/:id?",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/rooms/_id.vue",
-    "chunkName": "pages/rooms/_id",
-    "_name": "_20baf935"
+    "chunkName": "pages/rooms/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/apple/Desktop/forestage/bookingRooms/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_15d41164"
+    "chunkName": "pages/index"
   }
 ]
