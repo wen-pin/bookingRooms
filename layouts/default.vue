@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <UiAppbar />
+    <UiAppbar v-if="!$vuetify.breakpoint.xs" />
 
     <v-main>
       <Nuxt />
