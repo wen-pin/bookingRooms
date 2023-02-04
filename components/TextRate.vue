@@ -10,7 +10,7 @@
       readonly
     />
 
-    <div :class="margin">{{ value }}</div>
+    <div v-if="isVisible" :class="margin">{{ value }}</div>
   </div>
 </template>
 
@@ -32,6 +32,10 @@ export default {
     },
     margin: {
       type: String,
+    },
+    isVisible: {
+      type: Boolean,
+      default: true,
     },
   },
 }
