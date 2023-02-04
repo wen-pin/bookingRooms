@@ -10,6 +10,7 @@ export default {
       6: '6',
       sm: '3',
       lg: '10',
+      5: '5',
     },
   },
   plugins: [require('windicss/plugin/line-clamp')],
