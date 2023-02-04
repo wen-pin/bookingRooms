@@ -67,6 +67,7 @@
         :block="$vuetify.breakpoint.xs"
         outlined
         height="55px"
+        class="rounded-lg"
         @click="isVisible = true"
       >
         <span v-if="allMessages" span class="text-lg">
