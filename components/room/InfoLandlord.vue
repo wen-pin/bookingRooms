@@ -1,8 +1,11 @@
 <template>
   <DivideBlock>
-    <div class="my-10">
-      <div class="flex items-center">
-        <v-avatar size="70px" class="mr-2">
+    <div class="my-8">
+      <div
+        :class="$vuetify.breakpoint.xs ? 'justify-between' : ''"
+        class="flex items-center"
+      >
+        <v-avatar v-if="!$vuetify.breakpoint.xs" size="70px" class="mr-2">
           <img
             alt="Avatar"
             :src="
@@ -13,54 +16,89 @@
         </v-avatar>
 
         <div>
-          <span class="text-2xl font-medium">房東:{{ landlordInfo.name }}</span>
-          <div class="text-zinc-400">
-            加入時間:{{
+          <span class="text-2xl font-medium"
+            >房東：{{ landlordInfo.name }}</span
+          >
+          <div class="text-zinc-400 text-sm">
+            加入時間：{{
               this.$dayjs(landlordInfo.createdAt).format('YYYY[年]M[月]')
             }}
           </div>
         </div>
+
+        <v-avatar v-if="$vuetify.breakpoint.xs" size="70px" class="mr-2">
+          <img
+            alt="Avatar"
+            :src="
+              require(`~/assets/img/rooms/room${this.$route.params.id}/avater.jpeg`)
+            "
+            class="cursor-pointer"
+          />
+        </v-avatar>
       </div>
 
-      <div class="flex my-5 w-full">
-        <div class="w-[50%]">
-          <div class="flex">
-            <span>
-              <TextRate
-                :value="averageRating"
-                :size="25"
-                :max-width="''"
-                :margin="'mr-4'"
-                class="text-lg"
-              />
-            </span>
+      <div
+        :class="$vuetify.breakpoint.xs ? 'flex-col' : ''"
+        class="flex my-5 w-full text-base"
+      >
+        <div :class="$vuetify.breakpoint.xs ? 'w-full' : 'w-[50%]'">
+          <div
+            :class="$vuetify.breakpoint.xs ? 'flex-col' : 'items-center'"
+            class="flex"
+          >
+            <div>
+              <div class="flex items-center">
+                <div :class="$vuetify.breakpoint.xs ? 'mr-3' : ''">
+                  <TextRate
+                    :value="averageRating"
+                    :size="20"
+                    :max-width="''"
+                    :margin="'mr-4'"
+                    :isVisible="$vuetify.breakpoint.xs ? false : true"
+                    class="text-lg"
+                  />
+                </div>
 
-            <span v-if="allMessages">
-              <TextBtnDialog
-                :title="`${allMessages.length}則評價`"
-                :isUnderlineCursorPointer="false"
-                class="text-lg"
-              />
-            </span>
-
-            <div v-if="landlordInfo.isAuth" class="ml-5">
-              <div class="flex">
-                <v-icon color="black" class="mr-3">mdi-shield-check</v-icon>
-
-                <div class="text-lg font-medium">身分已驗證</div>
+                <div
+                  v-if="allMessages"
+                  :class="$vuetify.breakpoint.xs ? '' : ''"
+                >
+                  <TextBtnDialog
+                    :title="`${allMessages.length}則評價`"
+                    :isUnderlineCursorPointer="false"
+                  />
+                </div>
               </div>
             </div>
 
-            <div v-if="landlordInfo.isNice" class="ml-5">
+            <div
+              v-if="landlordInfo.isAuth"
+              :class="$vuetify.breakpoint.xs ? 'mt-3' : 'ml-5'"
+            >
+              <div class="flex">
+                <v-icon color="black" class="mr-3">mdi-shield-check</v-icon>
+
+                <div class="font-medium">身分已驗證</div>
+              </div>
+            </div>
+
+            <div
+              v-if="landlordInfo.isNice"
+              :class="$vuetify.breakpoint.xs ? 'mt-3' : 'ml-5'"
+            >
               <div class="flex">
                 <v-icon color="black" class="mr-3">mdi-medal-outline</v-icon>
 
-                <div class="text-lg font-medium">超讚房東</div>
+                <div class="font-medium">超讚房東</div>
               </div>
             </div>
           </div>
 
-          <div class="text-lg pr-[100px] mt-5" v-html="convertTobr"></div>
+          <div
+            :class="$vuetify.breakpoint.xs ? '' : 'pr-[100px]'"
+            class="mt-5"
+            v-html="convertTobr"
+          ></div>
 
           <div v-if="landlordInfo.isNice">
             <div class="font-semibold mt-5 mb-1">
@@ -73,8 +111,8 @@
           </div>
         </div>
 
-        <div class="w-[50%] text-lg">
-          <div class="pl-[80px]">
+        <div :class="$vuetify.breakpoint.xs ? 'w-full' : 'w-[50%]'">
+          <div :class="$vuetify.breakpoint.xs ? 'mt-5' : 'pl-[80px]'">
             <div v-if="landlordInfo.language">
               語言: {{ landlordInfo.language }}
             </div>
@@ -89,6 +127,7 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
+                  :block="$vuetify.breakpoint.xs"
                   v-bind="attrs"
                   v-on="on"
                   large
