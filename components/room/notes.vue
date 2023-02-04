@@ -12,6 +12,7 @@
               ? 'divide-solid divide-y divide-slate-200'
               : ''
           "
+          @click="houseRulesDialog_mobile()"
         >
           <div :class="$vuetify.breakpoint.xs ? 'mb-5' : ''">
             <div
@@ -27,16 +28,23 @@
               <div class="my-2">最多 {{ limitPeople }} 位房客</div>
             </div>
 
-            <div
-              :class="$vuetify.breakpoint.xs ? '' : 'mt-7'"
-              class="!max-w-[115px] flex"
-              @click="houseRulesDialog = !houseRulesDialog"
-            >
-              <TextBtnDialog :title="'顯示更多內容'" />
+            <div>
+              <div v-if="$vuetify.breakpoint.xs" class="font-bold underline">
+                顯示更多
+              </div>
 
-              <v-icon class="cursor-pointer" small color="black">
-                mdi-greater-than
-              </v-icon>
+              <div
+                v-else
+                :class="$vuetify.breakpoint.xs ? '' : 'mt-7'"
+                class="!max-w-[115px] flex"
+                @click="houseRulesDialog = !houseRulesDialog"
+              >
+                <TextBtnDialog :title="'顯示更多內容'" />
+
+                <v-icon class="cursor-pointer" small color="black">
+                  mdi-greater-than
+                </v-icon>
+              </div>
             </div>
           </div>
 
@@ -46,77 +54,76 @@
         <CardDialog
           :dialog="houseRulesDialog"
           :width="800"
+          :fullscreen="$vuetify.breakpoint.xs"
+          :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
+          scrollable
           @update="updateHouseRulesDialog"
         >
           <div class="text-3xl font-semibold mt-10">《房屋守則》</div>
 
-          <div class="px-2">
-            <div class="mt-5">
-              請遵守這些規則，作個貼心的房客並在住宿期間避免造成問題。
-            </div>
+          <div class="mt-5 text-base">
+            請遵守這些規則，作個貼心的房客並在住宿期間避免造成問題。
+          </div>
 
-            <div class="my-10 font-medium text-xl">入住條件</div>
+          <div class="my-10 font-medium text-xl">入住條件</div>
 
-            <div v-if="!isAcceptPet" class="flex items-center">
-              <v-icon large class="mr-2">mdi-account-group-outline</v-icon>
+          <div v-if="!isAcceptPet" class="flex items-center">
+            <v-icon large class="mr-2">mdi-account-group-outline</v-icon>
 
-              <div class="text-lg">最多{{ limitPeople }}位房客</div>
-            </div>
+            <div class="text-base">最多{{ limitPeople }}位房客</div>
+          </div>
 
-            <div v-else>
-              <DivideBlock>
-                <div class="flex items-center mb-5">
-                  <v-icon large class="mr-2">mdi-account-group-outline</v-icon>
-
-                  <div class="text-lg">最多{{ limitPeople }}位房客</div>
-                </div>
-              </DivideBlock>
-
-              <div class="flex items-center mt-5">
-                <v-icon large class="mr-3">mdi-paw</v-icon>
-
-                <div class="text-lg">可攜帶寵物</div>
-              </div>
-            </div>
-
-            <div class="my-10 font-medium text-xl">允許的事項</div>
-
+          <div v-else>
             <DivideBlock>
               <div class="flex items-center mb-5">
-                <v-icon large class="mr-3">mdi-clock-time-four-outline</v-icon>
+                <v-icon large class="mr-2">mdi-account-group-outline</v-icon>
 
-                <div class="text-lg">入住時間：{{ notes.checkIn }}</div>
+                <div class="text-base">最多{{ limitPeople }}位房客</div>
               </div>
             </DivideBlock>
 
-            <div v-if="!notes.isSmoking" class="flex items-center mt-5">
+            <div class="flex items-center mt-5">
+              <v-icon large class="mr-3">mdi-paw</v-icon>
+
+              <div class="text-base">可攜帶寵物</div>
+            </div>
+          </div>
+
+          <div class="my-10 font-medium text-xl">允許的事項</div>
+
+          <DivideBlock>
+            <div class="flex items-center mb-5">
               <v-icon large class="mr-3">mdi-clock-time-four-outline</v-icon>
 
-              <div class="text-lg">退房時間：{{ notes.checkOut }}</div>
+              <div class="text-base">入住時間：{{ notes.checkIn }}</div>
             </div>
+          </DivideBlock>
 
-            <div v-else>
-              <DivideBlock>
-                <div class="flex items-center mt-5 mb-5">
-                  <v-icon large class="mr-3"
-                    >mdi-clock-time-four-outline</v-icon
-                  >
+          <div v-if="!notes.isSmoking" class="flex items-center mt-5">
+            <v-icon large class="mr-3">mdi-clock-time-four-outline</v-icon>
 
-                  <div class="text-lg">退房時間：{{ notes.checkOut }}</div>
-                </div>
-              </DivideBlock>
+            <div class="text-base">退房時間：{{ notes.checkOut }}</div>
+          </div>
 
-              <div class="flex items-center mt-5">
-                <v-icon large class="mr-3">mdi-smoking</v-icon>
+          <div v-else>
+            <DivideBlock>
+              <div class="flex items-center mt-5 mb-5">
+                <v-icon large class="mr-3">mdi-clock-time-four-outline</v-icon>
 
-                <div class="text-lg">允許抽煙</div>
+                <div class="text-base">退房時間：{{ notes.checkOut }}</div>
               </div>
+            </DivideBlock>
+
+            <div class="flex items-center mt-5">
+              <v-icon large class="mr-3">mdi-smoking</v-icon>
+
+              <div class="text-base">允許抽煙</div>
             </div>
           </div>
 
           <div class="my-10 font-medium text-xl">其他規則</div>
 
-          <div v-html="convertTobr" class="mb-10"></div>
+          <div v-html="convertTobr" class="text-base"></div>
         </CardDialog>
       </v-col>
 
@@ -127,6 +134,7 @@
               ? 'divide-solid divide-y divide-slate-200'
               : ''
           "
+          @click="securityDialogDialog_mobile()"
         >
           <div class="mb-5">
             <div
@@ -146,16 +154,23 @@
               </div>
             </div>
 
-            <div
-              :class="$vuetify.breakpoint.xs ? '' : 'mt-7'"
-              class="!max-w-[115px] flex"
-              @click="securityDialog = !securityDialog"
-            >
-              <TextBtnDialog :title="'顯示更多內容'" />
+            <div>
+              <div v-if="$vuetify.breakpoint.xs" class="font-bold underline">
+                顯示更多
+              </div>
 
-              <v-icon class="cursor-pointer" small color="black">
-                mdi-greater-than
-              </v-icon>
+              <div
+                v-else
+                :class="$vuetify.breakpoint.xs ? '' : 'mt-7'"
+                class="!max-w-[115px] flex"
+                @click="securityDialog = !securityDialog"
+              >
+                <TextBtnDialog :title="'顯示更多內容'" />
+
+                <v-icon class="cursor-pointer" small color="black">
+                  mdi-greater-than
+                </v-icon>
+              </div>
             </div>
           </div>
 
@@ -165,12 +180,17 @@
         <CardDialog
           :dialog="securityDialog"
           :width="800"
+          :fullscreen="$vuetify.breakpoint.xs"
+          :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
+          scrollable
           @update="updateSecurityDialogDialog"
         >
-          <div class="px-2">
+          <div>
             <div class="text-3xl font-semibold mt-10">安全與房源</div>
 
-            <div class="mt-5">詳閱房源的重要細節，避免遇到意料之外的情況。</div>
+            <div class="mt-5 text-base">
+              詳閱房源的重要細節，避免遇到意料之外的情況。
+            </div>
 
             <div v-for="items in notes.safeInfo" :key="items.id" class="mb-10">
               <div class="text-xl font-bold my-10">
@@ -192,7 +212,7 @@
 
       <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
         <div :class="$vuetify.breakpoint.xs ? 'flex justify-between' : ''">
-          <div>
+          <div @click="unsubscribePolicyDialog_mobile()">
             <div
               :class="$vuetify.breakpoint.xs ? 'text-2xl' : ''"
               class="font-medium"
@@ -247,13 +267,16 @@
         <CardDialog
           :dialog="unsubscribePolicyDialog"
           :width="620"
+          :fullscreen="$vuetify.breakpoint.xs"
+          :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
+          scrollable
           @update="updateUnsubscribePolicyDialog"
         >
-          <div class="px-2">
+          <div>
             <div class="text-3xl font-semibold mt-10">《退訂政策》</div>
 
             <div class="px-2">
-              <div class="mt-5">
+              <div class="mt-5 text-base">
                 預訂之前，請確認你同意遵守房東的《退訂政策》。請注意，TheRooms
                 的
                 <span class="font-semibold underline cursor-pointer">
@@ -268,7 +291,7 @@
                 <div class="flex mb-6">
                   <div class="mr-[100px]">
                     <div class="flex flex-col items-center">
-                      <div class="font-medium">
+                      <div class="font-medium text-base">
                         {{ this.$dayjs(datesQueue[0]).format('M[月]D[日]') }}
                       </div>
 
@@ -278,7 +301,7 @@
                     </div>
                   </div>
 
-                  <div>
+                  <div class="text-base">
                     {{ notes.unsubscribeInfo }}
                   </div>
                 </div>
@@ -340,11 +363,26 @@ export default {
     updateHouseRulesDialog(val) {
       this.houseRulesDialog = val
     },
+    houseRulesDialog_mobile() {
+      if (this.$vuetify.breakpoint.xs) {
+        this.houseRulesDialog = !this.houseRulesDialog
+      }
+    },
     updateSecurityDialogDialog(val) {
       this.securityDialog = val
     },
+    securityDialogDialog_mobile() {
+      if (this.$vuetify.breakpoint.xs) {
+        this.securityDialog = !this.securityDialog
+      }
+    },
     updateUnsubscribePolicyDialog(val) {
       this.unsubscribePolicyDialog = val
+    },
+    unsubscribePolicyDialog_mobile() {
+      if (this.$vuetify.breakpoint.xs) {
+        this.unsubscribePolicyDialog = !this.unsubscribePolicyDialog
+      }
     },
     goToTarget(target) {
       this.$vuetify.goTo(target, {
