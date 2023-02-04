@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$vuetify.breakpoint.xs ? 'px-5 pt-5' : ''">
     <div class="flex items-center">
       <v-avatar size="56px" class="mr-2">
         <img
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div v-html="convertTobr" class="mt-5"></div>
+    <div v-html="convertTobr" class="mt-5" :class="lineclamp"></div>
   </div>
 </template>
 
@@ -44,6 +44,9 @@ export default {
     message: {
       type: String,
       required: true,
+    },
+    lineclamp: {
+      type: String,
     },
   },
   data() {
