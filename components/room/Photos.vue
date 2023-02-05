@@ -53,53 +53,18 @@
         max-width="120px"
         max-height="60px"
         class="!absolute right-[20px] bottom-[20px] !text-xs"
-        @click="fullscreenDialog = true"
+        @click="photosDialog = !photosDialog"
       >
         <v-icon>mdi-apps</v-icon>
         {{ $t('顯示全部相片') }}
       </v-btn>
 
-      <v-dialog
-        v-model="fullscreenDialog"
-        fullscreen
-        hide-overlay
-        scrollable
-        transition="dialog-bottom-transition"
-      >
-        <v-card>
-          <div class="flex pt-5 pl-2">
-            <v-btn icon @click="fullscreenDialog = false">
-              <v-icon class="cursor-pointer" color="black">
-                mdi-less-than
-              </v-icon>
-            </v-btn>
-
-            <v-spacer />
-
-            <DialogShare />
-
-            <DialogFavorites />
-          </div>
-
-          <v-card-text class="flex justify-center">
-            <v-row v-if="roomQuality" class="max-w-[800px] mt-10">
-              <v-col
-                v-for="item in roomQuality"
-                :key="item"
-                cols="12"
-                class="h-[450px]"
-              >
-                <v-img
-                  height="100%"
-                  :src="
-                    require(`~/assets/img/rooms/room${roomId}/bg_${item}.jpg`)
-                  "
-                />
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-dialog>
+      <DialogPhotos
+        :dialog="photosDialog"
+        :roomQuality="roomQuality"
+        :roomId="roomId"
+        @update="updatePhotosDialog"
+      />
     </div>
   </div>
 </template>
@@ -116,12 +81,17 @@ export default {
 
   data() {
     return {
-      fullscreenDialog: false,
+      photosDialog: false,
     }
   },
   computed: {
     roomId() {
       return this.$route.params.id
+    },
+  },
+  methods: {
+    updatePhotosDialog(val) {
+      this.photosDialog = val
     },
   },
 }
