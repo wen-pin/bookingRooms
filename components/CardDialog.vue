@@ -7,7 +7,7 @@
     scrollable
     transition="dialog-bottom-transition"
   >
-    <v-card class="rounded-lg">
+    <v-card :class="$vuetify.breakpoint.xs ? '!rounded-none' : '!rounded-lg'">
       <v-btn icon @click="detailDialog = false" class="ml-3 mt-2">
         <v-icon color="black">{{ icon }}</v-icon>
       </v-btn>
