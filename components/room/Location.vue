@@ -81,17 +81,19 @@
               </div>
             </div>
 
-            <GmapMap
-              v-if="!$vuetify.breakpoint.xs"
-              :center="{ lat: location.lat, lng: location.lng }"
-              :zoom="15"
-              map-type-id="terrain"
-              class="w-full h-full"
-            >
-              <GmapMarker
-                :position="{ lat: location.lat, lng: location.lng }"
-              />
-            </GmapMap>
+            <div v-if="googleMaps_visible">
+              <GmapMap
+                v-if="!$vuetify.breakpoint.xs"
+                :center="{ lat: location.lat, lng: location.lng }"
+                :zoom="15"
+                map-type-id="terrain"
+                class="w-full h-full"
+              >
+                <GmapMarker
+                  :position="{ lat: location.lat, lng: location.lng }"
+                />
+              </GmapMap>
+            </div>
           </v-card-text>
         </v-card>
       </v-dialog>
