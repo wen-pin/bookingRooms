@@ -14,17 +14,12 @@
 
     <v-carousel
       v-model="value"
-      eager
       hide-delimiters
+      :continuous="false"
       :show-arrows="false"
       height="300"
     >
-      <v-carousel-item
-        v-for="item in roomQuality"
-        :key="item"
-        touch
-        height="300"
-      >
+      <v-carousel-item v-for="item in roomQuality" :key="item" height="300">
         <v-img
           :src="require(`~/assets/img/rooms/room${roomId}/bg_${item}.jpg`)"
           aspect-ratio="16/9"
