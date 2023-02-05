@@ -3,70 +3,60 @@
     "name": "account",
     "path": "/account",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/account.vue",
-    "chunkName": "pages/account",
-    "_name": "_accb3ad2"
+    "chunkName": "pages/account"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/login.vue",
-    "chunkName": "pages/login",
-    "_name": "_5e8e935a"
+    "chunkName": "pages/login"
   },
   {
     "name": "logo",
     "path": "/logo",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/logo.vue",
-    "chunkName": "pages/logo",
-    "_name": "_1fba57b1"
+    "chunkName": "pages/logo"
   },
   {
     "name": "message",
     "path": "/message",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/message.vue",
-    "chunkName": "pages/message",
-    "_name": "_41ef5b71"
+    "chunkName": "pages/message"
   },
   {
     "name": "register",
     "path": "/register",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/register.vue",
-    "chunkName": "pages/register",
-    "_name": "_350b44ae"
+    "chunkName": "pages/register"
   },
   {
     "name": "trips",
     "path": "/trips",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/trips/index.vue",
-    "chunkName": "pages/trips/index",
-    "_name": "_81d09c4a"
+    "chunkName": "pages/trips/index"
   },
   {
     "name": "wishlists",
     "path": "/wishlists",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/wishlists.vue",
-    "chunkName": "pages/wishlists",
-    "_name": "_0292d290"
+    "chunkName": "pages/wishlists"
   },
   {
     "name": "book-stays-id",
     "path": "/book/stays/:id?",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/book/stays/_id.vue",
-    "chunkName": "pages/book/stays/_id",
-    "_name": "_1a982e45"
+    "chunkName": "pages/book/stays/_id"
   },
   {
     "name": "rooms-id",
     "path": "/rooms/:id?",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/rooms/_id.vue",
-    "chunkName": "pages/rooms/_id",
-    "_name": "_45734f0d"
+    "chunkName": "pages/rooms/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/wenpin/Desktop/bookingRooms/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_0711133c"
+    "chunkName": "pages/index"
   }
 ]

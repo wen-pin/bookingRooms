@@ -124,5 +124,8 @@
   },
   "UiBottomNavi ": {
     "description": "Auto imported from components/ui/BottomNavi .vue"
+  },
+  "UiBottomNavi2": {
+    "description": "Auto imported from components/ui/BottomNavi2.vue"
   }
 }

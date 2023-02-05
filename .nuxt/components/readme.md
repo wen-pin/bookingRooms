@@ -48,3 +48,4 @@ You can directly use them in pages and other components without the need to impo
 - `<UiAppbar>` | `<ui-appbar>` (components/ui/Appbar.vue)
 - `<UiAppbar2>` | `<ui-appbar2>` (components/ui/Appbar2.vue)
 - `<UiBottomNavi >` | `<ui-bottom-navi >` (components/ui/BottomNavi .vue)
+- `<UiBottomNavi2>` | `<ui-bottom-navi2>` (components/ui/BottomNavi2.vue)
