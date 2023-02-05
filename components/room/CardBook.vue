@@ -20,7 +20,7 @@
       <v-spacer />
 
       <span>
-        <TextRate :value="averageRating" :margin="'mr-4'" class="text-sm" />
+        <TextRate :value="averageRating" class="text-sm" />
       </span>
 
       <span v-if="allMessages" @click="evaluationDialog = true">

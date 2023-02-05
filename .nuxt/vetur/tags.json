@@ -44,6 +44,18 @@
   "BookUnsubscribe": {
     "description": "Auto imported from components/book/Unsubscribe.vue"
   },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogPhotos": {
+    "description": "Auto imported from components/dialog/Photos.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
+  },
   "DateClearBtn": {
     "description": "Auto imported from components/date/ClearBtn.vue"
   },
@@ -58,18 +70,6 @@
   },
   "DateRangeStyle": {
     "description": "Auto imported from components/date/RangeStyle.vue"
-  },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
-  },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
-  },
-  "DialogPhotos": {
-    "description": "Auto imported from components/dialog/Photos.vue"
-  },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
   },
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"

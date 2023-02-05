@@ -1,14 +1,13 @@
 <template>
   <DivideBlock>
     <div class="my-8">
-      <div class="flex">
+      <div class="flex items-center">
         <span>
           <TextRate
             :value="averageRating"
             :size="25"
             :max-width="''"
-            :margin="'mt-[2px] mr-4'"
-            class="text-2xl"
+            class="text-2xl mr-2"
           />
         </span>
 

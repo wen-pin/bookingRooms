@@ -1,16 +1,8 @@
 <template>
-  <div class="flex items-center" :class="maxWidth">
-    <v-rating
-      :value="value"
-      :size="size"
-      color="black"
-      length="1"
-      dense
-      half-increments
-      readonly
-    />
+  <div class="flex items-center mr-3" :class="maxWidth">
+    <v-icon color="black" :size="size">mdi-star</v-icon>
 
-    <div v-if="isVisible" :class="margin">{{ value }}</div>
+    <div v-if="isVisible">{{ value }}</div>
   </div>
 </template>
 
@@ -29,9 +21,6 @@ export default {
     maxWidth: {
       type: String,
       default: '!max-w-[150px]',
-    },
-    margin: {
-      type: String,
     },
     isVisible: {
       type: Boolean,

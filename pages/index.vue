@@ -19,7 +19,7 @@
               <v-spacer></v-spacer>
 
               <span>
-                <TextRate :value="room.averageRating" :size="14" />
+                <TextRate :value="room.averageRating" />
               </span>
             </div>
 

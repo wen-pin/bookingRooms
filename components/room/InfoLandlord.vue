@@ -48,12 +48,11 @@
           >
             <div>
               <div class="flex items-center">
-                <div :class="$vuetify.breakpoint.xs ? 'mr-3' : ''">
+                <div>
                   <TextRate
                     :value="averageRating"
                     :size="20"
                     :max-width="''"
-                    :margin="'mr-4'"
                     :isVisible="$vuetify.breakpoint.xs ? false : true"
                     class="text-lg"
                   />

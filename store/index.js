@@ -47,7 +47,7 @@ export const state = () => ({
   // 房客卡片是否可見
   tenantCard_visible: false,
   // 是否啟用全站的google地圖
-  googleMaps_visible: true,
+  googleMaps_visible: false,
 })
 
 export const getters = {

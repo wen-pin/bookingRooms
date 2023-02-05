@@ -26,7 +26,7 @@
             <div class="flex">
               <TextRate
                 :value="room.averageRating"
-                :maxWidth="'!max-w-[50px]'"
+                :maxWidth="'!max-w-[40px]'"
               />
 
               <DialogEvaluation

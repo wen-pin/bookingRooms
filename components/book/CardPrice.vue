@@ -17,12 +17,7 @@
 
           <div class="flex mt-3">
             <span>
-              <TextRate
-                :value="averageRating"
-                :size="15"
-                :margin="'mr-4'"
-                class="text-sm"
-              />
+              <TextRate :value="averageRating" :size="15" class="text-sm" />
             </span>
 
             <span v-if="allMessages">
