@@ -38,7 +38,7 @@
         </v-col>
       </v-row>
 
-      <div v-if="$vuetify.breakpoint.xs" class="mt-8">
+      <!-- <div v-if="$vuetify.breakpoint.xs" class="mt-8">
         <client-only>
           <carousel v-bind="options">
             <slide v-for="item in limitAllMessages_three" :key="item.id">
@@ -77,7 +77,7 @@
             </slide>
           </carousel>
         </client-only>
-      </div>
+      </div> -->
 
       <v-row v-if="!$vuetify.breakpoint.xs" class="mt-5">
         <v-col
