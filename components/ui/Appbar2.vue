@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: 'subAppbar',
+  name: 'uiAppbar2',
 
   props: {
     averageRating: {
