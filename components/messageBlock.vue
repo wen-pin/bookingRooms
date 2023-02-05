@@ -1,5 +1,5 @@
 <template>
-  <div :class="$vuetify.breakpoint.xs ? 'px-5 pt-5' : ''">
+  <div>
     <div class="flex items-center">
       <v-avatar size="56px" class="mr-2">
         <img
