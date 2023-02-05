@@ -23,23 +23,18 @@
           <div class="text-2xl font-bold mt-5">{{ room.title }}</div>
 
           <div class="my-2 flex">
-            <div class="flex" :class="$vuetify.breakpoint.xs ? 'flex-col' : ''">
-              <div class="my-auto">
-                <div class="flex items-center">
-                  <TextRate
-                    :value="room.averageRating"
-                    :maxWidth="'!max-w-[50px]'"
-                    :class="!$vuetify.breakpoint.xs ? 'mr-4' : ''"
-                  />
+            <div class="flex">
+              <TextRate
+                :value="room.averageRating"
+                :maxWidth="'!max-w-[50px]'"
+              />
 
-                  <DialogEvaluation
-                    :averageRating="room.averageRating"
-                    :allMessages="room.allMessages"
-                    :evaluationStandards="room.evaluationStandards"
-                    class="mr-4 my-auto"
-                  />
-                </div>
-              </div>
+              <DialogEvaluation
+                :averageRating="room.averageRating"
+                :allMessages="room.allMessages"
+                :evaluationStandards="room.evaluationStandards"
+                class="mr-4 my-auto"
+              />
 
               <div v-if="room.location" class="flex items-center">
                 <TextBtnDialog
