@@ -56,7 +56,6 @@
           :width="800"
           :fullscreen="$vuetify.breakpoint.xs"
           :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
-          scrollable
           @update="updateHouseRulesDialog"
         >
           <div class="text-3xl font-semibold mt-10">《房屋守則》</div>
@@ -182,7 +181,6 @@
           :width="800"
           :fullscreen="$vuetify.breakpoint.xs"
           :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
-          scrollable
           @update="updateSecurityDialogDialog"
         >
           <div>
@@ -211,8 +209,11 @@
       </v-col>
 
       <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
-        <div :class="$vuetify.breakpoint.xs ? 'flex justify-between' : ''">
-          <div @click="unsubscribePolicyDialog_mobile()">
+        <div
+          :class="$vuetify.breakpoint.xs ? 'flex justify-between' : ''"
+          @click="unsubscribePolicyDialog_mobile()"
+        >
+          <div>
             <div
               :class="$vuetify.breakpoint.xs ? 'text-2xl' : ''"
               class="font-medium"
@@ -269,7 +270,6 @@
           :width="620"
           :fullscreen="$vuetify.breakpoint.xs"
           :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
-          scrollable
           @update="updateUnsubscribePolicyDialog"
         >
           <div>

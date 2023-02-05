@@ -65,6 +65,9 @@
   "DialogFavorites": {
     "description": "Auto imported from components/dialog/Favorites.vue"
   },
+  "DialogPhotos": {
+    "description": "Auto imported from components/dialog/Photos.vue"
+  },
   "DialogShare": {
     "description": "Auto imported from components/dialog/Share.vue"
   },
@@ -77,11 +80,17 @@
   "RoomCardTenant": {
     "description": "Auto imported from components/room/CardTenant.vue"
   },
+  "RoomCarousels": {
+    "description": "Auto imported from components/room/Carousels.vue"
+  },
   "RoomEquipment": {
     "description": "Auto imported from components/room/Equipment.vue"
   },
   "RoomEvaluation": {
     "description": "Auto imported from components/room/Evaluation.vue"
+  },
+  "RoomGmapMobile": {
+    "description": "Auto imported from components/room/GmapMobile.vue"
   },
   "RoomInfoLandlord": {
     "description": "Auto imported from components/room/InfoLandlord.vue"

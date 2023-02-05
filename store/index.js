@@ -42,6 +42,8 @@ export const state = () => ({
   evaluationDialog_visible: false,
   // 地圖對話筐
   googleMapsDialog_visible: false,
+  // 手機版地圖對話筐
+  googleMapsDialog_mobile_visible: false,
   // 房客卡片是否可見
   tenantCard_visible: false,
   // 是否啟用全站的google地圖
@@ -106,6 +108,12 @@ export const mutations = {
   toggleGoogleMapsBtn(state, toggle) {
     state.googleMapsDialog_visible =
       typeof toggle === 'boolean' ? toggle : !state.googleMapsDialog_visible
+  },
+  toggleGoogleMapsBtn_mobile(state, toggle) {
+    state.googleMapsDialog_mobile_visible =
+      typeof toggle === 'boolean'
+        ? toggle
+        : !state.googleMapsDialog_mobile_visible
   },
   toggleTenantCardBtn(state, toggle) {
     state.tenantCard_visible =

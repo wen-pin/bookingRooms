@@ -41,7 +41,7 @@
       <div v-if="$vuetify.breakpoint.xs" class="mt-8">
         <client-only>
           <carousel v-bind="options">
-            <slide v-for="item in limitAllMessages_four" :key="item.id">
+            <slide v-for="item in limitAllMessages_three" :key="item.id">
               <v-card outlined class="h-[270px] rounded-lg">
                 <messageBlock
                   :avaterImg="item.avaterImg"
@@ -156,9 +156,9 @@ export default {
         this.$store.commit('toggleEvaluationBtn', v)
       },
     },
-    limitAllMessages_four() {
+    limitAllMessages_three() {
       if (this.allMessages) {
-        return this.allMessages.slice(0, 4)
+        return this.allMessages.slice(0, 3)
       }
     },
     limitAllMessages() {
