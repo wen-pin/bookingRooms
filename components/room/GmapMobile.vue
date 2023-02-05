@@ -16,6 +16,7 @@
     </v-btn>
 
     <GmapMap
+      v-if="googleMaps_visible"
       :center="{ lat: location.lat, lng: location.lng }"
       :zoom="15"
       map-type-id="terrain"
@@ -48,6 +49,9 @@ export default {
       set(v) {
         this.$store.commit('toggleGoogleMapsBtn_mobile', v)
       },
+    },
+    googleMaps_visible() {
+      return this.$store.state.googleMaps_visible
     },
   },
 }
