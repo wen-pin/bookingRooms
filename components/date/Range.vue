@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div v-if="datesQueue" class="text-sm text-neutral-500">
+    <div v-if="datesQueue" class="text-sm text-neutral-500 my-2">
       <div v-if="datesQueue.length < 2">新增旅行日期，查看確切價格</div>
       <div v-else>
         {{ dateRangeText }}
