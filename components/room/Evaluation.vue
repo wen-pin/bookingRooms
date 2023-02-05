@@ -63,6 +63,51 @@
         </v-col>
       </v-row>
 
+      <v-carousel
+        v-if="$vuetify.breakpoint.xs"
+        :hide-delimiters="false"
+        :continuous="false"
+        :show-arrows="false"
+        height="300"
+        class="mt-8 mb-6"
+      >
+        <v-carousel-item
+          v-for="item in limitAllMessages_three"
+          :key="item.id"
+          height="300"
+        >
+          <v-card outlined class="h-[300px] rounded-lg p-5">
+            <messageBlock
+              :avaterImg="item.avaterImg"
+              :commenterName="item.commenterName"
+              :createdAt="item.createdAt"
+              :message="item.message"
+              :lineclamp="'line-clamp-5'"
+            />
+
+            <div class="!max-w-[115px] flex mt-2" @click="isVisible = true">
+              <TextBtnDialog :title="'顯示更多內容'" />
+
+              <v-icon class="cursor-pointer" small color="black">
+                mdi-greater-than
+              </v-icon>
+            </div>
+          </v-card>
+        </v-carousel-item>
+
+        <v-carousel-item>
+          <v-card outlined class="h-[300px] rounded-lg">
+            <div
+              v-if="allMessages"
+              class="font-medium text-lg underline text-center h-full flex justify-center items-center"
+              @click="isVisible = true"
+            >
+              顯示全部{{ allMessages.length }}則評價
+            </div>
+          </v-card>
+        </v-carousel-item>
+      </v-carousel>
+
       <v-btn
         :block="$vuetify.breakpoint.xs"
         outlined
