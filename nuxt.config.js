@@ -54,7 +54,6 @@ export default {
     '~/plugins/axios',
     { src: '@/plugins/icons', ssr: true },
     { src: '~/plugins/google-maps', ssr: true },
-    { src: './plugins/vue-carousel.js', mode: 'client' },
     // 有bug暫時不用
     // { src: '~/plugins/persistedState.client.js' },
   ],

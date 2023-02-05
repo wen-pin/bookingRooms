@@ -38,47 +38,6 @@
         </v-col>
       </v-row>
 
-      <!-- <div v-if="$vuetify.breakpoint.xs" class="mt-8">
-        <client-only>
-          <carousel v-bind="options">
-            <slide v-for="item in limitAllMessages_three" :key="item.id">
-              <v-card outlined class="h-[270px] rounded-lg">
-                <messageBlock
-                  :avaterImg="item.avaterImg"
-                  :commenterName="item.commenterName"
-                  :createdAt="item.createdAt"
-                  :message="item.message"
-                  :lineclamp="'line-clamp-5'"
-                />
-
-                <div
-                  class="!max-w-[115px] flex mt-2 ml-5"
-                  @click="isVisible = true"
-                >
-                  <TextBtnDialog :title="'顯示更多內容'" />
-
-                  <v-icon class="cursor-pointer" small color="black">
-                    mdi-greater-than
-                  </v-icon>
-                </div>
-              </v-card>
-            </slide>
-
-            <slide>
-              <v-card outlined class="h-[270px] rounded-lg">
-                <div
-                  v-if="allMessages"
-                  class="font-medium text-lg underline text-center h-full flex justify-center items-center"
-                  @click="isVisible = true"
-                >
-                  顯示全部{{ allMessages.length }}則評價
-                </div>
-              </v-card>
-            </slide>
-          </carousel>
-        </client-only>
-      </div> -->
-
       <v-row v-if="!$vuetify.breakpoint.xs" class="mt-5">
         <v-col
           v-for="item in limitAllMessages"
