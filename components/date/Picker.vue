@@ -1,6 +1,7 @@
 <template>
   <v-date-picker
     v-model="dates"
+    :width="width"
     range
     no-title
     full-width
@@ -12,6 +13,12 @@
 <script>
 export default {
   name: 'datePicker',
+
+  props: {
+    width: {
+      types: Number,
+    },
+  },
 
   data() {
     return {}
