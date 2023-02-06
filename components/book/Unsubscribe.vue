@@ -16,7 +16,7 @@
       :title="'《退訂政策》'"
       @update="updateUnsubscribeDialog"
     >
-      <div class="px-5 mt-8 mb-[80px]">
+      <div class="px-5 mt-8">
         <div class="text-xl font-medium">取消截止時間</div>
 
         <DivideBlock>
