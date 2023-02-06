@@ -1,32 +1,69 @@
 <template>
-  <DivideBlock>
-    <div class="my-5">
-      <div class="flex justify-between">
-        <TextBtnDialog
-          :title="`${$n(
-            this.averageRentalCost,
-            'currency',
-          )}x${calculateDays} 晚`"
-        />
-        {{ $n(this.calculateRentalCost, 'currency') }}
-      </div>
+  <div>
+    <DivideBlock v-if="!$vuetify.breakpoint.xs">
+      <div class="my-5">
+        <div class="flex justify-between">
+          <TextBtnDialog
+            :title="`${$n(
+              this.averageRentalCost,
+              'currency',
+            )}x${calculateDays} 晚`"
+          />
+          {{ $n(this.calculateRentalCost, 'currency') }}
+        </div>
 
-      <div class="flex justify-between mt-2">
-        <TextBtnDialog :title="'服務費'" />
-        {{ $n(this.calculateServiceCharge, 'currency') }}
-      </div>
+        <div class="flex justify-between mt-4">
+          <TextBtnDialog :title="'服務費'" />
+          {{ $n(this.calculateServiceCharge, 'currency') }}
+        </div>
 
-      <div v-if="calculateCleaningFee !== 0" class="flex justify-between mt-2">
-        <TextBtnDialog :title="'清潔費'" />
-        {{ $n(this.calculateCleaningFee, 'currency') }}
-      </div>
+        <div
+          v-if="calculateCleaningFee !== 0"
+          class="flex justify-between mt-4"
+        >
+          <TextBtnDialog :title="'清潔費'" />
+          {{ $n(this.calculateCleaningFee, 'currency') }}
+        </div>
 
-      <div v-if="isVisible" class="flex justify-between mt-2">
-        <TextBtnDialog :title="'稅費'" />
-        {{ $n(this.calculateTaxCharges, 'currency') }}
+        <div v-if="isVisible" class="flex justify-between mt-4">
+          <TextBtnDialog :title="'稅費'" />
+          {{ $n(this.calculateTaxCharges, 'currency') }}
+        </div>
+      </div>
+    </DivideBlock>
+
+    <div v-else>
+      <div>
+        <div class="flex justify-between">
+          <TextBtnDialog
+            :title="`${$n(
+              this.averageRentalCost,
+              'currency',
+            )}x${calculateDays} 晚`"
+          />
+          {{ $n(this.calculateRentalCost, 'currency') }}
+        </div>
+
+        <div class="flex justify-between mt-4">
+          <TextBtnDialog :title="'服務費'" />
+          {{ $n(this.calculateServiceCharge, 'currency') }}
+        </div>
+
+        <div
+          v-if="calculateCleaningFee !== 0"
+          class="flex justify-between mt-4"
+        >
+          <TextBtnDialog :title="'清潔費'" />
+          {{ $n(this.calculateCleaningFee, 'currency') }}
+        </div>
+
+        <div v-if="isVisible" class="flex justify-between mt-4">
+          <TextBtnDialog :title="'稅費'" />
+          {{ $n(this.calculateTaxCharges, 'currency') }}
+        </div>
       </div>
     </div>
-  </DivideBlock>
+  </div>
 </template>
 
 <script>
