@@ -1,9 +1,18 @@
 <template>
   <DivideBlock>
     <div class="mb-10">
-      <div class="text-2xl font-medium">你的旅程</div>
+      <div
+        class="text-2xl font-medium"
+        :class="
+          $vuetify.breakpoint.xs
+            ? 'border border-t-8 border-r-0 border-b-0 border-l-0 border-solid border-gray-200'
+            : ''
+        "
+      >
+        <div :class="$vuetify.breakpoint.xs ? 'px-6 my-6' : ''">你的旅程</div>
+      </div>
 
-      <div class="mt-5">
+      <div class="mt-5" :class="$vuetify.breakpoint.xs ? 'px-6' : ''">
         <div class="flex justify-between">
           <div>
             <div class="text-xl font-medium">日期</div>
@@ -11,14 +20,28 @@
           </div>
 
           <TextBtnDialog
+            v-if="$vuetify.breakpoint.xs"
+            :title="'編輯'"
+            class="text-xl"
+            @click="dateDialog_mobile_visible = !dateDialog_mobile_visible"
+          />
+
+          <TextBtnDialog
+            v-else
             :title="'編輯'"
             class="text-xl"
             @click="editDialog = !editDialog"
           />
+
+          <DialogDateMobile
+            :averageRating="averageRating"
+            :location="location"
+            :price="price"
+          />
         </div>
 
         <CardDialog :dialog="editDialog" @update="updateEditDialog()">
-          <div class="flex justify-between items-center px-7">
+          <div class="flex justify-between items-center my-5">
             <div class="flex flex-col justify-center text-2xl font-bold">
               {{ calculateDays }} 晚
               <DateRange />
@@ -27,9 +50,9 @@
             <DateRangeStyle />
           </div>
 
-          <DatePicker />
+          <DatePicker class="!w-full" />
 
-          <div class="flex justify-end mx-8 mb-10">
+          <div class="flex justify-end">
             <DateClearBtn />
 
             <DateCloseBtn :text="'關閉'" @click="editDialog = false" />
@@ -37,7 +60,7 @@
         </CardDialog>
       </div>
 
-      <div class="mt-5">
+      <div class="mt-5" :class="$vuetify.breakpoint.xs ? 'px-6' : ''">
         <div class="flex justify-between">
           <div>
             <div class="text-xl font-medium">房客人數</div>
@@ -57,19 +80,10 @@
             @click="tenantCard_visible = !tenantCard_visible"
           />
 
-          <CardDialog
-            :dialog="tenantCard_visible"
-            :title="'房客人數'"
-            @update="updateTenantCard_visible"
-          >
-            <div>
-              <RoomCardTenant
-                :limitPeople="limitPeople"
-                :isAcceptPet="isAcceptPet"
-                :elevation="0"
-              />
-            </div>
-          </CardDialog>
+          <DialogBookTenant
+            :limitPeople="limitPeople"
+            :isAcceptPet="isAcceptPet"
+          />
         </div>
       </div>
     </div>
@@ -89,6 +103,18 @@ export default {
       types: Boolean,
       required: true,
     },
+    averageRating: {
+      types: Number,
+      required: true,
+    },
+    location: {
+      types: Object,
+      required: true,
+    },
+    price: {
+      types: Object,
+      required: true,
+    },
   },
 
   data() {
@@ -106,7 +132,15 @@ export default {
         this.$store.commit('toggleTenantCardBtn', v)
       },
     },
-
+    // 手機版日期選擇對話框
+    dateDialog_mobile_visible: {
+      get() {
+        return this.$store.state.dateDialog_mobile_visible
+      },
+      set(v) {
+        this.$store.commit('toggleDateDialog_mobile', v)
+      },
+    },
     // 計算天數
     calculateDays() {
       return this.$store.getters.calculateDays
@@ -124,9 +158,6 @@ export default {
   methods: {
     updateEditDialog() {
       this.editDialog = false
-    },
-    updateTenantCard_visible() {
-      this.tenantCard_visible = false
     },
   },
 }
