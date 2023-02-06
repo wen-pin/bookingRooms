@@ -18,7 +18,7 @@
         <div
           v-if="datesQueue.length === 2"
           class="underline"
-          @click="dateDialog = true"
+          @click="dateDialog_mobile_visible = true"
         >
           {{ this.$dayjs(datesQueue[0]).format('M[月]DD[日]') }}至{{
             this.$dayjs(datesQueue[1]).format('M[月]DD[日]')
@@ -48,7 +48,7 @@
           dark
           color="#EC407A"
           class="rounded-lg"
-          @click="dateDialog = true"
+          @click="dateDialog_mobile_visible = true"
         >
           <span class="text-base font-semibold"> 查看可訂日期 </span>
         </v-btn>
@@ -72,7 +72,7 @@
                 <div class="mb-6 mt-8">
                   <div
                     class="px-3 flex justify-between border-gray-300 border-l border-t border-r border-b-0 border-solid rounded-tl-lg rounded-tr-lg cursor-pointer"
-                    @click="dateDialog = true"
+                    @click="dateDialog_mobile_visible = true"
                   >
                     <div class="w-[50%] my-2">
                       <div class="font-semibold text-sm">入住</div>
@@ -95,7 +95,7 @@
 
                   <div
                     class="h-[65px] flex justify-between border-gray-300 border-[1px] border-solid rounded-bl-lg rounded-br-lg px-3 cursor-pointer"
-                    @click="tenantDialog = true"
+                    @click="tenantCard_visible = true"
                   >
                     <div class="my-2">
                       <div class="font-semibold">房客</div>
@@ -110,23 +110,6 @@
                       </div>
                     </div>
                   </div>
-
-                  <v-dialog
-                    v-model="tenantDialog"
-                    scrollable
-                    transition="dialog-bottom-transition"
-                  >
-                    <v-card class="">
-                      <v-btn
-                        icon
-                        large
-                        @click="tenantDialog = false"
-                        class="ml-2 mt-3"
-                      >
-                        <v-icon color="black">mdi-window-close</v-icon>
-                      </v-btn>
-                    </v-card>
-                  </v-dialog>
                 </div>
               </DivideBlock>
 
@@ -161,79 +144,16 @@
           </v-card>
         </v-dialog>
 
-        <!-- 日期選擇 -->
-        <v-dialog
-          v-model="dateDialog"
-          fullscreen
-          scrollable
-          transition="dialog-bottom-transition"
-        >
-          <v-card class="!rounded-none">
-            <div>
-              <div class="flex justify-between px-3 mt-3">
-                <v-btn icon @click="dateDialog = false" class="">
-                  <v-icon color="black">mdi-window-close</v-icon>
-                </v-btn>
+        <DialogDateMobile
+          :averageRating="averageRating"
+          :location="location"
+          :price="price"
+        />
 
-                <div class="flex justify-end" @click="dates = []">
-                  <TextBtnDialog :title="'清除日期'" />
-                </div>
-              </div>
-            </div>
-
-            <DateRange :location="location" class="px-5 mt-8" />
-            <v-card-text>
-              <DatePicker />
-            </v-card-text>
-
-            <div
-              class="!fixed w-full bottom-0 left-0 bg-white z-20 h-[80px] border-t border-r-0 border-b-0 border-l-0 border-solid border-gray-300"
-            >
-              <v-container class="flex justify-between px-5">
-                <div class="flex flex-col justify-center font-semibold">
-                  <div v-if="datesQueue">
-                    <div
-                      v-if="datesQueue.length === 2"
-                      class="flex items-center"
-                    >
-                      {{ $n(this.averageRentalCost, 'currency') }}
-                      <div class="font-normal text-base ml-1">晚</div>
-                    </div>
-                    <div v-else class="flex items-center">
-                      {{ $n(0, 'currency') }}
-                      <div class="font-normal text-base ml-1">晚</div>
-                    </div>
-                  </div>
-
-                  <TextRate :value="averageRating" class="text-sm" />
-                </div>
-
-                <v-btn
-                  v-if="datesQueue.length === 2"
-                  width="80px"
-                  height="50px"
-                  dark
-                  color="#000"
-                  class="rounded-lg"
-                  @click="dateDialog = false"
-                >
-                  <span class="text-base font-semibold"> 儲存 </span>
-                </v-btn>
-
-                <v-btn
-                  v-else
-                  depressed
-                  disabled
-                  width="80px"
-                  height="50px"
-                  class="rounded-lg"
-                >
-                  <div class="text-white">儲存</div>
-                </v-btn>
-              </v-container>
-            </div>
-          </v-card>
-        </v-dialog>
+        <DialogBookTenant
+          :limitPeople="limitPeople"
+          :isAcceptPet="isAcceptPet"
+        />
       </div>
     </v-container>
   </div>
@@ -256,22 +176,39 @@ export default {
       types: Object,
       required: true,
     },
+    limitPeople: {
+      types: Number,
+      required: true,
+    },
+    isAcceptPet: {
+      types: Boolean,
+      required: true,
+    },
   },
 
   data() {
     return {
       bookDialog: false,
-      dateDialog: false,
       tenantDialog: false,
     }
   },
   computed: {
-    dates: {
+    // 手機版日期選擇對話框
+    dateDialog_mobile_visible: {
       get() {
-        return this.$store.state.dates
+        return this.$store.state.dateDialog_mobile_visible
       },
       set(v) {
-        this.$store.commit('fetchDates', v)
+        this.$store.commit('toggleDateDialog_mobile', v)
+      },
+    },
+    // 房客選擇卡片
+    tenantCard_visible: {
+      get() {
+        return this.$store.state.tenantCard_visible
+      },
+      set(v) {
+        this.$store.commit('toggleTenantCardBtn', v)
       },
     },
     // 時間排列
