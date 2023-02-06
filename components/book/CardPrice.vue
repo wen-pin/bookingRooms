@@ -1,47 +1,25 @@
 <template>
-  <v-card outlined class="rounded-lg p-6" max-width="480px">
-    <DivideBlock>
-      <div class="flex w-full mb-7">
-        <v-img
-          :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
-          :aspect-ratio="1"
-          class="rounded-lg w-[30%]"
-        ></v-img>
-
-        <div class="w-[70%] px-2">
-          <div class="text-sm font-extralight">
-            {{ rentalType }}
-          </div>
-
-          <div class="line-clamp-3">{{ title }}</div>
-
-          <div class="flex mt-3">
-            <span>
-              <TextRate :value="averageRating" :size="15" class="text-sm" />
-            </span>
-
-            <span v-if="allMessages">
-              <TextBtnDialog
-                :title="`${allMessages.length}則評價`"
-                :isUnderlineCursorPointer="false"
-                class="text-sm"
-              />
-            </span>
-          </div>
-        </div>
-      </div>
-    </DivideBlock>
-
-    <div class="text-xl font-semibold mt-5">價格詳情</div>
+  <div>
+    <div class="text-xl font-semibold my-6">價格詳情</div>
 
     <RoomPriceUntaxed :price="price" :isVisible="true" />
 
-    <div class="flex justify-between mt-5">
-      <div class="font-medium">總價 (TWD)</div>
+    <div
+      class="flex justify-between"
+      :class="$vuetify.breakpoint.xs ? 'mt-4' : 'mt-6'"
+    >
+      <div class="font-bold">總價 (TWD)</div>
 
       <div>{{ $n(this.allRentalCost, 'currency') }}</div>
     </div>
-  </v-card>
+
+    <div
+      v-if="$vuetify.breakpoint.xs"
+      class="font-bold underline flex justify-end mt-4"
+    >
+      更多資訊
+    </div>
+  </div>
 </template>
 
 <script>
@@ -49,21 +27,6 @@ export default {
   name: 'bookCardPrice',
 
   props: {
-    rentalType: {
-      types: String,
-      required: true,
-    },
-    title: {
-      types: String,
-      required: true,
-    },
-    averageRating: {
-      types: Number,
-      required: true,
-    },
-    allMessages: {
-      types: Array,
-    },
     price: {
       types: Object,
       required: true,
@@ -74,9 +37,6 @@ export default {
     return {}
   },
   computed: {
-    roomId() {
-      return this.$route.params.id
-    },
     // 時間排列
     datesQueue() {
       return this.$store.getters.datesQueue
