@@ -7,7 +7,7 @@
     transition="dialog-bottom-transition"
   >
     <v-card>
-      <div class="flex py-5 pl-2">
+      <div class="flex py-3 pl-2">
         <v-btn icon @click="detailDialog = false">
           <v-icon class="cursor-pointer ml-5" color="black">
             mdi-less-than
