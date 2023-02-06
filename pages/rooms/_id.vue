@@ -5,7 +5,10 @@
       :roomQuality="room.img.roomQuality"
     />
 
-    <v-container class="px-5 mb-[80px]">
+    <v-container
+      class="px-5"
+      :class="$vuetify.breakpoint.xs ? 'mb-[80px]' : ''"
+    >
       <UiAppbar2
         v-if="!$vuetify.breakpoint.xs"
         :averageRating="room.averageRating"
@@ -165,6 +168,8 @@
         :averageRating="room.averageRating"
         :price="room.price"
         :location="room.location"
+        :limitPeople="room.limitPeople"
+        :isAcceptPet="room.isAcceptPet"
       />
     </v-container>
   </div>

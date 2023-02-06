@@ -38,6 +38,9 @@
   "BookPayment": {
     "description": "Auto imported from components/book/Payment.vue"
   },
+  "BookRoomPhoto": {
+    "description": "Auto imported from components/book/RoomPhoto.vue"
+  },
   "BookTrip": {
     "description": "Auto imported from components/book/Trip.vue"
   },
@@ -58,18 +61,6 @@
   },
   "DateRangeStyle": {
     "description": "Auto imported from components/date/RangeStyle.vue"
-  },
-  "DialogEvaluation": {
-    "description": "Auto imported from components/dialog/Evaluation.vue"
-  },
-  "DialogFavorites": {
-    "description": "Auto imported from components/dialog/Favorites.vue"
-  },
-  "DialogPhotos": {
-    "description": "Auto imported from components/dialog/Photos.vue"
-  },
-  "DialogShare": {
-    "description": "Auto imported from components/dialog/Share.vue"
   },
   "RoomBeds": {
     "description": "Auto imported from components/room/Beds.vue"
@@ -116,14 +107,29 @@
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
   },
+  "DialogBookTenant": {
+    "description": "Auto imported from components/dialog/BookTenant.vue"
+  },
+  "DialogDateMobile": {
+    "description": "Auto imported from components/dialog/DateMobile.vue"
+  },
+  "DialogEvaluation": {
+    "description": "Auto imported from components/dialog/Evaluation.vue"
+  },
+  "DialogFavorites": {
+    "description": "Auto imported from components/dialog/Favorites.vue"
+  },
+  "DialogPhotos": {
+    "description": "Auto imported from components/dialog/Photos.vue"
+  },
+  "DialogShare": {
+    "description": "Auto imported from components/dialog/Share.vue"
+  },
   "UiAppbar": {
     "description": "Auto imported from components/ui/Appbar.vue"
   },
   "UiAppbar2": {
     "description": "Auto imported from components/ui/Appbar2.vue"
-  },
-  "UiAppbarBook": {
-    "description": "Auto imported from components/ui/AppbarBook.vue"
   },
   "UiBottomNavi ": {
     "description": "Auto imported from components/ui/BottomNavi .vue"
