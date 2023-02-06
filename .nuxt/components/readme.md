@@ -47,5 +47,6 @@ You can directly use them in pages and other components without the need to impo
 - `<RoomNotes>` | `<room-notes>` (components/room/notes.vue)
 - `<UiAppbar>` | `<ui-appbar>` (components/ui/Appbar.vue)
 - `<UiAppbar2>` | `<ui-appbar2>` (components/ui/Appbar2.vue)
+- `<UiAppbarBook>` | `<ui-appbar-book>` (components/ui/AppbarBook.vue)
 - `<UiBottomNavi >` | `<ui-bottom-navi >` (components/ui/BottomNavi .vue)
 - `<UiBottomNavi2>` | `<ui-bottom-navi2>` (components/ui/BottomNavi2.vue)

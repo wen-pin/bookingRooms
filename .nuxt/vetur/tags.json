@@ -122,6 +122,9 @@
   "UiAppbar2": {
     "description": "Auto imported from components/ui/Appbar2.vue"
   },
+  "UiAppbarBook": {
+    "description": "Auto imported from components/ui/AppbarBook.vue"
+  },
   "UiBottomNavi ": {
     "description": "Auto imported from components/ui/BottomNavi .vue"
   },

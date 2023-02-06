@@ -39,6 +39,7 @@ export { default as RoomRights } from '../../components/room/Rights.vue'
 export { default as RoomNotes } from '../../components/room/notes.vue'
 export { default as UiAppbar } from '../../components/ui/Appbar.vue'
 export { default as UiAppbar2 } from '../../components/ui/Appbar2.vue'
+export { default as UiAppbarBook } from '../../components/ui/AppbarBook.vue'
 export { default as UiBottomNavi  } from '../../components/ui/BottomNavi .vue'
 export { default as UiBottomNavi2 } from '../../components/ui/BottomNavi2.vue'
 

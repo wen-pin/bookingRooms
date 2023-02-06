@@ -1,5 +1,7 @@
 <template>
   <v-container class="!max-w-[1280px]">
+    <UiAppbarBook />
+
     <div class="flex my-10">
       <v-btn icon class="mr-6" @click="$router.go(-1)">
         <v-icon> mdi-less-than </v-icon>
@@ -117,6 +119,7 @@
 <script>
 export default {
   name: 'scheduleRoom',
+  layout: 'singleRoom',
 
   data() {
     return {
