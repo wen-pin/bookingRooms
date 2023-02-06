@@ -129,6 +129,34 @@
                   </v-dialog>
                 </div>
               </DivideBlock>
+
+              <DivideBlock>
+                <div>
+                  <RoomPriceUntaxed :price="price" />
+                </div>
+              </DivideBlock>
+
+              <div class="flex justify-between mt-5 font-semibold">
+                <span>稅前總價</span>
+
+                {{ $n(this.allRentalCost, 'currency') }}
+              </div>
+            </div>
+
+            <div
+              class="!fixed w-full bottom-0 left-0 bg-white z-20 h-[80px] border-t border-r-0 border-b-0 border-l-0 border-solid border-gray-300"
+            >
+              <div class="w-full h-full px-6 py-4">
+                <v-btn
+                  block
+                  height="100%"
+                  color="#EC407A"
+                  nuxt
+                  :to="`/book/stays/${this.$route.params.id}`"
+                >
+                  <div class="text-white text-base">預訂</div>
+                </v-btn>
+              </div>
             </div>
           </v-card>
         </v-dialog>
@@ -277,6 +305,26 @@ export default {
     // 平均每晚房價(不包含服務費)
     averageRentalCost() {
       return this.calculateRentalCost / this.calculateDays
+    },
+    // 計算全部服務費
+    calculateServiceCharge() {
+      if (this.price) {
+        return this.calculateDays * this.price.serviceCharge
+      }
+    },
+    // 計算全部清潔費
+    calculateCleaningFee() {
+      if (this.price) {
+        return this.calculateDays * this.price.cleaningFee
+      }
+    },
+    // 總價
+    allRentalCost() {
+      return (
+        this.calculateRentalCost +
+        this.calculateServiceCharge +
+        this.calculateCleaningFee
+      )
     },
     // 大人人數
     allTenants() {
