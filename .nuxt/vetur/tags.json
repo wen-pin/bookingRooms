@@ -32,36 +32,6 @@
   "MessageBlock": {
     "description": "Auto imported from components/messageBlock.vue"
   },
-  "BookCardPrice": {
-    "description": "Auto imported from components/book/CardPrice.vue"
-  },
-  "BookPayment": {
-    "description": "Auto imported from components/book/Payment.vue"
-  },
-  "BookRoomPhoto": {
-    "description": "Auto imported from components/book/RoomPhoto.vue"
-  },
-  "BookTrip": {
-    "description": "Auto imported from components/book/Trip.vue"
-  },
-  "BookUnsubscribe": {
-    "description": "Auto imported from components/book/Unsubscribe.vue"
-  },
-  "DateClearBtn": {
-    "description": "Auto imported from components/date/ClearBtn.vue"
-  },
-  "DateCloseBtn": {
-    "description": "Auto imported from components/date/CloseBtn.vue"
-  },
-  "DatePicker": {
-    "description": "Auto imported from components/date/Picker.vue"
-  },
-  "DateRange": {
-    "description": "Auto imported from components/date/Range.vue"
-  },
-  "DateRangeStyle": {
-    "description": "Auto imported from components/date/RangeStyle.vue"
-  },
   "DialogBookTenant": {
     "description": "Auto imported from components/dialog/BookTenant.vue"
   },
@@ -124,6 +94,36 @@
   },
   "RoomNotes": {
     "description": "Auto imported from components/room/notes.vue"
+  },
+  "DateClearBtn": {
+    "description": "Auto imported from components/date/ClearBtn.vue"
+  },
+  "DateCloseBtn": {
+    "description": "Auto imported from components/date/CloseBtn.vue"
+  },
+  "DatePicker": {
+    "description": "Auto imported from components/date/Picker.vue"
+  },
+  "DateRange": {
+    "description": "Auto imported from components/date/Range.vue"
+  },
+  "DateRangeStyle": {
+    "description": "Auto imported from components/date/RangeStyle.vue"
+  },
+  "BookCardPrice": {
+    "description": "Auto imported from components/book/CardPrice.vue"
+  },
+  "BookPayment": {
+    "description": "Auto imported from components/book/Payment.vue"
+  },
+  "BookRoomPhoto": {
+    "description": "Auto imported from components/book/RoomPhoto.vue"
+  },
+  "BookTrip": {
+    "description": "Auto imported from components/book/Trip.vue"
+  },
+  "BookUnsubscribe": {
+    "description": "Auto imported from components/book/Unsubscribe.vue"
   },
   "UiAppbar": {
     "description": "Auto imported from components/ui/Appbar.vue"
