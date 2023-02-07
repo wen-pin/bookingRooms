@@ -62,7 +62,19 @@
           class="rounded-lg"
         >
           <template #append>
-            <TextBtnDialog :title="'新增'" />
+            <!-- 尚未完成開發 -->
+            <!-- <TextBtnDialog :title="'新增'" /> -->
+
+            <!-- 尚未完成開發 -->
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <div text v-bind="attrs" v-on="on">
+                  <TextBtnDialog :title="'新增'" />
+                </div>
+              </template>
+
+              <span>此功能開發中</span>
+            </v-tooltip>
           </template>
         </v-text-field>
       </CardDialog>
