@@ -13,7 +13,7 @@
       </v-btn>
 
       <v-card-text class="p-5 mb-10 black--text">
-        <div v-if="title" class="text-2xl font-semibold mt-5">
+        <div v-if="title" class="text-3xl font-semibold mt-5">
           {{ title }}
         </div>
 
