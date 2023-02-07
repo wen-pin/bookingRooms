@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 手機版Appbar -->
     <v-app-bar
       v-if="$vuetify.breakpoint.xs"
       app
@@ -23,7 +24,8 @@
     </v-app-bar>
 
     <v-container class="!max-w-[1280px]">
-      <div v-if="$vuetify.breakpoint.xs" class="">
+      <!-- 手機版預訂房間照片相關資訊 -->
+      <div v-if="$vuetify.breakpoint.xs">
         <BookRoomPhoto
           :rentalType="room.rentalType"
           :title="room.title"
@@ -41,8 +43,9 @@
         <div class="text-4xl font-semibold">申請預訂</div>
       </div>
 
-      <v-row :class="$vuetify.breakpoint.xs ? '' : 'px-[80px]'">
+      <v-row>
         <v-col :cols="$vuetify.breakpoint.xs ? 12 : 6">
+          <!-- 你的旅程 -->
           <BookTrip
             :limitPeople="room.limitPeople"
             :isAcceptPet="room.isAcceptPet"
@@ -51,6 +54,7 @@
             :price="room.price"
           />
 
+          <!-- 手機版價格詳情 -->
           <div
             v-if="$vuetify.breakpoint.xs"
             class="px-6 pb-6 border border-t-8 border-r-0 border-b-0 border-l-0 border-solid border-gray-200"
@@ -58,74 +62,98 @@
             <BookCardPrice :price="room.price" />
           </div>
 
-          <div
-            v-if="$auth.loggedIn"
-            class="mt-8"
-            :class="
-              $vuetify.breakpoint.xs
-                ? 'border border-t-8 border-r-0 border-b-0 border-l-0 border-solid border-gray-200'
-                : ''
-            "
-          >
-            <BookPayment />
-
-            <BookUnsubscribe />
-
-            <div class="my-8 text-xs">
-              點選以下按鈕即表示本人同意房東的《房屋守則》、房客基本守則、《重新預訂和退款政策》，且允許
-              Airbnb 在我應負責賠償損壞時，可以向我的付款方式扣款。
+          <!-- 已登入 -->
+          <div v-if="$auth.loggedIn" class="">
+            <!-- 付款方式 -->
+            <div
+              :class="
+                $vuetify.breakpoint.xs
+                  ? 'border border-t-8 border-r-0 border-b-0 border-l-0 border-solid border-gray-200'
+                  : ''
+              "
+            >
+              <BookPayment
+                :class="$vuetify.breakpoint.xs ? 'px-6 pt-6' : 'pt-8'"
+              />
             </div>
 
-            <v-btn
-              :disabled="this.select.title === undefined"
-              width="150px"
-              height="50px"
-              color="#EC407A"
-              class="rounded-lg"
+            <!-- 退訂政策 -->
+            <div
+              :class="
+                $vuetify.breakpoint.xs
+                  ? 'border border-t-8 border-r-0 border-b-0 border-l-0 border-solid border-gray-200'
+                  : ''
+              "
             >
-              <span class="text-lg text-white" @click="payment()">
-                {{ $t('確認並付款') }}
-              </span>
-            </v-btn>
+              <BookUnsubscribe
+                :class="$vuetify.breakpoint.xs ? 'px-6 pt-6' : 'pt-8'"
+              />
+            </div>
 
-            <v-dialog v-model="successDialog" width="450" persistent>
-              <v-card height="500px" class="p-5">
-                <div class="flex flex-col items-center">
-                  <SvgIcon
-                    :iconClass="'success'"
-                    :className="'success'"
-                    class="my-10"
-                  />
+            <div
+              :class="
+                $vuetify.breakpoint.xs
+                  ? 'px-6 pb-6 border border-t-8 border-r-0 border-b-0 border-l-0 border-solid border-gray-200'
+                  : ''
+              "
+            >
+              <div class="py-6 text-xs">
+                點選以下按鈕即表示本人同意房東的《房屋守則》、房客基本守則、《重新預訂和退款政策》，且允許
+                Airbnb 在我應負責賠償損壞時，可以向我的付款方式扣款。
+              </div>
 
-                  <div class="text-3xl">預訂完成</div>
+              <v-btn
+                :disabled="this.select.title === undefined"
+                :block="$vuetify.breakpoint.xs"
+                width="150px"
+                height="50px"
+                color="#EC407A"
+                class="rounded-lg"
+              >
+                <span class="text-lg text-white" @click="payment()">
+                  {{ $t('申請預訂') }}
+                </span>
+              </v-btn>
 
-                  <v-btn
-                    color="#0288D1"
-                    width="300px"
-                    height="50px"
-                    dark
-                    depressed
-                    class="mt-[100px]"
-                    nuxt
-                    to="/trips"
-                  >
-                    查看訂單詳情
-                  </v-btn>
+              <v-dialog v-model="successDialog" width="450" persistent>
+                <v-card height="500px" class="p-5">
+                  <div class="flex flex-col items-center">
+                    <SvgIcon
+                      :iconClass="'success'"
+                      :className="'success'"
+                      class="my-10"
+                    />
 
-                  <v-btn
-                    width="300px"
-                    height="50px"
-                    dark
-                    depressed
-                    nuxt
-                    to="/"
-                    class="mt-5"
-                  >
-                    回首頁
-                  </v-btn>
-                </div>
-              </v-card>
-            </v-dialog>
+                    <div class="text-3xl">預訂完成</div>
+
+                    <v-btn
+                      color="#0288D1"
+                      width="300px"
+                      height="50px"
+                      dark
+                      depressed
+                      class="mt-[100px]"
+                      nuxt
+                      to="/trips"
+                    >
+                      查看訂單詳情
+                    </v-btn>
+
+                    <v-btn
+                      width="300px"
+                      height="50px"
+                      dark
+                      depressed
+                      nuxt
+                      to="/"
+                      class="mt-5"
+                    >
+                      回首頁
+                    </v-btn>
+                  </div>
+                </v-card>
+              </v-dialog>
+            </div>
           </div>
 
           <div
