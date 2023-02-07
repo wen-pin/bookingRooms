@@ -17,7 +17,6 @@
         :title="'空間介紹'"
         :fullscreen="$vuetify.breakpoint.xs"
         :icon="$vuetify.breakpoint.xs ? 'mdi-less-than' : 'mdi-window-close'"
-        scrollable
         @update="updateDialog"
       >
         <div class="!text-base mt-5" v-html="convertTobr"></div>

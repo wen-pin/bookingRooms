@@ -22,8 +22,6 @@
       <v-carousel-item v-for="item in roomQuality" :key="item" height="300">
         <v-img
           :src="require(`~/assets/img/rooms/room${roomId}/bg_${item}.jpg`)"
-          aspect-ratio="16/9"
-          width="100%"
           height="300"
           @click="photosDialog = !photosDialog"
         >

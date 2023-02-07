@@ -13,10 +13,6 @@
 
       <v-spacer></v-spacer>
 
-      <div v-if="$auth.loggedIn" class="mr-2">
-        {{ $auth.user.user.username }}
-      </div>
-
       <v-menu offset-y nudge-bottom="10" nudge-left="100" nudge-width="100">
         <template #activator="{ attrs, on }">
           <v-btn rounded outlined v-bind="attrs" v-on="on">
