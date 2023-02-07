@@ -81,8 +81,10 @@ export default {
     },
     // 計算全部稅費
     calculateTaxCharges() {
-      if (this.price) {
+      if (this.price && this.calculateDays > 0) {
         return this.price.taxCharges + (this.calculateDays - 1) * 200
+      } else {
+        return 0
       }
     },
     // 稅後總價

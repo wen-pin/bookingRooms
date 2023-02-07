@@ -183,7 +183,11 @@ export default {
     },
     // 平均每晚房價(不包含服務費)
     averageRentalCost() {
-      return this.calculateRentalCost / this.calculateDays
+      if (this.calculateDays > 0) {
+        return this.calculateRentalCost / this.calculateDays
+      } else {
+        return this.price.weekday
+      }
     },
     // scrollTargetId() {
     //   return this.$store.state.scrollTargetId
