@@ -7,7 +7,9 @@
           :src="
             require(`~/assets/img/rooms/room1/commenters/${this.avaterImg}`)
           "
-          class="cursor-pointer"
+          width="100%"
+          height="100%"
+          class="cursor-pointer object-cover"
         />
       </v-avatar>
 

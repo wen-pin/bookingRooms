@@ -28,10 +28,12 @@
       <v-avatar size="56px" @click="goToTarget(targetElement)">
         <img
           alt="Avatar"
+          width="100%"
+          height="100%"
           :src="
             require(`~/assets/img/rooms/room${this.$route.params.id}/avater.jpeg`)
           "
-          class="cursor-pointer"
+          class="cursor-pointer object-cover"
         />
       </v-avatar>
     </div>

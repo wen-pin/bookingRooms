@@ -8,10 +8,12 @@
         <v-avatar v-if="!$vuetify.breakpoint.xs" size="70px" class="mr-2">
           <img
             alt="Avatar"
+            width="100%"
+            height="100%"
             :src="
               require(`~/assets/img/rooms/room${this.$route.params.id}/avater.jpeg`)
             "
-            class="cursor-pointer"
+            class="cursor-pointer object-cover"
           />
         </v-avatar>
 
