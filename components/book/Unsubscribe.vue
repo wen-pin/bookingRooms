@@ -1,15 +1,30 @@
 <template>
-  <DivideBlock>
-    <div class="my-8">
-      <div class="text-2xl font-medium">退訂政策</div>
-      <div class="flex mt-5">
-        <div>這筆預訂不可退款。</div>
-        <TextBtnDialog
-          :title="'了解詳情'"
-          @click="unsubscribeDialog = !unsubscribeDialog"
-        />
+  <div>
+    <div v-if="$vuetify.breakpoint.xs">
+      <div class="pb-3">
+        <div class="text-2xl font-medium">退訂政策</div>
+        <div class="flex mt-5">
+          <div>這筆預訂不可退款。</div>
+          <TextBtnDialog
+            :title="'了解詳情'"
+            @click="unsubscribeDialog = !unsubscribeDialog"
+          />
+        </div>
       </div>
     </div>
+
+    <DivideBlock v-else>
+      <div class="pb-6">
+        <div class="text-2xl font-medium">退訂政策</div>
+        <div class="flex mt-5">
+          <div>這筆預訂不可退款。</div>
+          <TextBtnDialog
+            :title="'了解詳情'"
+            @click="unsubscribeDialog = !unsubscribeDialog"
+          />
+        </div>
+      </div>
+    </DivideBlock>
 
     <CardDialog
       :dialog="unsubscribeDialog"
@@ -37,7 +52,7 @@
         </TextBtnDialog>
       </div>
     </CardDialog>
-  </DivideBlock>
+  </div>
 </template>
 
 <script>

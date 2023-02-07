@@ -1,6 +1,6 @@
 <template>
   <DivideBlock>
-    <div class="mb-10">
+    <div :class="$vuetify.breakpoint.xs ? 'pb-6' : 'mb-10'">
       <div
         class="text-2xl font-medium"
         :class="

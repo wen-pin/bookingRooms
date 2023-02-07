@@ -1,43 +1,51 @@
 <template>
   <DivideBlock>
-    <div class="mb-8">
-      <div class="flex">
-        <div class="text-2xl font-medium">付款方式：</div>
-        <div class="flex justify-end">
-          <SvgIcon :iconClass="'visa'" :className="'visa'" class="mr-2" />
-          <SvgIcon :iconClass="'mastercard'" class="mr-2 my-auto" />
-          <SvgIcon :iconClass="'googlePay'" :className="'size'" class="mr-2" />
-          <SvgIcon :iconClass="'applePay'" :className="'size'" />
-        </div>
-      </div>
+    <div>
+      <DivideBlock>
+        <div>
+          <div class="flex">
+            <div class="text-2xl font-medium">付款方式：</div>
+            <div class="flex justify-end">
+              <SvgIcon :iconClass="'visa'" :className="'visa'" class="mr-2" />
+              <SvgIcon :iconClass="'mastercard'" class="mr-2 my-auto" />
+              <SvgIcon
+                :iconClass="'googlePay'"
+                :className="'size'"
+                class="mr-2"
+              />
+              <SvgIcon :iconClass="'applePay'" :className="'size'" />
+            </div>
+          </div>
 
-      <v-select
-        v-model="select"
-        :items="payItems"
-        :menu-props="{ bottom: true, offsetY: true }"
-        :rules="[(v) => !!v.title || $t(`不能為空`)]"
-        label="請選擇付款方式"
-        placeholder="請選擇付款方式"
-        autofocus
-        item-text="title"
-        item-value="iconClass"
-        return-object
-        outlined
-        class="rounded-lg"
-      >
-        <template #selection="{ item }">
-          <SvgIcon
-            :iconClass="item.iconClass"
-            :className="item.className"
-            class="mr-5"
-          />
-          <div>{{ item.title }}</div>
-        </template>
-      </v-select>
+          <v-select
+            v-model="select"
+            :items="payItems"
+            :menu-props="{ bottom: true, offsetY: true }"
+            :rules="[(v) => !!v.title || $t(`不能為空`)]"
+            label="請選擇付款方式"
+            placeholder="請選擇付款方式"
+            autofocus
+            item-text="title"
+            item-value="iconClass"
+            return-object
+            outlined
+            class="rounded-lg"
+          >
+            <template #selection="{ item }">
+              <SvgIcon
+                :iconClass="item.iconClass"
+                :className="item.className"
+                class="mr-5"
+              />
+              <div>{{ item.title }}</div>
+            </template>
+          </v-select>
+        </div>
+      </DivideBlock>
 
       <TextBtnDialog
         :title="'輸入優惠券代碼'"
-        class="mt-5 w-[115px]"
+        class="py-6 w-[115px]"
         @click="couponsDialog = !couponsDialog"
       />
 

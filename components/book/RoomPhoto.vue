@@ -1,6 +1,6 @@
 <template>
   <DivideBlock>
-    <div class="flex w-full mb-6">
+    <div class="flex w-full pb-6">
       <v-img
         :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
         :aspect-ratio="1"
