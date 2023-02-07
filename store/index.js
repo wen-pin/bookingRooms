@@ -49,7 +49,7 @@ export const state = () => ({
   // 手機版日期選擇對話框
   dateDialog_mobile_visible: false,
   // 是否啟用全站的google地圖
-  googleMaps_visible: false,
+  googleMaps_visible: true,
 })
 
 export const getters = {
