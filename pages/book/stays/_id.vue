@@ -17,7 +17,7 @@
             class="absolute top-[50%] left-[50%]"
             style="transform: translate(-50%, -50%) !important"
           >
-            申請預訂
+            確認並付款
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
         <v-btn icon class="mr-6" @click="$router.go(-1)">
           <v-icon> mdi-less-than </v-icon>
         </v-btn>
-        <div class="text-4xl font-semibold">申請預訂</div>
+        <div class="text-4xl font-semibold">確認並付款</div>
       </div>
 
       <v-row>
@@ -111,7 +111,7 @@
                 class="rounded-lg"
               >
                 <span class="text-lg text-white" @click="payment()">
-                  {{ $t('申請預訂') }}
+                  {{ $t('確認並付款') }}
                 </span>
               </v-btn>
 

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="text-xl font-semibold my-6">價格詳情</div>
+    <div class="text-xl font-semibold mt-6">價格詳情</div>
 
     <RoomPriceUntaxed :price="price" :isVisible="true" />
 
     <div
       class="flex justify-between"
-      :class="$vuetify.breakpoint.xs ? 'mt-4' : 'mt-6'"
+      :class="$vuetify.breakpoint.xs ? '' : 'mt-6'"
     >
       <div class="font-bold">總價 (TWD)</div>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="px-6">
     <div class="text-4xl font-semibold my-5">旅程</div>
 
     <div v-if="bookingRooms.length !== 0">
@@ -9,7 +9,7 @@
         <v-col
           v-for="bookingRoom in bookingRooms"
           :key="bookingRoom.id"
-          cols="4"
+          :cols="$vuetify.breakpoint.xs ? 12 : 4"
         >
           <div class="flex items-center">
             <v-img
@@ -41,8 +41,12 @@
 
     <v-card v-else flat outlined class="!rounded-lg my-13">
       <v-row>
-        <v-col cols="4">
-          <div class="p-10">
+        <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
+          <div
+            :class="
+              $vuetify.breakpoint.xs ? 'flex flex-col items-center p-6' : 'p-10'
+            "
+          >
             <SvgIcon
               :iconClass="'handWaving'"
               :className="'size'"
@@ -55,13 +59,22 @@
               該拿出行李箱，開始規劃下一趟冒險之旅了
             </div>
 
-            <v-btn dark color="#EC407A" class="mt-5" nuxt to="/">
+            <v-btn
+              :block="$vuetify.breakpoint.xs"
+              width="112px"
+              height="48px"
+              dark
+              color="#EC407A"
+              class="mt-5 rounded-lg"
+              nuxt
+              to="/"
+            >
               開始搜尋
             </v-btn>
           </div>
         </v-col>
 
-        <v-col cols="8">
+        <v-col v-if="!$vuetify.breakpoint.xs" cols="8">
           <v-img
             :src="require('assets/img/bg_1.jpeg')"
             class="rounded-tr-lg rounded-br-lg"

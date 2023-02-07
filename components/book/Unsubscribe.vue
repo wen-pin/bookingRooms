@@ -28,14 +28,15 @@
 
     <CardDialog
       :dialog="unsubscribeDialog"
+      :fullscreen="$vuetify.breakpoint.xs"
       :title="'《退訂政策》'"
       @update="updateUnsubscribeDialog"
     >
-      <div class="px-5 mt-8">
+      <div class="mt-8">
         <div class="text-xl font-medium">取消截止時間</div>
 
         <DivideBlock>
-          <div class="flex mt-8 mb-5">
+          <div class="flex my-6">
             <div class="mr-[80px]">
               <div class="font-medium">{{ datesQueue[0] }}</div>
               <div class="text-sm">下午4:00</div>
@@ -47,7 +48,7 @@
 
         <TextBtnDialog
           :title="'了解更多有關《退訂政策》的事宜'"
-          class="mt-5 mb-[30px]"
+          class="mt-5 mb-[20px]"
         >
         </TextBtnDialog>
       </div>

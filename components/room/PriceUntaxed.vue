@@ -33,7 +33,7 @@
     </DivideBlock>
 
     <div v-else>
-      <div>
+      <div class="py-6">
         <div class="flex justify-between">
           <TextBtnDialog
             :title="`${$n(
