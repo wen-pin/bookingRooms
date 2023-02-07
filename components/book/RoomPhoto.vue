@@ -3,7 +3,8 @@
     <div class="flex w-full pb-6">
       <v-img
         :src="require(`~/assets/img/rooms/room${roomId}/bg_2.jpg`)"
-        :aspect-ratio="1"
+        :aspect-ratio="16 / 9"
+        width="129px"
         class="rounded-lg w-[30%]"
       ></v-img>
 
