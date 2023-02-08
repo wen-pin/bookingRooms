@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: 'formLoginBook',
+  name: 'formLogin',
 
   props: {},
 
@@ -94,12 +94,11 @@ export default {
             data: payload,
           })
 
-          this.$router.push('/')
-        } catch (err) {
-          this.$error(err)
-        } finally {
-          this.$toast.success('登入成功')
           this.loginDialog_visible = false
+
+          this.$toast.success('登入成功')
+        } catch (err) {
+        } finally {
           this.$nuxt.$loading.finish()
         }
       }

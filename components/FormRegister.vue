@@ -116,12 +116,9 @@ export default {
             data: this.registerInfo.data,
           })
 
-          this.$router.push('/')
-        } catch (err) {
-          console.err(err)
-        } finally {
           this.registerDialog_visible = false
-
+        } catch (err) {
+        } finally {
           this.$nuxt.$loading.finish()
         }
       }
