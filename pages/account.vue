@@ -11,7 +11,7 @@
                 <v-icon dark> mdi-account-circle </v-icon>
               </v-avatar>
 
-              <div>
+              <div v-if="$auth.loggedIn">
                 {{ $auth.user.user.username }}
                 <div>顯示個人資料</div>
               </div>
@@ -22,6 +22,17 @@
             </div>
           </div>
         </DivideBlock>
+
+        <v-btn
+          block
+          light
+          outlined
+          height="48px"
+          class="rounded-lg mt-4"
+          @click="logout()"
+        >
+          <span class="text-base"> 登出 </span>
+        </v-btn>
       </div>
     </div>
     <div v-else class="my-16">
@@ -38,6 +49,19 @@
 export default {
   data() {
     return {}
+  },
+  methods: {
+    async logout() {
+      try {
+        this.$nuxt.$loading.start()
+
+        await this.$auth.logout()
+      } catch (err) {
+        console.log(err)
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
+    },
   },
 }
 </script>
