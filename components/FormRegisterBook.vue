@@ -3,7 +3,6 @@
     <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="registerInfo.data.username"
-        autofocus
         clearable
         flat
         prepend-inner-icon="mdi-account-circle"
