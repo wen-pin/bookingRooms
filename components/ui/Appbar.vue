@@ -39,9 +39,13 @@
 
         <v-list v-else>
           <v-list-item-group>
-            <v-list-item @click="goToTrips()">
+            <v-list-item
+              v-for="item in authItems"
+              :key="item.title"
+              @click="goTo(item.router)"
+            >
               <v-list-item-title>
-                <span class="font-semibold">旅程</span>
+                <span class="font-semibold">{{ item.title }}</span>
               </v-list-item-title>
             </v-list-item>
 
@@ -104,7 +108,18 @@ export default {
   name: 'appbar',
 
   data() {
-    return {}
+    return {
+      authItems: [
+        {
+          title: '旅程',
+          router: '/trips',
+        },
+        {
+          title: '帳號',
+          router: '/account',
+        },
+      ],
+    }
   },
   computed: {
     loginDialog_visible: {
@@ -129,8 +144,8 @@ export default {
       this.loginDialog_visible = false
       this.registerDialog_visible = true
     },
-    goToTrips() {
-      this.$router.push('/trips')
+    goTo(path) {
+      this.$router.push(path)
     },
     goHome() {
       this.$router.push('/')

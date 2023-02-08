@@ -142,6 +142,7 @@
 <script>
 export default {
   name: 'trips',
+  middleware: 'auth',
 
   data() {
     return {

@@ -47,6 +47,8 @@
 
 <script>
 export default {
+  middleware: 'auth',
+
   data() {
     return {}
   },
@@ -57,7 +59,6 @@ export default {
 
         await this.$auth.logout()
       } catch (err) {
-        console.log(err)
       } finally {
         this.$nuxt.$loading.finish()
       }
