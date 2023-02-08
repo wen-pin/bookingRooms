@@ -11,33 +11,9 @@
           The Rooms 歡迎你
         </div>
 
-        <v-form ref="form" v-model="valid">
-          <v-text-field
-            v-model="loginInfo.data.username"
-            clearable
-            outlined
-            label="帳號"
-            placeholder="帳號"
-            prepend-inner-icon="mdi-account-circle"
-            :rules="[(v) => !!v || $t(`帳號為必填`)]"
-          ></v-text-field>
-          <v-text-field
-            v-model="loginInfo.data.password"
-            :type="form_password_visible ? 'text' : 'password'"
-            prepend-inner-icon="mdi-lock"
-            :append-icon="form_password_visible ? 'mdi-eye' : 'mdi-eye-off'"
-            clearable
-            outlined
-            label="密碼"
-            placeholder="密碼"
-            :rules="[(v) => !!v || $t(`密碼為必填`)]"
-            @click:append="form_password_visible = !form_password_visible"
-          ></v-text-field>
+        <FormLogin />
 
-          <v-btn dark color="#EC407A" block @click="loginUser()"> 登入 </v-btn>
-
-          <v-btn text color="grey" nuxt to="/register"> 註冊 </v-btn>
-        </v-form>
+        <v-btn text class="px-0" nuxt to="/register"> 註冊？ </v-btn>
       </v-card>
     </v-container>
   </div>
@@ -48,47 +24,7 @@ export default {
   name: 'login',
 
   data() {
-    return {
-      /** 表單密碼可見 */
-      form_password_visible: false,
-      // 表單是否有效驗證
-      valid: true,
-
-      loginInfo: {
-        data: {
-          username: '',
-          password: '',
-        },
-      },
-    }
-  },
-  methods: {
-    async loginUser() {
-      if (!this.valid) {
-        this.validate()
-        this.$toast.warning('帳號或密碼未填寫')
-      } else {
-        try {
-          this.$nuxt.$loading.start()
-
-          let payload = this.loginInfo.data
-          await this.$auth.loginWith('local', {
-            data: payload,
-          })
-
-          this.$router.push('/')
-        } catch (err) {
-          this.$error(err)
-        } finally {
-          this.$toast.success('登入成功')
-          this.$nuxt.$loading.finish()
-        }
-      }
-    },
-    // 驗證表單是否有效
-    validate() {
-      this.$refs.form.validate()
-    },
+    return {}
   },
 }
 </script>
