@@ -83,24 +83,6 @@ export default {
       },
     }
   },
-  computed: {
-    loginDialog_visible: {
-      get() {
-        return this.$store.state.loginDialog_visible
-      },
-      set(v) {
-        this.$store.commit('toggleLoginBtn', v)
-      },
-    },
-    registerDialog_visible: {
-      get() {
-        return this.$store.state.registerDialog_visible
-      },
-      set(v) {
-        this.$store.commit('toggleRegisterBtn', v)
-      },
-    },
-  },
   methods: {
     async registerUser() {
       if (!this.valid) {
@@ -116,12 +98,9 @@ export default {
             data: this.registerInfo.data,
           })
 
-          this.$router.push(`/book/stays/${this.$route.params.id}`)
+          this.$toast.success('註冊登入成功')
         } catch (err) {
-          console.err(err)
         } finally {
-          this.registerDialog_visible = false
-
           this.$nuxt.$loading.finish()
         }
       }
