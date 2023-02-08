@@ -3,7 +3,6 @@
     <v-form ref="form" v-model="valid">
       <v-text-field
         v-model="loginInfo.data.username"
-        autofocus
         clearable
         flat
         prepend-inner-icon="mdi-account-circle"
@@ -29,7 +28,16 @@
       ></v-text-field>
     </v-form>
 
-    <v-btn dark block @click="loginUser()"> 登入 </v-btn>
+    <v-btn
+      dark
+      block
+      color="#EC407A"
+      height="48px"
+      class="rounded-lg"
+      @click="loginUser()"
+    >
+      <span class="text-base"> 登入 </span>
+    </v-btn>
   </div>
 </template>
 
