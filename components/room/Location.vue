@@ -81,7 +81,10 @@
               </div>
             </div>
 
-            <div v-if="googleMaps_visible">
+            <div
+              v-if="googleMaps_visible"
+              :class="$vuetify.breakpoint.xs ? '' : 'w-full'"
+            >
               <GmapMap
                 v-if="!$vuetify.breakpoint.xs"
                 :center="{ lat: location.lat, lng: location.lng }"
