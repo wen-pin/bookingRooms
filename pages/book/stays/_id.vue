@@ -10,7 +10,7 @@
       <div class="!relative font-semibold flex items-center h-full">
         <div>
           <v-btn icon @click="$router.go(-1)">
-            <v-icon small color="black"> mdi-less-than </v-icon>
+            <v-icon color="black"> mdi-less-than </v-icon>
           </v-btn>
 
           <div
@@ -38,7 +38,7 @@
 
       <div v-else class="flex my-10">
         <v-btn icon class="mr-6" @click="$router.go(-1)">
-          <v-icon> mdi-less-than </v-icon>
+          <v-icon color="black"> mdi-less-than </v-icon>
         </v-btn>
         <div class="text-4xl font-semibold">確認並付款</div>
       </div>
