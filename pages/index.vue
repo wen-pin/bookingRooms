@@ -13,7 +13,8 @@
           <v-card-text class="px-0 black--text">
             <div class="flex font-bold">
               <div v-if="room.location" class="line-clamp-1 w-[215px]">
-                位於{{ room.location.address }}的{{ room.rentalType }}
+                位於{{ room.location.address }}的{{ room.rentalType }}test git
+                revert
               </div>
 
               <v-spacer></v-spacer>
